@@ -38,12 +38,10 @@
 .sidebar_container > button:first-child,
 .searchnav_container button:nth-child(2),
 .searchnav_container button:nth-child(3) {
-  /* outline: 1px solid red; */
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
   background: none;
   cursor: pointer;
-  /* outline: none; */
 }

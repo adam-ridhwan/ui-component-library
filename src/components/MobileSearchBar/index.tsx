@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 
 import CloseIcon from '@/assets/svg/CloseIcon';
@@ -7,6 +9,7 @@ import styles from './styles.module.css';
 
 const MobileSearchBar = () => {
   const { isSearchBarToggled, toggleSearchBar } = useSearchBarContext();
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   return (
     <>
@@ -27,12 +30,14 @@ const MobileSearchBar = () => {
         <label htmlFor='search' className={styles.visuallyHidden}>
           Search
         </label>
+
         <div className={styles.searchbar_container}>
           <div>
             <SearchIcon />
           </div>
 
           <input
+            ref={searchInputRef}
             id='search'
             name='search'
             type='text'
