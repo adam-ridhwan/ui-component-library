@@ -6,7 +6,7 @@ export const useSideBarContext = (): SideBarContextValue => {
   const context = useContext(SideBarContext);
 
   if (!context) {
-    throw new Error('useSideBarContext must be used within a SidebarProvider');
+    throw new Error('useSideBarContext must be used within a SideBarProvider');
   }
   return context;
 };

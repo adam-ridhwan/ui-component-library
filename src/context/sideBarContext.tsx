@@ -7,11 +7,11 @@ export interface SideBarContextValue {
 
 export const SideBarContext = createContext<SideBarContextValue | null>(null);
 
-interface MyComponentProps {
+interface SideBarProps {
   children: ReactNode;
 }
 
-const SidebarProvider: FC<MyComponentProps> = ({ children }) => {
+const SideBarProvider: FC<SideBarProps> = ({ children }) => {
   const [isSidebarToggled, setIsSidebarToggled] = useState(false);
 
   const toggleSidebar = () => {
@@ -25,4 +25,4 @@ const SidebarProvider: FC<MyComponentProps> = ({ children }) => {
   );
 };
 
-export { SidebarProvider };
+export { SideBarProvider };

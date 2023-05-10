@@ -7,11 +7,11 @@ export interface SearchBarContextValue {
 
 export const SearchBarContext = createContext<SearchBarContextValue | null>(null);
 
-interface MyComponentProps {
+interface SearchBarProps {
   children: ReactNode;
 }
 
-const SearchBarProvider: FC<MyComponentProps> = ({ children }) => {
+const SearchBarProvider: FC<SearchBarProps> = ({ children }) => {
   const [isSearchBarToggled, setIsSearchBarToggled] = useState(false);
 
   const toggleSearchBar = () => {
