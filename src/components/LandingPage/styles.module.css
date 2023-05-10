@@ -1,0 +1,139 @@
+.landing_container {
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  position: relative;
+  flex: 1;
+}
+
+h1 {
+  position: relative;
+  font-size: 24px;
+  line-height: 1.4;
+  letter-spacing: -0.05em;
+  padding-bottom: 1em;
+}
+
+.underline_h1 {
+  position: relative;
+}
+
+.underline_h1::before {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(to right, #f2f2f2, #e6e6e6);
+  z-index: -1;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+}
+
+.support_heading {
+  display: flex;
+  flex-direction: column;
+}
+
+.support_heading > span:first-child {
+  font-size: 16px;
+  color: #64748b;
+  font-weight: 400;
+  line-height: 1.8em;
+}
+
+.support_heading > span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.underline_instructions {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.underline_instructions::before {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 8px;
+  background: none;
+  z-index: -1;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.call_to_action {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.call_to_action button:first-child {
+  border: none;
+  outline: none;
+  color: #f8fafc;
+  font-size: 14px;
+  font-weight: 400;
+  background-color: #0f172ae6;
+  padding: 15px 32px;
+  border-radius: 6px;
+}
+
+.call_to_action button:last-child {
+  border: none;
+  outline: none;
+  color: #0f172a;
+  background-color: white;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 15px 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  box-shadow: inset 0 0 0 2px #f2f2f2;
+}
+
+.examples {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 0.5em 0;
+}
+
+.examples::-webkit-scrollbar {
+  display: none;
+}
+
+.selected_example {
+  color: #0f172a;
+}
+
+.unselected_example {
+  color: #64748b;
+}
+
+.images {
+  border: 1px solid #e6e6e6;
+  background-color: white;
+  font-weight: 400;
+  padding: 10px 32px;
+  border-radius: 8px;
+  height: 200px;
+  box-shadow: 0 10px 16px rgba(0, 0, 0, 0.1);
+}
