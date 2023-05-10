@@ -9,7 +9,13 @@ import styles from './styles.module.css';
 
 const NavBar = () => {
   const { toggleSidebar } = useSideBarContext();
-  const { toggleSearchBar } = useSearchBarContext();
+  const { toggleSearchBar, searchInputRef } = useSearchBarContext();
+
+  const handleSearchBar = () => {
+    toggleSearchBar();
+
+    if (searchInputRef.current) searchInputRef.current.focus();
+  };
 
   return (
     <>
@@ -21,7 +27,7 @@ const NavBar = () => {
 
           <div className={styles.searchnav_container}>
             <button>
-              <div onClick={toggleSearchBar}>Search...</div>
+              <div onClick={handleSearchBar}>Search...</div>
             </button>
 
             <button>

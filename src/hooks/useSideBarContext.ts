@@ -8,5 +8,6 @@ export const useSideBarContext = (): SideBarContextValue => {
   if (!context) {
     throw new Error('useSideBarContext must be used within a SideBarProvider');
   }
+
   return context;
 };

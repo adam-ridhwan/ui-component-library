@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { FC } from 'react';
 
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 
@@ -7,26 +7,24 @@ import SearchIcon from '@/assets/svg/SearchIcon';
 
 import styles from './styles.module.css';
 
-const MobileSearchBar = () => {
-  const { isSearchBarToggled, toggleSearchBar } = useSearchBarContext();
-  const searchInputRef = useRef<HTMLInputElement>(null);
+const MobileSearchBar: FC = () => {
+  const { isSearchBarToggled, toggleSearchBar, searchInputRef } = useSearchBarContext();
+
+  const containerStyle = `${styles.container} ${isSearchBarToggled ? styles.container_visible : ''}`;
+  const contentStyle = `${styles.content} ${isSearchBarToggled ? styles.content_active : ''}`;
+
+  const handleCloseModal = () => {
+    toggleSearchBar();
+
+    if (searchInputRef.current) searchInputRef.current.value = '';
+  };
 
   return (
     <>
-      <div
-        className={`
-          ${styles.container}
-          ${isSearchBarToggled && styles.container_visible}
-        `}
-        onClick={toggleSearchBar}
-      ></div>
+      {/* Blurry overlay */}
+      <div className={containerStyle} onClick={handleCloseModal} />
 
-      <div
-        className={`
-						${styles.content}
-						${isSearchBarToggled && styles.content_active}
-					`}
-      >
+      <div className={contentStyle}>
         <label htmlFor='search' className={styles.visuallyHidden}>
           Search
         </label>
@@ -45,7 +43,7 @@ const MobileSearchBar = () => {
             autoComplete='off'
           />
 
-          <button onClick={toggleSearchBar}>
+          <button onClick={handleCloseModal}>
             <CloseIcon />
           </button>
         </div>

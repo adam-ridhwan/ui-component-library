@@ -1,26 +1,22 @@
+import { FC } from 'react';
+
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 
 import styles from './styles.module.css';
 
-const MobileSidebar = () => {
+const MobileSidebar: FC = () => {
   const { isSidebarToggled, toggleSidebar } = useSideBarContext();
+
+  const containerStyle = `${styles.container} ${isSidebarToggled && styles.container_visible}`;
+  const contentStyle = `${styles.content} ${isSidebarToggled && styles.content_active}
+`;
 
   return (
     <>
-      <div
-        className={`
-					${styles.mobilesidebar_container}
-					${isSidebarToggled && styles.mobilesidebar_container_visible}
-				`}
-        onClick={toggleSidebar}
-      ></div>
+      {/* Blurry overlay */}
+      <div className={containerStyle} onClick={toggleSidebar} />
 
-      <div
-        className={`
-						${styles.mobilesidebar_content}
-						${isSidebarToggled && styles.mobilesidebar_content_active}
-					`}
-      ></div>
+      <div className={contentStyle}></div>
     </>
   );
 };

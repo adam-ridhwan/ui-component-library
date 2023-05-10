@@ -8,5 +8,6 @@ export const useSearchBarContext = (): SearchBarContextValue => {
   if (!context) {
     throw new Error('useSearchBarContext must be used within a SearchBarProvider');
   }
+
   return context;
 };
