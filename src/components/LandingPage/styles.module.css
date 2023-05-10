@@ -46,7 +46,6 @@ h1 {
 
 .support_heading > span {
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
@@ -79,6 +78,7 @@ h1 {
   gap: 1em;
 }
 
+/* Get started button */
 .call_to_action button:first-child {
   border: none;
   outline: none;
@@ -86,10 +86,12 @@ h1 {
   font-size: 14px;
   font-weight: 400;
   background-color: #0f172ae6;
-  padding: 15px 32px;
+  height: 40px;
+  width: 100px;
   border-radius: 6px;
 }
 
+/* Github button */
 .call_to_action button:last-child {
   border: none;
   outline: none;
@@ -97,7 +99,8 @@ h1 {
   background-color: white;
   font-size: 14px;
   font-weight: 400;
-  padding: 15px 32px;
+  height: 40px;
+  width: 100px;
   border-radius: 6px;
   display: flex;
   align-items: center;
@@ -109,11 +112,14 @@ h1 {
 .examples {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   gap: 1em;
   width: 100%;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   white-space: nowrap;
-  padding: 0.5em 0;
+  padding: 0.5em 1rem;
+  cursor: pointer;
 }
 
 .examples::-webkit-scrollbar {
@@ -136,4 +142,47 @@ h1 {
   border-radius: 8px;
   height: 200px;
   box-shadow: 0 10px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* iPad (Portrait) */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .landing_container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  h1 {
+    font-size: 35px;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    padding-bottom: 0.5em;
+  }
+
+  .support_heading > span:first-child {
+    font-size: 23px;
+  }
+
+  .underline_instructions,
+  .call_to_action {
+    font-size: 20px;
+  }
+
+  .call_to_action button:first-child,
+  .call_to_action button:last-child {
+    font-size: 18px;
+    height: 50px;
+    width: 130px;
+  }
+
+  .examples {
+    font-size: 18px;
+  }
+}
+
+/* iPad (Landscape) */
+@media screen and (min-width: 1024px) and (max-width: 1199px) {
+}
+
+/* Desktop */
+@media screen and (min-width: 1200px) {
 }

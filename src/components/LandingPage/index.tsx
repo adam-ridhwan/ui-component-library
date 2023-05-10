@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { CSSProperties, useState } from 'react';
 
 import CommandButtonIcon from '@/assets/svg/CommandButtonIcon';
 import GithubMiniIcon from '@/assets/svg/GithubMiniIcon';
@@ -10,21 +10,21 @@ import styles from './styles.module.css';
 const LandingPage = () => {
   const [selectedExample, setSelectedExample] = useState<string>(EXAMPLES[0]);
 
+  const exampleFontColorStyle = (example: string): string => {
+    return selectedExample === example ? styles.selected_example : styles.unselected_example;
+  };
+
   return (
     <>
       <div className={styles.landing_container}>
         <section className={styles.heading}>
           <h1>
-            Streamline your development with <span className={styles.underline_h1}>UI Express</span>
-            .
+            Streamline your development with <span className={styles.underline_h1}>UI Express</span>.
           </h1>
         </section>
 
         <section className={styles.support_heading}>
-          <span>
-            Customizable library to simplify your UI development with beautifully designed
-            components.
-          </span>
+          <span>Customizable library to simplify your UI development with beautifully designed components.</span>
 
           <span>
             <span className={styles.underline_instructions}>
@@ -34,6 +34,7 @@ const LandingPage = () => {
             </span>
           </span>
         </section>
+
         <section className={styles.call_to_action}>
           <button>
             <span>Get started</span>
@@ -41,7 +42,7 @@ const LandingPage = () => {
 
           <button>
             <GithubMiniIcon />
-            GitHub
+            <span>GitHub</span>
           </button>
         </section>
 
@@ -50,15 +51,7 @@ const LandingPage = () => {
             {EXAMPLES.map((example, index) => {
               return (
                 <div key={index} onClick={() => setSelectedExample(example)}>
-                  <span
-                    className={
-                      selectedExample === example
-                        ? styles.selected_example
-                        : styles.unselected_example
-                    }
-                  >
-                    {example}
-                  </span>
+                  <span className={exampleFontColorStyle(example)}>{example}</span>
                 </div>
               );
             })}

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 
@@ -9,15 +9,46 @@ import styles from './styles.module.css';
 
 const MobileSearchBar: FC = () => {
   const { isSearchBarToggled, toggleSearchBar, searchInputRef } = useSearchBarContext();
+  const [isWindowResized, setIsWindowResized] = useState<boolean>(false);
+  const [contentTransition, setContentTransition] = useState<string>(styles.transition);
 
   const containerStyle = `${styles.container} ${isSearchBarToggled ? styles.container_visible : ''}`;
-  const contentStyle = `${styles.content} ${isSearchBarToggled ? styles.content_active : ''}`;
+  const contentStyle = `${styles.content} ${isSearchBarToggled ? styles.content_active : ''} ${contentTransition}`;
 
   const handleCloseModal = () => {
     toggleSearchBar();
 
     if (searchInputRef.current) searchInputRef.current.value = '';
   };
+
+  useEffect(() => {
+    let resizeTimeout: ReturnType<typeof setTimeout>;
+
+    const handleResize = () => {
+      if (!isWindowResized) {
+        setIsWindowResized(true);
+        setContentTransition('');
+      }
+
+      clearTimeout(resizeTimeout);
+
+      resizeTimeout = setTimeout(() => {
+        setIsWindowResized(false);
+        setContentTransition(styles.transition);
+      }, 250);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(resizeTimeout);
+    };
+  }, [isWindowResized]);
+
+  useEffect(() => {
+    console.log(isWindowResized);
+  }, [isWindowResized]);
 
   return (
     <>
@@ -39,7 +70,7 @@ const MobileSearchBar: FC = () => {
             id='search'
             name='search'
             type='text'
-            placeholder='Type a command or search'
+            placeholder='Type a command or search...'
             autoComplete='off'
           />
 
