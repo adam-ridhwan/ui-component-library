@@ -26,6 +26,11 @@
   cursor: pointer;
   padding: 8px 16px;
   margin-right: 0.5rem;
+  transition: background-color 0.1s ease-in-out;
+}
+
+.searchnav_container > button:first-child:hover {
+  background-color: #f1f5f9;
 }
 
 /* search bar text */

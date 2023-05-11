@@ -26,7 +26,7 @@ const NavBar = () => {
           </button>
 
           <div className={styles.searchnav_container}>
-            <button>
+            <button className={styles.inner_div}>
               <div onClick={handleSearchBar}>Search...</div>
             </button>
 

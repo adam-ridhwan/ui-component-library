@@ -17,9 +17,7 @@ const Homepage = () => {
     <>
       <div style={style}>
         <NavBar />
-
         <LandingPage />
-
         <SideNavBar />
         <SearchBar />
       </div>
