@@ -1,8 +1,8 @@
 import { CSSProperties } from 'react';
 
 import LandingPage from '@/components/LandingPage';
-import MobileSidebar from '@/components/MobileSideBar';
 import SearchBar from '@/components/SearchBar';
+import SideNavBar from '@/components/SideNavBar';
 import NavBar from '@/layouts/NavBar';
 
 const Homepage = () => {
@@ -20,7 +20,7 @@ const Homepage = () => {
 
         <LandingPage />
 
-        <MobileSidebar />
+        <SideNavBar />
         <SearchBar />
       </div>
     </>

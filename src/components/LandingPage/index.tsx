@@ -18,13 +18,13 @@ const LandingPage = () => {
     <>
       <div className={styles.landing_container}>
         <section className={styles.heading}>
-          <h1>
-            Streamline your development with <span className={styles.underline_h1}>UI Express</span>.
-          </h1>
+          <h1>Streamline your development.</h1>
         </section>
 
         <section className={styles.support_heading}>
-          <span>Customizable library to simplify your UI development with beautifully designed components.</span>
+          <span>
+            Customizable library to simplify your development with beautifully designed and versatile components.
+          </span>
 
           <span>
             <span className={styles.underline_instructions}>

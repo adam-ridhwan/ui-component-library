@@ -7,7 +7,7 @@ import SearchIcon from '@/assets/svg/SearchIcon';
 
 import styles from './styles.module.css';
 
-const MobileSearchBar: FC = () => {
+const SideNavBar: FC = () => {
   const { isSearchBarToggled, toggleSearchBar, searchInputRef } = useSearchBarContext();
   const [isWindowResized, setIsWindowResized] = useState<boolean>(false);
   const [contentTransition, setContentTransition] = useState<string>(styles.transition);
@@ -44,11 +44,11 @@ const MobileSearchBar: FC = () => {
       window.removeEventListener('resize', handleResize);
       clearTimeout(resizeTimeout);
     };
-  }, [isWindowResized]);
+  }, [isWindowResized, searchInputRef]);
 
   useEffect(() => {
-    console.log(isWindowResized);
-  }, [isWindowResized]);
+    console.log(searchInputRef.current);
+  }, [searchInputRef]);
 
   return (
     <>
@@ -83,4 +83,4 @@ const MobileSearchBar: FC = () => {
   );
 };
 
-export default MobileSearchBar;
+export default SideNavBar;
