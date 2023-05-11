@@ -5,11 +5,13 @@ import ToggleThemeIcon from '@/assets/svg/ToggleThemeIcon';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 
+import useResolution, { DeviceType } from '@/hooks/useResolution';
 import styles from './styles.module.css';
 
 const NavBar = () => {
   const { toggleSidebar } = useSideBarContext();
   const { toggleSearchBar, searchInputRef } = useSearchBarContext();
+  const [resolution, deviceType] = useResolution();
 
   const handleSearchBar = () => {
     toggleSearchBar();
@@ -20,23 +22,33 @@ const NavBar = () => {
   return (
     <>
       <header>
-        <div className={styles.sidebar_container}>
-          <button onClick={toggleSidebar}>
-            <ToggleSidebarIcon />
-          </button>
+        <div className={styles.wrapper}>
+          <div className={styles.sidebar_container}>
+            {deviceType === DeviceType.IPAD || deviceType === DeviceType.DESKTOP ? (
+              <div className={styles.desktop_nav}>
+                <button>Documentation</button>
+                <button>Components</button>
+                <button>Examples</button>
+              </div>
+            ) : (
+              <button onClick={toggleSidebar} className={styles.toggle_side_bar_icon}>
+                <ToggleSidebarIcon />
+              </button>
+            )}
 
-          <div className={styles.searchnav_container}>
-            <button className={styles.inner_div}>
-              <div onClick={handleSearchBar}>Search...</div>
-            </button>
+            <div className={styles.searchnav_container}>
+              <button>
+                <div onClick={handleSearchBar}>Search...</div>
+              </button>
 
-            <button>
-              <GithubIcon />
-            </button>
+              <button>
+                <GithubIcon />
+              </button>
 
-            <button>
-              <ToggleThemeIcon />
-            </button>
+              <button>
+                <ToggleThemeIcon />
+              </button>
+            </div>
           </div>
         </div>
       </header>
