@@ -1,15 +1,12 @@
 import GithubIcon from '@/assets/svg/GithubIcon';
 import ToggleSidebarIcon from '@/assets/svg/ToggleSidebarIcon';
 import ToggleThemeIcon from '@/assets/svg/ToggleThemeIcon';
-
+import useResolution, { DeviceType } from '@/hooks/useResolution';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
-
-import useResolution, { DeviceType } from '@/hooks/useResolution';
-import { useEffect } from 'react';
 import styles from './styles.module.css';
 
-const NavBar = () => {
+const TopNavBar = () => {
   const { toggleSidebar } = useSideBarContext();
   const { toggleSearchBar, searchInputRef } = useSearchBarContext();
   const [deviceType] = useResolution();
@@ -57,4 +54,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default TopNavBar;

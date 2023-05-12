@@ -3,7 +3,7 @@ import { CSSProperties } from 'react';
 import LandingPage from '@/components/LandingPage';
 import SearchBar from '@/components/SearchBar';
 import SideNavBar from '@/components/SideNavBar';
-import NavBar from '@/layouts/NavBar';
+import TopNavBar from '@/layouts/TopNavBar';
 
 const Homepage = () => {
   const style: CSSProperties = {
@@ -16,7 +16,7 @@ const Homepage = () => {
   return (
     <>
       <div style={style}>
-        <NavBar />
+        <TopNavBar />
         <LandingPage />
         <SideNavBar />
         <SearchBar />

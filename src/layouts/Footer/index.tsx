@@ -6,9 +6,7 @@ const Footer = () => {
       <footer className={styles.footer}>
         <div>
           <p>
-            Built by <span>Adam Ridhwan.</span>
-            <br />
-            The source code is available on <span>Github.</span>
+            Built by <span>Adam Ridhwan</span>. The source code is available on <span>Github</span>.
           </p>
         </div>
       </footer>

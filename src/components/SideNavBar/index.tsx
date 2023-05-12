@@ -45,7 +45,7 @@ const MobileSidebar: FC = () => {
 
           <div>
             <span>Components</span>
-            {COMPONENTS.map((component, index) => {
+            {Object.keys(COMPONENTS).map((component, index) => {
               return <span key={index}>{component}</span>;
             })}
           </div>

@@ -1,10 +1,8 @@
-import { useState } from 'react';
-
 import CommandButtonIcon from '@/assets/svg/CommandButtonIcon';
 import GithubMiniIcon from '@/assets/svg/GithubMiniIcon';
 import Footer from '@/layouts/Footer';
 import { EXAMPLES } from '@/utils/constants';
-
+import { useState } from 'react';
 import styles from './styles.module.css';
 
 const LandingPage = () => {
