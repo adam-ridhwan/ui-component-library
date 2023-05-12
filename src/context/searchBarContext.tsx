@@ -19,6 +19,7 @@ export const SearchBarProvider: FC<SearchBarProps> = ({ children }) => {
   const [searchInputValue, setSearchInputValue] = useState('');
 
   const toggleSearchBar = () => {
+    console.log('ehy');
     setIsSearchBarToggled(!isSearchBarToggled);
   };
 

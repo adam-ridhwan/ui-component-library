@@ -9,6 +9,7 @@ export enum DeviceType {
   PHONE = 'Phone',
   TABLET = 'Tablet',
   DESKTOP = 'Desktop',
+  LARGE_DESKTOP = 'Large Desktop',
 }
 
 export const getDeviceType = (resolution: Resolution): DeviceType => {
@@ -18,11 +19,12 @@ export const getDeviceType = (resolution: Resolution): DeviceType => {
     return DeviceType.PHONE;
   } else if (width <= 767) {
     return DeviceType.TABLET;
-  } else {
+  } else if (width <= 1200) {
     return DeviceType.DESKTOP;
+  } else {
+    return DeviceType.LARGE_DESKTOP;
   }
 };
-
 const useResolution = (): [DeviceType] => {
   const [resolution, setResolution] = useState<Resolution>({
     width: window.innerWidth,

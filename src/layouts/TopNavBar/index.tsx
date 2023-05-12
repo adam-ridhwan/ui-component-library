@@ -4,9 +4,12 @@ import ToggleThemeIcon from '@/assets/svg/ToggleThemeIcon';
 import useResolution, { DeviceType } from '@/hooks/useResolution';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
+import { useNavigate } from 'react-router-dom';
 import styles from './styles.module.css';
 
 const TopNavBar = () => {
+  const navigate = useNavigate();
+
   const { toggleSidebar } = useSideBarContext();
   const { toggleSearchBar, searchInputRef } = useSearchBarContext();
   const [deviceType] = useResolution();
@@ -22,9 +25,9 @@ const TopNavBar = () => {
       <header>
         <div className={styles.wrapper}>
           <div className={styles.container}>
-            {deviceType === DeviceType.DESKTOP ? (
+            {[DeviceType.DESKTOP, DeviceType.LARGE_DESKTOP].includes(deviceType) ? (
               <div className={styles.desktop_nav}>
-                <button>Documentation</button>
+                <button onClick={() => navigate('/docs')}>Documentation</button>
                 <button>Components</button>
                 <button>Examples</button>
               </div>
@@ -36,7 +39,9 @@ const TopNavBar = () => {
 
             <div className={styles.searchnav_container}>
               <button>
-                <div onClick={handleSearchBar}>Search...</div>
+                <div onClick={handleSearchBar}>
+                  {[DeviceType.PHONE, DeviceType.TABLET].includes(deviceType) ? 'Search...' : 'Search documentation...'}
+                </div>
               </button>
 
               <button>

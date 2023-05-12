@@ -62,8 +62,6 @@ const LandingPage = () => {
           </section>
         </div>
       </div>
-
-      <Footer />
     </>
   );
 };

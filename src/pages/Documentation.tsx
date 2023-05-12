@@ -1,23 +1,21 @@
-import { CSSProperties } from 'react';
-
-import LandingPage from '@/components/LandingPage';
+import DocContent from '@/components/DocContent';
 import SearchBar from '@/components/SearchBar';
 import Footer from '@/layouts/Footer';
 import SideNavBar from '@/layouts/SideNavBar';
 import TopNavBar from '@/layouts/TopNavBar';
+import { CSSProperties } from 'react';
 
-const Homepage = () => {
+const Documentation = () => {
   const style: CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     position: 'relative',
   };
-
   return (
     <>
       <div style={style}>
         <TopNavBar />
-        <LandingPage />
+        <DocContent />
         <SearchBar />
         <SideNavBar />
       </div>
@@ -25,4 +23,4 @@ const Homepage = () => {
     </>
   );
 };
-export default Homepage;
+export default Documentation;

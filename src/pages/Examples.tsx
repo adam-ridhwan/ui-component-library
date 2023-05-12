@@ -1,28 +1,22 @@
-import { CSSProperties } from 'react';
-
-import LandingPage from '@/components/LandingPage';
 import SearchBar from '@/components/SearchBar';
-import Footer from '@/layouts/Footer';
 import SideNavBar from '@/layouts/SideNavBar';
 import TopNavBar from '@/layouts/TopNavBar';
+import { CSSProperties } from 'react';
 
-const Homepage = () => {
+const Examples = () => {
   const style: CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
-    position: 'relative',
+    minHeight: '100vh',
   };
-
   return (
     <>
       <div style={style}>
         <TopNavBar />
-        <LandingPage />
-        <SearchBar />
         <SideNavBar />
+        <SearchBar />
       </div>
-      <Footer />
     </>
   );
 };
-export default Homepage;
+export default Examples;

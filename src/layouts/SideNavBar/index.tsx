@@ -13,7 +13,7 @@ const MobileSidebar: FC = () => {
   const overlayStyle = `${styles.overlay} ${isSidebarToggled && styles.overlay_visible}`;
   const contentStyle = `${styles.content} ${isSidebarToggled && styles.content_active}`;
 
-  const handleCloseModal = () => {
+  const handleToggleModal = () => {
     toggleSidebar();
     if (sideBarContentRef.current) sideBarContentRef.current.scrollTop = 0;
   };
@@ -21,7 +21,7 @@ const MobileSidebar: FC = () => {
   return (
     <>
       {/* Blurry overlay */}
-      <div className={overlayStyle} onClick={handleCloseModal} />
+      <div className={overlayStyle} onClick={handleToggleModal} />
 
       <div className={contentStyle}>
         <div className={styles.sidebar_content} ref={sideBarContentRef}>

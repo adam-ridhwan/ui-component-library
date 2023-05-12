@@ -1,10 +1,7 @@
-import { FC, useEffect, useState } from 'react';
-
-import { useSearchBarContext } from '@/hooks/useSearchBarContext';
-
 import CloseIcon from '@/assets/svg/CloseIcon';
 import SearchIcon from '@/assets/svg/SearchIcon';
-
+import { useSearchBarContext } from '@/hooks/useSearchBarContext';
+import { FC, useEffect, useState } from 'react';
 import styles from './styles.module.css';
 
 const SideNavBar: FC = () => {
@@ -12,8 +9,8 @@ const SideNavBar: FC = () => {
   const [isWindowResized, setIsWindowResized] = useState<boolean>(false);
   const [contentTransition, setContentTransition] = useState<string>(styles.transition);
 
-  const containerStyle = `${styles.container} ${isSearchBarToggled ? styles.container_visible : ''}`;
-  const contentStyle = `${styles.content} ${isSearchBarToggled ? styles.content_active : ''} ${contentTransition}`;
+  const overlayStyle = `${styles.overlay} ${isSearchBarToggled && styles.overlay_visible}`;
+  const contentStyle = `${styles.content} ${isSearchBarToggled && styles.content_active} ${contentTransition}`;
 
   const handleCloseModal = () => {
     toggleSearchBar();
@@ -50,7 +47,7 @@ const SideNavBar: FC = () => {
   return (
     <>
       {/* Blurry overlay */}
-      <div className={containerStyle} onClick={handleCloseModal} />
+      <div className={overlayStyle} onClick={handleCloseModal} />
 
       <div className={contentStyle}>
         <label htmlFor='search' className={styles.visuallyHidden}>

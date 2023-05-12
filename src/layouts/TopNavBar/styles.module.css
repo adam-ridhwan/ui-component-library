@@ -3,8 +3,8 @@
   flex-direction: column;
   align-items: center;
   height: 57px;
-  background-color: #f8fafc;
-  box-shadow: inset 0 -2px 0 #dfe4ed;
+  background-color: white;
+  box-shadow: inset 0px -1px 0px #dfe4ed;
 }
 
 .container {
@@ -94,20 +94,20 @@
 /* iPad (Portrait) */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .searchnav_container > button:first-child {
-    width: 160px;
+    width: 256px;
   }
 }
 
 /* iPad (Landscape) */
 @media screen and (min-width: 1024px) and (max-width: 1199px) {
   .searchnav_container > button:first-child {
-    width: 160px;
+    width: 256px;
   }
 }
 
 /* Desktop */
 @media screen and (min-width: 1200px) {
   .searchnav_container > button:first-child {
-    width: 160px;
+    width: 256px;
   }
 }
