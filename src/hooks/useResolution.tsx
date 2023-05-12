@@ -7,7 +7,7 @@ export interface Resolution {
 
 export enum DeviceType {
   PHONE = 'Phone',
-  IPAD = 'iPad',
+  TABLET = 'Tablet',
   DESKTOP = 'Desktop',
 }
 
@@ -16,14 +16,14 @@ export const getDeviceType = (resolution: Resolution): DeviceType => {
 
   if (width <= 640) {
     return DeviceType.PHONE;
-  } else if (width <= 768) {
-    return DeviceType.IPAD;
+  } else if (width <= 767) {
+    return DeviceType.TABLET;
   } else {
     return DeviceType.DESKTOP;
   }
 };
 
-const useResolution = (): [Resolution, DeviceType] => {
+const useResolution = (): [DeviceType] => {
   const [resolution, setResolution] = useState<Resolution>({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -42,7 +42,7 @@ const useResolution = (): [Resolution, DeviceType] => {
 
   const deviceType: DeviceType = getDeviceType(resolution);
 
-  return [resolution, deviceType];
+  return [deviceType];
 };
 
 export default useResolution;

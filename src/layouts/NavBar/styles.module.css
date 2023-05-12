@@ -1,16 +1,22 @@
-.sidebar_container {
-  height: 56px;
-  padding: 0 16px;
-  gap: 0.5rem;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 57px;
+  background-color: #f8fafc;
+  box-shadow: inset 0 -2px 0 #dfe4ed;
+}
+
+.container {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 1200px;
+  padding: 0 1.25em;
+  gap: 1em;
   width: 100%;
-}
-
-.wrapper {
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+  height: 100%;
+  max-width: 1200px;
 }
 
 .desktop_nav {
@@ -87,49 +93,21 @@
 
 /* iPad (Portrait) */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-  .sidebar_container {
-    padding: 0 32px;
-  }
   .searchnav_container > button:first-child {
     width: 160px;
-  }
-
-  .wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
   }
 }
 
 /* iPad (Landscape) */
 @media screen and (min-width: 1024px) and (max-width: 1199px) {
-  .sidebar_container {
-    padding: 0 32px;
-  }
   .searchnav_container > button:first-child {
     width: 160px;
-  }
-  .wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
   }
 }
 
 /* Desktop */
 @media screen and (min-width: 1200px) {
-  .sidebar_container {
-    padding: 0 32px;
-  }
   .searchnav_container > button:first-child {
     width: 160px;
-  }
-  .wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
   }
 }

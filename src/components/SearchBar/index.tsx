@@ -21,6 +21,7 @@ const SideNavBar: FC = () => {
     if (searchInputRef.current) searchInputRef.current.value = '';
   };
 
+  // Handle window resize and DISABLES transition when window is resized
   useEffect(() => {
     let resizeTimeout: ReturnType<typeof setTimeout>;
 
@@ -45,10 +46,6 @@ const SideNavBar: FC = () => {
       clearTimeout(resizeTimeout);
     };
   }, [isWindowResized, searchInputRef]);
-
-  useEffect(() => {
-    console.log(searchInputRef.current);
-  }, [searchInputRef]);
 
   return (
     <>

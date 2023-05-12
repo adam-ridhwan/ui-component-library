@@ -6,12 +6,13 @@ import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 
 import useResolution, { DeviceType } from '@/hooks/useResolution';
+import { useEffect } from 'react';
 import styles from './styles.module.css';
 
 const NavBar = () => {
   const { toggleSidebar } = useSideBarContext();
   const { toggleSearchBar, searchInputRef } = useSearchBarContext();
-  const [resolution, deviceType] = useResolution();
+  const [deviceType] = useResolution();
 
   const handleSearchBar = () => {
     toggleSearchBar();
@@ -23,8 +24,8 @@ const NavBar = () => {
     <>
       <header>
         <div className={styles.wrapper}>
-          <div className={styles.sidebar_container}>
-            {deviceType === DeviceType.IPAD || deviceType === DeviceType.DESKTOP ? (
+          <div className={styles.container}>
+            {deviceType === DeviceType.DESKTOP ? (
               <div className={styles.desktop_nav}>
                 <button>Documentation</button>
                 <button>Components</button>

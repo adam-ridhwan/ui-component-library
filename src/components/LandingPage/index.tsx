@@ -16,8 +16,8 @@ const LandingPage = () => {
 
   return (
     <>
-      <div className={styles.landing_container}>
-        <div className={styles.landing_container_wrapper}>
+      <div className={styles.wrapper}>
+        <div className={styles.container}>
           <section className={styles.heading}>
             <h1>Streamline your development.</h1>
           </section>
@@ -28,7 +28,7 @@ const LandingPage = () => {
             </span>
 
             <span>
-              <span className={styles.underline_instructions}>
+              <span className={styles.underlined_instructions}>
                 Just press &nbsp;
                 <CommandButtonIcon /> &nbsp;+ c and &nbsp;
                 <CommandButtonIcon /> &nbsp;+ v
@@ -47,8 +47,8 @@ const LandingPage = () => {
             </button>
           </section>
 
-          <section>
-            <div className={styles.examples}>
+          <section className={styles.examples}>
+            <div className={styles.examples_titles}>
               {EXAMPLES.map((example, index) => {
                 return (
                   <div key={index} onClick={() => setSelectedExample(example)}>
