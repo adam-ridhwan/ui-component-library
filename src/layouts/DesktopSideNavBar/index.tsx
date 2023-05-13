@@ -1,29 +1,19 @@
 import NavigationButton from '@/components/NavigationButton/NavigationButton';
-import { useSideBarContext } from '@/hooks/useSideBarContext';
-import { COMPONENTS, GETTING_STARTED_NAVIGATION } from '@/utils/constants';
-import { useEffect } from 'react';
+import { COMPONENTS, GETTING_STARTED_COMPONENTS } from '@/utils/constants';
+import { format } from '@/utils/format';
 import styles from './styles.module.css';
 
 const DesktopSideNavBar = () => {
-  const { currentSection } = useSideBarContext();
-
-  useEffect(() => {
-    console.log(currentSection);
-  }, [currentSection]);
   return (
     <>
       <aside>
         <div className={styles.container}>
           <div className={styles.instructions_container}>
             <span>Getting started</span>
-            {GETTING_STARTED_NAVIGATION.map((getting_started, index) => {
+            {Object.keys(GETTING_STARTED_COMPONENTS).map((component, index) => {
               return (
-                <NavigationButton
-                  key={index}
-                  path={`/docs/${getting_started.toLowerCase().replace(' ', '-')}`}
-                  section={getting_started}
-                >
-                  {getting_started}
+                <NavigationButton key={index} path={`/docs/${format(component)}`} section={component}>
+                  {component}
                 </NavigationButton>
               );
             })}
@@ -33,11 +23,7 @@ const DesktopSideNavBar = () => {
             <span>Components</span>
             {Object.keys(COMPONENTS).map((component, index) => {
               return (
-                <NavigationButton
-                  key={index}
-                  path={`/docs/components/${component.toLowerCase().replace(' ', '-')}`}
-                  section={component}
-                >
+                <NavigationButton key={index} path={`/docs/components/${format(component)}`} section={component}>
                   {component}
                 </NavigationButton>
               );

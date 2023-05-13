@@ -13,11 +13,6 @@
   max-width: var(--desktop-width);
 }
 
-.horizontal_line {
-  border-top: 1px solid #dfe4ed;
-  margin: 20px 0;
-}
-
 .middle_container {
   display: flex;
   flex-direction: column;

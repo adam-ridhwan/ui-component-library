@@ -5,6 +5,7 @@ import NavigationButton from '@/components/NavigationButton/NavigationButton';
 import useResolution, { DeviceType } from '@/hooks/useResolution';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
+import { COMPONENTS, GETTING_STARTED_COMPONENTS } from '@/utils/constants';
 import styles from './styles.module.css';
 
 const TopNavBar = () => {
@@ -25,9 +26,15 @@ const TopNavBar = () => {
           <div className={styles.container}>
             {[DeviceType.DESKTOP, DeviceType.LARGE_DESKTOP].includes(deviceType) ? (
               <div className={styles.desktop_nav}>
-                <NavigationButton path='/docs'>Documentation</NavigationButton>
-                <NavigationButton path='/docs/components/accordian'>Components</NavigationButton>
-                <NavigationButton path='/examples'>Examples</NavigationButton>
+                <NavigationButton path='/docs' section={Object.keys(GETTING_STARTED_COMPONENTS)[0]}>
+                  Documentation
+                </NavigationButton>
+                <NavigationButton path='/docs/components/accordian' section={Object.keys(COMPONENTS)[0]}>
+                  Components
+                </NavigationButton>
+                <NavigationButton path='/examples' section={''}>
+                  Examples
+                </NavigationButton>
               </div>
             ) : (
               <button onClick={toggleSidebar} className={styles.toggle_side_bar_icon}>

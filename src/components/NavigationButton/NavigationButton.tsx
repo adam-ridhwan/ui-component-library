@@ -8,7 +8,7 @@ interface NavigationButtonProps {
   children: ReactNode;
 }
 
-const NavigationButton: FC<NavigationButtonProps> = ({ path, children, section }) => {
+const NavigationButton: FC<NavigationButtonProps> = ({ path, section, children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { setCurrentSection } = useSideBarContext();

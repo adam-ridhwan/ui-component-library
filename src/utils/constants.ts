@@ -1,3 +1,7 @@
+import Installation from '@/components/GettingStarted/Installation';
+import Introduction from '@/components/GettingStarted/Introduction';
+import Theming from '@/components/GettingStarted/Theming';
+import Typography from '@/components/GettingStarted/Typography';
 import Accordian from '@/components/ui/accordian';
 import Alert from '@/components/ui/alert';
 import AlertDialog from '@/components/ui/alert-dialog';
@@ -38,7 +42,11 @@ import Toast from '@/components/ui/toast';
 import Toggle from '@/components/ui/toggle';
 import Tooltip from '@/components/ui/tooltip';
 
-export const COMPONENTS = {
+type ComponentMap = {
+  [key: string]: React.FunctionComponent;
+};
+
+export const COMPONENTS: ComponentMap = {
   Accordian: Accordian,
   Alert: Alert,
   'Alert Dialog': AlertDialog,
@@ -84,4 +92,9 @@ export const EXAMPLES: string[] = ['Dashboard', 'Cards', 'Tasks', 'Playground', 
 
 export const TOP_NAVIGATION: string[] = ['Documentation', 'Components', 'Examples'];
 
-export const GETTING_STARTED_NAVIGATION: string[] = ['Introduction', 'Installation', 'Theming', 'CLI', 'Typography'];
+export const GETTING_STARTED_COMPONENTS: ComponentMap = {
+  Introduction: Introduction,
+  Installation: Installation,
+  Theming: Theming,
+  Typography: Typography,
+};

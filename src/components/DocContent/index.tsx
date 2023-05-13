@@ -2,12 +2,11 @@ import useResolution, { DeviceType } from '@/hooks/useResolution';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 import DesktopSideNavBar from '@/layouts/DesktopSideNavBar';
 import JumpNav from '@/layouts/JumpNav';
-
-import { COMPONENTS } from '@/utils/constants';
-import Accordian from '../ui/accordian';
+import { COMPONENTS, GETTING_STARTED_COMPONENTS } from '@/utils/constants';
+import { FC, createElement } from 'react';
 import styles from './styles.module.css';
 
-const DocContent = () => {
+const DocContent: FC = () => {
   const [deviceType] = useResolution();
   const { currentSection } = useSideBarContext();
 
@@ -18,46 +17,15 @@ const DocContent = () => {
           {[DeviceType.DESKTOP, DeviceType.LARGE_DESKTOP].includes(deviceType) && <DesktopSideNavBar />}
 
           <div className={styles.middle_container}>
-            {currentSection === 'Accordian' && <Accordian />}
-            {/* <span>Docs Introduction</span>
-            <h1>Introduction</h1>
-            <span>Reusable components built from scratch</span>
-            <div className={styles.horizontal_line} />
-            <span>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur unde nisi quas repudiandae! Perferendis
-              earum a minus dolorem, officia accusantium sapiente magnam quos sint, soluta expedita deleniti maxime
-              perspiciatis necessitatibus!
-              <br />
-              <br />
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis consequuntur qui rerum repudiandae odio
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis consequuntur qui rerum repudiandae odio
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis consequuntur qui rerum repudiandae odio
-              quidem veniam eos! Possimus eligendi illo ab! Quibusdam impedit totam natus quia ex sit quisquam aliquid.
-            </span>
+            {/* Getting started section */}
+            {Object.keys(GETTING_STARTED_COMPONENTS).map((key) => {
+              return key === currentSection ? createElement(GETTING_STARTED_COMPONENTS[key], { key }) : null;
+            })}
 
-            <span>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur unde nisi quas repudiandae! Perferendis
-              earum a minus dolorem, officia accusantium sapiente magnam quos sint, soluta expedita deleniti maxime
-              perspiciatis necessitatibus!
-              <br />
-              <br />
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis consequuntur qui rerum repudiandae odio
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis consequuntur qui rerum repudiandae odio
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis consequuntur qui rerum repudiandae odio
-              quidem veniam eos! Possimus eligendi illo ab! Quibusdam impedit totam natus quia ex sit quisquam aliquid.
-            </span>
-
-            <span>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur unde nisi quas repudiandae! Perferendis
-              earum a minus dolorem, officia accusantium sapiente magnam quos sint, soluta expedita deleniti maxime
-              perspiciatis necessitatibus!
-              <br />
-              <br />
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis consequuntur qui rerum repudiandae odio
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis consequuntur qui rerum repudiandae odio
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis consequuntur qui rerum repudiandae odio
-              quidem veniam eos! Possimus eligendi illo ab! Quibusdam impedit totam natus quia ex sit quisquam aliquid.
-            </span> */}
+            {/* Components section */}
+            {Object.keys(COMPONENTS).map((key) => {
+              return key === currentSection ? createElement(COMPONENTS[key], { key }) : null;
+            })}
           </div>
 
           {[DeviceType.LARGE_DESKTOP].includes(deviceType) && <JumpNav />}
