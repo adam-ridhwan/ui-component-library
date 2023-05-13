@@ -1,5 +1,4 @@
 .wrapper {
-  /* outline: 1px solid blue; */
   display: flex;
   justify-content: center;
   background-color: white;
@@ -9,9 +8,9 @@
 .main_container {
   position: relative;
   display: flex;
-  padding-left: 1.5em;
-  padding-right: 1.5em;
-  max-width: 1200px;
+  padding: var(--desktop-horizontal-padding);
+  width: 100%;
+  max-width: var(--desktop-width);
 }
 
 .horizontal_line {
@@ -20,9 +19,9 @@
 }
 
 .middle_container {
-  /* outline: 1px solid red; */
   display: flex;
   flex-direction: column;
+  width: 100%;
   padding: 0 1.5em;
   padding-top: 30px;
 }

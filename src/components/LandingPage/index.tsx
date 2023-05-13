@@ -16,7 +16,7 @@ const LandingPage = () => {
       <div className={styles.wrapper}>
         <div className={styles.container}>
           <section className={styles.heading}>
-            <h1>Streamline your development.</h1>
+            <h1 className={styles.heading_title}>Streamline your development.</h1>
           </section>
 
           <section className={styles.support_heading}>

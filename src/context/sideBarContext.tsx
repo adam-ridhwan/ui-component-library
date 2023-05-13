@@ -3,6 +3,8 @@ import { FC, ReactNode, createContext, useState } from 'react';
 export interface SideBarContextValue {
   isSidebarToggled: boolean;
   toggleSidebar: () => void;
+  currentSection: string;
+  setCurrentSection: (section: string) => void;
 }
 
 export const SideBarContext = createContext<SideBarContextValue | null>(null);
@@ -12,14 +14,15 @@ interface SideBarProps {
 }
 
 const SideBarProvider: FC<SideBarProps> = ({ children }) => {
-  const [isSidebarToggled, setIsSidebarToggled] = useState(false);
+  const [isSidebarToggled, setIsSidebarToggled] = useState<boolean>(false);
+  const [currentSection, setCurrentSection] = useState<string>('introduction');
 
   const toggleSidebar = () => {
     setIsSidebarToggled(!isSidebarToggled);
   };
 
   return (
-    <SideBarContext.Provider value={{ isSidebarToggled, toggleSidebar }}>
+    <SideBarContext.Provider value={{ isSidebarToggled, toggleSidebar, currentSection, setCurrentSection }}>
       {children}
     </SideBarContext.Provider>
   );

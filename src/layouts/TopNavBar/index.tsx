@@ -26,7 +26,7 @@ const TopNavBar = () => {
             {[DeviceType.DESKTOP, DeviceType.LARGE_DESKTOP].includes(deviceType) ? (
               <div className={styles.desktop_nav}>
                 <NavigationButton path='/docs'>Documentation</NavigationButton>
-                <NavigationButton path='/components'>Components</NavigationButton>
+                <NavigationButton path='/docs/components/accordian'>Components</NavigationButton>
                 <NavigationButton path='/examples'>Examples</NavigationButton>
               </div>
             ) : (

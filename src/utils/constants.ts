@@ -81,3 +81,7 @@ export const COMPONENTS = {
 };
 
 export const EXAMPLES: string[] = ['Dashboard', 'Cards', 'Tasks', 'Playground', 'Music', 'Authentication'];
+
+export const TOP_NAVIGATION: string[] = ['Documentation', 'Components', 'Examples'];
+
+export const GETTING_STARTED_NAVIGATION: string[] = ['Introduction', 'Installation', 'Theming', 'CLI', 'Typography'];

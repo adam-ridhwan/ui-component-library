@@ -15,7 +15,6 @@
 .footer span {
   position: relative;
   display: inline-block;
-  margin-bottom: 10px;
   z-index: -1;
 }
 
