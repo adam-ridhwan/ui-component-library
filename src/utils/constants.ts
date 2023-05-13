@@ -52,7 +52,7 @@ export const COMPONENTS = {
   Collapsible: Collapsible,
   'Combo Box': ComboBox,
   Command: Command,
-  'Context Manu': ContextMenu,
+  'Context Menu': ContextMenu,
   'Data Table': DataTable,
   'Date Picker': DatePicker,
   Dialog: Dialog,

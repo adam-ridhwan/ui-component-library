@@ -21,3 +21,34 @@
   background-color: #d7d7d7;
   border-radius: 10px;
 }
+
+.instructions_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.components_container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  padding-bottom: 50px;
+}
+
+.instructions_container span,
+.components_container span {
+  height: 30px;
+}
+
+.instructions_container span:not(:first-child),
+.components_container span:not(:first-child) {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 400;
+  line-height: 1.8em;
+}
+
+.instructions_container span:not(:first-child):hover,
+.components_container span:not(:first-child):hover {
+  color: #0f127a;
+  cursor: pointer;
+}

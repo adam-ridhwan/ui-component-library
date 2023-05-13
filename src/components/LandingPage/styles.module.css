@@ -4,7 +4,7 @@
   align-items: center;
   height: calc(100vh - 60px * 2);
   width: 100%;
-  background-color: #f8fafc;
+  background-color: white;
   flex: 1;
 }
 
