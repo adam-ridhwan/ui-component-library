@@ -1,3 +1,3 @@
-export const format = (string: string) => {
+export const convertToURL = (string: string) => {
   return string.toLowerCase().replace(' ', '-');
 };

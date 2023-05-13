@@ -1,6 +1,6 @@
 import Documentation from '@/pages/Documentation';
 import Home from '@/pages/Home';
-import { format } from '@/utils/format';
+import { convertToURL } from '@/utils/convertToURL';
 import { createElement } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
@@ -15,12 +15,12 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/docs' element={<Documentation />}>
               {Object.entries(GETTING_STARTED_COMPONENTS).map(([name, component], index) => {
-                const path = format(name);
+                const path = convertToURL(name);
                 return <Route key={index} path={`/docs/${path}`} element={createElement(component)} />;
               })}
 
               {Object.entries(COMPONENTS).map(([name, component], index) => {
-                const path = format(name);
+                const path = convertToURL(name);
                 return <Route key={index} path={`/docs/components/${path}`} element={createElement(component)} />;
               })}
             </Route>

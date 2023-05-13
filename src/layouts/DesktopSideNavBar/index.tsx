@@ -1,6 +1,6 @@
 import NavigationButton from '@/components/NavigationButton/NavigationButton';
-import { COMPONENTS, GETTING_STARTED_COMPONENTS } from '@/utils/constants';
-import { format } from '@/utils/format';
+import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTES, GETTING_STARTED_COMPONENTS } from '@/utils/constants';
+import { convertToURL } from '@/utils/convertToURL';
 import styles from './styles.module.css';
 
 const DesktopSideNavBar = () => {
@@ -10,10 +10,14 @@ const DesktopSideNavBar = () => {
         <div className={styles.container}>
           <div className={styles.instructions_container}>
             <span>Getting started</span>
-            {Object.keys(GETTING_STARTED_COMPONENTS).map((component, index) => {
+            {Object.keys(GETTING_STARTED_COMPONENTS).map((componentString, index) => {
               return (
-                <NavigationButton key={index} path={`/docs/${format(component)}`} section={component}>
-                  {component}
+                <NavigationButton
+                  key={index}
+                  path={`${DOC_ROUTES + convertToURL(componentString)}`}
+                  section={componentString}
+                >
+                  {componentString}
                 </NavigationButton>
               );
             })}
@@ -21,10 +25,14 @@ const DesktopSideNavBar = () => {
 
           <div className={styles.components_container}>
             <span>Components</span>
-            {Object.keys(COMPONENTS).map((component, index) => {
+            {Object.keys(COMPONENTS).map((componentString, index) => {
               return (
-                <NavigationButton key={index} path={`/docs/components/${format(component)}`} section={component}>
-                  {component}
+                <NavigationButton
+                  key={index}
+                  path={`${COMPONENTS_ROUTES + convertToURL(componentString)}`}
+                  section={componentString}
+                >
+                  {componentString}
                 </NavigationButton>
               );
             })}

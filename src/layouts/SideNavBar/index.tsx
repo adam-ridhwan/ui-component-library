@@ -1,10 +1,10 @@
 import { FC, useRef } from 'react';
 
 import CloseIcon from '@/assets/svg/CloseIcon';
-import { useSideBarContext } from '@/hooks/useSideBarContext';
-import { COMPONENTS } from '@/utils/constants';
-
 import NavigationButton from '@/components/NavigationButton/NavigationButton';
+import { useSideBarContext } from '@/hooks/useSideBarContext';
+import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTES, GETTING_STARTED_COMPONENTS } from '@/utils/constants';
+import { convertToURL } from '@/utils/convertToURL';
 import styles from './styles.module.css';
 
 const MobileSidebar: FC = () => {
@@ -29,25 +29,43 @@ const MobileSidebar: FC = () => {
           <span className={styles.sidebar_title}>Title</span>
 
           <div>
-            <NavigationButton path='/docs'>Documentation</NavigationButton>
-            <NavigationButton path='/docs'>Components</NavigationButton>
-            <NavigationButton path='/docs'>Examples</NavigationButton>
+            <NavigationButton path='/docs' section={Object.keys(GETTING_STARTED_COMPONENTS)[0]}>
+              Documentation
+            </NavigationButton>
+            <NavigationButton path='/docs/components/accordian' section={Object.keys(COMPONENTS)[0]}>
+              Components
+            </NavigationButton>
+            <NavigationButton path='/examples' section={''}>
+              Examples
+            </NavigationButton>
           </div>
 
           <div>
             <span className={styles.sidebar_title}>Getting started</span>
-            <NavigationButton path='/docs'>Introduction</NavigationButton>
-            <NavigationButton path='/docs'>Installation</NavigationButton>
-            <NavigationButton path='/docs'>Theming</NavigationButton>
-            <NavigationButton path='/docs'>CLI</NavigationButton>
-            <NavigationButton path='/docs'>Typography</NavigationButton>
+            {Object.keys(GETTING_STARTED_COMPONENTS).map((component, index) => {
+              return (
+                <NavigationButton
+                  key={index}
+                  path={`${DOC_ROUTES + convertToURL(component)}`}
+                  section={component}
+                  closeSidebar={handleToggleModal}
+                >
+                  {component}
+                </NavigationButton>
+              );
+            })}
           </div>
 
           <div>
             <span className={styles.sidebar_title}>Components</span>
             {Object.keys(COMPONENTS).map((component, index) => {
               return (
-                <NavigationButton key={index} path='/docs'>
+                <NavigationButton
+                  key={index}
+                  path={`${COMPONENTS_ROUTES + convertToURL(component)}`}
+                  section={component}
+                  closeSidebar={handleToggleModal}
+                >
                   {component}
                 </NavigationButton>
               );

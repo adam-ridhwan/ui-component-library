@@ -41,9 +41,10 @@ import Textarea from '@/components/ui/textarea';
 import Toast from '@/components/ui/toast';
 import Toggle from '@/components/ui/toggle';
 import Tooltip from '@/components/ui/tooltip';
+import { FunctionComponent } from 'react';
 
 type ComponentMap = {
-  [key: string]: React.FunctionComponent;
+  [key: string]: FunctionComponent;
 };
 
 export const COMPONENTS: ComponentMap = {
@@ -88,8 +89,6 @@ export const COMPONENTS: ComponentMap = {
   Tooltip: Tooltip,
 };
 
-export const EXAMPLES: string[] = ['Dashboard', 'Cards', 'Tasks', 'Playground', 'Music', 'Authentication'];
-
 export const TOP_NAVIGATION: string[] = ['Documentation', 'Components', 'Examples'];
 
 export const GETTING_STARTED_COMPONENTS: ComponentMap = {
@@ -98,3 +97,8 @@ export const GETTING_STARTED_COMPONENTS: ComponentMap = {
   Theming: Theming,
   Typography: Typography,
 };
+
+export const EXAMPLES: string[] = ['Dashboard', 'Cards', 'Tasks', 'Playground', 'Music', 'Authentication'];
+
+export const DOC_ROUTES = '/docs/';
+export const COMPONENTS_ROUTES = '/docs/components/';
