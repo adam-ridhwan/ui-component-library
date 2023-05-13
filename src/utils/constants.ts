@@ -89,8 +89,6 @@ export const COMPONENTS: ComponentMap = {
   Tooltip: Tooltip,
 };
 
-export const TOP_NAVIGATION: string[] = ['Documentation', 'Components', 'Examples'];
-
 export const GETTING_STARTED_COMPONENTS: ComponentMap = {
   Introduction: Introduction,
   Installation: Installation,
@@ -100,5 +98,6 @@ export const GETTING_STARTED_COMPONENTS: ComponentMap = {
 
 export const EXAMPLES: string[] = ['Dashboard', 'Cards', 'Tasks', 'Playground', 'Music', 'Authentication'];
 
+export const DOC_ROUTE = '/docs';
 export const DOC_ROUTES = '/docs/';
 export const COMPONENTS_ROUTES = '/docs/components/';
