@@ -1,4 +1,3 @@
-import { GETTING_STARTED_COMPONENTS } from '@/utils/constants';
 import { FC, ReactNode, createContext, useState } from 'react';
 
 export interface SideBarContextValue {
@@ -16,7 +15,7 @@ interface SideBarProps {
 
 const SideBarProvider: FC<SideBarProps> = ({ children }) => {
   const [isSidebarToggled, setIsSidebarToggled] = useState<boolean>(false);
-  const [currentSection, setCurrentSection] = useState<string>(Object.keys(GETTING_STARTED_COMPONENTS)[0]);
+  const [currentSection, setCurrentSection] = useState<string>('Introduction');
 
   const toggleSidebar = () => {
     setIsSidebarToggled(!isSidebarToggled);

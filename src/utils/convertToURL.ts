@@ -1,3 +1,3 @@
 export const convertToURL = (string: string) => {
-  return string.toLowerCase().replace(' ', '-');
+  return '/' + string.toLowerCase().replace(' ', '-');
 };

@@ -3,7 +3,7 @@ import { FC, useRef } from 'react';
 import CloseIcon from '@/assets/svg/CloseIcon';
 import NavigationButton from '@/components/NavigationButton/NavigationButton';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
-import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE, DOC_ROUTES, GETTING_STARTED_COMPONENTS } from '@/utils/constants';
+import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE } from '@/utils/constants';
 import { convertToURL } from '@/utils/convertToURL';
 import styles from './styles.module.css';
 
@@ -29,7 +29,7 @@ const MobileSidebar: FC = () => {
           <span className={styles.sidebar_title}>Title</span>
 
           <div>
-            <NavigationButton path={DOC_ROUTE} section={Object.keys(GETTING_STARTED_COMPONENTS)[0]}>
+            <NavigationButton path={DOC_ROUTE} section={'Introduction'}>
               Documentation
             </NavigationButton>
             <NavigationButton path='/docs/components/accordian' section={Object.keys(COMPONENTS)[0]}>
@@ -42,18 +42,6 @@ const MobileSidebar: FC = () => {
 
           <div>
             <span className={styles.sidebar_title}>Getting started</span>
-            {Object.keys(GETTING_STARTED_COMPONENTS).map((component, index) => {
-              return (
-                <NavigationButton
-                  key={index}
-                  path={`${DOC_ROUTES + convertToURL(component)}`}
-                  section={component}
-                  closeSidebar={handleToggleModal}
-                >
-                  {component}
-                </NavigationButton>
-              );
-            })}
           </div>
 
           <div>
