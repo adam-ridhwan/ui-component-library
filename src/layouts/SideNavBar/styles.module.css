@@ -1,3 +1,7 @@
+:root {
+  --sidebar-padding-left: 40px;
+}
+
 .overlay {
   position: absolute;
   height: inherit;
@@ -34,78 +38,37 @@
   pointer-events: auto;
 }
 
-.sidebar_title {
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  padding: 0 12px;
-  height: 40px;
-}
-
-.content button {
-  height: 24px;
-  width: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  outline: none;
-  background-color: white;
-}
-
 .sidebar_content {
   overflow: hidden;
   overflow-y: auto;
   max-height: 90vh;
 }
 
-/* Title of app */
-.sidebar_content > span:first-child {
-  /* outline: 1px solid red; */
+/* subtitles */
+.sidebar_title {
   margin-top: 30px;
-  padding-left: 40px;
+  padding-left: var(--sidebar-padding-left);
   font-weight: 600;
   display: flex;
-  flex-direction: column;
 }
 
-.sidebar_content > div:nth-child(2) > span {
+.sidebar_content > div:nth-child(2) > button,
+.sidebar_content > div:nth-child(3) > button,
+.sidebar_content > div:nth-child(4) > button {
+  width: 100%;
+  font-size: 14px;
   font-weight: 400;
-  color: rgb(71 85 105);
-  margin-top: 12px;
-  padding-left: 40px;
+  color: #0f172a;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding-left: var(--sidebar-padding-left);
   display: flex;
   flex-direction: column;
-}
-
-/* ___ */
-.sidebar_content > div:nth-child(3) > span:first-child {
-  font-weight: 600;
-  padding-top: 25px;
-}
-
-.sidebar_content > div:nth-child(3) > span {
-  font-weight: 400;
-  color: rgb(71 85 105);
-  margin-top: 12px;
-  padding-left: 40px;
-  display: flex;
-  flex-direction: column;
-}
-
-/* ___ */
-.sidebar_content > div:nth-child(4) > span:first-child {
-  font-weight: 600;
-  padding-top: 25px;
-}
-
-.sidebar_content > div:nth-child(4) > span {
-  font-weight: 400;
-  color: rgb(71 85 105);
-  margin-top: 12px;
-  padding-left: 40px;
-  display: flex;
-  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
 }
 
 .sidebar_content::-webkit-scrollbar {

@@ -1,15 +1,13 @@
 import GithubIcon from '@/assets/svg/GithubIcon';
 import ToggleSidebarIcon from '@/assets/svg/ToggleSidebarIcon';
 import ToggleThemeIcon from '@/assets/svg/ToggleThemeIcon';
+import NavigationButton from '@/components/NavigationButton/NavigationButton';
 import useResolution, { DeviceType } from '@/hooks/useResolution';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
-import { useNavigate } from 'react-router-dom';
 import styles from './styles.module.css';
 
 const TopNavBar = () => {
-  const navigate = useNavigate();
-
   const { toggleSidebar } = useSideBarContext();
   const { toggleSearchBar, searchInputRef } = useSearchBarContext();
   const [deviceType] = useResolution();
@@ -27,9 +25,9 @@ const TopNavBar = () => {
           <div className={styles.container}>
             {[DeviceType.DESKTOP, DeviceType.LARGE_DESKTOP].includes(deviceType) ? (
               <div className={styles.desktop_nav}>
-                <button onClick={() => navigate('/docs')}>Documentation</button>
-                <button>Components</button>
-                <button>Examples</button>
+                <NavigationButton path='/docs'>Documentation</NavigationButton>
+                <NavigationButton path='/components'>Components</NavigationButton>
+                <NavigationButton path='/examples'>Examples</NavigationButton>
               </div>
             ) : (
               <button onClick={toggleSidebar} className={styles.toggle_side_bar_icon}>

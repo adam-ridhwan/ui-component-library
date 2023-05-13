@@ -1,7 +1,7 @@
 const Accordian = () => {
   return (
     <>
-      <div></div>
+      <div>Accordian</div>
     </>
   );
 };

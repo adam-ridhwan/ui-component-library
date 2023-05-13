@@ -4,6 +4,7 @@ import CloseIcon from '@/assets/svg/CloseIcon';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 import { COMPONENTS } from '@/utils/constants';
 
+import NavigationButton from '@/components/NavigationButton/NavigationButton';
 import styles from './styles.module.css';
 
 const MobileSidebar: FC = () => {
@@ -25,28 +26,31 @@ const MobileSidebar: FC = () => {
 
       <div className={contentStyle}>
         <div className={styles.sidebar_content} ref={sideBarContentRef}>
-          <span>Title</span>
+          <span className={styles.sidebar_title}>Title</span>
 
           <div>
-            <span>Documentation</span>
-            <span>Components</span>
-            <span>Examples</span>
-            <span>Github</span>
+            <NavigationButton path='/docs'>Documentation</NavigationButton>
+            <NavigationButton path='/docs'>Components</NavigationButton>
+            <NavigationButton path='/docs'>Examples</NavigationButton>
           </div>
 
           <div>
-            <span>Getting started</span>
-            <span>Introduction</span>
-            <span>Installation</span>
-            <span>Themeing</span>
-            <span>CLI</span>
-            <span>Typography</span>
+            <span className={styles.sidebar_title}>Getting started</span>
+            <NavigationButton path='/docs'>Introduction</NavigationButton>
+            <NavigationButton path='/docs'>Installation</NavigationButton>
+            <NavigationButton path='/docs'>Theming</NavigationButton>
+            <NavigationButton path='/docs'>CLI</NavigationButton>
+            <NavigationButton path='/docs'>Typography</NavigationButton>
           </div>
 
           <div>
-            <span>Components</span>
+            <span className={styles.sidebar_title}>Components</span>
             {Object.keys(COMPONENTS).map((component, index) => {
-              return <span key={index}>{component}</span>;
+              return (
+                <NavigationButton key={index} path='/docs'>
+                  {component}
+                </NavigationButton>
+              );
             })}
           </div>
         </div>

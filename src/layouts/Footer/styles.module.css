@@ -1,5 +1,4 @@
 .footer {
-  outline: 1px solid red;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,6 +16,7 @@
   position: relative;
   display: inline-block;
   margin-bottom: 10px;
+  z-index: -1;
 }
 
 .footer span::after {

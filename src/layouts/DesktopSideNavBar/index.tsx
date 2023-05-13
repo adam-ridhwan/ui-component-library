@@ -1,3 +1,4 @@
+import NavigationButton from '@/components/NavigationButton/NavigationButton';
 import { COMPONENTS } from '@/utils/constants';
 import styles from './styles.module.css';
 
@@ -8,17 +9,21 @@ const DesktopSideNavBar = () => {
         <div className={styles.container}>
           <div className={styles.instructions_container}>
             <span>Getting started</span>
-            <span>Introduction</span>
-            <span>Installation</span>
-            <span>Theming</span>
-            <span>CLI</span>
-            <span>Typography</span>
+            <NavigationButton path='/docs/'>Introduction</NavigationButton>
+            <NavigationButton path='/docs/'>Installation</NavigationButton>
+            <NavigationButton path='/docs/'>Theming</NavigationButton>
+            <NavigationButton path='/docs/'>CLI</NavigationButton>
+            <NavigationButton path='/docs/'>Typography</NavigationButton>
           </div>
 
           <div className={styles.components_container}>
             <span>Components</span>
             {Object.keys(COMPONENTS).map((component, index) => {
-              return <span key={index}>{component}</span>;
+              return (
+                <NavigationButton key={index} path={`/docs/components/${component.toLowerCase()}`}>
+                  {component}
+                </NavigationButton>
+              );
             })}
           </div>
         </div>

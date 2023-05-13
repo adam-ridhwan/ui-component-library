@@ -13,9 +13,10 @@ function App() {
           <Routes>
             <Route path='/' element={<Homepage />} />
             <Route path='/docs' element={<Documentation />} />
+
             {Object.entries(COMPONENTS).map(([name, component], index) => {
               const path = name.toLowerCase().replace(' ', '-');
-              return <Route path={`/${path}`} key={index} element={createElement(component)} />;
+              return <Route path={`/docs/components/${path}`} key={index} element={createElement(component)} />;
             })}
           </Routes>
         </Router>
