@@ -2,14 +2,14 @@ import { useSideBarContext } from '@/hooks/useSideBarContext';
 import { FC, ReactNode } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-interface NavigationButtonProps {
+interface INavigationButtonProps {
   path: string;
   section: string;
   children: ReactNode;
   closeSidebar?: () => void;
 }
 
-const NavigationButton: FC<NavigationButtonProps> = ({ path, section, children, closeSidebar }) => {
+const NavigationButton: FC<INavigationButtonProps> = ({ path, section, children, closeSidebar }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { setCurrentSection } = useSideBarContext();

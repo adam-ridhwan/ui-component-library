@@ -9,7 +9,6 @@ const Introduction = () => {
       <Path section={currentSection} />
       <h1>{currentSection}</h1>
       <span>Reusable components built from scratch</span>
-      <div className={styles.horizontal_line} />
       <span>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur unde nisi quas repudiandae! Perferendis earum
         a minus dolorem, officia accusantium sapiente magnam quos sint, soluta expedita deleniti maxime perspiciatis
