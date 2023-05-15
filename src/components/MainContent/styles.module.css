@@ -5,7 +5,7 @@
   flex: 1;
 }
 
-.main_container {
+.container {
   position: relative;
   display: flex;
   padding: var(--desktop-horizontal-padding);

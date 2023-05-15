@@ -22,7 +22,7 @@ const DocContent: FC = () => {
   return (
     <>
       <div className={styles.wrapper}>
-        <div className={styles.main_container}>
+        <div className={styles.container}>
           {[DeviceType.DESKTOP, DeviceType.LARGE_DESKTOP].includes(deviceType) && <DesktopSideNavBar />}
 
           <div className={styles.middle_container}>

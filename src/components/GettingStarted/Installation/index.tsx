@@ -1,12 +1,16 @@
+import Divider from '@/components/Divider';
+import Path from '@/components/Path';
+import { useSideBarContext } from '@/hooks/useSideBarContext';
 import styles from './styles.module.css';
 
 const Installation = () => {
+  const { currentSection } = useSideBarContext();
   return (
     <>
-      <span>Docs Installation</span>
-      <h1>Installation</h1>
+      <Path section={currentSection} />
+      <h1>{currentSection}</h1>
       <span>Reusable components built from scratch</span>
-      <div className={styles.horizontal_line} />
+      <Divider />
       <span>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur unde nisi quas repudiandae! Perferendis earum
         a minus dolorem, officia accusantium sapiente magnam quos sint, soluta expedita deleniti maxime perspiciatis
