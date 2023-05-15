@@ -1,3 +1,7 @@
+import Installation from '@/components/GettingStarted/Installation';
+import Introduction from '@/components/GettingStarted/Introduction';
+import Theming from '@/components/GettingStarted/Theming';
+import Typography from '@/components/GettingStarted/Typography';
 import Documentation from '@/pages/Documentation';
 import Home from '@/pages/Home';
 import { COMPONENTS } from '@/utils/constants';
@@ -5,10 +9,6 @@ import { convertToURL } from '@/utils/convertToURL';
 import { createElement } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
-import Installation from './components/GettingStarted/Installation';
-import Introduction from './components/GettingStarted/Introduction';
-import Theming from './components/GettingStarted/Theming';
-import Typography from './components/GettingStarted/Typography';
 
 function App() {
   return (

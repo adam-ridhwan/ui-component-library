@@ -1,13 +1,13 @@
+import Installation from '@/components/GettingStarted/Installation';
+import Introduction from '@/components/GettingStarted/Introduction';
+import Theming from '@/components/GettingStarted/Theming';
+import Typography from '@/components/GettingStarted/Typography';
 import useResolution, { DeviceType } from '@/hooks/useResolution';
 import DesktopSideNavBar from '@/layouts/DesktopSideNavBar';
 import JumpNav from '@/layouts/JumpNav';
 import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE } from '@/utils/constants';
 import { FC, createElement, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import Installation from '../GettingStarted/Installation';
-import Introduction from '../GettingStarted/Introduction';
-import Theming from '../GettingStarted/Theming';
-import Typography from '../GettingStarted/Typography';
 import styles from './styles.module.css';
 
 const DocContent: FC = () => {

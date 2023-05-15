@@ -1,4 +1,4 @@
-import DocContent from '@/components/DocContent';
+import DocContent from '@/components/MainContent';
 import SearchBar from '@/components/SearchBar';
 import Footer from '@/layouts/Footer';
 import SideNavBar from '@/layouts/SideNavBar';

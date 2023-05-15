@@ -1,17 +1,13 @@
-import Chevronright from '@/assets/svg/ChevronRightIcon';
+import Path from '@/components/Path';
+import { useSideBarContext } from '@/hooks/useSideBarContext';
 import styles from './styles.module.css';
 
 const Introduction = () => {
+  const { currentSection } = useSideBarContext();
   return (
     <>
-      <div>
-        <span>Docs </span>
-        <span>
-          <Chevronright />
-        </span>
-        <span>Introduction</span>
-      </div>
-      <h1>Introduction</h1>
+      <Path section={currentSection} />
+      <h1>{currentSection}</h1>
       <span>Reusable components built from scratch</span>
       <div className={styles.horizontal_line} />
       <span>
