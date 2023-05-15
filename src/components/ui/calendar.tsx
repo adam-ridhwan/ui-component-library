@@ -1,7 +1,10 @@
+import { useSideBarContext } from '@/hooks/useSideBarContext';
+
 const Calendar = () => {
+  const { currentSection } = useSideBarContext();
   return (
     <>
-      <div></div>
+      <div>{currentSection}</div>
     </>
   );
 };

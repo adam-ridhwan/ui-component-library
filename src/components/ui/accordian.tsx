@@ -1,7 +1,10 @@
+import { useSideBarContext } from '@/hooks/useSideBarContext';
+
 const Accordian = () => {
+  const { currentSection } = useSideBarContext();
   return (
     <>
-      <div>Accordian component</div>
+      <div>{currentSection}</div>
     </>
   );
 };

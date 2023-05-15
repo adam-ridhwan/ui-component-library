@@ -1,7 +1,10 @@
+import { useSideBarContext } from '@/hooks/useSideBarContext';
+
 const Tabs = () => {
+  const { currentSection } = useSideBarContext();
   return (
     <>
-      <div></div>
+      <div>{currentSection}</div>
     </>
   );
 };

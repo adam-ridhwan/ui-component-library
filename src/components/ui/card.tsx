@@ -1,7 +1,10 @@
+import { useSideBarContext } from '@/hooks/useSideBarContext';
+
 const Card = () => {
+  const { currentSection } = useSideBarContext();
   return (
     <>
-      <div></div>
+      <div>{currentSection}</div>
     </>
   );
 };
