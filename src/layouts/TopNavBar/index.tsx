@@ -43,8 +43,8 @@ const TopNavBar = () => {
             )}
 
             <div className={styles.searchnav_container}>
-              <button>
-                <div onClick={handleSearchBar}>
+              <button onClick={handleSearchBar}>
+                <div>
                   {[DeviceType.PHONE, DeviceType.TABLET].includes(deviceType) ? 'Search...' : 'Search documentation...'}
                 </div>
               </button>

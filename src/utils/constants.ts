@@ -1,7 +1,3 @@
-import Installation from '@/components/GettingStarted/Installation';
-import Introduction from '@/components/GettingStarted/Introduction';
-import Theming from '@/components/GettingStarted/Theming';
-import Typography from '@/components/GettingStarted/Typography';
 import Accordian from '@/components/ui/accordian';
 import Alert from '@/components/ui/alert';
 import AlertDialog from '@/components/ui/alert-dialog';

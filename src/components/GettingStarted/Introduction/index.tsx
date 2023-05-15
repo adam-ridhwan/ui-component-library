@@ -1,9 +1,16 @@
+import Chevronright from '@/assets/svg/ChevronRightIcon';
 import styles from './styles.module.css';
 
 const Introduction = () => {
   return (
     <>
-      <span>Docs Introduction</span>
+      <div>
+        <span>Docs </span>
+        <span>
+          <Chevronright />
+        </span>
+        <span>Introduction</span>
+      </div>
       <h1>Introduction</h1>
       <span>Reusable components built from scratch</span>
       <div className={styles.horizontal_line} />
