@@ -44,8 +44,6 @@ const DocContent: FC = () => {
               );
             })}
           </div>
-
-          {[DeviceType.LARGE_DESKTOP].includes(deviceType) && <JumpNav />}
         </div>
       </div>
     </>

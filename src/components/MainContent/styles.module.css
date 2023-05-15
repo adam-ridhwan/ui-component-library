@@ -14,9 +14,10 @@
 }
 
 .middle_container {
+  outline: 1px solid blue;
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 0 40px;
+  margin-left: 40px;
   padding-top: 30px;
 }

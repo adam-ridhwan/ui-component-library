@@ -2,4 +2,25 @@
   width: 300px;
   position: sticky;
   top: 0;
+  margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  align-items: flex-start;
+}
+
+.container span:first-child {
+  font-weight: 500;
+  color: #0f172a;
+  margin-bottom: 1em;
+}
+
+.container span:not(:first-child) {
+  color: #64748b;
+  margin-bottom: 0.5em;
+}
+
+.container span:not(:first-child):hover {
+  cursor: pointer;
+  color: #0f172a;
 }

@@ -1,11 +1,17 @@
+import { FC } from 'react';
 import styles from './styles.module.css';
 
-const JumpNav = () => {
+interface IJumpNavProps {
+  children: React.ReactNode;
+}
+
+const JumpNav: FC<IJumpNavProps> = ({ children }) => {
   return (
     <>
       <aside>
         <div className={styles.container}>
           <span>On this page</span>
+          {children}
         </div>
       </aside>
     </>
