@@ -50,15 +50,16 @@
 .sidebar_title {
   margin-top: 30px;
   padding-left: var(--sidebar-padding-left);
-  font-weight: 600;
+  font-weight: 500;
   display: flex;
+  font-size: 16px;
 }
 
 .sidebar_content > div:nth-child(2) > button,
 .sidebar_content > div:nth-child(3) > button,
 .sidebar_content > div:nth-child(4) > button {
   width: 100%;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   color: #0f172a;
   margin-top: 15px;

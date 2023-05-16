@@ -38,11 +38,13 @@
 
 .instructions_container button,
 .components_container button {
-  height: 30px;
+  height: 35px;
   text-align: left;
   background-color: transparent;
   border: none;
   outline: none;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
 .instructions_container span,
@@ -60,6 +62,6 @@
 
 .instructions_container button:not(:first-child):hover,
 .components_container button:not(:first-child):hover {
-  color: #0f127a;
+  text-decoration: underline;
   cursor: pointer;
 }
