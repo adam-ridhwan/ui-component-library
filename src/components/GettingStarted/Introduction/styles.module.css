@@ -1,15 +1,18 @@
 .container {
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
 }
 
-/* .section_container {
-  outline: 2px solid green;
+.section_container {
+  /* outline: 2px solid green; */
 }
 
 .jump_nav_container {
-  outline: 2px solid red;
-} */
+  /* outline: 2px solid red; */
+  position: sticky;
+  top: 87px;
+}
 
 .horizontal_line {
   border-top: 1px solid #dfe4ed;

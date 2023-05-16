@@ -15,7 +15,6 @@ const TopNavBar = () => {
 
   const handleSearchBar = () => {
     toggleSearchBar();
-
     if (searchInputRef.current) searchInputRef.current.focus();
   };
 

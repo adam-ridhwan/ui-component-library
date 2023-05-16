@@ -1,7 +1,5 @@
 .container {
   width: 300px;
-  position: sticky;
-  top: 0;
   margin-left: 40px;
   display: flex;
   flex-direction: column;

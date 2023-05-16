@@ -1,8 +1,8 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import styles from './styles.module.css';
 
 interface IJumpNavProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const JumpNav: FC<IJumpNavProps> = ({ children }) => {
