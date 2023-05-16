@@ -14,10 +14,30 @@
 }
 
 .middle_container {
-  outline: 1px solid blue;
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-left: 40px;
+
   padding-top: 30px;
+}
+
+/* iPad (Portrait) */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .middle_container {
+    margin-left: 30px;
+  }
+}
+
+/* iPad (Landscape) */
+@media screen and (min-width: 1024px) and (max-width: 1199px) {
+  .middle_container {
+    margin-left: 30px;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1200px) {
+  .middle_container {
+    margin-left: 40px;
+  }
 }

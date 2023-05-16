@@ -5,7 +5,6 @@ import Typography from '@/components/GettingStarted/Typography';
 import useResolution, { DeviceType } from '@/hooks/useResolution';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 import DesktopSideNavBar from '@/layouts/DesktopSideNavBar';
-import JumpNav from '@/layouts/JumpNav';
 import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE } from '@/utils/constants';
 import { convertToURL } from '@/utils/convertToURL';
 import { FC, createElement, useEffect } from 'react';
@@ -44,17 +43,6 @@ const DocContent: FC = () => {
               );
             })}
           </div>
-
-          {/* {[DeviceType.LARGE_DESKTOP].includes(deviceType) && (
-            <JumpNav>
-              {path === DOC_ROUTE && (
-                <>
-                  <span>FAQ</span>
-                  <span>Credits</span>
-                </>
-              )}
-            </JumpNav>
-          )} */}
         </div>
       </div>
     </>
