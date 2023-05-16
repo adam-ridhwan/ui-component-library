@@ -4,7 +4,7 @@ import useResolution, { DeviceType } from '@/hooks/useResolution';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 import JumpNav from '@/layouts/JumpNav';
 import jumpToSection from '@/utils/jumpToSection';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import styles from './styles.module.css';
 
 const Introduction = () => {

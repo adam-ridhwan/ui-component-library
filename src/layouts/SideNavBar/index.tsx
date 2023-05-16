@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from 'react';
+import { FC, useRef } from 'react';
 
 import CloseIcon from '@/assets/svg/CloseIcon';
 import NavigationButton from '@/components/NavigationButton/NavigationButton';
