@@ -17,10 +17,6 @@ const DocContent: FC = () => {
   const location = useLocation();
   const path = location.pathname;
 
-  useEffect(() => {
-    console.log(currentSection);
-  });
-
   return (
     <>
       <div className={styles.wrapper}>

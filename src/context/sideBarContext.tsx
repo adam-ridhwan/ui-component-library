@@ -18,7 +18,7 @@ const SideBarProvider: FC<SideBarProps> = ({ children }) => {
   const [currentSection, setCurrentSection] = useState<string>('Introduction');
 
   const toggleSidebar = () => {
-    setIsSidebarToggled(!isSidebarToggled);
+    setIsSidebarToggled((isSidebarToggled) => !isSidebarToggled);
   };
 
   return (

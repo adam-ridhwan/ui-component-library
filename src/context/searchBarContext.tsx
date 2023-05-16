@@ -19,7 +19,18 @@ export const SearchBarProvider: FC<SearchBarProps> = ({ children }) => {
   const [searchInputValue, setSearchInputValue] = useState('');
 
   const toggleSearchBar = () => {
-    setIsSearchBarToggled(!isSearchBarToggled);
+    setIsSearchBarToggled((isSearchBarToggled) => !isSearchBarToggled);
+
+    // const originalStyle = window.getComputedStyle(document.body).overflow;
+
+    // if (!isSearchBarToggled) {
+    //   document.body.style.overflow = originalStyle;
+    //   document.body.style.paddingRight = '0px';
+    // } else {
+    //   const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+    //   document.body.style.overflow = 'hidden';
+    //   document.body.style.paddingRight = `${scrollBarWidth}px`;
+    // }
   };
 
   return (

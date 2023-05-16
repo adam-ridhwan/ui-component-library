@@ -1,8 +1,18 @@
 header {
   position: sticky;
   top: 0;
-  background-color: white;
   z-index: 1; /* or any value higher than the z-index of the content underneath */
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background-color: white; */
+  z-index: -1;
 }
 
 .wrapper {
@@ -12,6 +22,7 @@ header {
   justify-content: center;
   height: var(--top-navigation-height);
   box-shadow: inset 0px -1px 0px #dfe4ed;
+  background-color: white;
 }
 
 .container {
@@ -63,7 +74,7 @@ header {
   border-radius: 6px;
   background-color: #f0f0f0;
   border: none;
-  background: none;
+  /* background: none; */
   cursor: pointer;
   padding: 8px 16px;
   margin-right: 0.5rem;

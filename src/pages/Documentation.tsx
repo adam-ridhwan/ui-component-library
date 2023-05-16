@@ -11,6 +11,7 @@ const Documentation = () => {
     flexDirection: 'column',
     position: 'relative',
   };
+
   return (
     <>
       <div style={style}>

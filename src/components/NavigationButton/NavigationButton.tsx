@@ -14,13 +14,14 @@ const NavigationButton: FC<INavigationButtonProps> = ({ path, section, children,
   const location = useLocation();
   const { setCurrentSection } = useSideBarContext();
 
-  const handleClick = () => {
+  const handleNavigateToSection = () => {
     closeSidebar?.();
     setCurrentSection(section);
     if (location.pathname !== path) navigate(path);
+    window.scrollTo(0, 0);
   };
 
-  return <button onClick={handleClick}>{children}</button>;
+  return <button onClick={handleNavigateToSection}>{children}</button>;
 };
 
 export default NavigationButton;

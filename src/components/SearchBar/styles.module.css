@@ -12,7 +12,8 @@
   background-color: rgba(255, 255, 255, 0.5);
   opacity: 1;
   pointer-events: auto;
-  height: 100vh;
+  height: 100%;
+  z-index: 10;
 }
 
 .transition {
@@ -22,7 +23,7 @@
 .content {
   position: absolute;
   height: 350px;
-  width: 100%;
+  width: calc(100% + var(--scrollBarWidth));
   opacity: 0;
   background-color: white;
   pointer-events: none;
@@ -35,6 +36,7 @@
   transform: translateY(0%);
   opacity: 1;
   pointer-events: auto;
+  z-index: 11;
 }
 
 .searchbar_container {
@@ -84,8 +86,8 @@
 /* iPad (Portrait) */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .content {
-    position: absolute;
-    top: 50%;
+    position: fixed;
+    top: 40%;
     left: 50%;
     height: 350px;
     width: 500px;
@@ -108,8 +110,8 @@
 /* iPad (Landscape) */
 @media screen and (min-width: 1024px) and (max-width: 1199px) {
   .content {
-    position: absolute;
-    top: 50%;
+    position: fixed;
+    top: 40%;
     left: 50%;
     height: 350px;
     width: 500px;
@@ -132,8 +134,8 @@
 /* Desktop */
 @media screen and (min-width: 1200px) {
   .content {
-    position: absolute;
-    top: 50%;
+    position: fixed;
+    top: 40%;
     left: 50%;
     height: 350px;
     width: 500px;
@@ -142,7 +144,6 @@
     pointer-events: none;
     box-shadow: 0 10px 220px rgba(0, 0, 0, 0.19), 0 10px 15px rgba(0, 0, 0, 0.1);
     transform: translate(-50%, -50%) scale(0.9);
-
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 6px;
   }

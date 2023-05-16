@@ -3,7 +3,8 @@ import Path from '@/components/Path';
 import useResolution, { DeviceType } from '@/hooks/useResolution';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 import JumpNav from '@/layouts/JumpNav';
-import { RefObject, useRef } from 'react';
+import jumpToSection from '@/utils/jumpToSection';
+import { useEffect, useRef } from 'react';
 import styles from './styles.module.css';
 
 const Introduction = () => {
@@ -12,10 +13,6 @@ const Introduction = () => {
   const { currentSection } = useSideBarContext();
   const [deviceType] = useResolution();
   const isLargeDesktop = [DeviceType.LARGE_DESKTOP].includes(deviceType);
-
-  const handleClick = (ref: RefObject<HTMLSpanElement>) => {
-    ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
 
   return (
     <>
@@ -119,8 +116,8 @@ const Introduction = () => {
           {isLargeDesktop && (
             <JumpNav>
               <>
-                <span onClick={() => handleClick(faqRef)}>FAQ</span>
-                <span onClick={() => handleClick(creditsRef)}>Credits</span>
+                <span onClick={() => jumpToSection(faqRef)}>FAQ</span>
+                <span onClick={() => jumpToSection(creditsRef)}>Credits</span>
               </>
             </JumpNav>
           )}

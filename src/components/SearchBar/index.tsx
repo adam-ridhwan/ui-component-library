@@ -14,8 +14,9 @@ const SideNavBar: FC = () => {
 
   const handleCloseModal = () => {
     toggleSearchBar();
-
     if (searchInputRef.current) searchInputRef.current.value = '';
+    document.body.style.overflow = 'auto';
+    document.body.style.paddingRight = '0px';
   };
 
   // Handle window resize and DISABLES transition when window is resized

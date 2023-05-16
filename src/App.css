@@ -8,6 +8,10 @@
   font-family: 'Poppins', sans-serif;
 }
 
+:root {
+  --scrollBarWidth: 9px;
+}
+
 body {
   overflow-x: hidden;
 }
@@ -19,7 +23,7 @@ body {
 }
 
 body::-webkit-scrollbar {
-  width: 9px;
+  width: var(--scrollBarWidth);
   background-color: #f5f5f5;
 }
 
