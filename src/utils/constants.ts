@@ -43,6 +43,8 @@ type ComponentMap = {
   [key: string]: FunctionComponent;
 };
 
+export const GETTING_STARTED: string[] = ['introduction', 'installation', 'theming', 'typography'];
+
 export const COMPONENTS: ComponentMap = {
   accordian: Accordian,
   alert: Alert,

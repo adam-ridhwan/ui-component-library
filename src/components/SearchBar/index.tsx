@@ -16,12 +16,7 @@ const SearchBar: FC = () => {
     toggleSearchBar();
     if (searchInputRef.current) searchInputRef.current.value = '';
     document.body.style.overflowY = 'auto';
-    document.body.style.paddingRight = '0';
   };
-
-  useEffect(() => {
-    console.log(isSearchBarToggled);
-  }, [isSearchBarToggled]);
 
   // Handle window resize and DISABLES transition when window is resized
   useEffect(() => {

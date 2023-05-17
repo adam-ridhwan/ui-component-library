@@ -1,5 +1,5 @@
 import NavigationButton from '@/components/NavigationButton/NavigationButton';
-import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE } from '@/utils/constants';
+import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE, GETTING_STARTED } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import styles from './styles.module.css';
 
@@ -10,18 +10,20 @@ const DesktopSideNavBar = () => {
         <div className={styles.container}>
           <div className={styles.instructions_container}>
             <span>Getting started</span>
-            <NavigationButton path={`${DOC_ROUTE}`} section='docs'>
-              Introduction
-            </NavigationButton>
-            <NavigationButton path={`${DOC_ROUTE}/installation`} section='installation'>
-              Installation
-            </NavigationButton>
-            <NavigationButton path={`${DOC_ROUTE}/theming`} section='theming'>
-              Theming
-            </NavigationButton>
-            <NavigationButton path={`${DOC_ROUTE}/typography`} section='typography'>
-              Typography
-            </NavigationButton>
+            {GETTING_STARTED.map((section, index) => {
+              if (section === 'introduction')
+                return (
+                  <NavigationButton path={`${DOC_ROUTE}`} section='docs'>
+                    Introduction
+                  </NavigationButton>
+                );
+
+              return (
+                <NavigationButton key={index} path={`${DOC_ROUTE}/${section}`} section={`${section}`}>
+                  {section}
+                </NavigationButton>
+              );
+            })}
           </div>
 
           <div className={styles.components_container}>

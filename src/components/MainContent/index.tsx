@@ -5,7 +5,7 @@ import Typography from '@/components/GettingStarted/Typography';
 import useResolution, { DeviceType } from '@/hooks/useResolution';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 import DesktopSideNavBar from '@/layouts/DesktopSideNavBar';
-import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE } from '@/utils/constants';
+import { COMPONENTS } from '@/utils/constants';
 import { FC, createElement, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import styles from './styles.module.css';
@@ -18,7 +18,7 @@ const DocContent: FC = () => {
 
   useEffect(() => {
     const sectionArray = path.split('/');
-    console.log(sectionArray[sectionArray.length - 1]);
+    // console.log(sectionArray[sectionArray.length - 1]);
     setCurrentSection(sectionArray[sectionArray.length - 1]);
   }, [path, setCurrentSection]);
 
@@ -32,8 +32,8 @@ const DocContent: FC = () => {
             {/* Getting started section */}
             {currentSection === 'docs' && <Introduction />}
             {currentSection === 'installation' && <Installation />}
-            {currentSection === `theming` && <Theming />}
-            {currentSection === `typography` && <Typography />}
+            {currentSection === 'theming' && <Theming />}
+            {currentSection === 'typography' && <Typography />}
 
             {/* Components section */}
             {Object.keys(COMPONENTS).map((component, index) => {

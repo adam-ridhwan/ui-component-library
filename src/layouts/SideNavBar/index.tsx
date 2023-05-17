@@ -18,7 +18,6 @@ const MobileSidebar: FC = () => {
     toggleSidebar();
     if (sideBarContentRef.current) sideBarContentRef.current.scrollTop = 0;
     document.body.style.overflowY = 'auto';
-    document.body.style.paddingRight = '0';
   };
 
   return (

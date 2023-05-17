@@ -5,7 +5,6 @@ import Typography from '@/components/GettingStarted/Typography';
 import Documentation from '@/pages/Documentation';
 import Home from '@/pages/Home';
 import { COMPONENTS, COMPONENTS_ROUTES } from '@/utils/constants';
-
 import { createElement } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
