@@ -20,7 +20,7 @@ const SearchBar: FC = () => {
   };
 
   useEffect(() => {
-    // console.log(isSearchBarToggled);
+    console.log(isSearchBarToggled);
   }, [isSearchBarToggled]);
 
   // Handle window resize and DISABLES transition when window is resized
