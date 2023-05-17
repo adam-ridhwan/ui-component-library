@@ -7,10 +7,21 @@ import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 import { COMPONENTS, DOCUMENTATION, NAVIGATION_MENU_ITEMS } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import { FC, useEffect, useState } from 'react';
+import SearchSection from '../SearchSection';
 import styles from './styles.module.css';
 
 const SearchBar: FC = () => {
-  const { isSearchBarToggled, toggleSearchBar, searchInputRef } = useSearchBarContext();
+  const {
+    isSearchBarToggled,
+    toggleSearchBar,
+    searchInputRef,
+    searchInputValue,
+    setSearchInputValue,
+    filteredNavItems,
+    filteredDocItems,
+    filteredCompItems,
+    isResultsEmpty,
+  } = useSearchBarContext();
   const [isWindowResized, setIsWindowResized] = useState<boolean>(false);
   const [contentTransition, setContentTransition] = useState<string>(styles.transition);
 
@@ -71,6 +82,7 @@ const SearchBar: FC = () => {
             type='text'
             placeholder='Type a command or search...'
             autoComplete='off'
+            onChange={(e) => setSearchInputValue(e.target.value)}
           />
 
           <button onClick={handleCloseModal}>
@@ -79,41 +91,19 @@ const SearchBar: FC = () => {
         </div>
 
         <div className={styles.section_wrapper}>
-          <div className={styles.section_container}>
-            <span className={styles.title}>Links</span>
-            {NAVIGATION_MENU_ITEMS.map((title, index) => {
-              return (
-                <div key={index} className={styles.items}>
-                  <PaperIcon />
-                  <span>{convertToTitleCase(title)}</span>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className={styles.section_container}>
-            <span className={styles.title}>Documentation</span>
-            {DOCUMENTATION.map((title, index) => {
-              return (
-                <div key={index} className={styles.items}>
-                  <BookOpen />
-                  <span>{convertToTitleCase(title)}</span>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className={styles.section_container}>
-            <span className={styles.title}>Components</span>
-            {Object.keys(COMPONENTS).map((title, index) => {
-              return (
-                <div key={index} className={styles.items}>
-                  <EmptyCircleIcon />
-                  <span>{convertToTitleCase(title)}</span>
-                </div>
-              );
-            })}
-          </div>
+          {isResultsEmpty ? (
+            <div className={styles.no_results}>No results found</div>
+          ) : (
+            <>
+              {filteredNavItems.length > 0 && <SearchSection title='Links' items={filteredNavItems} Icon={PaperIcon} />}
+              {filteredDocItems.length > 0 && (
+                <SearchSection title='Documentation' items={filteredDocItems} Icon={BookOpen} />
+              )}
+              {filteredCompItems.length > 0 && (
+                <SearchSection title='Components' items={filteredCompItems} Icon={EmptyCircleIcon} />
+              )}
+            </>
+          )}
         </div>
       </div>
     </>
