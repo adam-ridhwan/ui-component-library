@@ -7,10 +7,10 @@
   border-top: 1px solid #e6e6e6;
   left: 0;
   bottom: 0;
-  width: 100%;
+  /* width: 100%; */
   padding: 30px;
   margin-top: auto;
-  z-index: -5;
+  /* z-index: -5; */
 }
 
 .footer span {

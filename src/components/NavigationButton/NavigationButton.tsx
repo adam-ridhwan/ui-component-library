@@ -15,7 +15,6 @@ const NavigationButton: FC<INavigationButtonProps> = ({ path, section, children,
   const { setCurrentSection } = useSideBarContext();
 
   const handleNavigateToSection = () => {
-    console.log('navigate to section');
     closeSidebar?.();
     setCurrentSection(section);
     if (location.pathname !== path) navigate(path);

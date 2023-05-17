@@ -5,7 +5,7 @@ import NavigationButton from '@/components/NavigationButton/NavigationButton';
 import useResolution, { DeviceType } from '@/hooks/useResolution';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
-import { COMPONENTS } from '@/utils/constants';
+import { COMPONENTS, DOC_ROUTE } from '@/utils/constants';
 import styles from './styles.module.css';
 
 const TopNavBar = () => {
@@ -35,7 +35,7 @@ const TopNavBar = () => {
           <div className={styles.container}>
             {[DeviceType.DESKTOP, DeviceType.LARGE_DESKTOP].includes(deviceType) ? (
               <div className={styles.desktop_nav}>
-                <NavigationButton path='/docs' section={'Introduction'}>
+                <NavigationButton path={`${DOC_ROUTE}`} section='docs'>
                   Documentation
                 </NavigationButton>
                 <NavigationButton path='/docs/components/accordian' section={Object.keys(COMPONENTS)[0]}>

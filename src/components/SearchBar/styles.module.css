@@ -1,5 +1,5 @@
 .overlay {
-  position: absolute;
+  position: fixed;
   height: inherit;
   width: 100%;
   background-color: rgba(255, 255, 255, 0);
@@ -10,6 +10,7 @@
 
 .overlay_visible {
   background-color: rgba(255, 255, 255, 0.5);
+
   opacity: 1;
   pointer-events: auto;
   height: 100%;
@@ -21,7 +22,7 @@
 }
 
 .content {
-  position: absolute;
+  position: fixed;
   height: 350px;
   width: calc(100% + var(--scrollBarWidth));
   opacity: 0;
