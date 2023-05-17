@@ -4,7 +4,7 @@ import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 import { FC, useEffect, useState } from 'react';
 import styles from './styles.module.css';
 
-const SideNavBar: FC = () => {
+const SearchBar: FC = () => {
   const { isSearchBarToggled, toggleSearchBar, searchInputRef } = useSearchBarContext();
   const [isWindowResized, setIsWindowResized] = useState<boolean>(false);
   const [contentTransition, setContentTransition] = useState<string>(styles.transition);
@@ -15,9 +15,13 @@ const SideNavBar: FC = () => {
   const handleCloseModal = () => {
     toggleSearchBar();
     if (searchInputRef.current) searchInputRef.current.value = '';
-    document.body.style.overflow = 'auto';
-    document.body.style.paddingRight = '0px';
+    document.body.style.overflowY = 'auto';
+    document.body.style.paddingRight = '0';
   };
+
+  useEffect(() => {
+    // console.log(isSearchBarToggled);
+  }, [isSearchBarToggled]);
 
   // Handle window resize and DISABLES transition when window is resized
   useEffect(() => {
@@ -78,4 +82,4 @@ const SideNavBar: FC = () => {
   );
 };
 
-export default SideNavBar;
+export default SearchBar;

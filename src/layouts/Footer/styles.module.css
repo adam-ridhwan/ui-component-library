@@ -10,6 +10,7 @@
   width: 100%;
   padding: 30px;
   margin-top: auto;
+  z-index: -5;
 }
 
 .footer span {

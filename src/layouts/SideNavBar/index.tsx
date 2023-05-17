@@ -4,6 +4,7 @@ import CloseIcon from '@/assets/svg/CloseIcon';
 import NavigationButton from '@/components/NavigationButton/NavigationButton';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE } from '@/utils/constants';
+import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import styles from './styles.module.css';
 
 const MobileSidebar: FC = () => {
@@ -16,8 +17,8 @@ const MobileSidebar: FC = () => {
   const handleCloseModal = () => {
     toggleSidebar();
     if (sideBarContentRef.current) sideBarContentRef.current.scrollTop = 0;
-    document.body.style.overflow = 'auto';
-    document.body.style.paddingRight = '0px';
+    document.body.style.overflowY = 'auto';
+    document.body.style.paddingRight = '0';
   };
 
   return (
@@ -55,7 +56,7 @@ const MobileSidebar: FC = () => {
                   section={component}
                   closeSidebar={handleCloseModal}
                 >
-                  {component}
+                  {convertToTitleCase(component)}
                 </NavigationButton>
               );
             })}

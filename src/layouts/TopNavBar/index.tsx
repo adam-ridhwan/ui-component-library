@@ -17,14 +17,14 @@ const TopNavBar = () => {
     toggleSearchBar();
     if (searchInputRef.current) searchInputRef.current.focus();
     const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflowY = 'hidden';
     document.body.style.paddingRight = `${scrollBarWidth}px`;
   };
 
   const handleOpenSideBar = () => {
     toggleSidebar();
     const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflowY = 'hidden';
     document.body.style.paddingRight = `${scrollBarWidth}px`;
   };
 
