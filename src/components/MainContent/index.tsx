@@ -6,16 +6,21 @@ import useResolution, { DeviceType } from '@/hooks/useResolution';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 import DesktopSideNavBar from '@/layouts/DesktopSideNavBar';
 import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE } from '@/utils/constants';
-import { convertToURL } from '@/utils/convertToURL';
 import { FC, createElement, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import styles from './styles.module.css';
 
 const DocContent: FC = () => {
-  const { currentSection } = useSideBarContext();
+  const { currentSection, setCurrentSection } = useSideBarContext();
   const [deviceType] = useResolution();
   const location = useLocation();
   const path = location.pathname;
+
+  useEffect(() => {
+    const sectionArray = path.split('/');
+    console.log(sectionArray[sectionArray.length - 1]);
+    setCurrentSection(sectionArray[sectionArray.length - 1]);
+  }, [path, setCurrentSection]);
 
   return (
     <>
@@ -25,18 +30,14 @@ const DocContent: FC = () => {
 
           <div className={styles.middle_container}>
             {/* Getting started section */}
-            {path === DOC_ROUTE && <Introduction />}
-            {path === `${DOC_ROUTE}/installation` && <Installation />}
-            {path === `${DOC_ROUTE}/theming` && <Theming />}
-            {path === `${DOC_ROUTE}/typography` && <Typography />}
+            {currentSection === 'docs' && <Introduction />}
+            {currentSection === 'installation' && <Installation />}
+            {currentSection === `theming` && <Theming />}
+            {currentSection === `typography` && <Typography />}
 
             {/* Components section */}
             {Object.keys(COMPONENTS).map((component, index) => {
-              const section = component.toLowerCase();
-              return (
-                path === `${COMPONENTS_ROUTES + convertToURL(section)}` &&
-                createElement(COMPONENTS[component], { key: index })
-              );
+              return currentSection === component && createElement(COMPONENTS[component], { key: index });
             })}
           </div>
         </div>

@@ -4,8 +4,8 @@ import Theming from '@/components/GettingStarted/Theming';
 import Typography from '@/components/GettingStarted/Typography';
 import Documentation from '@/pages/Documentation';
 import Home from '@/pages/Home';
-import { COMPONENTS } from '@/utils/constants';
-import { convertToURL } from '@/utils/convertToURL';
+import { COMPONENTS, COMPONENTS_ROUTES } from '@/utils/constants';
+
 import { createElement } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
@@ -23,9 +23,8 @@ function App() {
               <Route path='/docs/theming' element={<Theming />} />
               <Route path='/docs/typography' element={<Typography />} />
 
-              {Object.entries(COMPONENTS).map(([name, component], index) => {
-                const path = convertToURL(name);
-                return <Route key={index} path={`/docs/components${path}`} element={createElement(component)} />;
+              {Object.entries(COMPONENTS).map(([path, component], index) => {
+                return <Route key={index} path={`${COMPONENTS_ROUTES}/${path}`} element={createElement(component)} />;
               })}
             </Route>
           </Routes>

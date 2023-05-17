@@ -1,6 +1,6 @@
 import NavigationButton from '@/components/NavigationButton/NavigationButton';
 import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE } from '@/utils/constants';
-import { convertToURL } from '@/utils/convertToURL';
+import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import styles from './styles.module.css';
 
 const DesktopSideNavBar = () => {
@@ -10,16 +10,16 @@ const DesktopSideNavBar = () => {
         <div className={styles.container}>
           <div className={styles.instructions_container}>
             <span>Getting started</span>
-            <NavigationButton path={`${DOC_ROUTE}`} section='Introduction'>
+            <NavigationButton path={`${DOC_ROUTE}`} section='docs'>
               Introduction
             </NavigationButton>
-            <NavigationButton path={`${DOC_ROUTE}/installation`} section='Installation'>
+            <NavigationButton path={`${DOC_ROUTE}/installation`} section='installation'>
               Installation
             </NavigationButton>
-            <NavigationButton path={`${DOC_ROUTE}/theming`} section='Theming'>
+            <NavigationButton path={`${DOC_ROUTE}/theming`} section='theming'>
               Theming
             </NavigationButton>
-            <NavigationButton path={`${DOC_ROUTE}/typography`} section='Typography'>
+            <NavigationButton path={`${DOC_ROUTE}/typography`} section='typography'>
               Typography
             </NavigationButton>
           </div>
@@ -30,10 +30,10 @@ const DesktopSideNavBar = () => {
               return (
                 <NavigationButton
                   key={index}
-                  path={`${COMPONENTS_ROUTES + convertToURL(componentString)}`}
+                  path={`${COMPONENTS_ROUTES}/${componentString}`}
                   section={componentString}
                 >
-                  {componentString}
+                  {convertToTitleCase(componentString)}
                 </NavigationButton>
               );
             })}

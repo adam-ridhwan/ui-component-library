@@ -1,7 +1,7 @@
-import Divider from '@/components/Divider';
 import Path from '@/components/Path';
 import useResolution, { DeviceType } from '@/hooks/useResolution';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
+import Divider from '@/layouts/Divider';
 import JumpNav from '@/layouts/JumpNav';
 import jumpToSection from '@/utils/jumpToSection';
 import { useRef } from 'react';
@@ -18,8 +18,8 @@ const Introduction = () => {
     <>
       <div className={styles.container}>
         <div className={styles.section_container}>
-          <Path section={currentSection} />
-          <h1>{currentSection}</h1>
+          <Path section={'Introduction'} />
+          <h1>Introduction</h1>
           <span>Reusable components built from scratch</span>
           <Divider />
           <div className={styles.section_body}>

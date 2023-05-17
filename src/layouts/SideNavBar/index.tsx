@@ -4,7 +4,6 @@ import CloseIcon from '@/assets/svg/CloseIcon';
 import NavigationButton from '@/components/NavigationButton/NavigationButton';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE } from '@/utils/constants';
-import { convertToURL } from '@/utils/convertToURL';
 import styles from './styles.module.css';
 
 const MobileSidebar: FC = () => {
@@ -52,7 +51,7 @@ const MobileSidebar: FC = () => {
               return (
                 <NavigationButton
                   key={index}
-                  path={`${COMPONENTS_ROUTES + convertToURL(component)}`}
+                  path={`${COMPONENTS_ROUTES}/${component}`}
                   section={component}
                   closeSidebar={handleCloseModal}
                 >

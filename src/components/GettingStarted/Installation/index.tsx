@@ -1,6 +1,6 @@
-import Divider from '@/components/Divider';
 import Path from '@/components/Path';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
+import Divider from '@/layouts/Divider';
 import styles from './styles.module.css';
 
 const Installation = () => {
