@@ -4,7 +4,10 @@ import EmptyCircleIcon from '@/assets/svg/EmptyCircleIcon';
 import PaperIcon from '@/assets/svg/PaperIcon';
 import SearchIcon from '@/assets/svg/SearchIcon';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
+import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE } from '@/utils/constants';
+import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import { FC, useEffect, useState } from 'react';
+import NavigationButton from '../NavigationButton/NavigationButton';
 import SearchSection from '../SearchSection';
 import styles from './styles.module.css';
 
@@ -92,12 +95,40 @@ const SearchBar: FC = () => {
             <div className={styles.no_results}>No results found.</div>
           ) : (
             <>
-              {filteredNavItems.length > 0 && <SearchSection title='Links' items={filteredNavItems} Icon={PaperIcon} />}
-              {filteredDocItems.length > 0 && (
-                <SearchSection title='Documentation' items={filteredDocItems} Icon={BookOpen} />
-              )}
-              {filteredCompItems.length > 0 && (
-                <SearchSection title='Components' items={filteredCompItems} Icon={EmptyCircleIcon} />
+              {filteredNavItems.length > 0 && (
+                <div className={styles.section_container}>
+                  <span className={styles.title}>Links</span>
+                  {filteredNavItems.map((section, index) => {
+                    if (section === 'documentation')
+                      return (
+                        <NavigationButton key={index} path={`${DOC_ROUTE}`} section='docs'>
+                          <PaperIcon />
+                          <span>{convertToTitleCase(section)}</span>
+                        </NavigationButton>
+                      );
+
+                    if (section === 'components')
+                      return (
+                        <NavigationButton
+                          key={index}
+                          path='/docs/components/accordian'
+                          section={Object.keys(COMPONENTS)[0]}
+                        >
+                          <PaperIcon />
+                          <span>{convertToTitleCase(section)}</span>
+                        </NavigationButton>
+                      );
+
+                    return (
+                      <NavigationButton key={index} path={`${DOC_ROUTE}/${section}`} section={section}>
+                        <div key={index} className={styles.section}>
+                          <PaperIcon />
+                          <span>{convertToTitleCase(section)}</span>
+                        </div>
+                      </NavigationButton>
+                    );
+                  })}
+                </div>
               )}
             </>
           )}
