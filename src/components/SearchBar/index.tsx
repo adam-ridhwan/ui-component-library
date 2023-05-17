@@ -1,6 +1,8 @@
 import CloseIcon from '@/assets/svg/CloseIcon';
 import SearchIcon from '@/assets/svg/SearchIcon';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
+import { COMPONENTS, DOCUMENTATION, NAVIGATION_MENU_ITEMS } from '@/utils/constants';
+import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import { FC, useEffect, useState } from 'react';
 import styles from './styles.module.css';
 
@@ -71,6 +73,39 @@ const SearchBar: FC = () => {
           <button onClick={handleCloseModal}>
             <CloseIcon />
           </button>
+        </div>
+
+        <div>
+          <span>Links</span>
+          {NAVIGATION_MENU_ITEMS.map((title, index) => {
+            return (
+              <div key={index}>
+                <span>{convertToTitleCase(title)}</span>
+              </div>
+            );
+          })}
+        </div>
+
+        <div>
+          <span>Documentation</span>
+          {DOCUMENTATION.map((title, index) => {
+            return (
+              <div key={index}>
+                <span>{convertToTitleCase(title)}</span>
+              </div>
+            );
+          })}
+        </div>
+
+        <div>
+          <span>Components</span>
+          {Object.keys(COMPONENTS).map((title, index) => {
+            return (
+              <div key={index}>
+                <span>{convertToTitleCase(title)}</span>
+              </div>
+            );
+          })}
         </div>
       </div>
     </>

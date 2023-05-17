@@ -1,14 +1,15 @@
 import Path from '@/components/Path';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 import Divider from '@/layouts/Divider';
+import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import styles from './styles.module.css';
 
 const Installation = () => {
   const { currentSection } = useSideBarContext();
   return (
     <>
-      <Path section={currentSection} />
-      <h1>{currentSection}</h1>
+      <Path section={convertToTitleCase(currentSection)} />
+      <h1>{convertToTitleCase(currentSection)}</h1>
       <span>Reusable components built from scratch</span>
       <Divider />
       <span>

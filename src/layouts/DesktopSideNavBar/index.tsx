@@ -1,5 +1,5 @@
 import NavigationButton from '@/components/NavigationButton/NavigationButton';
-import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE, GETTING_STARTED } from '@/utils/constants';
+import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE, DOCUMENTATION } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import styles from './styles.module.css';
 
@@ -10,17 +10,17 @@ const DesktopSideNavBar = () => {
         <div className={styles.container}>
           <div className={styles.instructions_container}>
             <span>Getting started</span>
-            {GETTING_STARTED.map((section, index) => {
+            {DOCUMENTATION.map((section, index) => {
               if (section === 'introduction')
                 return (
                   <NavigationButton path={`${DOC_ROUTE}`} section='docs'>
-                    Introduction
+                    {convertToTitleCase(section)}
                   </NavigationButton>
                 );
 
               return (
                 <NavigationButton key={index} path={`${DOC_ROUTE}/${section}`} section={`${section}`}>
-                  {section}
+                  {convertToTitleCase(section)}
                 </NavigationButton>
               );
             })}
