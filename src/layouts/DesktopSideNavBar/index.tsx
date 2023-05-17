@@ -1,9 +1,16 @@
 import NavigationButton from '@/components/NavigationButton/NavigationButton';
+import { useSideBarContext } from '@/hooks/useSideBarContext';
 import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE, DOCUMENTATION } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
+import { useEffect } from 'react';
 import styles from './styles.module.css';
 
 const DesktopSideNavBar = () => {
+  const { currentSection } = useSideBarContext();
+
+  useEffect(() => {
+    console.log(currentSection === 'docs');
+  }, [currentSection]);
   return (
     <>
       <aside>
@@ -13,14 +20,18 @@ const DesktopSideNavBar = () => {
             {DOCUMENTATION.map((section, index) => {
               if (section === 'introduction')
                 return (
-                  <NavigationButton path={`${DOC_ROUTE}`} section='docs'>
-                    {convertToTitleCase(section)}
+                  <NavigationButton key={index} path={`${DOC_ROUTE}`} section='docs'>
+                    <span className={currentSection === 'docs' ? styles.active_section : ''}>
+                      {convertToTitleCase(section)}
+                    </span>
                   </NavigationButton>
                 );
 
               return (
-                <NavigationButton key={index} path={`${DOC_ROUTE}/${section}`} section={`${section}`}>
-                  {convertToTitleCase(section)}
+                <NavigationButton key={index} path={`${DOC_ROUTE}/${section}`} section={section}>
+                  <span className={currentSection === section ? styles.active_section : ''}>
+                    {convertToTitleCase(section)}
+                  </span>
                 </NavigationButton>
               );
             })}
@@ -35,7 +46,9 @@ const DesktopSideNavBar = () => {
                   path={`${COMPONENTS_ROUTES}/${componentString}`}
                   section={componentString}
                 >
-                  {convertToTitleCase(componentString)}
+                  <span className={currentSection === componentString ? styles.active_section : ''}>
+                    {convertToTitleCase(componentString)}
+                  </span>
                 </NavigationButton>
               );
             })}

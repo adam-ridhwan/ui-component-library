@@ -1,4 +1,4 @@
-import { useSearchBarContext } from '@/hooks/useSearchBarContext';
+import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import { FC, FunctionComponent, SVGProps } from 'react';
 import styles from './styles.module.css';
 
@@ -9,16 +9,14 @@ interface ISectionProps {
 }
 
 const SearchSection: FC<ISectionProps> = ({ title, items, Icon }) => {
-  const { searchInputValue } = useSearchBarContext();
-
   return (
     <>
       <div className={styles.section_container}>
         <span className={styles.title}>{title}</span>
         {items.map((item, index) => (
-          <div key={index} className={styles.items}>
+          <div key={index} className={styles.item}>
             <Icon />
-            <span>{item}</span>
+            <span>{convertToTitleCase(item)}</span>
           </div>
         ))}
       </div>

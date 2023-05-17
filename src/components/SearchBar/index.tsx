@@ -4,8 +4,6 @@ import EmptyCircleIcon from '@/assets/svg/EmptyCircleIcon';
 import PaperIcon from '@/assets/svg/PaperIcon';
 import SearchIcon from '@/assets/svg/SearchIcon';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
-import { COMPONENTS, DOCUMENTATION, NAVIGATION_MENU_ITEMS } from '@/utils/constants';
-import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import { FC, useEffect, useState } from 'react';
 import SearchSection from '../SearchSection';
 import styles from './styles.module.css';
@@ -15,7 +13,6 @@ const SearchBar: FC = () => {
     isSearchBarToggled,
     toggleSearchBar,
     searchInputRef,
-    searchInputValue,
     setSearchInputValue,
     filteredNavItems,
     filteredDocItems,
@@ -92,7 +89,7 @@ const SearchBar: FC = () => {
 
         <div className={styles.section_wrapper}>
           {isResultsEmpty ? (
-            <div className={styles.no_results}>No results found</div>
+            <div className={styles.no_results}>No results found.</div>
           ) : (
             <>
               {filteredNavItems.length > 0 && <SearchSection title='Links' items={filteredNavItems} Icon={PaperIcon} />}

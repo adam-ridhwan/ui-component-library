@@ -52,3 +52,8 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+.active_section {
+  color: #0f172a;
+  font-weight: 500;
+}
