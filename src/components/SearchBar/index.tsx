@@ -1,4 +1,7 @@
+import BookOpen from '@/assets/svg/BookOpen';
 import CloseIcon from '@/assets/svg/CloseIcon';
+import EmptyCircleIcon from '@/assets/svg/EmptyCircleIcon';
+import PaperIcon from '@/assets/svg/PaperIcon';
 import SearchIcon from '@/assets/svg/SearchIcon';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 import { COMPONENTS, DOCUMENTATION, NAVIGATION_MENU_ITEMS } from '@/utils/constants';
@@ -75,37 +78,42 @@ const SearchBar: FC = () => {
           </button>
         </div>
 
-        <div>
-          <span>Links</span>
-          {NAVIGATION_MENU_ITEMS.map((title, index) => {
-            return (
-              <div key={index}>
-                <span>{convertToTitleCase(title)}</span>
-              </div>
-            );
-          })}
-        </div>
+        <div className={styles.section_wrapper}>
+          <div className={styles.section_container}>
+            <span className={styles.title}>Links</span>
+            {NAVIGATION_MENU_ITEMS.map((title, index) => {
+              return (
+                <div key={index} className={styles.items}>
+                  <PaperIcon />
+                  <span>{convertToTitleCase(title)}</span>
+                </div>
+              );
+            })}
+          </div>
 
-        <div>
-          <span>Documentation</span>
-          {DOCUMENTATION.map((title, index) => {
-            return (
-              <div key={index}>
-                <span>{convertToTitleCase(title)}</span>
-              </div>
-            );
-          })}
-        </div>
+          <div className={styles.section_container}>
+            <span className={styles.title}>Documentation</span>
+            {DOCUMENTATION.map((title, index) => {
+              return (
+                <div key={index} className={styles.items}>
+                  <BookOpen />
+                  <span>{convertToTitleCase(title)}</span>
+                </div>
+              );
+            })}
+          </div>
 
-        <div>
-          <span>Components</span>
-          {Object.keys(COMPONENTS).map((title, index) => {
-            return (
-              <div key={index}>
-                <span>{convertToTitleCase(title)}</span>
-              </div>
-            );
-          })}
+          <div className={styles.section_container}>
+            <span className={styles.title}>Components</span>
+            {Object.keys(COMPONENTS).map((title, index) => {
+              return (
+                <div key={index} className={styles.items}>
+                  <EmptyCircleIcon />
+                  <span>{convertToTitleCase(title)}</span>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </>

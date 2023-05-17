@@ -85,6 +85,25 @@
   clip: rect(0 0 0 0);
 }
 
+.section_container {
+  padding: 4px 8px;
+}
+
+.title {
+  padding: 6px 8px;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.items {
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
 /* iPad (Portrait) */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .content {
