@@ -6,7 +6,7 @@ import SearchIcon from '@/assets/svg/SearchIcon';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 import { COMPONENTS, COMPONENTS_ROUTES, DOCUMENTATION, DOC_ROUTE, NAVIGATION_MENU_ITEMS } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
-import { ChangeEvent, FC, ReactElement, useEffect, useState } from 'react';
+import { ChangeEvent, FC, ReactElement, useCallback, useEffect, useState } from 'react';
 import NavigationButton from '../NavigationButton/NavigationButton';
 import styles from './styles.module.css';
 
@@ -24,21 +24,45 @@ const SearchBar: FC = () => {
     filteredComponents,
     setFilteredComponents,
     filterSections,
+    combinedFilteredItems,
+    setCombinedFilteredItems,
   } = useSearchBarContext();
+  useEffect(() => {
+    console.log(combinedFilteredItems);
+  }, [combinedFilteredItems]);
   const [isWindowResized, setIsWindowResized] = useState<boolean>(false);
   const [contentTransition, setContentTransition] = useState<string>(styles.transition);
+  const [isHovering, setIsHovering] = useState<boolean>(false);
 
   const overlayStyle = `${styles.overlay} ${isSearchBarToggled && styles.overlay_visible}`;
   const contentStyle = `${styles.content} ${isSearchBarToggled && styles.content_active} ${contentTransition}`;
 
-  const handleCloseModal = () => {
+  const handleCloseModal = useCallback(() => {
     toggleSearchBar();
     if (searchInputRef.current) searchInputRef.current.value = '';
     document.body.style.overflowY = 'auto';
     setFilteredNavItems(NAVIGATION_MENU_ITEMS);
     setFilteredDocumentation(DOCUMENTATION);
     setFilteredComponents(Object.keys(COMPONENTS));
-  };
+  }, [toggleSearchBar, setFilteredNavItems, setFilteredDocumentation, setFilteredComponents, searchInputRef]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isSearchBarToggled) {
+        handleCloseModal();
+      }
+
+      // Check if 'k' is pressed while 'Command' (on Mac) or 'Control' (on Windows) is held down
+      if (event.key.toLowerCase() === 'k' && (event.metaKey || event.ctrlKey)) {
+        event.preventDefault();
+        toggleSearchBar();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleCloseModal, isSearchBarToggled, toggleSearchBar]);
 
   // Handle window resize and DISABLES transition when window is resized
   useEffect(() => {
@@ -83,7 +107,7 @@ const SearchBar: FC = () => {
             path = `${DOC_ROUTE}`;
             sectionForButton = 'docs';
           } else if (title === 'Links' && section === 'components') {
-            path = '/docs/components/accordian';
+            path = `${COMPONENTS_ROUTES}/accordian`;
             sectionForButton = Object.keys(COMPONENTS)[0];
           } else if (title === 'Documentation' && section === 'introduction') {
             path = `${DOC_ROUTE}`;
@@ -91,7 +115,15 @@ const SearchBar: FC = () => {
           }
 
           return (
-            <NavigationButton key={index} path={path} section={sectionForButton} closeSidebar={handleCloseModal}>
+            <NavigationButton
+              key={index}
+              path={path}
+              section={sectionForButton}
+              closeSidebar={handleCloseModal}
+              style={{
+                backgroundColor: `${combinedFilteredItems[0] === section ? '#f5f8fa' : ''}`,
+              }}
+            >
               <div className={styles.section}>
                 <span>{icon}</span>
                 <span>{convertToTitleCase(section)}</span>
@@ -109,10 +141,16 @@ const SearchBar: FC = () => {
       setFilteredNavItems(NAVIGATION_MENU_ITEMS);
       setFilteredDocumentation(DOCUMENTATION);
       setFilteredComponents(Object.keys(COMPONENTS));
+      setCombinedFilteredItems(() => [...NAVIGATION_MENU_ITEMS, ...DOCUMENTATION, ...Object.keys(COMPONENTS)]);
     } else {
       setFilteredNavItems(() => filterSections(NAVIGATION_MENU_ITEMS));
       setFilteredDocumentation(() => filterSections(DOCUMENTATION));
       setFilteredComponents(() => filterSections(Object.keys(COMPONENTS)));
+      setCombinedFilteredItems(() => [
+        ...filterSections(NAVIGATION_MENU_ITEMS),
+        ...filterSections(DOCUMENTATION),
+        ...filterSections(Object.keys(COMPONENTS)),
+      ]);
     }
   };
 
@@ -156,6 +194,11 @@ const SearchBar: FC = () => {
               {renderSection('Components', filteredComponents, COMPONENTS_ROUTES, <EmptyCircleIcon />)}
             </>
           )}
+        </div>
+
+        <div className={styles.shortcut_instructions}>
+          <span>Open application</span>
+          <span>Actions</span>
         </div>
       </div>
     </>

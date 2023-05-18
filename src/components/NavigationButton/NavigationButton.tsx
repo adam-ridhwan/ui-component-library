@@ -7,9 +7,10 @@ interface INavigationButtonProps {
   section: string;
   children: ReactNode;
   closeSidebar?: () => void;
+  style?: object;
 }
 
-const NavigationButton: FC<INavigationButtonProps> = ({ path, section, children, closeSidebar }) => {
+const NavigationButton: FC<INavigationButtonProps> = ({ path, section, children, closeSidebar, style }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { setCurrentSection } = useSideBarContext();
@@ -21,7 +22,11 @@ const NavigationButton: FC<INavigationButtonProps> = ({ path, section, children,
     window.scrollTo(0, 0);
   };
 
-  return <button onClick={handleNavigateToSection}>{children}</button>;
+  return (
+    <button onClick={handleNavigateToSection} style={style}>
+      {children}
+    </button>
+  );
 };
 
 export default NavigationButton;

@@ -16,6 +16,8 @@ export interface SearchBarContextValue {
   filteredComponents: string[];
   setFilteredComponents: Dispatch<SetStateAction<string[]>>;
   filterSections: (items: string[]) => string[];
+  combinedFilteredItems: string[];
+  setCombinedFilteredItems: Dispatch<SetStateAction<string[]>>;
 }
 export const SearchBarContext = createContext<SearchBarContextValue | null>(null);
 
@@ -30,6 +32,11 @@ export const SearchBarProvider: FC<SearchBarProps> = ({ children }) => {
   const [filteredNavItems, setFilteredNavItems] = useState(NAVIGATION_MENU_ITEMS);
   const [filteredDocumentation, setFilteredDocumentation] = useState(DOCUMENTATION);
   const [filteredComponents, setFilteredComponents] = useState(Object.keys(COMPONENTS));
+  const [combinedFilteredItems, setCombinedFilteredItems] = useState([
+    ...NAVIGATION_MENU_ITEMS,
+    ...DOCUMENTATION,
+    ...Object.keys(COMPONENTS),
+  ]);
 
   const toggleSearchBar = () => {
     setIsSearchBarToggled((isSearchBarToggled) => !isSearchBarToggled);
@@ -62,6 +69,8 @@ export const SearchBarProvider: FC<SearchBarProps> = ({ children }) => {
         filteredComponents,
         setFilteredComponents,
         filterSections,
+        combinedFilteredItems,
+        setCombinedFilteredItems,
       }}
     >
       {children}

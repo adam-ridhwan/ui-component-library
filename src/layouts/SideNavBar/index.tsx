@@ -34,7 +34,7 @@ const MobileSidebar: FC = () => {
               Documentation
             </NavigationButton>
             <NavigationButton
-              path='/docs/components/accordian'
+              path={`${COMPONENTS_ROUTES}/accordian`}
               section={Object.keys(COMPONENTS)[0]}
               closeSidebar={handleCloseModal}
             >
