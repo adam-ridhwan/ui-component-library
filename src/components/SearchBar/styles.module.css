@@ -88,6 +88,45 @@
   overflow-y: auto;
 }
 
+.section_container {
+  padding: 4px 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.section_container button {
+  /* outline: 2px solid blue; */
+  padding: 12px 8px;
+  background-color: white;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  color: #0f172a;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.section {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.section span {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  padding: 6px 8px;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 500;
+}
+
 .no_results {
   padding: 12px 8px;
   display: flex;

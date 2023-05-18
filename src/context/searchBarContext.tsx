@@ -1,17 +1,21 @@
 import { COMPONENTS, DOCUMENTATION, NAVIGATION_MENU_ITEMS } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
-import { Dispatch, FC, ReactNode, RefObject, createContext, useRef, useState } from 'react';
+import { Dispatch, FC, ReactNode, RefObject, SetStateAction, createContext, useRef, useState } from 'react';
 
 export interface SearchBarContextValue {
   isSearchBarToggled: boolean;
   toggleSearchBar: () => void;
   searchInputRef: RefObject<HTMLInputElement>;
   searchInputValue: string;
-  setSearchInputValue: Dispatch<React.SetStateAction<string>>;
+  setSearchInputValue: Dispatch<SetStateAction<string>>;
+  isResultEmpty: boolean;
   filteredNavItems: string[];
-  filteredDocItems: string[];
-  filteredCompItems: string[];
-  isResultsEmpty: boolean;
+  setFilteredNavItems: Dispatch<SetStateAction<string[]>>;
+  filteredDocumentation: string[];
+  setFilteredDocumentation: Dispatch<SetStateAction<string[]>>;
+  filteredComponents: string[];
+  setFilteredComponents: Dispatch<SetStateAction<string[]>>;
+  filterSections: (items: string[]) => string[];
 }
 export const SearchBarContext = createContext<SearchBarContextValue | null>(null);
 
@@ -21,14 +25,17 @@ interface SearchBarProps {
 
 export const SearchBarProvider: FC<SearchBarProps> = ({ children }) => {
   const [isSearchBarToggled, setIsSearchBarToggled] = useState(false);
-  const searchInputRef = useRef<HTMLInputElement>(null);
+  const searchInputRef = useRef(null);
   const [searchInputValue, setSearchInputValue] = useState('');
+  const [filteredNavItems, setFilteredNavItems] = useState(NAVIGATION_MENU_ITEMS);
+  const [filteredDocumentation, setFilteredDocumentation] = useState(DOCUMENTATION);
+  const [filteredComponents, setFilteredComponents] = useState(Object.keys(COMPONENTS));
 
   const toggleSearchBar = () => {
     setIsSearchBarToggled((isSearchBarToggled) => !isSearchBarToggled);
   };
 
-  const filterItems = (items: string[]) => {
+  const filterSections = (items: string[]) => {
     return items.filter((value) => {
       return searchInputValue === ''
         ? value
@@ -36,13 +43,8 @@ export const SearchBarProvider: FC<SearchBarProps> = ({ children }) => {
     });
   };
 
-  // Filter items for each section
-  const filteredNavItems = filterItems(NAVIGATION_MENU_ITEMS);
-  const filteredDocItems = filterItems(DOCUMENTATION);
-  const filteredCompItems = filterItems(Object.keys(COMPONENTS));
-
-  const isResultsEmpty =
-    filteredNavItems.length === 0 && filteredDocItems.length === 0 && filteredCompItems.length === 0;
+  const isResultEmpty =
+    filteredNavItems.length === 0 && filteredDocumentation.length === 0 && filteredComponents.length === 0;
 
   return (
     <SearchBarContext.Provider
@@ -52,10 +54,14 @@ export const SearchBarProvider: FC<SearchBarProps> = ({ children }) => {
         searchInputRef,
         searchInputValue,
         setSearchInputValue,
+        isResultEmpty,
         filteredNavItems,
-        filteredDocItems,
-        filteredCompItems,
-        isResultsEmpty,
+        setFilteredNavItems,
+        filteredDocumentation,
+        setFilteredDocumentation,
+        filteredComponents,
+        setFilteredComponents,
+        filterSections,
       }}
     >
       {children}

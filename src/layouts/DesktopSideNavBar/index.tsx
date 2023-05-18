@@ -2,15 +2,12 @@ import NavigationButton from '@/components/NavigationButton/NavigationButton';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE, DOCUMENTATION } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
-import { useEffect } from 'react';
+
 import styles from './styles.module.css';
 
 const DesktopSideNavBar = () => {
   const { currentSection } = useSideBarContext();
 
-  useEffect(() => {
-    console.log(currentSection === 'docs');
-  }, [currentSection]);
   return (
     <>
       <aside>

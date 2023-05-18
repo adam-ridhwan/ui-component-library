@@ -30,13 +30,17 @@ const MobileSidebar: FC = () => {
           <span className={styles.sidebar_title}>Title</span>
 
           <div>
-            <NavigationButton path={DOC_ROUTE} section={'Introduction'}>
+            <NavigationButton path={DOC_ROUTE} section={'docs'} closeSidebar={handleCloseModal}>
               Documentation
             </NavigationButton>
-            <NavigationButton path='/docs/components/accordian' section={Object.keys(COMPONENTS)[0]}>
+            <NavigationButton
+              path='/docs/components/accordian'
+              section={Object.keys(COMPONENTS)[0]}
+              closeSidebar={handleCloseModal}
+            >
               Components
             </NavigationButton>
-            <NavigationButton path='/examples' section={''}>
+            <NavigationButton path='/examples' section={''} closeSidebar={handleCloseModal}>
               Examples
             </NavigationButton>
           </div>
@@ -44,7 +48,6 @@ const MobileSidebar: FC = () => {
           <div>
             <span className={styles.sidebar_title}>Getting started</span>
           </div>
-
           <div>
             <span className={styles.sidebar_title}>Components</span>
             {Object.keys(COMPONENTS).map((component, index) => {

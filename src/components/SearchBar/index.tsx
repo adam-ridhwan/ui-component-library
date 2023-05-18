@@ -4,11 +4,10 @@ import EmptyCircleIcon from '@/assets/svg/EmptyCircleIcon';
 import PaperIcon from '@/assets/svg/PaperIcon';
 import SearchIcon from '@/assets/svg/SearchIcon';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
-import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE } from '@/utils/constants';
+import { COMPONENTS, COMPONENTS_ROUTES, DOCUMENTATION, DOC_ROUTE, NAVIGATION_MENU_ITEMS } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
-import { FC, useEffect, useState } from 'react';
+import { ChangeEvent, FC, ReactElement, useEffect, useState } from 'react';
 import NavigationButton from '../NavigationButton/NavigationButton';
-import SearchSection from '../SearchSection';
 import styles from './styles.module.css';
 
 const SearchBar: FC = () => {
@@ -16,11 +15,16 @@ const SearchBar: FC = () => {
     isSearchBarToggled,
     toggleSearchBar,
     searchInputRef,
+    searchInputValue,
     setSearchInputValue,
+    isResultEmpty,
     filteredNavItems,
-    filteredDocItems,
-    filteredCompItems,
-    isResultsEmpty,
+    setFilteredNavItems,
+    filteredDocumentation,
+    setFilteredDocumentation,
+    filteredComponents,
+    setFilteredComponents,
+    filterSections,
   } = useSearchBarContext();
   const [isWindowResized, setIsWindowResized] = useState<boolean>(false);
   const [contentTransition, setContentTransition] = useState<string>(styles.transition);
@@ -32,6 +36,9 @@ const SearchBar: FC = () => {
     toggleSearchBar();
     if (searchInputRef.current) searchInputRef.current.value = '';
     document.body.style.overflowY = 'auto';
+    setFilteredNavItems(NAVIGATION_MENU_ITEMS);
+    setFilteredDocumentation(DOCUMENTATION);
+    setFilteredComponents(Object.keys(COMPONENTS));
   };
 
   // Handle window resize and DISABLES transition when window is resized
@@ -60,7 +67,7 @@ const SearchBar: FC = () => {
     };
   }, [isWindowResized, searchInputRef]);
 
-  const renderSection = (title: string, items: string[], baseRoute: string) => {
+  const renderSection = (title: string, items: string[], baseRoute: string, icon: ReactElement) => {
     if (items.length === 0) {
       return null;
     }
@@ -85,9 +92,9 @@ const SearchBar: FC = () => {
           }
 
           return (
-            <NavigationButton key={index} path={path} section={sectionForButton}>
+            <NavigationButton key={index} path={path} section={sectionForButton} closeSidebar={handleCloseModal}>
               <div className={styles.section}>
-                <PaperIcon />
+                <span>{icon}</span>
                 <span>{convertToTitleCase(section)}</span>
               </div>
             </NavigationButton>
@@ -95,6 +102,19 @@ const SearchBar: FC = () => {
         })}
       </div>
     );
+  };
+
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchInputValue(e.target.value);
+    if (e.target.value === '') {
+      setFilteredNavItems(NAVIGATION_MENU_ITEMS);
+      setFilteredDocumentation(DOCUMENTATION);
+      setFilteredComponents(Object.keys(COMPONENTS));
+    } else {
+      setFilteredNavItems(() => filterSections(NAVIGATION_MENU_ITEMS));
+      setFilteredDocumentation(() => filterSections(DOCUMENTATION));
+      setFilteredComponents(() => filterSections(Object.keys(COMPONENTS)));
+    }
   };
 
   return (
@@ -119,7 +139,7 @@ const SearchBar: FC = () => {
             type='text'
             placeholder='Type a command or search...'
             autoComplete='off'
-            onChange={(e) => setSearchInputValue(e.target.value)}
+            onChange={handleSearch}
           />
 
           <button onClick={handleCloseModal}>
@@ -128,13 +148,13 @@ const SearchBar: FC = () => {
         </div>
 
         <div className={styles.section_wrapper}>
-          {isResultsEmpty ? (
+          {isResultEmpty ? (
             <div className={styles.no_results}>No results found.</div>
           ) : (
             <>
-              {renderSection('Links', filteredNavItems, DOC_ROUTE)}
-              {renderSection('Documentation', filteredDocItems, DOC_ROUTE)}
-              {renderSection('Components', filteredCompItems, COMPONENTS_ROUTES)}
+              {renderSection('Links', filteredNavItems, DOC_ROUTE, <PaperIcon />)}
+              {renderSection('Documentation', filteredDocumentation, DOC_ROUTE, <BookOpen />)}
+              {renderSection('Components', filteredComponents, COMPONENTS_ROUTES, <EmptyCircleIcon />)}
             </>
           )}
         </div>

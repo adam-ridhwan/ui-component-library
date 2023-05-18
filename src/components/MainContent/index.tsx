@@ -18,7 +18,6 @@ const DocContent: FC = () => {
 
   useEffect(() => {
     const sectionArray = path.split('/');
-    // console.log(sectionArray[sectionArray.length - 1]);
     setCurrentSection(sectionArray[sectionArray.length - 1]);
   }, [path, setCurrentSection]);
 
