@@ -60,6 +60,43 @@ const SearchBar: FC = () => {
     };
   }, [isWindowResized, searchInputRef]);
 
+  const renderSection = (title: string, items: string[], baseRoute: string) => {
+    if (items.length === 0) {
+      return null;
+    }
+
+    return (
+      <div className={styles.section_container}>
+        <span className={styles.title}>{title}</span>
+        {items.map((section, index) => {
+          let path = `${baseRoute}/${section}`;
+          let sectionForButton = section;
+
+          // Special cases
+          if (title === 'Links' && section === 'documentation') {
+            path = `${DOC_ROUTE}`;
+            sectionForButton = 'docs';
+          } else if (title === 'Links' && section === 'components') {
+            path = '/docs/components/accordian';
+            sectionForButton = Object.keys(COMPONENTS)[0];
+          } else if (title === 'Documentation' && section === 'introduction') {
+            path = `${DOC_ROUTE}`;
+            sectionForButton = 'docs';
+          }
+
+          return (
+            <NavigationButton key={index} path={path} section={sectionForButton}>
+              <div className={styles.section}>
+                <PaperIcon />
+                <span>{convertToTitleCase(section)}</span>
+              </div>
+            </NavigationButton>
+          );
+        })}
+      </div>
+    );
+  };
+
   return (
     <>
       {/* Blurry overlay */}
@@ -95,41 +132,9 @@ const SearchBar: FC = () => {
             <div className={styles.no_results}>No results found.</div>
           ) : (
             <>
-              {filteredNavItems.length > 0 && (
-                <div className={styles.section_container}>
-                  <span className={styles.title}>Links</span>
-                  {filteredNavItems.map((section, index) => {
-                    if (section === 'documentation')
-                      return (
-                        <NavigationButton key={index} path={`${DOC_ROUTE}`} section='docs'>
-                          <PaperIcon />
-                          <span>{convertToTitleCase(section)}</span>
-                        </NavigationButton>
-                      );
-
-                    if (section === 'components')
-                      return (
-                        <NavigationButton
-                          key={index}
-                          path='/docs/components/accordian'
-                          section={Object.keys(COMPONENTS)[0]}
-                        >
-                          <PaperIcon />
-                          <span>{convertToTitleCase(section)}</span>
-                        </NavigationButton>
-                      );
-
-                    return (
-                      <NavigationButton key={index} path={`${DOC_ROUTE}/${section}`} section={section}>
-                        <div key={index} className={styles.section}>
-                          <PaperIcon />
-                          <span>{convertToTitleCase(section)}</span>
-                        </div>
-                      </NavigationButton>
-                    );
-                  })}
-                </div>
-              )}
+              {renderSection('Links', filteredNavItems, DOC_ROUTE)}
+              {renderSection('Documentation', filteredDocItems, DOC_ROUTE)}
+              {renderSection('Components', filteredCompItems, COMPONENTS_ROUTES)}
             </>
           )}
         </div>
