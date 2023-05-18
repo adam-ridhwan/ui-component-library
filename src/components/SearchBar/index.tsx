@@ -15,7 +15,6 @@ const SearchBar: FC = () => {
     isSearchBarToggled,
     toggleSearchBar,
     searchInputRef,
-    searchInputValue,
     setSearchInputValue,
     isResultEmpty,
     filteredNavItems,

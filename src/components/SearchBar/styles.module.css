@@ -84,8 +84,26 @@
 }
 
 .section_wrapper {
-  max-height: 300px;
+  /* outline: 2px solid blue; */
+  max-height: 298px;
   overflow-y: auto;
+}
+
+.section_wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+.section_wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.section_wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.section_wrapper::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .section_container {
@@ -107,6 +125,10 @@
   color: #0f172a;
   font-size: 14px;
   font-weight: 400;
+}
+
+.section_container button:hover {
+  background-color: #f5f8fa;
 }
 
 .section {
