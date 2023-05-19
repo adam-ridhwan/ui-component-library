@@ -32,13 +32,17 @@ const SearchBar: FC = () => {
   const [isWindowResized, setIsWindowResized] = useState<boolean>(false);
   const [contentTransition, setContentTransition] = useState<string>(styles.transition);
   const [lastSelectedItem, setLastSelectedItem] = useState<string | null>(combinedFilteredItems[0]);
-  const [lastHoveredItem, setLastHoveredItem] = useState<string | null>(null);
+  const [lastHoveredItem, setLastHoveredItem] = useState<string | null>(combinedFilteredItems[0]);
   const [isTyping, setIsTyping] = useState<boolean>(false);
 
   const scrollableDivRef = useRef<HTMLDivElement | null>(null);
 
   const overlayStyle = `${styles.overlay} ${isSearchBarToggled && styles.overlay_visible}`;
   const contentStyle = `${styles.content} ${isSearchBarToggled && styles.content_active} ${contentTransition}`;
+
+  useEffect(() => {
+    console.log(lastSelectedItem);
+  }, [lastSelectedItem]);
 
   const setOriginalItems = useCallback(() => {
     setFilteredNavItems(NAVIGATION_MENU_ITEMS);
@@ -131,8 +135,6 @@ const SearchBar: FC = () => {
               closeSidebar={handleCloseModal}
               onMouseEnter={() => {
                 setLastHoveredItem(section);
-                console.log(section);
-                if (lastHoveredItem === section) return setLastSelectedItem(section);
                 if (!isTyping) return setLastSelectedItem(section);
               }}
               onMouseLeave={() => {
@@ -153,11 +155,6 @@ const SearchBar: FC = () => {
       </div>
     );
   };
-
-  useEffect(() => {
-    console.log('isTyping', isTyping, lastSelectedItem);
-    console.log('lastHoveredItem', lastHoveredItem);
-  }, [isTyping, lastHoveredItem, lastSelectedItem]);
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -188,7 +185,7 @@ const SearchBar: FC = () => {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [lastHoveredItem]);
+  }, [isSearchBarToggled, lastHoveredItem]);
 
   return (
     <>
