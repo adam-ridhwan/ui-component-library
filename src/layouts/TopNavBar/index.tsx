@@ -1,3 +1,5 @@
+import CommandIcon from '@/assets/svg/CommandIcon';
+import CommandMiniIcon from '@/assets/svg/CommandMiniIcon';
 import GithubIcon from '@/assets/svg/GithubIcon';
 import ToggleSidebarIcon from '@/assets/svg/ToggleSidebarIcon';
 import ToggleThemeIcon from '@/assets/svg/ToggleThemeIcon';
@@ -5,7 +7,7 @@ import NavigationButton from '@/components/NavigationButton/NavigationButton';
 import useResolution, { DeviceType } from '@/hooks/useResolution';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
-import { COMPONENTS, DOC_ROUTE } from '@/utils/constants';
+import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE } from '@/utils/constants';
 import styles from './styles.module.css';
 
 const TopNavBar = () => {
@@ -34,10 +36,10 @@ const TopNavBar = () => {
                 <NavigationButton path={`${DOC_ROUTE}`} section='docs'>
                   Documentation
                 </NavigationButton>
-                <NavigationButton path='/docs/components/accordian' section={Object.keys(COMPONENTS)[0]}>
+                <NavigationButton path={`${COMPONENTS_ROUTES}/accordian`} section={Object.keys(COMPONENTS)[0]}>
                   Components
                 </NavigationButton>
-                <NavigationButton path='/examples' section={''}>
+                <NavigationButton path={`${DOC_ROUTE}`} section='docs'>
                   Examples
                 </NavigationButton>
               </div>
@@ -51,6 +53,12 @@ const TopNavBar = () => {
               <button onClick={handleSearchBar}>
                 <div>
                   {[DeviceType.PHONE, DeviceType.TABLET].includes(deviceType) ? 'Search...' : 'Search documentation...'}
+                </div>
+                <div className={styles.shortcut_container}>
+                  <span>
+                    <CommandMiniIcon />
+                  </span>
+                  <span>K</span>
                 </div>
               </button>
 

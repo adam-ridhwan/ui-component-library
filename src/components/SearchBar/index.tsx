@@ -15,7 +15,6 @@ const SearchBar: FC = () => {
     isSearchBarToggled,
     toggleSearchBar,
     searchInputRef,
-    searchInputValue,
     setSearchInputValue,
     isResultEmpty,
     filteredNavItems,
@@ -39,10 +38,6 @@ const SearchBar: FC = () => {
 
   const overlayStyle = `${styles.overlay} ${isSearchBarToggled && styles.overlay_visible}`;
   const contentStyle = `${styles.content} ${isSearchBarToggled && styles.content_active} ${contentTransition}`;
-
-  useEffect(() => {
-    console.log(lastSelectedItem);
-  }, [lastSelectedItem]);
 
   const setOriginalItems = useCallback(() => {
     setFilteredNavItems(NAVIGATION_MENU_ITEMS);

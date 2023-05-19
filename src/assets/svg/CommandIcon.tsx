@@ -1,4 +1,4 @@
-const CommandButtonIcon = () => {
+const CommandIcon = () => {
   return (
     <>
       <svg
@@ -18,4 +18,4 @@ const CommandButtonIcon = () => {
     </>
   );
 };
-export default CommandButtonIcon;
+export default CommandIcon;

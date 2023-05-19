@@ -1,4 +1,4 @@
-import CommandButtonIcon from '@/assets/svg/CommandButtonIcon';
+import CommandIcon from '@/assets/svg/CommandIcon';
 import GithubMiniIcon from '@/assets/svg/GithubMiniIcon';
 import { EXAMPLES } from '@/utils/constants';
 import { useState } from 'react';
@@ -27,8 +27,8 @@ const LandingPage = () => {
             <span>
               <span className={styles.underlined_instructions}>
                 Just press &nbsp;
-                <CommandButtonIcon /> &nbsp;+ c and &nbsp;
-                <CommandButtonIcon /> &nbsp;+ v
+                <CommandIcon /> &nbsp;+ c and &nbsp;
+                <CommandIcon /> &nbsp;+ v
               </span>
             </span>
           </section>
