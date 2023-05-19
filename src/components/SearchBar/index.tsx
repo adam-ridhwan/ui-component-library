@@ -4,13 +4,7 @@ import EmptyCircleIcon from '@/assets/svg/EmptyCircleIcon';
 import PaperIcon from '@/assets/svg/PaperIcon';
 import SearchIcon from '@/assets/svg/SearchIcon';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
-import {
-  COMPONENTS,
-  COMPONENTS_ROUTES,
-  DOCUMENTATION,
-  DOC_ROUTE,
-  NAVIGATION_MENU_ITEMS,
-} from '@/utils/constants';
+import { COMPONENTS, COMPONENTS_ROUTES, DOCUMENTATION, DOC_ROUTE, NAVIGATION_MENU_ITEMS } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import { ChangeEvent, FC, ReactElement, useCallback, useEffect, useRef, useState } from 'react';
 import NavigationButton from '../NavigationButton/NavigationButton';
@@ -21,6 +15,7 @@ const SearchBar: FC = () => {
     isSearchBarToggled,
     toggleSearchBar,
     searchInputRef,
+    searchInputValue,
     setSearchInputValue,
     isResultEmpty,
     filteredNavItems,
@@ -37,38 +32,33 @@ const SearchBar: FC = () => {
   const [isWindowResized, setIsWindowResized] = useState<boolean>(false);
   const [contentTransition, setContentTransition] = useState<string>(styles.transition);
   const [lastSelectedItem, setLastSelectedItem] = useState<string | null>(combinedFilteredItems[0]);
-  const [isContainerHovered, setIsContainerHovered] = useState<boolean>(false);
+  const [lastHoveredItem, setLastHoveredItem] = useState<string | null>(null);
+  const [isTyping, setIsTyping] = useState<boolean>(false);
 
   const scrollableDivRef = useRef<HTMLDivElement | null>(null);
 
   const overlayStyle = `${styles.overlay} ${isSearchBarToggled && styles.overlay_visible}`;
-  const contentStyle = `${styles.content} ${
-    isSearchBarToggled && styles.content_active
-  } ${contentTransition}`;
+  const contentStyle = `${styles.content} ${isSearchBarToggled && styles.content_active} ${contentTransition}`;
 
+  const setOriginalItems = useCallback(() => {
+    setFilteredNavItems(NAVIGATION_MENU_ITEMS);
+    setFilteredDocumentation(DOCUMENTATION);
+    setFilteredComponents(Object.keys(COMPONENTS));
+    setCombinedFilteredItems([...NAVIGATION_MENU_ITEMS, ...DOCUMENTATION, ...Object.keys(COMPONENTS)]);
+    setLastSelectedItem(NAVIGATION_MENU_ITEMS[0]);
+  }, [setFilteredNavItems, setFilteredDocumentation, setFilteredComponents, setCombinedFilteredItems]);
+
+  // close search modal
   const handleCloseModal = useCallback(() => {
     toggleSearchBar();
     if (searchInputRef.current) searchInputRef.current.value = '';
     document.body.style.overflowY = 'auto';
-    setFilteredNavItems(NAVIGATION_MENU_ITEMS);
-    setFilteredDocumentation(DOCUMENTATION);
-    setFilteredComponents(Object.keys(COMPONENTS));
-    setCombinedFilteredItems([
-      ...NAVIGATION_MENU_ITEMS,
-      ...DOCUMENTATION,
-      ...Object.keys(COMPONENTS),
-    ]);
-    setLastSelectedItem(NAVIGATION_MENU_ITEMS[0]);
-    if (scrollableDivRef.current) scrollableDivRef.current.scrollTop = 0;
-  }, [
-    toggleSearchBar,
-    searchInputRef,
-    setFilteredNavItems,
-    setFilteredDocumentation,
-    setFilteredComponents,
-    setCombinedFilteredItems,
-  ]);
+    setOriginalItems();
 
+    if (scrollableDivRef.current) scrollableDivRef.current.scrollTop = 0;
+  }, [toggleSearchBar, searchInputRef, setOriginalItems]);
+
+  // handle toggle search bar with keyboard shortcut
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape' && isSearchBarToggled) handleCloseModal();
@@ -140,12 +130,14 @@ const SearchBar: FC = () => {
               section={sectionForButton}
               closeSidebar={handleCloseModal}
               onMouseEnter={() => {
-                setLastSelectedItem(section);
-                setIsContainerHovered(true);
+                setLastHoveredItem(section);
+                console.log(section);
+                if (lastHoveredItem === section) return setLastSelectedItem(section);
+                if (!isTyping) return setLastSelectedItem(section);
               }}
               onMouseLeave={() => {
-                setLastSelectedItem(section);
-                setIsContainerHovered(false);
+                setIsTyping(false);
+                setLastHoveredItem(section);
               }}
               style={{
                 backgroundColor: `${lastSelectedItem === section ? '#f5f8fa' : ''}`,
@@ -163,23 +155,14 @@ const SearchBar: FC = () => {
   };
 
   useEffect(() => {
-    console.log(lastSelectedItem);
-  }, [lastSelectedItem]);
+    console.log('isTyping', isTyping, lastSelectedItem);
+    console.log('lastHoveredItem', lastHoveredItem);
+  }, [isTyping, lastHoveredItem, lastSelectedItem]);
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchInputValue(value);
-
-    const setAllItems = () => {
-      setFilteredNavItems(NAVIGATION_MENU_ITEMS);
-      setFilteredDocumentation(DOCUMENTATION);
-      setFilteredComponents(Object.keys(COMPONENTS));
-      setCombinedFilteredItems([
-        ...NAVIGATION_MENU_ITEMS,
-        ...DOCUMENTATION,
-        ...Object.keys(COMPONENTS),
-      ]);
-    };
+    setIsTyping(true);
 
     const filterAllSections = () => {
       const filteredNavItems = filterSections(NAVIGATION_MENU_ITEMS);
@@ -189,15 +172,23 @@ const SearchBar: FC = () => {
       setFilteredNavItems(filteredNavItems);
       setFilteredDocumentation(filteredDocumentation);
       setFilteredComponents(filteredComponents);
-      setCombinedFilteredItems([
-        ...filteredNavItems,
-        ...filteredDocumentation,
-        ...filteredComponents,
-      ]);
+      setCombinedFilteredItems([...filteredNavItems, ...filteredDocumentation, ...filteredComponents]);
+      setLastSelectedItem([...filteredNavItems, ...filteredDocumentation, ...filteredComponents][0]);
     };
 
-    value === '' ? setAllItems() : filterAllSections();
+    value === '' ? setOriginalItems() : filterAllSections();
   };
+
+  useEffect(() => {
+    const handleMouseMove = () => {
+      setIsTyping(false);
+      setLastSelectedItem(lastHoveredItem);
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, [lastHoveredItem]);
 
   return (
     <>
@@ -236,12 +227,7 @@ const SearchBar: FC = () => {
             <>
               {renderSection('Links', filteredNavItems, DOC_ROUTE, <PaperIcon />)}
               {renderSection('Documentation', filteredDocumentation, DOC_ROUTE, <BookOpen />)}
-              {renderSection(
-                'Components',
-                filteredComponents,
-                COMPONENTS_ROUTES,
-                <EmptyCircleIcon />
-              )}
+              {renderSection('Components', filteredComponents, COMPONENTS_ROUTES, <EmptyCircleIcon />)}
             </>
           )}
         </div>
