@@ -8,9 +8,19 @@ interface INavigationButtonProps {
   children: ReactNode;
   closeSidebar?: () => void;
   style?: object;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }
 
-const NavigationButton: FC<INavigationButtonProps> = ({ path, section, children, closeSidebar, style }) => {
+const NavigationButton: FC<INavigationButtonProps> = ({
+  path,
+  section,
+  children,
+  closeSidebar,
+  style,
+  onMouseEnter,
+  onMouseLeave,
+}) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { setCurrentSection } = useSideBarContext();
@@ -23,7 +33,7 @@ const NavigationButton: FC<INavigationButtonProps> = ({ path, section, children,
   };
 
   return (
-    <button onClick={handleNavigateToSection} style={style}>
+    <button onClick={handleNavigateToSection} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} style={style}>
       {children}
     </button>
   );

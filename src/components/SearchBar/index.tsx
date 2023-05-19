@@ -4,9 +4,15 @@ import EmptyCircleIcon from '@/assets/svg/EmptyCircleIcon';
 import PaperIcon from '@/assets/svg/PaperIcon';
 import SearchIcon from '@/assets/svg/SearchIcon';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
-import { COMPONENTS, COMPONENTS_ROUTES, DOCUMENTATION, DOC_ROUTE, NAVIGATION_MENU_ITEMS } from '@/utils/constants';
+import {
+  COMPONENTS,
+  COMPONENTS_ROUTES,
+  DOCUMENTATION,
+  DOC_ROUTE,
+  NAVIGATION_MENU_ITEMS,
+} from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
-import { ChangeEvent, FC, ReactElement, useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, FC, ReactElement, useCallback, useEffect, useRef, useState } from 'react';
 import NavigationButton from '../NavigationButton/NavigationButton';
 import styles from './styles.module.css';
 
@@ -27,15 +33,18 @@ const SearchBar: FC = () => {
     combinedFilteredItems,
     setCombinedFilteredItems,
   } = useSearchBarContext();
-  useEffect(() => {
-    console.log(combinedFilteredItems);
-  }, [combinedFilteredItems]);
+
   const [isWindowResized, setIsWindowResized] = useState<boolean>(false);
   const [contentTransition, setContentTransition] = useState<string>(styles.transition);
-  const [isHovering, setIsHovering] = useState<boolean>(false);
+  const [lastSelectedItem, setLastSelectedItem] = useState<string | null>(combinedFilteredItems[0]);
+  const [isContainerHovered, setIsContainerHovered] = useState<boolean>(false);
+
+  const scrollableDivRef = useRef<HTMLDivElement | null>(null);
 
   const overlayStyle = `${styles.overlay} ${isSearchBarToggled && styles.overlay_visible}`;
-  const contentStyle = `${styles.content} ${isSearchBarToggled && styles.content_active} ${contentTransition}`;
+  const contentStyle = `${styles.content} ${
+    isSearchBarToggled && styles.content_active
+  } ${contentTransition}`;
 
   const handleCloseModal = useCallback(() => {
     toggleSearchBar();
@@ -44,13 +53,25 @@ const SearchBar: FC = () => {
     setFilteredNavItems(NAVIGATION_MENU_ITEMS);
     setFilteredDocumentation(DOCUMENTATION);
     setFilteredComponents(Object.keys(COMPONENTS));
-  }, [toggleSearchBar, setFilteredNavItems, setFilteredDocumentation, setFilteredComponents, searchInputRef]);
+    setCombinedFilteredItems([
+      ...NAVIGATION_MENU_ITEMS,
+      ...DOCUMENTATION,
+      ...Object.keys(COMPONENTS),
+    ]);
+    setLastSelectedItem(NAVIGATION_MENU_ITEMS[0]);
+    if (scrollableDivRef.current) scrollableDivRef.current.scrollTop = 0;
+  }, [
+    toggleSearchBar,
+    searchInputRef,
+    setFilteredNavItems,
+    setFilteredDocumentation,
+    setFilteredComponents,
+    setCombinedFilteredItems,
+  ]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && isSearchBarToggled) {
-        handleCloseModal();
-      }
+      if (event.key === 'Escape' && isSearchBarToggled) handleCloseModal();
 
       // Check if 'k' is pressed while 'Command' (on Mac) or 'Control' (on Windows) is held down
       if (event.key.toLowerCase() === 'k' && (event.metaKey || event.ctrlKey)) {
@@ -81,9 +102,7 @@ const SearchBar: FC = () => {
         setContentTransition(styles.transition);
       }, 250);
     };
-
     window.addEventListener('resize', handleResize);
-
     return () => {
       window.removeEventListener('resize', handleResize);
       clearTimeout(resizeTimeout);
@@ -120,8 +139,16 @@ const SearchBar: FC = () => {
               path={path}
               section={sectionForButton}
               closeSidebar={handleCloseModal}
+              onMouseEnter={() => {
+                setLastSelectedItem(section);
+                setIsContainerHovered(true);
+              }}
+              onMouseLeave={() => {
+                setLastSelectedItem(section);
+                setIsContainerHovered(false);
+              }}
               style={{
-                backgroundColor: `${combinedFilteredItems[0] === section ? '#f5f8fa' : ''}`,
+                backgroundColor: `${lastSelectedItem === section ? '#f5f8fa' : ''}`,
               }}
             >
               <div className={styles.section}>
@@ -135,23 +162,41 @@ const SearchBar: FC = () => {
     );
   };
 
+  useEffect(() => {
+    console.log(lastSelectedItem);
+  }, [lastSelectedItem]);
+
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchInputValue(e.target.value);
-    if (e.target.value === '') {
+    const value = e.target.value;
+    setSearchInputValue(value);
+
+    const setAllItems = () => {
       setFilteredNavItems(NAVIGATION_MENU_ITEMS);
       setFilteredDocumentation(DOCUMENTATION);
       setFilteredComponents(Object.keys(COMPONENTS));
-      setCombinedFilteredItems(() => [...NAVIGATION_MENU_ITEMS, ...DOCUMENTATION, ...Object.keys(COMPONENTS)]);
-    } else {
-      setFilteredNavItems(() => filterSections(NAVIGATION_MENU_ITEMS));
-      setFilteredDocumentation(() => filterSections(DOCUMENTATION));
-      setFilteredComponents(() => filterSections(Object.keys(COMPONENTS)));
-      setCombinedFilteredItems(() => [
-        ...filterSections(NAVIGATION_MENU_ITEMS),
-        ...filterSections(DOCUMENTATION),
-        ...filterSections(Object.keys(COMPONENTS)),
+      setCombinedFilteredItems([
+        ...NAVIGATION_MENU_ITEMS,
+        ...DOCUMENTATION,
+        ...Object.keys(COMPONENTS),
       ]);
-    }
+    };
+
+    const filterAllSections = () => {
+      const filteredNavItems = filterSections(NAVIGATION_MENU_ITEMS);
+      const filteredDocumentation = filterSections(DOCUMENTATION);
+      const filteredComponents = filterSections(Object.keys(COMPONENTS));
+
+      setFilteredNavItems(filteredNavItems);
+      setFilteredDocumentation(filteredDocumentation);
+      setFilteredComponents(filteredComponents);
+      setCombinedFilteredItems([
+        ...filteredNavItems,
+        ...filteredDocumentation,
+        ...filteredComponents,
+      ]);
+    };
+
+    value === '' ? setAllItems() : filterAllSections();
   };
 
   return (
@@ -184,14 +229,19 @@ const SearchBar: FC = () => {
           </button>
         </div>
 
-        <div className={styles.section_wrapper}>
+        <div className={styles.section_wrapper} ref={scrollableDivRef}>
           {isResultEmpty ? (
             <div className={styles.no_results}>No results found.</div>
           ) : (
             <>
               {renderSection('Links', filteredNavItems, DOC_ROUTE, <PaperIcon />)}
               {renderSection('Documentation', filteredDocumentation, DOC_ROUTE, <BookOpen />)}
-              {renderSection('Components', filteredComponents, COMPONENTS_ROUTES, <EmptyCircleIcon />)}
+              {renderSection(
+                'Components',
+                filteredComponents,
+                COMPONENTS_ROUTES,
+                <EmptyCircleIcon />
+              )}
             </>
           )}
         </div>
