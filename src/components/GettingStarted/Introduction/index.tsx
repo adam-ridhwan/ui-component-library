@@ -85,6 +85,7 @@ const Introduction = () => {
               quidem veniam eos! Possimus eligendi illo ab! Quibusdam impedit totam natus quia ex sit quisquam aliquid.
             </span>
           </div>
+
           <div ref={creditsRef} className={styles.section_body}>
             <h2>Credits</h2>
             <span>
