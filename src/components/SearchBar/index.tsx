@@ -7,7 +7,7 @@ import NavigationButton from '@/components/NavigationButton';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 import { COMPONENTS, COMPONENTS_ROUTES, DOCUMENTATION, DOC_ROUTE, NAVIGATION_MENU_ITEMS } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
-import { ChangeEvent, FC, ReactElement, useCallback, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, FC, ReactElement, RefObject, createRef, useCallback, useEffect, useRef, useState } from 'react';
 import styles from './styles.module.css';
 
 const SearchBar: FC = () => {
@@ -35,6 +35,15 @@ const SearchBar: FC = () => {
   const [isTyping, setIsTyping] = useState<boolean>(false);
 
   const scrollableDivRef = useRef<HTMLDivElement | null>(null);
+  const itemRefs = useRef<{ [key: string]: RefObject<HTMLButtonElement> }>({});
+
+  useEffect(() => {
+    combinedFilteredItems.forEach((item) => {
+      if (!itemRefs.current[item]) {
+        itemRefs.current[item] = createRef();
+      }
+    });
+  }, [combinedFilteredItems]);
 
   const overlayStyle = `${styles.overlay} ${isSearchBarToggled && styles.overlay_visible}`;
   const contentStyle = `${styles.content} ${isSearchBarToggled && styles.content_active} ${contentTransition}`;
@@ -48,6 +57,10 @@ const SearchBar: FC = () => {
     setLastHoveredItem(NAVIGATION_MENU_ITEMS[0]);
   }, [setFilteredNavItems, setFilteredDocumentation, setFilteredComponents, setCombinedFilteredItems]);
 
+  useEffect(() => {
+    console.log(lastSelectedItem, lastHoveredItem);
+  }, [lastHoveredItem, lastSelectedItem]);
+
   // close search modal
   const handleCloseModal = useCallback(() => {
     toggleSearchBar();
@@ -60,19 +73,91 @@ const SearchBar: FC = () => {
   // handle toggle search bar with keyboard shortcut
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && isSearchBarToggled) handleCloseModal();
+      setIsTyping(true);
+      if (event.key === 'Escape' && isSearchBarToggled) return handleCloseModal();
 
       // Check if 'k' is pressed while 'Command' (on Mac) or 'Control' (on Windows) is held down
       if (event.key.toLowerCase() === 'k' && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
         toggleSearchBar();
       }
+
+      // check if up or down arrow is pressed
+      switch (event.key) {
+        case 'ArrowUp':
+          setLastSelectedItem((prevSelectedItem) => {
+            if (prevSelectedItem && combinedFilteredItems.indexOf(prevSelectedItem) > 0) {
+              const newItem = combinedFilteredItems[combinedFilteredItems.indexOf(prevSelectedItem) - 1];
+              if (itemRefs.current[newItem]?.current) {
+                const rect = itemRefs.current[newItem].current?.getBoundingClientRect();
+                const containerRect = scrollableDivRef.current?.getBoundingClientRect();
+
+                // Check if the item is not in the view
+                if (rect && containerRect && rect.top < containerRect.top) {
+                  if (combinedFilteredItems.indexOf(newItem) === 0) {
+                    // Scroll all the way to the top
+                    scrollableDivRef.current?.scrollTo({
+                      top: 0,
+                      behavior: 'smooth',
+                    });
+                  } else {
+                    // Scroll up by the difference between the top of the item and the top of the container
+                    const scrollTop = scrollableDivRef.current?.scrollTop ?? 0;
+                    const scrollAmount = scrollTop + rect.top - containerRect.top - 5;
+                    scrollableDivRef.current?.scrollTo({
+                      top: scrollAmount,
+                      behavior: 'smooth',
+                    });
+                  }
+                }
+              }
+              setLastHoveredItem(newItem);
+              return newItem;
+            }
+            setLastHoveredItem(prevSelectedItem);
+            return prevSelectedItem;
+          });
+          break;
+
+        case 'ArrowDown':
+          setLastSelectedItem((prevSelectedItem) => {
+            if (
+              prevSelectedItem &&
+              combinedFilteredItems.indexOf(prevSelectedItem) < combinedFilteredItems.length - 1
+            ) {
+              const newItem = combinedFilteredItems[combinedFilteredItems.indexOf(prevSelectedItem) + 1];
+              if (itemRefs.current[newItem]?.current) {
+                const rect = itemRefs.current[newItem].current?.getBoundingClientRect();
+                const containerRect = scrollableDivRef.current?.getBoundingClientRect();
+
+                // Check if the item is not in the view
+                if (rect && containerRect && rect.bottom > containerRect.bottom) {
+                  const scrollTop = scrollableDivRef.current?.scrollTop ?? 0;
+                  // Scroll down by the difference between the bottom of the item and the bottom of the container
+                  const scrollAmount = scrollTop + rect.bottom - containerRect.bottom + 5;
+                  scrollableDivRef.current?.scrollTo({
+                    top: scrollAmount,
+                    behavior: 'smooth',
+                  });
+                }
+              }
+              setLastHoveredItem(newItem);
+              return newItem;
+            }
+            setLastHoveredItem(prevSelectedItem);
+            return prevSelectedItem;
+          });
+          break;
+
+        default:
+          break;
+      }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [handleCloseModal, isSearchBarToggled, toggleSearchBar]);
+  }, [combinedFilteredItems, handleCloseModal, isSearchBarToggled, lastSelectedItem, toggleSearchBar]);
 
   // Handle window resize and DISABLES transition when window is resized
   useEffect(() => {
@@ -122,17 +207,18 @@ const SearchBar: FC = () => {
 
           return (
             <NavigationButton
+              ref={itemRefs.current[section]}
               key={index}
               path={path}
               section={sectionForButton}
-              closeSidebar={handleCloseModal}
+              closeSidebar={() => {
+                handleCloseModal();
+                setLastSelectedItem(NAVIGATION_MENU_ITEMS[0]);
+                setLastHoveredItem(NAVIGATION_MENU_ITEMS[0]);
+              }}
               onMouseEnter={() => {
                 setLastHoveredItem(section);
                 if (!isTyping) return setLastSelectedItem(section);
-              }}
-              onMouseLeave={() => {
-                setIsTyping(false);
-                setLastHoveredItem(section);
               }}
               style={{
                 backgroundColor: `${lastSelectedItem === section ? '#f5f8fa' : ''}`,
