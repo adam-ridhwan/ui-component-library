@@ -3,7 +3,7 @@ import CommandMiniIcon from '@/assets/svg/CommandMiniIcon';
 import GithubIcon from '@/assets/svg/GithubIcon';
 import ToggleSidebarIcon from '@/assets/svg/ToggleSidebarIcon';
 import ToggleThemeIcon from '@/assets/svg/ToggleThemeIcon';
-import NavigationButton from '@/components/NavigationButton/NavigationButton';
+import NavigationButton from '@/components/NavigationButton';
 import useResolution, { DeviceType } from '@/hooks/useResolution';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 import { useSideBarContext } from '@/hooks/useSideBarContext';

@@ -1,7 +1,7 @@
 import { FC, useRef } from 'react';
 
 import CloseIcon from '@/assets/svg/CloseIcon';
-import NavigationButton from '@/components/NavigationButton/NavigationButton';
+import NavigationButton from '@/components/NavigationButton';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';

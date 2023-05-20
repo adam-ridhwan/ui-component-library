@@ -3,11 +3,11 @@ import CloseIcon from '@/assets/svg/CloseIcon';
 import EmptyCircleIcon from '@/assets/svg/EmptyCircleIcon';
 import PaperIcon from '@/assets/svg/PaperIcon';
 import SearchIcon from '@/assets/svg/SearchIcon';
+import NavigationButton from '@/components/NavigationButton';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 import { COMPONENTS, COMPONENTS_ROUTES, DOCUMENTATION, DOC_ROUTE, NAVIGATION_MENU_ITEMS } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import { ChangeEvent, FC, ReactElement, useCallback, useEffect, useRef, useState } from 'react';
-import NavigationButton from '../NavigationButton/NavigationButton';
 import styles from './styles.module.css';
 
 const SearchBar: FC = () => {
@@ -51,11 +51,10 @@ const SearchBar: FC = () => {
   // close search modal
   const handleCloseModal = useCallback(() => {
     toggleSearchBar();
-    if (searchInputRef.current) searchInputRef.current.value = '';
-    document.body.style.overflowY = 'auto';
     setOriginalItems();
-
+    if (searchInputRef.current) searchInputRef.current.value = '';
     if (scrollableDivRef.current) scrollableDivRef.current.scrollTop = 0;
+    document.body.style.overflowY = 'auto';
   }, [toggleSearchBar, searchInputRef, setOriginalItems]);
 
   // handle toggle search bar with keyboard shortcut
@@ -100,9 +99,7 @@ const SearchBar: FC = () => {
   }, [isWindowResized, searchInputRef]);
 
   const renderSection = (title: string, items: string[], baseRoute: string, icon: ReactElement) => {
-    if (items.length === 0) {
-      return null;
-    }
+    if (items.length === 0) return null;
 
     return (
       <div className={styles.section_container}>
