@@ -45,6 +45,7 @@ const SearchBar: FC = () => {
     setFilteredComponents(Object.keys(COMPONENTS));
     setCombinedFilteredItems([...NAVIGATION_MENU_ITEMS, ...DOCUMENTATION, ...Object.keys(COMPONENTS)]);
     setLastSelectedItem(NAVIGATION_MENU_ITEMS[0]);
+    setLastHoveredItem(NAVIGATION_MENU_ITEMS[0]);
   }, [setFilteredNavItems, setFilteredDocumentation, setFilteredComponents, setCombinedFilteredItems]);
 
   // close search modal
