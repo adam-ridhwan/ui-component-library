@@ -1,9 +1,11 @@
 import { useSideBarContext } from '@/hooks/useSideBarContext';
-import { FC, MouseEvent, ReactNode, Ref, forwardRef } from 'react';
+import jumpToSection from '@/utils/jumpToSection';
+import { FC, MouseEvent, ReactNode, Ref, RefObject, forwardRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 interface INavigationLinkProps {
   ref?: Ref<HTMLAnchorElement>;
+  sectionRef?: RefObject<HTMLDivElement>;
   path: string;
   section?: string;
   children: ReactNode;
@@ -13,7 +15,7 @@ interface INavigationLinkProps {
 }
 
 const NavigationLink: FC<INavigationLinkProps> = forwardRef<HTMLAnchorElement, INavigationLinkProps>(
-  ({ path, section, children, closeModal, style, onMouseEnter }, ref) => {
+  ({ path, sectionRef, section, children, closeModal, style, onMouseEnter }, ref) => {
     const navigate = useNavigate();
     const location = useLocation();
     const { setCurrentSection } = useSideBarContext();
@@ -22,7 +24,13 @@ const NavigationLink: FC<INavigationLinkProps> = forwardRef<HTMLAnchorElement, I
       e.preventDefault();
       closeModal?.();
       if (section) setCurrentSection(section);
-      if (location.pathname !== path) navigate(path);
+
+      const [pathWithoutHash, hash] = path.split('#');
+
+      if (location.pathname !== pathWithoutHash || location.hash !== hash) navigate(path);
+
+      if (hash && sectionRef) return jumpToSection(sectionRef);
+
       window.scrollTo(0, 0);
     };
 

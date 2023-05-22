@@ -29,22 +29,28 @@ body {
   margin-top: 2em;
 }
 
-.navigation_button-container button {
+.navigation_button-container a {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
   color: #0f172a;
   height: 36px;
   border-radius: 6px;
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  padding-left: 16px;
-  padding-right: 6px;
-  margin-right: 0.5rem;
+  padding-left: 12px;
+  padding-right: 10px;
 }
 
-.navigation_button-container button div,
-.navigation_button-container button span {
+.navigation_button-container a > span {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+}
+
+.navigation_button-container a > span:last-child {
+  margin-left: 7px;
 }

@@ -127,8 +127,12 @@ const Introduction = () => {
         <div className={styles.quick_nav_container}>
           {isLargeDesktop && (
             <QuickNav>
-              <NavigationLink path={`${DOC_ROUTE}#faq`}>FAQ</NavigationLink>
-              <NavigationLink path={`${DOC_ROUTE}#credits`}>Credits</NavigationLink>
+              <NavigationLink path={`${DOC_ROUTE}#faq`} sectionRef={faqRef}>
+                FAQ
+              </NavigationLink>
+              <NavigationLink path={`${DOC_ROUTE}#credits`} sectionRef={creditsRef}>
+                Credits
+              </NavigationLink>
             </QuickNav>
           )}
         </div>

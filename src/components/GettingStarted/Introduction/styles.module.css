@@ -13,6 +13,12 @@
   top: 87px;
 }
 
+.quick_nav_container a {
+  text-decoration: none;
+  padding-bottom: 0.5em;
+  color: #64748b;
+}
+
 .horizontal_line {
   border-top: 1px solid #dfe4ed;
   margin: 20px 0;
