@@ -2,41 +2,45 @@ import { COMPONENTS, DOCUMENTATION, NAVIGATION_MENU_ITEMS } from '@/utils/consta
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import { Dispatch, FC, ReactNode, RefObject, SetStateAction, createContext, useRef, useState } from 'react';
 
+interface SearchItemsState {
+  NavMenuItems: string[];
+  documentationItems: string[];
+  componentsItems: string[];
+  combinedFilteredItems: string[];
+}
+
 export interface SearchBarContextValue {
+  initialSearchItemsState: SearchItemsState;
   isSearchBarToggled: boolean;
   toggleSearchBar: () => void;
   searchInputRef: RefObject<HTMLInputElement>;
   searchInputValue: string;
   setSearchInputValue: Dispatch<SetStateAction<string>>;
+  searchItemsState: SearchItemsState;
+  setSearchItemsState: Dispatch<SetStateAction<SearchItemsState>>;
   isResultEmpty: boolean;
-  filteredNavItems: string[];
-  setFilteredNavItems: Dispatch<SetStateAction<string[]>>;
-  filteredDocumentation: string[];
-  setFilteredDocumentation: Dispatch<SetStateAction<string[]>>;
-  filteredComponents: string[];
-  setFilteredComponents: Dispatch<SetStateAction<string[]>>;
   filterSections: (items: string[]) => string[];
-  combinedFilteredItems: string[];
-  setCombinedFilteredItems: Dispatch<SetStateAction<string[]>>;
 }
+
 export const SearchBarContext = createContext<SearchBarContextValue | null>(null);
 
 interface SearchBarProps {
   children: ReactNode;
 }
 
+const initialSearchItemsState: SearchItemsState = {
+  NavMenuItems: NAVIGATION_MENU_ITEMS,
+  documentationItems: DOCUMENTATION,
+  componentsItems: Object.keys(COMPONENTS),
+  combinedFilteredItems: [...NAVIGATION_MENU_ITEMS, ...DOCUMENTATION, ...Object.keys(COMPONENTS)],
+};
+
 export const SearchBarProvider: FC<SearchBarProps> = ({ children }) => {
   const [isSearchBarToggled, setIsSearchBarToggled] = useState(false);
   const searchInputRef = useRef(null);
   const [searchInputValue, setSearchInputValue] = useState('');
-  const [filteredNavItems, setFilteredNavItems] = useState(NAVIGATION_MENU_ITEMS);
-  const [filteredDocumentation, setFilteredDocumentation] = useState(DOCUMENTATION);
-  const [filteredComponents, setFilteredComponents] = useState(Object.keys(COMPONENTS));
-  const [combinedFilteredItems, setCombinedFilteredItems] = useState([
-    ...NAVIGATION_MENU_ITEMS,
-    ...DOCUMENTATION,
-    ...Object.keys(COMPONENTS),
-  ]);
+
+  const [searchItemsState, setSearchItemsState] = useState<SearchItemsState>(initialSearchItemsState);
 
   const toggleSearchBar = () => {
     setIsSearchBarToggled((isSearchBarToggled) => !isSearchBarToggled);
@@ -57,26 +61,23 @@ export const SearchBarProvider: FC<SearchBarProps> = ({ children }) => {
   };
 
   const isResultEmpty =
-    filteredNavItems.length === 0 && filteredDocumentation.length === 0 && filteredComponents.length === 0;
+    searchItemsState.NavMenuItems.length === 0 &&
+    searchItemsState.documentationItems.length === 0 &&
+    searchItemsState.componentsItems.length === 0;
 
   return (
     <SearchBarContext.Provider
       value={{
+        initialSearchItemsState,
         isSearchBarToggled,
         toggleSearchBar,
         searchInputRef,
         searchInputValue,
         setSearchInputValue,
         isResultEmpty,
-        filteredNavItems,
-        setFilteredNavItems,
-        filteredDocumentation,
-        setFilteredDocumentation,
-        filteredComponents,
-        setFilteredComponents,
+        searchItemsState,
+        setSearchItemsState,
         filterSections,
-        combinedFilteredItems,
-        setCombinedFilteredItems,
       }}
     >
       {children}

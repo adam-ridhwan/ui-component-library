@@ -18,52 +18,41 @@ const SearchBar: FC = () => {
   const { setCurrentSection } = useSideBarContext();
 
   const {
+    initialSearchItemsState,
     isSearchBarToggled,
     toggleSearchBar,
     searchInputRef,
+    searchInputValue,
     setSearchInputValue,
     isResultEmpty,
-    filteredNavItems,
-    setFilteredNavItems,
-    filteredDocumentation,
-    setFilteredDocumentation,
-    filteredComponents,
-    setFilteredComponents,
+    searchItemsState,
+    setSearchItemsState,
     filterSections,
-    combinedFilteredItems,
-    setCombinedFilteredItems,
   } = useSearchBarContext();
 
   const [isWindowResized, setIsWindowResized] = useState<boolean>(false);
   const [contentTransition, setContentTransition] = useState<string>(styles.transition);
-  const [lastSelectedItem, setLastSelectedItem] = useState<string | null>(combinedFilteredItems[0]);
-  const [lastHoveredItem, setLastHoveredItem] = useState<string | null>(combinedFilteredItems[0]);
+  const [lastSelectedItem, setLastSelectedItem] = useState<string | null>(searchItemsState.combinedFilteredItems[0]);
+  const [lastHoveredItem, setLastHoveredItem] = useState<string | null>(searchItemsState.combinedFilteredItems[0]);
   const [isTyping, setIsTyping] = useState<boolean>(false);
 
   const scrollableDivRef = useRef<HTMLDivElement | null>(null);
   const itemRefs = useRef<{ [key: string]: RefObject<HTMLButtonElement> }>({});
 
   useEffect(() => {
-    combinedFilteredItems.forEach((item) => {
+    searchItemsState.combinedFilteredItems.forEach((item) => {
       if (!itemRefs.current[item]) itemRefs.current[item] = createRef();
     });
-  }, [combinedFilteredItems]);
+  }, [searchItemsState.combinedFilteredItems]);
 
   const overlayStyle = `${styles.overlay} ${isSearchBarToggled && styles.overlay_visible}`;
   const contentStyle = `${styles.content} ${isSearchBarToggled && styles.content_active} ${contentTransition}`;
 
   const setOriginalItems = useCallback(() => {
-    setFilteredNavItems(NAVIGATION_MENU_ITEMS);
-    setFilteredDocumentation(DOCUMENTATION);
-    setFilteredComponents(Object.keys(COMPONENTS));
-    setCombinedFilteredItems([...NAVIGATION_MENU_ITEMS, ...DOCUMENTATION, ...Object.keys(COMPONENTS)]);
+    setSearchItemsState(initialSearchItemsState);
     setLastSelectedItem(NAVIGATION_MENU_ITEMS[0]);
     setLastHoveredItem(NAVIGATION_MENU_ITEMS[0]);
-  }, [setFilteredNavItems, setFilteredDocumentation, setFilteredComponents, setCombinedFilteredItems]);
-
-  useEffect(() => {
-    console.log(lastSelectedItem, lastHoveredItem);
-  }, [lastHoveredItem, lastSelectedItem]);
+  }, [setSearchItemsState, initialSearchItemsState]);
 
   const handleCloseModal = useCallback(() => {
     toggleSearchBar();
@@ -89,15 +78,18 @@ const SearchBar: FC = () => {
       switch (event.key) {
         case 'ArrowUp':
           setLastSelectedItem((prevSelectedItem) => {
-            if (prevSelectedItem && combinedFilteredItems.indexOf(prevSelectedItem) > 0) {
-              const newItem = combinedFilteredItems[combinedFilteredItems.indexOf(prevSelectedItem) - 1];
+            if (prevSelectedItem && searchItemsState.combinedFilteredItems.indexOf(prevSelectedItem) > 0) {
+              const newItem =
+                searchItemsState.combinedFilteredItems[
+                  searchItemsState.combinedFilteredItems.indexOf(prevSelectedItem) - 1
+                ];
               if (itemRefs.current[newItem]?.current) {
                 const rect = itemRefs.current[newItem].current?.getBoundingClientRect();
                 const containerRect = scrollableDivRef.current?.getBoundingClientRect();
 
                 // Check if the item is not in the view
                 if (rect && containerRect && rect.top < containerRect.top) {
-                  if (combinedFilteredItems.indexOf(newItem) === 0) {
+                  if (searchItemsState.combinedFilteredItems.indexOf(newItem) === 0) {
                     scrollableDivRef.current?.scrollTo({
                       top: 0,
                       behavior: 'smooth',
@@ -113,10 +105,8 @@ const SearchBar: FC = () => {
                   }
                 }
               }
-              // setLastHoveredItem(newItem);
               return newItem;
             }
-            // setLastHoveredItem(prevSelectedItem);
             return prevSelectedItem;
           });
           break;
@@ -125,9 +115,13 @@ const SearchBar: FC = () => {
           setLastSelectedItem((prevSelectedItem) => {
             if (
               prevSelectedItem &&
-              combinedFilteredItems.indexOf(prevSelectedItem) < combinedFilteredItems.length - 1
+              searchItemsState.combinedFilteredItems.indexOf(prevSelectedItem) <
+                searchItemsState.combinedFilteredItems.length - 1
             ) {
-              const newItem = combinedFilteredItems[combinedFilteredItems.indexOf(prevSelectedItem) + 1];
+              const newItem =
+                searchItemsState.combinedFilteredItems[
+                  searchItemsState.combinedFilteredItems.indexOf(prevSelectedItem) + 1
+                ];
               if (itemRefs.current[newItem]?.current) {
                 const rect = itemRefs.current[newItem].current?.getBoundingClientRect();
                 const containerRect = scrollableDivRef.current?.getBoundingClientRect();
@@ -143,10 +137,8 @@ const SearchBar: FC = () => {
                   });
                 }
               }
-              // setLastHoveredItem(newItem);
               return newItem;
             }
-            // setLastHoveredItem(prevSelectedItem);
             return prevSelectedItem;
           });
           break;
@@ -157,20 +149,51 @@ const SearchBar: FC = () => {
 
       // check if enter is pressed
       if (event.key === 'Enter' && isSearchBarToggled && lastSelectedItem) {
-        const path = `${COMPONENTS_ROUTES}/accordian`;
-        setCurrentSection(lastSelectedItem);
+        let path = `${DOC_ROUTE}`;
+        let currentSection = lastSelectedItem;
+
+        switch (lastSelectedItem) {
+          case 'documentation':
+          case 'introduction':
+            path = `${DOC_ROUTE}`;
+            currentSection = 'docs';
+            break;
+          case 'components':
+            path = `${COMPONENTS_ROUTES}/accordian`;
+            currentSection = 'accordian';
+            break;
+          case 'installation':
+          case 'theming':
+          case 'typography':
+            path = `${DOC_ROUTE}/${lastSelectedItem}`;
+            break;
+          default:
+            path = `${COMPONENTS_ROUTES}/${lastSelectedItem}`;
+            break;
+        }
+
+        setCurrentSection(currentSection);
         if (location.pathname !== path) navigate(path);
-        // const path = getPathFromLastSelectedItem(lastSelectedItem);
-        // history.push(path);
-        console.log('enter pressed');
-        console.log(lastSelectedItem);
+        toggleSearchBar();
+        scrollableDivRef.current?.scrollTo({ top: 0 });
+        setLastSelectedItem(NAVIGATION_MENU_ITEMS[0]);
+        setLastHoveredItem(NAVIGATION_MENU_ITEMS[0]);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [combinedFilteredItems, handleCloseModal, isSearchBarToggled, lastSelectedItem, toggleSearchBar]);
+  }, [
+    searchItemsState.combinedFilteredItems,
+    handleCloseModal,
+    isSearchBarToggled,
+    lastSelectedItem,
+    location.pathname,
+    navigate,
+    setCurrentSection,
+    toggleSearchBar,
+  ]);
 
   // Handle window resize and DISABLES transition when window is resized
   useEffect(() => {
@@ -254,15 +277,21 @@ const SearchBar: FC = () => {
     setIsTyping(true);
 
     const filterAllSections = () => {
-      const filteredNavItems = filterSections(NAVIGATION_MENU_ITEMS);
-      const filteredDocumentation = filterSections(DOCUMENTATION);
-      const filteredComponents = filterSections(Object.keys(COMPONENTS));
+      const filteredNavMenuItems = filterSections(NAVIGATION_MENU_ITEMS);
+      const filteredDocumentationItems = filterSections(DOCUMENTATION);
+      const filteredComponentsItems = filterSections(Object.keys(COMPONENTS));
 
-      setFilteredNavItems(filteredNavItems);
-      setFilteredDocumentation(filteredDocumentation);
-      setFilteredComponents(filteredComponents);
-      setCombinedFilteredItems([...filteredNavItems, ...filteredDocumentation, ...filteredComponents]);
-      setLastSelectedItem([...filteredNavItems, ...filteredDocumentation, ...filteredComponents][0]);
+      setSearchItemsState({
+        NavMenuItems: filteredNavMenuItems,
+        documentationItems: filteredDocumentationItems,
+        componentsItems: Object.keys(filteredComponentsItems),
+        combinedFilteredItems: [
+          ...filteredNavMenuItems,
+          ...filteredDocumentationItems,
+          ...Object.keys(filteredComponentsItems),
+        ],
+      });
+      setLastSelectedItem([...filteredNavMenuItems, ...filteredDocumentationItems, ...filteredComponentsItems][0]);
     };
 
     value === '' ? setOriginalItems() : filterAllSections();
@@ -319,9 +348,9 @@ const SearchBar: FC = () => {
             <div className={styles.no_results}>No results found.</div>
           ) : (
             <>
-              {renderSection('Links', filteredNavItems, DOC_ROUTE, <PaperIcon />)}
-              {renderSection('Documentation', filteredDocumentation, DOC_ROUTE, <BookOpen />)}
-              {renderSection('Components', filteredComponents, COMPONENTS_ROUTES, <EmptyCircleIcon />)}
+              {renderSection('Links', searchItemsState.NavMenuItems, DOC_ROUTE, <PaperIcon />)}
+              {renderSection('Documentation', searchItemsState.documentationItems, DOC_ROUTE, <BookOpen />)}
+              {renderSection('Components', searchItemsState.componentsItems, COMPONENTS_ROUTES, <EmptyCircleIcon />)}
             </>
           )}
         </div>
