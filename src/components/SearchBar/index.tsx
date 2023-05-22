@@ -5,12 +5,18 @@ import PaperIcon from '@/assets/svg/PaperIcon';
 import SearchIcon from '@/assets/svg/SearchIcon';
 import NavigationButton from '@/components/NavigationButton';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
+import { useSideBarContext } from '@/hooks/useSideBarContext';
 import { COMPONENTS, COMPONENTS_ROUTES, DOCUMENTATION, DOC_ROUTE, NAVIGATION_MENU_ITEMS } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import { ChangeEvent, FC, ReactElement, RefObject, createRef, useCallback, useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './styles.module.css';
 
 const SearchBar: FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { setCurrentSection } = useSideBarContext();
+
   const {
     isSearchBarToggled,
     toggleSearchBar,
@@ -39,9 +45,7 @@ const SearchBar: FC = () => {
 
   useEffect(() => {
     combinedFilteredItems.forEach((item) => {
-      if (!itemRefs.current[item]) {
-        itemRefs.current[item] = createRef();
-      }
+      if (!itemRefs.current[item]) itemRefs.current[item] = createRef();
     });
   }, [combinedFilteredItems]);
 
@@ -61,7 +65,6 @@ const SearchBar: FC = () => {
     console.log(lastSelectedItem, lastHoveredItem);
   }, [lastHoveredItem, lastSelectedItem]);
 
-  // close search modal
   const handleCloseModal = useCallback(() => {
     toggleSearchBar();
     setOriginalItems();
@@ -95,7 +98,6 @@ const SearchBar: FC = () => {
                 // Check if the item is not in the view
                 if (rect && containerRect && rect.top < containerRect.top) {
                   if (combinedFilteredItems.indexOf(newItem) === 0) {
-                    // Scroll all the way to the top
                     scrollableDivRef.current?.scrollTo({
                       top: 0,
                       behavior: 'smooth',
@@ -111,10 +113,10 @@ const SearchBar: FC = () => {
                   }
                 }
               }
-              setLastHoveredItem(newItem);
+              // setLastHoveredItem(newItem);
               return newItem;
             }
-            setLastHoveredItem(prevSelectedItem);
+            // setLastHoveredItem(prevSelectedItem);
             return prevSelectedItem;
           });
           break;
@@ -141,16 +143,27 @@ const SearchBar: FC = () => {
                   });
                 }
               }
-              setLastHoveredItem(newItem);
+              // setLastHoveredItem(newItem);
               return newItem;
             }
-            setLastHoveredItem(prevSelectedItem);
+            // setLastHoveredItem(prevSelectedItem);
             return prevSelectedItem;
           });
           break;
 
         default:
           break;
+      }
+
+      // check if enter is pressed
+      if (event.key === 'Enter' && isSearchBarToggled && lastSelectedItem) {
+        const path = `${COMPONENTS_ROUTES}/accordian`;
+        setCurrentSection(lastSelectedItem);
+        if (location.pathname !== path) navigate(path);
+        // const path = getPathFromLastSelectedItem(lastSelectedItem);
+        // history.push(path);
+        console.log('enter pressed');
+        console.log(lastSelectedItem);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -256,15 +269,20 @@ const SearchBar: FC = () => {
   };
 
   useEffect(() => {
-    const handleMouseMove = () => {
-      setIsTyping(false);
-      setLastSelectedItem(lastHoveredItem);
+    const handleMouseMove = (e: MouseEvent) => {
+      const scrollableDiv = scrollableDivRef.current;
+
+      // Check if the mouse is over the scrollable div
+      if (scrollableDiv && scrollableDiv.contains(e.target as Node)) {
+        setIsTyping(false);
+        setLastSelectedItem(lastHoveredItem);
+      }
     };
     window.addEventListener('mousemove', handleMouseMove);
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [isSearchBarToggled, lastHoveredItem]);
+  }, [isSearchBarToggled, lastHoveredItem, scrollableDivRef]);
 
   return (
     <>
