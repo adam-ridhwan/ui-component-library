@@ -46,14 +46,6 @@ export const SearchBarProvider: FC<SearchBarProps> = ({ children }) => {
     setIsSearchBarToggled((isSearchBarToggled) => !isSearchBarToggled);
   };
 
-  // const filterSections = (items: string[]) => {
-  //   return items.filter((value) => {
-  //     return searchInputValue === ''
-  //       ? value
-  //       : convertToTitleCase(value).toLowerCase().includes(searchInputValue.toLowerCase());
-  //   });
-  // };
-
   const filterSections = (items: string[]) => {
     const safeUserInput = searchInputValue.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
     const regex = new RegExp(safeUserInput, 'i');

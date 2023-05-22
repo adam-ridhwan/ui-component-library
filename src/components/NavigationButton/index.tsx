@@ -10,32 +10,23 @@ interface INavigationButtonProps {
   closeModal?: () => void;
   style?: object;
   onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-  reset?: () => void;
 }
 
 const NavigationButton: FC<INavigationButtonProps> = forwardRef<HTMLButtonElement, INavigationButtonProps>(
-  ({ path, section, children, closeModal, style, onMouseEnter, onMouseLeave, reset }, ref) => {
+  ({ path, section, children, closeModal, style, onMouseEnter }, ref) => {
     const navigate = useNavigate();
     const location = useLocation();
     const { setCurrentSection } = useSideBarContext();
 
     const handleNavigateToSection = () => {
       closeModal?.();
-      reset?.();
       setCurrentSection(section);
       if (location.pathname !== path) navigate(path);
       window.scrollTo(0, 0);
     };
 
     return (
-      <button
-        ref={ref}
-        onClick={handleNavigateToSection}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        style={style}
-      >
+      <button ref={ref} onClick={handleNavigateToSection} onMouseEnter={onMouseEnter} style={style}>
         {children}
       </button>
     );

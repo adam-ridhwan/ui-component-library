@@ -37,18 +37,28 @@ const SearchBar: FC = () => {
     lastHoveredItem: searchItemsState.combinedSearchItems[0] as string | null,
   });
 
+  const overlayStyle = `${styles.overlay} ${isSearchBarToggled && styles.overlay_visible}`;
+  const contentStyle = `${styles.content} ${isSearchBarToggled && styles.content_active} ${contentTransition}`;
+
   const scrollableDivRef = useRef<HTMLDivElement | null>(null);
   const itemRefs = useRef<{ [key: string]: RefObject<HTMLButtonElement> }>({});
 
+  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  //
+  //                   Create refs for combined search items
+  //
+  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
   useEffect(() => {
     searchItemsState.combinedSearchItems.forEach((item) => {
       if (!itemRefs.current[item]) itemRefs.current[item] = createRef();
     });
   }, [searchItemsState.combinedSearchItems]);
 
-  const overlayStyle = `${styles.overlay} ${isSearchBarToggled && styles.overlay_visible}`;
-  const contentStyle = `${styles.content} ${isSearchBarToggled && styles.content_active} ${contentTransition}`;
-
+  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  //
+  //                         Set initial search state
+  //
+  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
   const handleSetInitialState = useCallback(() => {
     setSearchItemsState(initialSearchItemsState);
     setItemState({
@@ -65,12 +75,18 @@ const SearchBar: FC = () => {
     document.body.style.overflowY = 'auto';
   }, [toggleSearchBar, searchInputRef, handleSetInitialState]);
 
-  // handle toggle search bar with keyboard shortcut
+  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  //
+  //              Handle toggle search bar with keyboard shortcut
+  //
+  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       const { combinedSearchItems } = searchItemsState;
 
       setIsTyping(true);
+
+      // Check if 'Escape' is pressed while search bar is toggled
       if (event.key === 'Escape' && isSearchBarToggled) return handleCloseModal();
 
       // Check if 'k' is pressed while 'Command' (on Mac) or 'Control' (on Windows) is held down
@@ -79,7 +95,7 @@ const SearchBar: FC = () => {
         toggleSearchBar();
       }
 
-      // check if up or down arrow is pressed
+      // Check if up or down arrow is pressed
       switch (event.key) {
         case 'ArrowUp':
           setItemState((prevState) => {
@@ -135,7 +151,7 @@ const SearchBar: FC = () => {
           break;
       }
 
-      // check if enter is pressed
+      // Check if enter is pressed
       if (event.key === 'Enter' && isSearchBarToggled && selectionState.lastSelectedItem) {
         let path = `${DOC_ROUTE}`;
         let currentSection = selectionState.lastSelectedItem;
@@ -160,10 +176,11 @@ const SearchBar: FC = () => {
             break;
         }
 
+        // Effects after navigation
         setCurrentSection(currentSection);
         if (location.pathname !== path) navigate(path);
-        toggleSearchBar();
-        scrollableDivRef.current?.scrollTo({ top: 0 });
+        window.scrollTo(0, 0);
+        handleCloseModal();
         setItemState((prevState) => ({
           ...prevState,
           lastSelectedItem: NAVIGATION_MENU_ITEMS[0],
@@ -187,7 +204,11 @@ const SearchBar: FC = () => {
     selectionState.lastSelectedItem,
   ]);
 
-  // Handle window resize and DISABLES transition when window is resized
+  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  //
+  //    Handle window resize and DISABLES transition when window is resized
+  //
+  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
   useEffect(() => {
     let resizeTimeout: ReturnType<typeof setTimeout>;
 
@@ -211,6 +232,11 @@ const SearchBar: FC = () => {
     };
   }, [isWindowResized, searchInputRef]);
 
+  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  //
+  //                  Render a section of navigation buttons
+  //
+  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
   const renderSection = (title: string, items: string[], baseRoute: string, icon: ReactElement) => {
     if (items.length === 0) return null;
 
@@ -267,6 +293,11 @@ const SearchBar: FC = () => {
     );
   };
 
+  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  //
+  //                        Handle search input change
+  //
+  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
   const handleSearch = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     setSearchInputValue(value);
     setIsTyping(true);
@@ -292,6 +323,11 @@ const SearchBar: FC = () => {
     setItemState((prevState) => ({ ...prevState, lastSelectedItem: filteredCombinedSearchItems[0] }));
   };
 
+  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  //
+  //               Handle mouse movement over the scrollable div
+  //
+  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       const scrollableDiv = scrollableDivRef.current;
@@ -311,6 +347,11 @@ const SearchBar: FC = () => {
     };
   }, [isSearchBarToggled, scrollableDivRef]);
 
+  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  //
+  //                                   HTML
+  //
+  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
   return (
     <>
       {/* Blurry overlay */}
