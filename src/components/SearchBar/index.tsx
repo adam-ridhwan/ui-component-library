@@ -22,49 +22,55 @@ const SearchBar: FC = () => {
     isSearchBarToggled,
     toggleSearchBar,
     searchInputRef,
-    searchInputValue,
     setSearchInputValue,
+    filterSections,
     isResultEmpty,
     searchItemsState,
     setSearchItemsState,
-    filterSections,
   } = useSearchBarContext();
 
   const [isWindowResized, setIsWindowResized] = useState<boolean>(false);
   const [contentTransition, setContentTransition] = useState<string>(styles.transition);
-  const [lastSelectedItem, setLastSelectedItem] = useState<string | null>(searchItemsState.combinedFilteredItems[0]);
-  const [lastHoveredItem, setLastHoveredItem] = useState<string | null>(searchItemsState.combinedFilteredItems[0]);
+  const [itemState, setItemState] = useState({
+    lastSelectedItem: searchItemsState.combinedSearchItems[0] as string | null,
+    lastHoveredItem: searchItemsState.combinedSearchItems[0] as string | null,
+  });
+
   const [isTyping, setIsTyping] = useState<boolean>(false);
 
   const scrollableDivRef = useRef<HTMLDivElement | null>(null);
   const itemRefs = useRef<{ [key: string]: RefObject<HTMLButtonElement> }>({});
 
   useEffect(() => {
-    searchItemsState.combinedFilteredItems.forEach((item) => {
+    searchItemsState.combinedSearchItems.forEach((item) => {
       if (!itemRefs.current[item]) itemRefs.current[item] = createRef();
     });
-  }, [searchItemsState.combinedFilteredItems]);
+  }, [searchItemsState.combinedSearchItems]);
 
   const overlayStyle = `${styles.overlay} ${isSearchBarToggled && styles.overlay_visible}`;
   const contentStyle = `${styles.content} ${isSearchBarToggled && styles.content_active} ${contentTransition}`;
 
-  const setOriginalItems = useCallback(() => {
+  const handleSetInitialState = useCallback(() => {
     setSearchItemsState(initialSearchItemsState);
-    setLastSelectedItem(NAVIGATION_MENU_ITEMS[0]);
-    setLastHoveredItem(NAVIGATION_MENU_ITEMS[0]);
+    setItemState({
+      lastSelectedItem: NAVIGATION_MENU_ITEMS[0],
+      lastHoveredItem: NAVIGATION_MENU_ITEMS[0],
+    });
   }, [setSearchItemsState, initialSearchItemsState]);
 
   const handleCloseModal = useCallback(() => {
     toggleSearchBar();
-    setOriginalItems();
+    handleSetInitialState();
     if (searchInputRef.current) searchInputRef.current.value = '';
     if (scrollableDivRef.current) scrollableDivRef.current.scrollTop = 0;
     document.body.style.overflowY = 'auto';
-  }, [toggleSearchBar, searchInputRef, setOriginalItems]);
+  }, [toggleSearchBar, searchInputRef, handleSetInitialState]);
 
   // handle toggle search bar with keyboard shortcut
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
+      const { combinedSearchItems } = searchItemsState;
+
       setIsTyping(true);
       if (event.key === 'Escape' && isSearchBarToggled) return handleCloseModal();
 
@@ -77,19 +83,18 @@ const SearchBar: FC = () => {
       // check if up or down arrow is pressed
       switch (event.key) {
         case 'ArrowUp':
-          setLastSelectedItem((prevSelectedItem) => {
-            if (prevSelectedItem && searchItemsState.combinedFilteredItems.indexOf(prevSelectedItem) > 0) {
-              const newItem =
-                searchItemsState.combinedFilteredItems[
-                  searchItemsState.combinedFilteredItems.indexOf(prevSelectedItem) - 1
-                ];
+          setItemState((prevState) => {
+            const prevSelectedItem = prevState.lastSelectedItem;
+
+            if (prevSelectedItem && combinedSearchItems.indexOf(prevSelectedItem) > 0) {
+              const newItem = combinedSearchItems[combinedSearchItems.indexOf(prevSelectedItem) - 1];
               if (itemRefs.current[newItem]?.current) {
                 const rect = itemRefs.current[newItem].current?.getBoundingClientRect();
                 const containerRect = scrollableDivRef.current?.getBoundingClientRect();
 
                 // Check if the item is not in the view
                 if (rect && containerRect && rect.top < containerRect.top) {
-                  if (searchItemsState.combinedFilteredItems.indexOf(newItem) === 0) {
+                  if (combinedSearchItems.indexOf(newItem) === 0) {
                     scrollableDivRef.current?.scrollTo({
                       top: 0,
                       behavior: 'smooth',
@@ -105,23 +110,20 @@ const SearchBar: FC = () => {
                   }
                 }
               }
-              return newItem;
+              return {
+                ...prevState,
+                lastSelectedItem: newItem,
+              };
             }
-            return prevSelectedItem;
+            return prevState;
           });
           break;
 
         case 'ArrowDown':
-          setLastSelectedItem((prevSelectedItem) => {
-            if (
-              prevSelectedItem &&
-              searchItemsState.combinedFilteredItems.indexOf(prevSelectedItem) <
-                searchItemsState.combinedFilteredItems.length - 1
-            ) {
-              const newItem =
-                searchItemsState.combinedFilteredItems[
-                  searchItemsState.combinedFilteredItems.indexOf(prevSelectedItem) + 1
-                ];
+          setItemState((prevState) => {
+            const prevSelectedItem = prevState.lastSelectedItem;
+            if (prevSelectedItem && combinedSearchItems.indexOf(prevSelectedItem) < combinedSearchItems.length - 1) {
+              const newItem = combinedSearchItems[combinedSearchItems.indexOf(prevSelectedItem) + 1];
               if (itemRefs.current[newItem]?.current) {
                 const rect = itemRefs.current[newItem].current?.getBoundingClientRect();
                 const containerRect = scrollableDivRef.current?.getBoundingClientRect();
@@ -137,9 +139,12 @@ const SearchBar: FC = () => {
                   });
                 }
               }
-              return newItem;
+              return {
+                ...prevState,
+                lastSelectedItem: newItem,
+              };
             }
-            return prevSelectedItem;
+            return prevState;
           });
           break;
 
@@ -148,11 +153,11 @@ const SearchBar: FC = () => {
       }
 
       // check if enter is pressed
-      if (event.key === 'Enter' && isSearchBarToggled && lastSelectedItem) {
+      if (event.key === 'Enter' && isSearchBarToggled && itemState.lastSelectedItem) {
         let path = `${DOC_ROUTE}`;
-        let currentSection = lastSelectedItem;
+        let currentSection = itemState.lastSelectedItem;
 
-        switch (lastSelectedItem) {
+        switch (itemState.lastSelectedItem) {
           case 'documentation':
           case 'introduction':
             path = `${DOC_ROUTE}`;
@@ -165,10 +170,10 @@ const SearchBar: FC = () => {
           case 'installation':
           case 'theming':
           case 'typography':
-            path = `${DOC_ROUTE}/${lastSelectedItem}`;
+            path = `${DOC_ROUTE}/${itemState.lastSelectedItem}`;
             break;
           default:
-            path = `${COMPONENTS_ROUTES}/${lastSelectedItem}`;
+            path = `${COMPONENTS_ROUTES}/${itemState.lastSelectedItem}`;
             break;
         }
 
@@ -176,8 +181,11 @@ const SearchBar: FC = () => {
         if (location.pathname !== path) navigate(path);
         toggleSearchBar();
         scrollableDivRef.current?.scrollTo({ top: 0 });
-        setLastSelectedItem(NAVIGATION_MENU_ITEMS[0]);
-        setLastHoveredItem(NAVIGATION_MENU_ITEMS[0]);
+        setItemState((prevState) => ({
+          ...prevState,
+          lastSelectedItem: NAVIGATION_MENU_ITEMS[0],
+          lastHoveredItem: NAVIGATION_MENU_ITEMS[0],
+        }));
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -185,14 +193,15 @@ const SearchBar: FC = () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [
-    searchItemsState.combinedFilteredItems,
+    searchItemsState.combinedSearchItems,
     handleCloseModal,
     isSearchBarToggled,
-    lastSelectedItem,
     location.pathname,
     navigate,
     setCurrentSection,
     toggleSearchBar,
+    searchItemsState,
+    itemState.lastSelectedItem,
   ]);
 
   // Handle window resize and DISABLES transition when window is resized
@@ -230,15 +239,22 @@ const SearchBar: FC = () => {
           let sectionForButton = section;
 
           // Special cases
-          if (title === 'Links' && section === 'documentation') {
-            path = `${DOC_ROUTE}`;
-            sectionForButton = 'docs';
-          } else if (title === 'Links' && section === 'components') {
-            path = `${COMPONENTS_ROUTES}/accordian`;
-            sectionForButton = Object.keys(COMPONENTS)[0];
-          } else if (title === 'Documentation' && section === 'introduction') {
-            path = `${DOC_ROUTE}`;
-            sectionForButton = 'docs';
+          const key = `${title}-${section}`;
+          switch (key) {
+            case 'Links-documentation':
+              path = `${DOC_ROUTE}`;
+              sectionForButton = 'docs';
+              break;
+            case 'Links-components':
+              path = `${COMPONENTS_ROUTES}/accordian`;
+              sectionForButton = Object.keys(COMPONENTS)[0];
+              break;
+            case 'Documentation-introduction':
+              path = `${DOC_ROUTE}`;
+              sectionForButton = 'docs';
+              break;
+            default:
+              break;
           }
 
           return (
@@ -247,17 +263,16 @@ const SearchBar: FC = () => {
               key={index}
               path={path}
               section={sectionForButton}
-              closeSidebar={() => {
-                handleCloseModal();
-                setLastSelectedItem(NAVIGATION_MENU_ITEMS[0]);
-                setLastHoveredItem(NAVIGATION_MENU_ITEMS[0]);
-              }}
+              closeSidebar={handleCloseModal}
               onMouseEnter={() => {
-                setLastHoveredItem(section);
-                if (!isTyping) return setLastSelectedItem(section);
+                setItemState((prevState) => ({
+                  ...prevState,
+                  lastSelectedItem: isTyping ? prevState.lastSelectedItem : section,
+                  lastHoveredItem: section,
+                }));
               }}
               style={{
-                backgroundColor: `${lastSelectedItem === section ? '#f5f8fa' : ''}`,
+                backgroundColor: `${itemState.lastSelectedItem === section ? '#f5f8fa' : ''}`,
               }}
             >
               <div className={styles.section}>
@@ -280,21 +295,28 @@ const SearchBar: FC = () => {
       const filteredNavMenuItems = filterSections(NAVIGATION_MENU_ITEMS);
       const filteredDocumentationItems = filterSections(DOCUMENTATION);
       const filteredComponentsItems = filterSections(Object.keys(COMPONENTS));
+      const filteredCombinedSearchItems = [
+        ...filteredNavMenuItems,
+        ...filteredDocumentationItems,
+        ...filteredComponentsItems,
+      ];
+
+      console.log(filteredCombinedSearchItems);
 
       setSearchItemsState({
-        NavMenuItems: filteredNavMenuItems,
+        navMenuItems: filteredNavMenuItems,
         documentationItems: filteredDocumentationItems,
-        componentsItems: Object.keys(filteredComponentsItems),
-        combinedFilteredItems: [
-          ...filteredNavMenuItems,
-          ...filteredDocumentationItems,
-          ...Object.keys(filteredComponentsItems),
-        ],
+        componentsItems: filteredComponentsItems,
+        combinedSearchItems: filteredCombinedSearchItems,
       });
-      setLastSelectedItem([...filteredNavMenuItems, ...filteredDocumentationItems, ...filteredComponentsItems][0]);
+
+      setItemState((prevState) => ({
+        ...prevState,
+        lastSelectedItem: filteredCombinedSearchItems[0],
+      }));
     };
 
-    value === '' ? setOriginalItems() : filterAllSections();
+    value === '' ? handleSetInitialState() : filterAllSections();
   };
 
   useEffect(() => {
@@ -304,14 +326,17 @@ const SearchBar: FC = () => {
       // Check if the mouse is over the scrollable div
       if (scrollableDiv && scrollableDiv.contains(e.target as Node)) {
         setIsTyping(false);
-        setLastSelectedItem(lastHoveredItem);
+        setItemState((prevState) => ({
+          ...prevState,
+          lastSelectedItem: prevState.lastHoveredItem,
+        }));
       }
     };
     window.addEventListener('mousemove', handleMouseMove);
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [isSearchBarToggled, lastHoveredItem, scrollableDivRef]);
+  }, [isSearchBarToggled, scrollableDivRef]);
 
   return (
     <>
@@ -348,7 +373,7 @@ const SearchBar: FC = () => {
             <div className={styles.no_results}>No results found.</div>
           ) : (
             <>
-              {renderSection('Links', searchItemsState.NavMenuItems, DOC_ROUTE, <PaperIcon />)}
+              {renderSection('Links', searchItemsState.navMenuItems, DOC_ROUTE, <PaperIcon />)}
               {renderSection('Documentation', searchItemsState.documentationItems, DOC_ROUTE, <BookOpen />)}
               {renderSection('Components', searchItemsState.componentsItems, COMPONENTS_ROUTES, <EmptyCircleIcon />)}
             </>

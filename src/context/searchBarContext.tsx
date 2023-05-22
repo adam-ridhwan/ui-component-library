@@ -3,10 +3,10 @@ import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import { Dispatch, FC, ReactNode, RefObject, SetStateAction, createContext, useRef, useState } from 'react';
 
 interface SearchItemsState {
-  NavMenuItems: string[];
+  navMenuItems: string[];
   documentationItems: string[];
   componentsItems: string[];
-  combinedFilteredItems: string[];
+  combinedSearchItems: string[];
 }
 
 export interface SearchBarContextValue {
@@ -29,10 +29,10 @@ interface SearchBarProps {
 }
 
 const initialSearchItemsState: SearchItemsState = {
-  NavMenuItems: NAVIGATION_MENU_ITEMS,
+  navMenuItems: NAVIGATION_MENU_ITEMS,
   documentationItems: DOCUMENTATION,
   componentsItems: Object.keys(COMPONENTS),
-  combinedFilteredItems: [...NAVIGATION_MENU_ITEMS, ...DOCUMENTATION, ...Object.keys(COMPONENTS)],
+  combinedSearchItems: [...NAVIGATION_MENU_ITEMS, ...DOCUMENTATION, ...Object.keys(COMPONENTS)],
 };
 
 export const SearchBarProvider: FC<SearchBarProps> = ({ children }) => {
@@ -61,7 +61,7 @@ export const SearchBarProvider: FC<SearchBarProps> = ({ children }) => {
   };
 
   const isResultEmpty =
-    searchItemsState.NavMenuItems.length === 0 &&
+    searchItemsState.navMenuItems.length === 0 &&
     searchItemsState.documentationItems.length === 0 &&
     searchItemsState.componentsItems.length === 0;
 
@@ -74,10 +74,10 @@ export const SearchBarProvider: FC<SearchBarProps> = ({ children }) => {
         searchInputRef,
         searchInputValue,
         setSearchInputValue,
+        filterSections,
         isResultEmpty,
         searchItemsState,
         setSearchItemsState,
-        filterSections,
       }}
     >
       {children}
