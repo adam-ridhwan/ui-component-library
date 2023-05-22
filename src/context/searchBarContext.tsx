@@ -1,5 +1,4 @@
 import { COMPONENTS, DOCUMENTATION, NAVIGATION_MENU_ITEMS } from '@/utils/constants';
-import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import { Dispatch, FC, ReactNode, RefObject, SetStateAction, createContext, useRef, useState } from 'react';
 
 interface SearchItemsState {
@@ -47,7 +46,7 @@ export const SearchBarProvider: FC<SearchBarProps> = ({ children }) => {
   };
 
   const filterSections = (items: string[]) => {
-    const safeUserInput = searchInputValue.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+    const safeUserInput = searchInputValue.replace(/[-[\]/{}()*+?.\\^$|]/g, '\\$&');
     const regex = new RegExp(safeUserInput, 'i');
     return items.filter((item) => item.match(regex));
   };
