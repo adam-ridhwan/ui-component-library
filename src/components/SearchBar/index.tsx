@@ -1,9 +1,9 @@
 import BookOpen from '@/assets/svg/BookOpen';
 import CloseIcon from '@/assets/svg/CloseIcon';
 import EmptyCircleIcon from '@/assets/svg/EmptyCircleIcon';
+import MagnifyingIcon from '@/assets/svg/MagnifyingIcon';
 import PaperIcon from '@/assets/svg/PaperIcon';
-import SearchIcon from '@/assets/svg/SearchIcon';
-import NavigationButton from '@/components/NavigationButton';
+import NavigationLink from '@/components/NavigationLink';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 import { COMPONENTS, COMPONENTS_ROUTES, DOCUMENTATION, DOC_ROUTE, NAVIGATION_MENU_ITEMS } from '@/utils/constants';
@@ -41,12 +41,10 @@ const SearchBar: FC = () => {
   const contentStyle = `${styles.content} ${isSearchBarToggled && styles.content_active} ${contentTransition}`;
 
   const scrollableDivRef = useRef<HTMLDivElement | null>(null);
-  const itemRefs = useRef<{ [key: string]: RefObject<HTMLButtonElement> }>({});
+  const itemRefs = useRef<{ [key: string]: RefObject<HTMLAnchorElement> }>({});
 
   // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-  //
   //                   Create refs for combined search items
-  //
   // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
   useEffect(() => {
     searchItemsState.combinedSearchItems.forEach((item) => {
@@ -55,9 +53,7 @@ const SearchBar: FC = () => {
   }, [searchItemsState.combinedSearchItems]);
 
   // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-  //
   //                         Set initial search state
-  //
   // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
   const handleSetInitialState = useCallback(() => {
     setSearchItemsState(initialSearchItemsState);
@@ -76,9 +72,7 @@ const SearchBar: FC = () => {
   }, [toggleSearchBar, searchInputRef, handleSetInitialState]);
 
   // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-  //
   //              Handle toggle search bar with keyboard shortcut
-  //
   // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -205,9 +199,7 @@ const SearchBar: FC = () => {
   ]);
 
   // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-  //
   //    Handle window resize and DISABLES transition when window is resized
-  //
   // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
   useEffect(() => {
     let resizeTimeout: ReturnType<typeof setTimeout>;
@@ -233,9 +225,7 @@ const SearchBar: FC = () => {
   }, [isWindowResized, searchInputRef]);
 
   // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-  //
   //                  Render a section of navigation buttons
-  //
   // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
   const renderSection = (title: string, items: string[], baseRoute: string, icon: ReactElement) => {
     if (items.length === 0) return null;
@@ -267,7 +257,7 @@ const SearchBar: FC = () => {
           }
 
           return (
-            <NavigationButton
+            <NavigationLink
               ref={itemRefs.current[section]}
               key={index}
               path={path}
@@ -286,7 +276,7 @@ const SearchBar: FC = () => {
                 <span>{icon}</span>
                 <span>{convertToTitleCase(section)}</span>
               </div>
-            </NavigationButton>
+            </NavigationLink>
           );
         })}
       </div>
@@ -294,9 +284,7 @@ const SearchBar: FC = () => {
   };
 
   // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-  //
   //                        Handle search input change
-  //
   // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
   const handleSearch = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     setSearchInputValue(value);
@@ -348,9 +336,7 @@ const SearchBar: FC = () => {
   }, [isSearchBarToggled, scrollableDivRef]);
 
   // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-  //
   //                                   HTML
-  //
   // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
   return (
     <>
@@ -364,7 +350,7 @@ const SearchBar: FC = () => {
 
         <div className={styles.searchbar_container}>
           <div>
-            <SearchIcon />
+            <MagnifyingIcon />
           </div>
 
           <input
@@ -377,7 +363,7 @@ const SearchBar: FC = () => {
             onChange={handleSearch}
           />
 
-          <button onClick={handleCloseModal}>
+          <button onClick={handleCloseModal} className={styles.close_icon}>
             <CloseIcon />
           </button>
         </div>

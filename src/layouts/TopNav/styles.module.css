@@ -1,7 +1,7 @@
 header {
   position: sticky;
   top: 0;
-  z-index: 1; /* or any value higher than the z-index of the content underneath */
+  z-index: 1;
 }
 
 header::before {
@@ -43,16 +43,19 @@ header::before {
   gap: 2em;
 }
 
-.desktop_nav button {
+.desktop_nav a {
   border: none;
   background: none;
   cursor: pointer;
   outline: none;
   color: #0f172a99;
   font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+  color: 'inherit';
 }
 
-.desktop_nav button:hover {
+.desktop_nav a:hover {
   color: #0f172acc;
 }
 

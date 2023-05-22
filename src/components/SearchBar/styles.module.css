@@ -95,7 +95,7 @@
   flex-direction: column;
 }
 
-.section_container button {
+.section_container a {
   padding: 12px 8px;
   background-color: white;
   border: none;
@@ -107,11 +107,12 @@
   color: #0f172a;
   font-size: 14px;
   font-weight: 400;
+  text-decoration: none;
 }
 
-/* .section_container button:hover {
-  background-color: #f5f8fa;
-} */
+.close_icon {
+  cursor: pointer;
+}
 
 .section {
   display: flex;

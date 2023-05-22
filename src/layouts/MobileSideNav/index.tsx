@@ -1,13 +1,12 @@
-import { FC, useRef } from 'react';
-
 import CloseIcon from '@/assets/svg/CloseIcon';
-import NavigationButton from '@/components/NavigationButton';
+import NavigationLink from '@/components/NavigationLink';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
+import { FC, useRef } from 'react';
 import styles from './styles.module.css';
 
-const MobileSidebar: FC = () => {
+const MobileSideNav: FC = () => {
   const { isSidebarToggled, toggleSidebar } = useSideBarContext();
   const sideBarContentRef = useRef<HTMLDivElement | null>(null);
 
@@ -30,19 +29,19 @@ const MobileSidebar: FC = () => {
           <span className={styles.sidebar_title}>Title</span>
 
           <div>
-            <NavigationButton path={DOC_ROUTE} section={'docs'} closeModal={handleCloseModal}>
+            <NavigationLink path={DOC_ROUTE} section={'docs'} closeModal={handleCloseModal}>
               Documentation
-            </NavigationButton>
-            <NavigationButton
+            </NavigationLink>
+            <NavigationLink
               path={`${COMPONENTS_ROUTES}/accordian`}
               section={Object.keys(COMPONENTS)[0]}
               closeModal={handleCloseModal}
             >
               Components
-            </NavigationButton>
-            <NavigationButton path='/examples' section={''} closeModal={handleCloseModal}>
+            </NavigationLink>
+            <NavigationLink path='/examples' section={''} closeModal={handleCloseModal}>
               Examples
-            </NavigationButton>
+            </NavigationLink>
           </div>
 
           <div>
@@ -52,14 +51,14 @@ const MobileSidebar: FC = () => {
             <span className={styles.sidebar_title}>Components</span>
             {Object.keys(COMPONENTS).map((component, index) => {
               return (
-                <NavigationButton
+                <NavigationLink
                   key={index}
                   path={`${COMPONENTS_ROUTES}/${component}`}
                   section={component}
                   closeModal={handleCloseModal}
                 >
                   {convertToTitleCase(component)}
-                </NavigationButton>
+                </NavigationLink>
               );
             })}
           </div>
@@ -69,4 +68,4 @@ const MobileSidebar: FC = () => {
   );
 };
 
-export default MobileSidebar;
+export default MobileSideNav;

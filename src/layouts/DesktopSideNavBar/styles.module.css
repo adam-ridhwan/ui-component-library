@@ -23,8 +23,8 @@
   padding-bottom: 50px;
 }
 
-.instructions_container button,
-.components_container button {
+.instructions_container a,
+.components_container a {
   height: 35px;
   text-align: left;
   background-color: transparent;
@@ -32,6 +32,8 @@
   outline: none;
   padding-top: 4px;
   padding-bottom: 4px;
+  text-decoration: none;
+  color: 'inherit';
 }
 
 .instructions_container span,
@@ -39,16 +41,16 @@
   height: 30px;
 }
 
-.instructions_container button:not(:first-child),
-.components_container button:not(:first-child) {
+.instructions_container a:not(:first-child),
+.components_container a:not(:first-child) {
   font-size: 14px;
   color: #64748b;
   font-weight: 400;
   line-height: 1.8em;
 }
 
-.instructions_container button:not(:first-child):hover,
-.components_container button:not(:first-child):hover {
+.instructions_container a:not(:first-child):hover,
+.components_container a:not(:first-child):hover {
   text-decoration: underline;
   cursor: pointer;
 }

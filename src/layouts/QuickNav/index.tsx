@@ -1,11 +1,11 @@
 import { FC, ReactNode } from 'react';
 import styles from './styles.module.css';
 
-interface IJumpNavProps {
+interface IQuickNavProps {
   children: ReactNode;
 }
 
-const JumpNav: FC<IJumpNavProps> = ({ children }) => {
+const QuickNav: FC<IQuickNavProps> = ({ children }) => {
   return (
     <>
       <aside>
@@ -17,4 +17,4 @@ const JumpNav: FC<IJumpNavProps> = ({ children }) => {
     </>
   );
 };
-export default JumpNav;
+export default QuickNav;

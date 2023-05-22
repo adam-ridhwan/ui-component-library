@@ -7,10 +7,6 @@
   box-sizing: border-box; /* Opera/IE 8+ */
   font-family: 'Poppins', sans-serif;
 }
-/*
-html {
-  overflow-y: scroll;
-} */
 
 :root {
   --scrollBarWidth: 9px;
@@ -24,4 +20,31 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+.navigation_button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 2em;
+}
+
+.navigation_button-container button {
+  color: #0f172a;
+  height: 36px;
+  border-radius: 6px;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  padding-left: 16px;
+  padding-right: 6px;
+  margin-right: 0.5rem;
+}
+
+.navigation_button-container button div,
+.navigation_button-container button span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }

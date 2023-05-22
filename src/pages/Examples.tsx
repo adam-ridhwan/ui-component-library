@@ -1,6 +1,6 @@
 import SearchBar from '@/components/SearchBar';
-import SideNavBar from '@/layouts/SideNavBar';
-import TopNavBar from '@/layouts/TopNavBar';
+import SideNavBar from '@/layouts/MobileSideNav';
+import TopNavBar from '@/layouts/TopNav';
 import { CSSProperties } from 'react';
 
 const Examples = () => {

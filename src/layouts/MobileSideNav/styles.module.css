@@ -55,9 +55,9 @@
   font-size: 16px;
 }
 
-.sidebar_content > div:nth-child(2) > button,
-.sidebar_content > div:nth-child(3) > button,
-.sidebar_content > div:nth-child(4) > button {
+.sidebar_content > div:nth-child(2) > a,
+.sidebar_content > div:nth-child(3) > a,
+.sidebar_content > div:nth-child(4) > a {
   width: 100%;
   font-size: 16px;
   font-weight: 400;
@@ -69,9 +69,8 @@
   flex-direction: column;
   justify-content: center;
   cursor: pointer;
-  background-color: transparent;
-  border: none;
-  outline: none;
+  background-color: white;
+  text-decoration: none;
 }
 
 .sidebar_content::-webkit-scrollbar {

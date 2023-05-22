@@ -2,26 +2,26 @@ import Chevronright from '@/assets/svg/ChevronRightIcon';
 import NavigationLink from '@/components/NavigationLink';
 import Path from '@/components/Path';
 import useResolution, { DeviceType } from '@/hooks/useResolution';
+import { useSideBarContext } from '@/hooks/useSideBarContext';
 import Divider from '@/layouts/Divider';
 import QuickNav from '@/layouts/QuickNav';
-import { DOCUMENTATION, DOC_ROUTE } from '@/utils/constants';
+import { COMPONENTS_ROUTES } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
-import { useRef } from 'react';
+import jumpToSection from '@/utils/jumpToSection';
 import styles from './styles.module.css';
 
-const Introduction = () => {
-  const faqRef = useRef<HTMLDivElement>(null);
-  const creditsRef = useRef<HTMLDivElement>(null);
+const Accordian = () => {
+  const { currentSection } = useSideBarContext();
   const [deviceType] = useResolution();
   const isLargeDesktop = [DeviceType.LARGE_DESKTOP].includes(deviceType);
-
   return (
     <>
       <div className={styles.container}>
         <div className={styles.section_container}>
-          <Path section={'Introduction'} />
-          <h1>Introduction</h1>
+          <Path section={'Accordian'} />
+          <h1>Accordian</h1>
           <span>Reusable components built from scratch</span>
+          <span></span>
           <Divider />
           <div className={styles.section_body}>
             <span>
@@ -60,7 +60,8 @@ const Introduction = () => {
               quidem veniam eos! Possimus eligendi illo ab! Quibusdam impedit totam natus quia ex sit quisquam aliquid.
             </span>
           </div>
-          <div ref={faqRef} className={styles.section_body}>
+
+          <div className={styles.section_body}>
             <h2>FAQ</h2>
             <span>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur unde nisi quas repudiandae! Perferendis
@@ -87,7 +88,7 @@ const Introduction = () => {
             </span>
           </div>
 
-          <div ref={creditsRef} className={styles.section_body}>
+          <div className={styles.section_body}>
             <h2>Credits</h2>
             <span>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur unde nisi quas repudiandae! Perferendis
@@ -115,20 +116,24 @@ const Introduction = () => {
           <Divider />
 
           <div className='navigation_button-container'>
-            <NavigationLink path={`${DOC_ROUTE}/${DOCUMENTATION[1]}`} section={DOCUMENTATION[1]}>
-              <span>{convertToTitleCase(DOCUMENTATION[1])}</span>
-              <span>
-                <Chevronright />
-              </span>
-            </NavigationLink>
+            {/* <NavigationLink path={`${COMPONENTS_ROUTES}/${[1]}`} section={DOCUMENTATION[1]}>
+              <div>
+                <span>{convertToTitleCase(DOCUMENTATION[1])}</span>
+                <span>
+                  <Chevronright />
+                </span>
+              </div>
+            </NavigationLink> */}
           </div>
         </div>
 
-        <div className={styles.quick_nav_container}>
+        <div className={styles.jump_nav_container}>
           {isLargeDesktop && (
             <QuickNav>
-              <NavigationLink path={`${DOC_ROUTE}#faq`}>FAQ</NavigationLink>
-              <NavigationLink path={`${DOC_ROUTE}#credits`}>Credits</NavigationLink>
+              <>
+                {/* <span onClick={() => jumpToSection(faqRef)}>FAQ</span>
+                <span onClick={() => jumpToSection(creditsRef)}>Credits</span> */}
+              </>
             </QuickNav>
           )}
         </div>
@@ -136,4 +141,4 @@ const Introduction = () => {
     </>
   );
 };
-export default Introduction;
+export default Accordian;

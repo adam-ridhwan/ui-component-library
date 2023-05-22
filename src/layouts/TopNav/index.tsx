@@ -3,14 +3,14 @@ import CommandMiniIcon from '@/assets/svg/CommandMiniIcon';
 import GithubIcon from '@/assets/svg/GithubIcon';
 import ToggleSidebarIcon from '@/assets/svg/ToggleSidebarIcon';
 import ToggleThemeIcon from '@/assets/svg/ToggleThemeIcon';
-import NavigationButton from '@/components/NavigationButton';
+import NavigationLink from '@/components/NavigationLink';
 import useResolution, { DeviceType } from '@/hooks/useResolution';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE } from '@/utils/constants';
 import styles from './styles.module.css';
 
-const TopNavBar = () => {
+const TopNav = () => {
   const { toggleSidebar } = useSideBarContext();
   const { toggleSearchBar, searchInputRef } = useSearchBarContext();
   const [deviceType] = useResolution();
@@ -33,15 +33,15 @@ const TopNavBar = () => {
           <div className={styles.container}>
             {[DeviceType.DESKTOP, DeviceType.LARGE_DESKTOP].includes(deviceType) ? (
               <div className={styles.desktop_nav}>
-                <NavigationButton path={`${DOC_ROUTE}`} section='docs'>
+                <NavigationLink path={`${DOC_ROUTE}`} section='docs'>
                   Documentation
-                </NavigationButton>
-                <NavigationButton path={`${COMPONENTS_ROUTES}/accordian`} section={Object.keys(COMPONENTS)[0]}>
+                </NavigationLink>
+                <NavigationLink path={`${COMPONENTS_ROUTES}/accordian`} section={Object.keys(COMPONENTS)[0]}>
                   Components
-                </NavigationButton>
-                <NavigationButton path={`${DOC_ROUTE}`} section='docs'>
+                </NavigationLink>
+                <NavigationLink path={`${DOC_ROUTE}`} section='docs'>
                   Examples
-                </NavigationButton>
+                </NavigationLink>
               </div>
             ) : (
               <button onClick={handleOpenSideBar} className={styles.toggle_side_bar_icon}>
@@ -77,4 +77,4 @@ const TopNavBar = () => {
   );
 };
 
-export default TopNavBar;
+export default TopNav;

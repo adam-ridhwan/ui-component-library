@@ -1,36 +1,37 @@
 import { useSideBarContext } from '@/hooks/useSideBarContext';
-import { FC, ReactNode, Ref, forwardRef } from 'react';
+import { FC, MouseEvent, ReactNode, Ref, forwardRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-interface INavigationButtonProps {
-  ref: Ref<HTMLButtonElement>;
+interface INavigationLinkProps {
+  ref?: Ref<HTMLAnchorElement>;
   path: string;
-  section: string;
+  section?: string;
   children: ReactNode;
   closeModal?: () => void;
   style?: object;
   onMouseEnter?: () => void;
 }
 
-const NavigationButton: FC<INavigationButtonProps> = forwardRef<HTMLButtonElement, INavigationButtonProps>(
+const NavigationLink: FC<INavigationLinkProps> = forwardRef<HTMLAnchorElement, INavigationLinkProps>(
   ({ path, section, children, closeModal, style, onMouseEnter }, ref) => {
     const navigate = useNavigate();
     const location = useLocation();
     const { setCurrentSection } = useSideBarContext();
 
-    const handleNavigateToSection = () => {
+    const handleNavigateToSection = (e: MouseEvent<HTMLAnchorElement>) => {
+      e.preventDefault();
       closeModal?.();
-      setCurrentSection(section);
+      if (section) setCurrentSection(section);
       if (location.pathname !== path) navigate(path);
       window.scrollTo(0, 0);
     };
 
     return (
-      <button ref={ref} onClick={handleNavigateToSection} onMouseEnter={onMouseEnter} style={style}>
+      <a ref={ref} href={path} onClick={handleNavigateToSection} onMouseEnter={onMouseEnter} style={style}>
         {children}
-      </button>
+      </a>
     );
   }
 );
 
-export default NavigationButton;
+export default NavigationLink;
