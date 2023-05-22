@@ -7,7 +7,7 @@ interface INavigationButtonProps {
   path: string;
   section: string;
   children: ReactNode;
-  closeSidebar?: () => void;
+  closeModal?: () => void;
   style?: object;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
@@ -15,13 +15,13 @@ interface INavigationButtonProps {
 }
 
 const NavigationButton: FC<INavigationButtonProps> = forwardRef<HTMLButtonElement, INavigationButtonProps>(
-  ({ path, section, children, closeSidebar, style, onMouseEnter, onMouseLeave, reset }, ref) => {
+  ({ path, section, children, closeModal, style, onMouseEnter, onMouseLeave, reset }, ref) => {
     const navigate = useNavigate();
     const location = useLocation();
     const { setCurrentSection } = useSideBarContext();
 
     const handleNavigateToSection = () => {
-      closeSidebar?.();
+      closeModal?.();
       reset?.();
       setCurrentSection(section);
       if (location.pathname !== path) navigate(path);

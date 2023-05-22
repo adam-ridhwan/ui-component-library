@@ -31,12 +31,11 @@ const SearchBar: FC = () => {
 
   const [isWindowResized, setIsWindowResized] = useState<boolean>(false);
   const [contentTransition, setContentTransition] = useState<string>(styles.transition);
-  const [itemState, setItemState] = useState({
+  const [isTyping, setIsTyping] = useState<boolean>(false);
+  const [selectionState, setItemState] = useState({
     lastSelectedItem: searchItemsState.combinedSearchItems[0] as string | null,
     lastHoveredItem: searchItemsState.combinedSearchItems[0] as string | null,
   });
-
-  const [isTyping, setIsTyping] = useState<boolean>(false);
 
   const scrollableDivRef = useRef<HTMLDivElement | null>(null);
   const itemRefs = useRef<{ [key: string]: RefObject<HTMLButtonElement> }>({});
@@ -85,7 +84,6 @@ const SearchBar: FC = () => {
         case 'ArrowUp':
           setItemState((prevState) => {
             const prevSelectedItem = prevState.lastSelectedItem;
-
             if (prevSelectedItem && combinedSearchItems.indexOf(prevSelectedItem) > 0) {
               const newItem = combinedSearchItems[combinedSearchItems.indexOf(prevSelectedItem) - 1];
               if (itemRefs.current[newItem]?.current) {
@@ -95,25 +93,16 @@ const SearchBar: FC = () => {
                 // Check if the item is not in the view
                 if (rect && containerRect && rect.top < containerRect.top) {
                   if (combinedSearchItems.indexOf(newItem) === 0) {
-                    scrollableDivRef.current?.scrollTo({
-                      top: 0,
-                      behavior: 'smooth',
-                    });
+                    scrollableDivRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
                   } else {
                     // Scroll up by the difference between the top of the item and the top of the container
                     const scrollTop = scrollableDivRef.current?.scrollTop ?? 0;
                     const scrollAmount = scrollTop + rect.top - containerRect.top - 5;
-                    scrollableDivRef.current?.scrollTo({
-                      top: scrollAmount,
-                      behavior: 'smooth',
-                    });
+                    scrollableDivRef.current?.scrollTo({ top: scrollAmount, behavior: 'smooth' });
                   }
                 }
               }
-              return {
-                ...prevState,
-                lastSelectedItem: newItem,
-              };
+              return { ...prevState, lastSelectedItem: newItem };
             }
             return prevState;
           });
@@ -133,16 +122,10 @@ const SearchBar: FC = () => {
                   const scrollTop = scrollableDivRef.current?.scrollTop ?? 0;
                   // Scroll down by the difference between the bottom of the item and the bottom of the container
                   const scrollAmount = scrollTop + rect.bottom - containerRect.bottom + 5;
-                  scrollableDivRef.current?.scrollTo({
-                    top: scrollAmount,
-                    behavior: 'smooth',
-                  });
+                  scrollableDivRef.current?.scrollTo({ top: scrollAmount, behavior: 'smooth' });
                 }
               }
-              return {
-                ...prevState,
-                lastSelectedItem: newItem,
-              };
+              return { ...prevState, lastSelectedItem: newItem };
             }
             return prevState;
           });
@@ -153,11 +136,11 @@ const SearchBar: FC = () => {
       }
 
       // check if enter is pressed
-      if (event.key === 'Enter' && isSearchBarToggled && itemState.lastSelectedItem) {
+      if (event.key === 'Enter' && isSearchBarToggled && selectionState.lastSelectedItem) {
         let path = `${DOC_ROUTE}`;
-        let currentSection = itemState.lastSelectedItem;
+        let currentSection = selectionState.lastSelectedItem;
 
-        switch (itemState.lastSelectedItem) {
+        switch (selectionState.lastSelectedItem) {
           case 'documentation':
           case 'introduction':
             path = `${DOC_ROUTE}`;
@@ -170,10 +153,10 @@ const SearchBar: FC = () => {
           case 'installation':
           case 'theming':
           case 'typography':
-            path = `${DOC_ROUTE}/${itemState.lastSelectedItem}`;
+            path = `${DOC_ROUTE}/${selectionState.lastSelectedItem}`;
             break;
           default:
-            path = `${COMPONENTS_ROUTES}/${itemState.lastSelectedItem}`;
+            path = `${COMPONENTS_ROUTES}/${selectionState.lastSelectedItem}`;
             break;
         }
 
@@ -201,7 +184,7 @@ const SearchBar: FC = () => {
     setCurrentSection,
     toggleSearchBar,
     searchItemsState,
-    itemState.lastSelectedItem,
+    selectionState.lastSelectedItem,
   ]);
 
   // Handle window resize and DISABLES transition when window is resized
@@ -263,7 +246,7 @@ const SearchBar: FC = () => {
               key={index}
               path={path}
               section={sectionForButton}
-              closeSidebar={handleCloseModal}
+              closeModal={handleCloseModal}
               onMouseEnter={() => {
                 setItemState((prevState) => ({
                   ...prevState,
@@ -271,9 +254,7 @@ const SearchBar: FC = () => {
                   lastHoveredItem: section,
                 }));
               }}
-              style={{
-                backgroundColor: `${itemState.lastSelectedItem === section ? '#f5f8fa' : ''}`,
-              }}
+              style={{ backgroundColor: `${selectionState.lastSelectedItem === section ? '#f5f8fa' : ''}` }}
             >
               <div className={styles.section}>
                 <span>{icon}</span>
@@ -286,37 +267,29 @@ const SearchBar: FC = () => {
     );
   };
 
-  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+  const handleSearch = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     setSearchInputValue(value);
     setIsTyping(true);
 
-    const filterAllSections = () => {
-      const filteredNavMenuItems = filterSections(NAVIGATION_MENU_ITEMS);
-      const filteredDocumentationItems = filterSections(DOCUMENTATION);
-      const filteredComponentsItems = filterSections(Object.keys(COMPONENTS));
-      const filteredCombinedSearchItems = [
-        ...filteredNavMenuItems,
-        ...filteredDocumentationItems,
-        ...filteredComponentsItems,
-      ];
+    if (value === '') return handleSetInitialState();
 
-      console.log(filteredCombinedSearchItems);
+    const sections = [NAVIGATION_MENU_ITEMS, DOCUMENTATION, Object.keys(COMPONENTS)];
+    const [filteredNavMenuItems, filteredDocumentationItems, filteredComponentsItems] = sections.map(filterSections);
 
-      setSearchItemsState({
-        navMenuItems: filteredNavMenuItems,
-        documentationItems: filteredDocumentationItems,
-        componentsItems: filteredComponentsItems,
-        combinedSearchItems: filteredCombinedSearchItems,
-      });
+    const filteredCombinedSearchItems = [
+      ...filteredNavMenuItems,
+      ...filteredDocumentationItems,
+      ...filteredComponentsItems,
+    ];
 
-      setItemState((prevState) => ({
-        ...prevState,
-        lastSelectedItem: filteredCombinedSearchItems[0],
-      }));
-    };
+    setSearchItemsState({
+      navMenuItems: filteredNavMenuItems,
+      documentationItems: filteredDocumentationItems,
+      componentsItems: filteredComponentsItems,
+      combinedSearchItems: filteredCombinedSearchItems,
+    });
 
-    value === '' ? handleSetInitialState() : filterAllSections();
+    setItemState((prevState) => ({ ...prevState, lastSelectedItem: filteredCombinedSearchItems[0] }));
   };
 
   useEffect(() => {

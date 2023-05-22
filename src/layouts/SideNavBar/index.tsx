@@ -30,17 +30,17 @@ const MobileSidebar: FC = () => {
           <span className={styles.sidebar_title}>Title</span>
 
           <div>
-            <NavigationButton path={DOC_ROUTE} section={'docs'} closeSidebar={handleCloseModal}>
+            <NavigationButton path={DOC_ROUTE} section={'docs'} closeModal={handleCloseModal}>
               Documentation
             </NavigationButton>
             <NavigationButton
               path={`${COMPONENTS_ROUTES}/accordian`}
               section={Object.keys(COMPONENTS)[0]}
-              closeSidebar={handleCloseModal}
+              closeModal={handleCloseModal}
             >
               Components
             </NavigationButton>
-            <NavigationButton path='/examples' section={''} closeSidebar={handleCloseModal}>
+            <NavigationButton path='/examples' section={''} closeModal={handleCloseModal}>
               Examples
             </NavigationButton>
           </div>
@@ -56,7 +56,7 @@ const MobileSidebar: FC = () => {
                   key={index}
                   path={`${COMPONENTS_ROUTES}/${component}`}
                   section={component}
-                  closeSidebar={handleCloseModal}
+                  closeModal={handleCloseModal}
                 >
                   {convertToTitleCase(component)}
                 </NavigationButton>
