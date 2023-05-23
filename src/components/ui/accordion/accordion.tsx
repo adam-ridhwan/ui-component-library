@@ -1,7 +1,4 @@
-import React, { FunctionComponent, ReactNode, createContext, useContext, useEffect, useRef, useState } from 'react';
-
-import ChevronDownIcon from '@/assets/svg/ChevronDownIcon';
-import { isAscii } from 'buffer';
+import React from 'react';
 import styles from './AccordionStyles.module.css';
 
 //* ────────────────────────────────────────────────────────────────────────────────────────────────
@@ -13,16 +10,16 @@ interface AccordionContextData {
   setActiveIndexes: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
-const AccordionContext = createContext<AccordionContextData | undefined>(undefined);
+const AccordionContext = React.createContext<AccordionContextData | undefined>(undefined);
 
 interface AccordionProps {
   defaultIndex?: number;
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 // single tabs open at once
-// const Accordion: FunctionComponent<AccordionProps> = ({ defaultIndex = 0, children }) => {
-//   const [activeIndex, setActiveIndex] = useState(defaultIndex);
+// const Accordion: React.FC<AccordionProps> = ({ defaultIndex = 0, children }) => {
+//   const [activeIndex, setActiveIndex] = React.useState(defaultIndex);
 
 //   return (
 //     <AccordionContext.Provider value={{ activeIndex, setActiveIndex }}>
@@ -32,8 +29,8 @@ interface AccordionProps {
 // };
 
 // Multiple tabs open at once
-const Accordion: FunctionComponent<AccordionProps> = ({ children }) => {
-  const [activeIndexes, setActiveIndexes] = useState<number[]>([]);
+const Accordion: React.FC<AccordionProps> = ({ children }) => {
+  const [activeIndexes, setActiveIndexes] = React.useState<number[]>([]);
 
   return (
     <AccordionContext.Provider value={{ activeIndexes, setActiveIndexes }}>
@@ -53,8 +50,8 @@ interface AccordionItemProps {
   children: AccordionChild | AccordionChild[];
 }
 
-const AccordionItem: FunctionComponent<AccordionItemProps> = ({ index, children }) => {
-  const { activeIndexes, setActiveIndexes } = useContext(AccordionContext) as AccordionContextData;
+const AccordionItem: React.FC<AccordionItemProps> = ({ index, children }) => {
+  const { activeIndexes, setActiveIndexes } = React.useContext(AccordionContext) as AccordionContextData;
 
   const isActive = activeIndexes.includes(index);
 
@@ -63,17 +60,15 @@ const AccordionItem: FunctionComponent<AccordionItemProps> = ({ index, children 
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
           return React.cloneElement(child, {
+            index,
             isActive,
-            onHeaderClick: () => {
-              if (isActive) {
-                setActiveIndexes(activeIndexes.filter((i) => i !== index)); // if this tab is already open, close it
-              } else {
-                setActiveIndexes([...activeIndexes, index]); // otherwise, open this tab
-              }
-            },
+            toggleAccordionTab: () =>
+              isActive
+                ? setActiveIndexes(activeIndexes.filter((i) => i !== index))
+                : setActiveIndexes([...activeIndexes, index]),
           });
         }
-        child;
+        return child;
       })}
     </div>
   );
@@ -83,14 +78,24 @@ const AccordionItem: FunctionComponent<AccordionItemProps> = ({ index, children 
 //* AccordianHeader
 //* ────────────────────────────────────────────────────────────────────────────────────────────────
 
-interface AccordionHeaderProps {
-  children: ReactNode;
-  onHeaderClick?: () => void;
-  isActive?: boolean;
+interface AccordionHeaderChildProps {
+  index: number;
+  toggleAccordionTab: () => void;
 }
 
-const AccordionHeader: FunctionComponent<AccordionHeaderProps> = ({ children, onHeaderClick }) => {
-  return <h3 onClick={onHeaderClick}>{children}</h3>;
+type AccordionHeaderChild = React.ReactElement<AccordionHeaderChildProps>;
+
+interface AccordionHeaderProps {
+  children: AccordionHeaderChild | AccordionHeaderChild[];
+  toggleAccordionTab: () => void;
+  index: number;
+}
+
+const AccordionHeader: React.FC<AccordionHeaderProps> = ({ children, toggleAccordionTab, index }) => {
+  if (React.isValidElement<AccordionHeaderChildProps>(children)) {
+    return React.cloneElement(children, { index, toggleAccordionTab });
+  }
+  return null;
 };
 
 //* ────────────────────────────────────────────────────────────────────────────────────────────────
@@ -98,16 +103,37 @@ const AccordionHeader: FunctionComponent<AccordionHeaderProps> = ({ children, on
 //* ────────────────────────────────────────────────────────────────────────────────────────────────
 
 interface AccordionTriggerProps {
-  children: ReactNode;
-  onHeaderClick?: () => void;
-  isActive?: boolean;
+  children: React.ReactNode;
+  toggleAccordionTab: () => void;
+  index: number;
 }
 
-const AccordionTrigger: FunctionComponent<AccordionTriggerProps> = ({ children, onHeaderClick }) => {
+const AccordionTrigger: React.FC<AccordionTriggerProps> = ({ children, toggleAccordionTab, index }) => {
+  const { activeIndexes } = React.useContext(AccordionContext) as AccordionContextData;
+
   return (
-    <button className={styles.accordian_trigger} onClick={onHeaderClick}>
+    <button className={styles.accordian_trigger} onClick={toggleAccordionTab}>
       {children}
-      <ChevronDownIcon />
+
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        width='24'
+        height='24'
+        viewBox='0 0 24 24'
+        fill='none'
+        stroke='currentColor'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        style={{
+          height: '1rem',
+          width: '1rem',
+          transform: activeIndexes.includes(index ?? -1) ? 'rotate(-180deg)' : 'rotate(0deg)',
+          transition: 'transform 0.3s ease-in-out',
+        }}
+      >
+        <polyline points='6 9 12 15 18 9'></polyline>
+      </svg>
     </button>
   );
 };
@@ -117,33 +143,24 @@ const AccordionTrigger: FunctionComponent<AccordionTriggerProps> = ({ children, 
 //* ────────────────────────────────────────────────────────────────────────────────────────────────
 
 interface AccordionContentProps {
-  children: ReactNode | null;
-  onHeaderClick?: () => void;
+  children: React.ReactNode | null;
+  toggleAccordionTab?: () => void;
   isActive?: boolean;
 }
 
-const AccordionContent: FunctionComponent<AccordionContentProps> = ({ children, isActive }) => {
-  const [contentHeight, setContentHeight] = useState<number | null>(null);
-  const [padding] = useState<number | null>(10);
+const AccordionContent: React.FC<AccordionContentProps> = ({ children, isActive }) => {
+  const [contentHeight, setContentHeight] = React.useState<number | null>(null);
+  const [padding] = React.useState<number | null>(10);
+  const contentRef = React.useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (isActive) {
-      // Get the content height when the component becomes active
-      setContentHeight(getContentHeight(padding));
-    } else {
-      // Reset the content height when the component becomes inactive
-      setContentHeight(null);
-    }
+  React.useEffect(() => {
+    isActive ? setContentHeight(getContentHeight(padding)) : setContentHeight(null);
   }, [isActive, padding]);
 
   const getContentHeight = (padding: number | null): number => {
-    if (contentRef.current) {
-      return contentRef.current.scrollHeight + (padding || 0) * 2;
-    }
+    if (contentRef.current) return contentRef.current.scrollHeight + (padding || 0) * 2;
     return 0;
   };
-
-  const contentRef = useRef<HTMLDivElement>(null);
 
   const contentStyle = {
     height: isActive ? `${contentHeight}px` : '0',
