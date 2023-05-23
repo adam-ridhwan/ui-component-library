@@ -1,5 +1,7 @@
-import React, { FunctionComponent, ReactNode, createContext, useContext, useState } from 'react';
+import React, { FunctionComponent, ReactNode, createContext, useContext, useEffect, useRef, useState } from 'react';
 
+import ChevronDownIcon from '@/assets/svg/ChevronDownIcon';
+import { isAscii } from 'buffer';
 import styles from './AccordionStyles.module.css';
 
 //* ────────────────────────────────────────────────────────────────────────────────────────────────
@@ -105,6 +107,7 @@ const AccordionTrigger: FunctionComponent<AccordionTriggerProps> = ({ children, 
   return (
     <button className={styles.accordian_trigger} onClick={onHeaderClick}>
       {children}
+      <ChevronDownIcon />
     </button>
   );
 };
@@ -120,11 +123,39 @@ interface AccordionContentProps {
 }
 
 const AccordionContent: FunctionComponent<AccordionContentProps> = ({ children, isActive }) => {
-  // return isActive ? <div className={styles.accordian_content}>{children}</div> : <div></div>;
+  const [contentHeight, setContentHeight] = useState<number | null>(null);
+  const [padding] = useState<number | null>(10);
+
+  useEffect(() => {
+    if (isActive) {
+      // Get the content height when the component becomes active
+      setContentHeight(getContentHeight(padding));
+    } else {
+      // Reset the content height when the component becomes inactive
+      setContentHeight(null);
+    }
+  }, [isActive, padding]);
+
+  const getContentHeight = (padding: number | null): number => {
+    if (contentRef.current) {
+      return contentRef.current.scrollHeight + (padding || 0) * 2;
+    }
+    return 0;
+  };
+
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const contentStyle = {
+    height: isActive ? `${contentHeight}px` : '0',
+    padding: isActive ? `${padding}px 0` : '0',
+    overflow: 'hidden',
+    transition: 'height 300ms cubic-bezier(0.87, 0, 0.13, 1), padding 300ms cubic-bezier(0.87, 0, 0.13, 1)',
+    borderBottom: '1px solid #e0e0e0',
+  };
 
   return (
-    <div className={styles.accordian_content}>
-      {isActive ? <div className={styles.accordian_content_child}>{children}</div> : <div></div>}
+    <div ref={contentRef} style={contentStyle}>
+      {children}
     </div>
   );
 };

@@ -1,3 +1,4 @@
+import ChevronDownIcon from '@/assets/svg/ChevronDownIcon';
 import Chevronright from '@/assets/svg/ChevronRightIcon';
 import NavigationLink from '@/components/navigation-link';
 import Path from '@/components/path';
