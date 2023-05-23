@@ -24,14 +24,19 @@ const NavigationLink: FC<INavigationLinkProps> = forwardRef<HTMLAnchorElement, I
       e.preventDefault();
       closeModal?.();
       if (section) setCurrentSection(section);
-
       const [pathWithoutHash, hash] = path.split('#');
 
-      if (location.pathname !== pathWithoutHash || location.hash !== hash) navigate(path);
+      // Determine whether the navigation should be performed
+      const shouldNavigate =
+        location.pathname !== pathWithoutHash || // Different path
+        (!hash && location.hash) || // Navigating from hashed to non-hashed
+        (hash && location.hash !== `#${hash}`); // Different hash
 
-      if (hash && sectionRef) return jumpToSection(sectionRef);
-
-      window.scrollTo(0, 0);
+      if (shouldNavigate) {
+        navigate(path);
+        if (hash && sectionRef) jumpToSection(sectionRef);
+        else window.scrollTo(0, 0);
+      }
     };
 
     return (

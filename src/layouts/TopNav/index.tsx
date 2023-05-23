@@ -36,7 +36,7 @@ const TopNav = () => {
                 <NavigationLink path={`${DOC_ROUTE}`} section='docs'>
                   Documentation
                 </NavigationLink>
-                <NavigationLink path={`${COMPONENTS_ROUTES}/accordian`} section={Object.keys(COMPONENTS)[0]}>
+                <NavigationLink path={`${COMPONENTS_ROUTES}/accordion`} section={Object.keys(COMPONENTS)[0]}>
                   Components
                 </NavigationLink>
                 <NavigationLink path={`${DOC_ROUTE}`} section='docs'>

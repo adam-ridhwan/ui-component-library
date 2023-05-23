@@ -8,6 +8,11 @@
   padding-bottom: 2em;
 }
 
+.section_container h3 {
+  font-weight: 400;
+  color: #64748b;
+}
+
 .jump_nav_container {
   position: sticky;
   top: 87px;

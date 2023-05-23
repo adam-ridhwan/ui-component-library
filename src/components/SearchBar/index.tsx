@@ -157,8 +157,8 @@ const SearchBar: FC = () => {
             currentSection = 'docs';
             break;
           case 'components':
-            path = `${COMPONENTS_ROUTES}/accordian`;
-            currentSection = 'accordian';
+            path = `${COMPONENTS_ROUTES}/accordion`;
+            currentSection = 'accordion';
             break;
           case 'installation':
           case 'theming':
@@ -245,7 +245,7 @@ const SearchBar: FC = () => {
               sectionForButton = 'docs';
               break;
             case 'Links-components':
-              path = `${COMPONENTS_ROUTES}/accordian`;
+              path = `${COMPONENTS_ROUTES}/accordion`;
               sectionForButton = Object.keys(COMPONENTS)[0];
               break;
             case 'Documentation-introduction':

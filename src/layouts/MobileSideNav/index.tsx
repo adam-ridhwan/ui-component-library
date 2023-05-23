@@ -33,7 +33,7 @@ const MobileSideNav: FC = () => {
               Documentation
             </NavigationLink>
             <NavigationLink
-              path={`${COMPONENTS_ROUTES}/accordian`}
+              path={`${COMPONENTS_ROUTES}/accordion`}
               section={Object.keys(COMPONENTS)[0]}
               closeModal={handleCloseModal}
             >

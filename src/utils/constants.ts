@@ -1,4 +1,4 @@
-import Accordian from '@/components/UI/accordian';
+import Accordion from '@/components/UI/accordion';
 import Alert from '@/components/UI/alert';
 import AlertDialog from '@/components/UI/alert-dialog';
 import AspectRatio from '@/components/UI/aspect-ratio';
@@ -48,7 +48,7 @@ export const NAVIGATION_MENU_ITEMS: string[] = ['documentation', 'components', '
 export const DOCUMENTATION: string[] = ['introduction', 'installation', 'theming', 'typography'];
 
 export const COMPONENTS: ComponentMap = {
-  accordian: Accordian,
+  accordion: Accordion,
   alert: Alert,
   'alert-dialog': AlertDialog,
   'aspect-ratio': AspectRatio,
