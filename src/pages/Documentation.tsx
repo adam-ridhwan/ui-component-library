@@ -1,8 +1,8 @@
-import DocContent from '@/components/DocContent';
-import SearchBar from '@/components/SearchBar';
-import Footer from '@/layouts/Footer';
-import SideNavBar from '@/layouts/MobileSideNav';
-import TopNavBar from '@/layouts/TopNav';
+import Content from '@/components/content';
+import SearchBar from '@/components/search-bar';
+import Footer from '@/layouts/footer';
+import SideNavBar from '@/layouts/side-nav-mobile';
+import TopNavBar from '@/layouts/top-nav';
 import { CSSProperties } from 'react';
 
 const Documentation = () => {
@@ -16,7 +16,7 @@ const Documentation = () => {
     <>
       <div style={style}>
         <TopNavBar />
-        <DocContent />
+        <Content />
         <SearchBar />
         <SideNavBar />
       </div>

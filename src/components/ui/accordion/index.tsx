@@ -1,10 +1,10 @@
 import Chevronright from '@/assets/svg/ChevronRightIcon';
-import NavigationLink from '@/components/NavigationLink';
-import Path from '@/components/Path';
+import NavigationLink from '@/components/navigation-link';
+import Path from '@/components/path';
 import useResolution, { DeviceType } from '@/hooks/useResolution';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
-import Divider from '@/layouts/Divider';
-import QuickNav from '@/layouts/QuickNav';
+import Divider from '@/layouts/divider';
+import QuickNav from '@/layouts/quick-nav';
 import { COMPONENTS, COMPONENTS_ROUTES } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import { FC, useState } from 'react';

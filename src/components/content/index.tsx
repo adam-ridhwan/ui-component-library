@@ -1,16 +1,16 @@
-import Installation from '@/components/GettingStarted/Installation';
-import Introduction from '@/components/GettingStarted/Introduction';
-import Theming from '@/components/GettingStarted/Theming';
-import Typography from '@/components/GettingStarted/Typography';
+import Installation from '@/components/getting-started/Installation';
+import Introduction from '@/components/getting-started/Introduction';
+import Theming from '@/components/getting-started/Theming';
+import Typography from '@/components/getting-started/Typography';
 import useResolution, { DeviceType } from '@/hooks/useResolution';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
-import DesktopSideNavBar from '@/layouts/DesktopSideNavBar';
+import DesktopSideNavBar from '@/layouts/side-nav-desktop';
 import { COMPONENTS } from '@/utils/constants';
 import { FC, createElement, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import styles from './styles.module.css';
 
-const DocContent: FC = () => {
+const Content: FC = () => {
   const { currentSection, setCurrentSection } = useSideBarContext();
   const [deviceType] = useResolution();
   const location = useLocation();
@@ -45,4 +45,4 @@ const DocContent: FC = () => {
   );
 };
 
-export default DocContent;
+export default Content;

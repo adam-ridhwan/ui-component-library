@@ -1,10 +1,10 @@
 import { CSSProperties } from 'react';
 
-import LandingPage from '@/components/LandingPage';
-import SearchBar from '@/components/SearchBar';
-import Footer from '@/layouts/Footer';
-import SideNavBar from '@/layouts/MobileSideNav';
-import TopNavBar from '@/layouts/TopNav';
+import LandingPage from '@/components/landing-page';
+import SearchBar from '@/components/search-bar';
+import Footer from '@/layouts/footer';
+import SideNavBar from '@/layouts/side-nav-mobile';
+import TopNavBar from '@/layouts/top-nav';
 
 const Homepage = () => {
   const style: CSSProperties = {

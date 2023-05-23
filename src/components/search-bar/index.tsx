@@ -3,7 +3,7 @@ import CloseIcon from '@/assets/svg/CloseIcon';
 import EmptyCircleIcon from '@/assets/svg/EmptyCircleIcon';
 import MagnifyingIcon from '@/assets/svg/MagnifyingIcon';
 import PaperIcon from '@/assets/svg/PaperIcon';
-import NavigationLink from '@/components/NavigationLink';
+import NavigationLink from '@/components/navigation-link';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 import { COMPONENTS, COMPONENTS_ROUTES, DOCUMENTATION, DOC_ROUTE, NAVIGATION_MENU_ITEMS } from '@/utils/constants';

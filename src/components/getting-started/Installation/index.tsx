@@ -1,6 +1,6 @@
-import Path from '@/components/Path';
+import Path from '@/components/path';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
-import Divider from '@/layouts/Divider';
+import Divider from '@/layouts/divider';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import styles from './styles.module.css';
 

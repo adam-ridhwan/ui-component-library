@@ -1,5 +1,5 @@
 import CloseIcon from '@/assets/svg/CloseIcon';
-import NavigationLink from '@/components/NavigationLink';
+import NavigationLink from '@/components/navigation-link';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
