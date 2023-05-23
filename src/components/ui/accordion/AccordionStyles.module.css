@@ -1,0 +1,29 @@
+.accordion_root {
+  width: 400px;
+  /* border: 1px solid #e0e0e0; */
+  border-radius: 6px;
+}
+
+.accordion_item {
+  /* height: 50px; */
+}
+
+.accordian_trigger {
+  border-radius: 6px;
+  height: 50px;
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+  text-align: left;
+  /* border: 1px solid #e0e0e0; */
+  border: none;
+  background-color: white;
+}
+
+.accordian_content {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.accordian_content_child {
+  padding: 20px;
+}

@@ -25,6 +25,7 @@ export const getDeviceType = (resolution: Resolution): DeviceType => {
     return DeviceType.LARGE_DESKTOP;
   }
 };
+
 const useResolution = (): [DeviceType] => {
   const [resolution, setResolution] = useState<Resolution>({
     width: window.innerWidth,
@@ -32,9 +33,7 @@ const useResolution = (): [DeviceType] => {
   });
 
   useEffect(() => {
-    const handleResize = () => {
-      setResolution({ width: window.innerWidth, height: window.innerHeight });
-    };
+    const handleResize = () => setResolution({ width: window.innerWidth, height: window.innerHeight });
 
     window.addEventListener('resize', handleResize);
     return () => {

@@ -1,7 +1,7 @@
-import Installation from '@/components/getting-started/Installation';
-import Introduction from '@/components/getting-started/Introduction';
-import Theming from '@/components/getting-started/Theming';
-import Typography from '@/components/getting-started/Typography';
+import Installation from '@/components/installation';
+import Introduction from '@/components/introduction';
+import Theming from '@/components/theming';
+import Typography from '@/components/typography';
 import Documentation from '@/pages/Documentation';
 import Home from '@/pages/Home';
 import { COMPONENTS, COMPONENTS_ROUTES } from '@/utils/constants';
