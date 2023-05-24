@@ -53,16 +53,18 @@ const AccordionDocs: FC<IAccordionProps> = () => {
                     <Accordion.Header className='AccordionHeader'>
                       <Accordion.Trigger className='AccordionTrigger'>Open 1</Accordion.Trigger>
                     </Accordion.Header>
-                    <Accordion.Content className='AccordionContent'>
+                    <Accordion.Content className='AccordionContent AccordionContent-first'>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua.
+                      labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                      eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur
+                      adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </Accordion.Content>
                   </Accordion.Item>
                   <Accordion.Item className='AccordionItem' index={1}>
                     <Accordion.Header className='AccordionHeader'>
                       <Accordion.Trigger className='AccordionTrigger'>Open 2</Accordion.Trigger>
                     </Accordion.Header>
-                    <Accordion.Content className='AccordionContent'>
+                    <Accordion.Content className='AccordionContent AccordionContent-second'>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                       labore et dolore magna aliqua.
                     </Accordion.Content>
@@ -72,9 +74,10 @@ const AccordionDocs: FC<IAccordionProps> = () => {
                     <Accordion.Header className='AccordionHeader'>
                       <Accordion.Trigger className='AccordionTrigger'>Open 3</Accordion.Trigger>
                     </Accordion.Header>
-                    <Accordion.Content className='AccordionContent'>
+                    <Accordion.Content className='AccordionContent AccordionContent-third'>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua.
+                      labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                      eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     </Accordion.Content>
                   </Accordion.Item>
                 </Accordion.Root>
