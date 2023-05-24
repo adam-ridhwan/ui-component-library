@@ -8,33 +8,28 @@ import styles from './AccordionStyles.module.css';
 interface AccordionContextData {
   activeIndexes: number[];
   setActiveIndexes: React.Dispatch<React.SetStateAction<number[]>>;
+  type: 'single' | 'multiple'; // Add a type property to the context
 }
 
 const AccordionContext = React.createContext<AccordionContextData | undefined>(undefined);
 
 interface AccordionProps {
   defaultIndex?: number;
+  type?: 'single' | 'multiple';
   children: React.ReactNode;
+  className?: string;
 }
 
-// single tabs open at once
-// const Accordion: React.FC<AccordionProps> = ({ defaultIndex = 0, children }) => {
-//   const [activeIndex, setActiveIndex] = React.useState(defaultIndex);
+const Accordion: React.FC<AccordionProps> = ({ children, defaultIndex = 0, type = 'single', className }) => {
+  const [activeIndexes, setActiveIndexes] = React.useState<number[]>([defaultIndex]);
 
-//   return (
-//     <AccordionContext.Provider value={{ activeIndex, setActiveIndex }}>
-//       <div className={styles.accordion_root}>{children}</div>
-//     </AccordionContext.Provider>
-//   );
-// };
-
-// Multiple tabs open at once
-const Accordion: React.FC<AccordionProps> = ({ children }) => {
-  const [activeIndexes, setActiveIndexes] = React.useState<number[]>([]);
+  React.useEffect(() => {
+    console.log(activeIndexes);
+  }, [activeIndexes]);
 
   return (
-    <AccordionContext.Provider value={{ activeIndexes, setActiveIndexes }}>
-      <div className={styles.accordion_root}>{children}</div>
+    <AccordionContext.Provider value={{ activeIndexes, setActiveIndexes, type }}>
+      <div className={className}>{children}</div>
     </AccordionContext.Provider>
   );
 };
@@ -48,24 +43,37 @@ type AccordionChild = React.ReactElement<AccordionHeaderProps | AccordionTrigger
 interface AccordionItemProps {
   index: number;
   children: AccordionChild | AccordionChild[];
+  className?: string;
 }
 
-const AccordionItem: React.FC<AccordionItemProps> = ({ index, children }) => {
-  const { activeIndexes, setActiveIndexes } = React.useContext(AccordionContext) as AccordionContextData;
+const AccordionItem: React.FC<AccordionItemProps> = ({ index, children, className }) => {
+  const { activeIndexes, setActiveIndexes, type } = React.useContext(AccordionContext) as AccordionContextData;
 
   const isActive = activeIndexes.includes(index);
 
+  const toggleAccordionTab = () => {
+    setActiveIndexes((prevIndexes) => {
+      const isActive = prevIndexes.includes(index);
+      if (isActive) {
+        return prevIndexes.filter((i) => i !== index);
+      } else {
+        if (type === 'single') {
+          return [index];
+        } else {
+          return [...prevIndexes, index];
+        }
+      }
+    });
+  };
+
   return (
-    <div className={styles.accordion_item}>
+    <div className={className}>
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
           return React.cloneElement(child, {
             index,
             isActive,
-            toggleAccordionTab: () =>
-              isActive
-                ? setActiveIndexes(activeIndexes.filter((i) => i !== index))
-                : setActiveIndexes([...activeIndexes, index]),
+            toggleAccordionTab: toggleAccordionTab,
           });
         }
         return child;
@@ -87,11 +95,12 @@ type AccordionHeaderChild = React.ReactElement<AccordionHeaderChildProps>;
 
 interface AccordionHeaderProps {
   children: AccordionHeaderChild | AccordionHeaderChild[];
-  toggleAccordionTab: () => void;
-  index: number;
+  toggleAccordionTab?: () => void;
+  index?: number;
+  className?: string;
 }
 
-const AccordionHeader: React.FC<AccordionHeaderProps> = ({ children, toggleAccordionTab, index }) => {
+const AccordionHeader: React.FC<AccordionHeaderProps> = ({ children, toggleAccordionTab, index, className }) => {
   if (React.isValidElement<AccordionHeaderChildProps>(children)) {
     return React.cloneElement(children, { index, toggleAccordionTab });
   }
@@ -104,15 +113,21 @@ const AccordionHeader: React.FC<AccordionHeaderProps> = ({ children, toggleAccor
 
 interface AccordionTriggerProps {
   children: React.ReactNode;
-  toggleAccordionTab: () => void;
-  index: number;
+  toggleAccordionTab?: () => void;
+  index?: number;
+  className?: string;
 }
 
-const AccordionTrigger: React.FC<AccordionTriggerProps> = ({ children, toggleAccordionTab, index }) => {
+const AccordionTrigger: React.FC<AccordionTriggerProps> = ({ children, toggleAccordionTab, index, className }) => {
   const { activeIndexes } = React.useContext(AccordionContext) as AccordionContextData;
 
+  const handleClick = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    toggleAccordionTab && toggleAccordionTab();
+  };
+
   return (
-    <button className={styles.accordian_trigger} onClick={toggleAccordionTab}>
+    <button onClick={handleClick} className={className}>
       {children}
 
       <svg
@@ -146,32 +161,14 @@ interface AccordionContentProps {
   children: React.ReactNode | null;
   toggleAccordionTab?: () => void;
   isActive?: boolean;
+  className?: string;
 }
 
-const AccordionContent: React.FC<AccordionContentProps> = ({ children, isActive }) => {
-  const [contentHeight, setContentHeight] = React.useState<number | null>(null);
-  const [padding] = React.useState<number | null>(10);
+const AccordionContent: React.FC<AccordionContentProps> = ({ children, className, isActive }) => {
   const contentRef = React.useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
-    isActive ? setContentHeight(getContentHeight(padding)) : setContentHeight(null);
-  }, [isActive, padding]);
-
-  const getContentHeight = (padding: number | null): number => {
-    if (contentRef.current) return contentRef.current.scrollHeight + (padding || 0) * 2;
-    return 0;
-  };
-
-  const contentStyle = {
-    height: isActive ? `${contentHeight}px` : '0',
-    padding: isActive ? `${padding}px 0` : '0',
-    overflow: 'hidden',
-    transition: 'height 300ms cubic-bezier(0.87, 0, 0.13, 1), padding 300ms cubic-bezier(0.87, 0, 0.13, 1)',
-    borderBottom: '1px solid #e0e0e0',
-  };
-
   return (
-    <div ref={contentRef} style={contentStyle}>
+    <div ref={contentRef} className={className} data-state={isActive ? 'open' : 'closed'}>
       {children}
     </div>
   );

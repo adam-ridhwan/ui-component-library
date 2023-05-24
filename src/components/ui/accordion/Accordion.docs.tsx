@@ -1,4 +1,3 @@
-import ChevronDownIcon from '@/assets/svg/ChevronDownIcon';
 import Chevronright from '@/assets/svg/ChevronRightIcon';
 import NavigationLink from '@/components/navigation-link';
 import Path from '@/components/path';
@@ -11,6 +10,7 @@ import { COMPONENTS, COMPONENTS_ROUTES } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import { FC } from 'react';
 import styles from './AccordionDocsStyles.module.css';
+import './AccordionStyles.css';
 
 interface IAccordionProps {
   title: string;
@@ -48,34 +48,31 @@ const AccordionDocs: FC<IAccordionProps> = () => {
           <div className={styles.preview_container}>
             {selectedTab === Tab.PREVIEW && (
               <div className={styles.component_container}>
-                <Accordion.Root defaultIndex={-1}>
-                  <Accordion.Item index={0}>
-                    <Accordion.Header>
-                      <Accordion.Trigger>Open 1</Accordion.Trigger>
+                <Accordion.Root className='AccordionRoot' defaultIndex={-1} type='single'>
+                  <Accordion.Item className='AccordionItem' index={0}>
+                    <Accordion.Header className='AccordionHeader'>
+                      <Accordion.Trigger className='AccordionTrigger'>Open 1</Accordion.Trigger>
                     </Accordion.Header>
-                    <Accordion.Content>
+                    <Accordion.Content className='AccordionContent'>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                      labore et dolore magna aliqua.
+                    </Accordion.Content>
+                  </Accordion.Item>
+                  <Accordion.Item className='AccordionItem' index={1}>
+                    <Accordion.Header className='AccordionHeader'>
+                      <Accordion.Trigger className='AccordionTrigger'>Open 2</Accordion.Trigger>
+                    </Accordion.Header>
+                    <Accordion.Content className='AccordionContent'>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                       labore et dolore magna aliqua.
                     </Accordion.Content>
                   </Accordion.Item>
 
-                  <Accordion.Item index={1}>
-                    <Accordion.Header>
-                      <Accordion.Trigger>Open 2</Accordion.Trigger>
+                  <Accordion.Item className='AccordionItem' index={2}>
+                    <Accordion.Header className='AccordionHeader'>
+                      <Accordion.Trigger className='AccordionTrigger'>Open 3</Accordion.Trigger>
                     </Accordion.Header>
-
-                    <Accordion.Content>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua.
-                    </Accordion.Content>
-                  </Accordion.Item>
-
-                  <Accordion.Item index={2}>
-                    <Accordion.Header>
-                      <Accordion.Trigger>Open 3</Accordion.Trigger>
-                    </Accordion.Header>
-
-                    <Accordion.Content>
+                    <Accordion.Content className='AccordionContent'>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                       labore et dolore magna aliqua.
                     </Accordion.Content>

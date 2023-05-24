@@ -1,0 +1,48 @@
+:root {
+  --radix-accordion-content-height: 40px;
+  --radix-accordion-content-padding: 10px;
+}
+
+.AccordionRoot {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  border-radius: 6px;
+}
+
+.AccordionItem {
+  /* overflow: hidden; */
+}
+
+.AccordionHeader {
+}
+
+.AccordionTrigger {
+  border-radius: 6px;
+  font-size: 16px;
+  height: 50px;
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+  text-align: left;
+  border: none;
+  background-color: white;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.AccordionContent {
+  overflow: hidden;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  color: #0f172a;
+  height: 0;
+  transition: height 300ms cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+.AccordionContent[data-state='open'] {
+  height: var(--radix-accordion-content-height);
+}
