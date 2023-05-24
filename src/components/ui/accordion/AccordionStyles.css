@@ -1,24 +1,16 @@
-:root {
-  --radix-accordion-content-height: 40px;
-  --radix-accordion-content-padding: 30px;
-}
-
 .AccordionRoot {
   display: flex;
   flex-direction: column;
-  width: 500px;
-  border-radius: 6px;
+  margin: 0 40px;
 }
 
 .AccordionItem {
   margin-top: 1px;
 }
 
-.AccordionHeader {
-}
-
 .AccordionTrigger {
   font-size: 16px;
+  font-weight: 500;
   height: 50px;
   width: 100%;
   cursor: pointer;
@@ -30,14 +22,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
 
 .AccordionTrigger:hover {
   text-decoration: underline;
 }
 
-.AccordionContent {
+/* .AccordionContent {
   overflow: hidden;
   font-size: 14px;
   display: flex;
@@ -61,4 +52,4 @@
 .AccordionContent-third[data-state='open'] {
   height: 84px;
   margin: 10px 0;
-}
+} */

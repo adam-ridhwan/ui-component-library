@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './AccordionStyles.module.css';
 
 //* ────────────────────────────────────────────────────────────────────────────────────────────────
 //* Accordion
@@ -164,11 +163,34 @@ interface AccordionContentProps {
   className?: string;
 }
 
-const AccordionContent: React.FC<AccordionContentProps> = ({ children, className, isActive }) => {
+const AccordionContent: React.FC<AccordionContentProps> = ({ children, isActive }) => {
+  const { activeIndexes, setActiveIndexes, type } = React.useContext(AccordionContext) as AccordionContextData;
+
+  const [contentHeight, setContentHeight] = React.useState<number | null>(null);
+  const [padding] = React.useState<number | null>(10);
   const contentRef = React.useRef<HTMLDivElement>(null);
 
+  const getContentHeight = React.useCallback((): number => {
+    if (contentRef.current) return contentRef.current.scrollHeight + (padding || 0);
+    return 0;
+  }, [contentRef, padding]);
+
+  React.useEffect(() => {
+    isActive ? setContentHeight(getContentHeight()) : setContentHeight(null);
+  }, [isActive, padding, children, getContentHeight]);
+
+  const contentStyle: React.CSSProperties = {
+    height: isActive ? `${contentHeight}px` : '1px',
+    padding: isActive ? `0 0 ${padding}px 0` : '0',
+    fontSize: '14px',
+    fontWeight: 300,
+    overflow: 'hidden',
+    transition: 'height 300ms cubic-bezier(0.4, 0, 0.2, 1), padding 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+    boxShadow: '0 1px 0 rgba(0, 0, 0, 0.1)',
+  };
+
   return (
-    <div ref={contentRef} className={className} data-state={isActive ? 'open' : 'closed'}>
+    <div ref={contentRef} style={contentStyle}>
       {children}
     </div>
   );

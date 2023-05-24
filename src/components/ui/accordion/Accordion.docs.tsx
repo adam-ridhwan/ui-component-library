@@ -48,36 +48,54 @@ const AccordionDocs: FC<IAccordionProps> = () => {
           <div className={styles.preview_container}>
             {selectedTab === Tab.PREVIEW && (
               <div className={styles.component_container}>
-                <Accordion.Root className='AccordionRoot' defaultIndex={-1} type='single'>
+                <Accordion.Root className='AccordionRoot' defaultIndex={1} type='multiple'>
                   <Accordion.Item className='AccordionItem' index={0}>
                     <Accordion.Header className='AccordionHeader'>
-                      <Accordion.Trigger className='AccordionTrigger'>Open 1</Accordion.Trigger>
+                      <Accordion.Trigger className='AccordionTrigger'>Why Sustainable Living?</Accordion.Trigger>
                     </Accordion.Header>
-                    <Accordion.Content className='AccordionContent AccordionContent-first'>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                      eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur
-                      adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    <Accordion.Content>
+                      Sustainable living isn't just a trend, it's a fundamental shift in how we interact with our
+                      environment. The choices we make every day, from the food we eat to the transportation we use, can
+                      have a major impact on our planet. By choosing a sustainable lifestyle, we can reduce our
+                      ecological footprint and help preserve the natural world for future generations.
                     </Accordion.Content>
                   </Accordion.Item>
                   <Accordion.Item className='AccordionItem' index={1}>
                     <Accordion.Header className='AccordionHeader'>
-                      <Accordion.Trigger className='AccordionTrigger'>Open 2</Accordion.Trigger>
+                      <Accordion.Trigger className='AccordionTrigger'>
+                        Easy Ways to Adopt Sustainability
+                      </Accordion.Trigger>
                     </Accordion.Header>
-                    <Accordion.Content className='AccordionContent AccordionContent-second'>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua.
+                    <Accordion.Content>
+                      Adopting a more sustainable lifestyle doesn't have to be complicated or inconvenient. Here are a
+                      few simple ways you can make a difference:
+                      <ol>
+                        <li>
+                          Reduce, Reuse, Recycle: This age-old mantra still holds true. Consider buying less, reusing
+                          items, and recycling where possible.
+                        </li>
+                        <li>Choose Green Energy: Switch to renewable energy sources such as solar or wind power.</li>
+                        <li>
+                          Eat Local and Organic: Choose foods that are locally sourced and grown organically to reduce
+                          carbon emissions.
+                        </li>
+                        <li>Conserve Water: Use water-saving devices and avoid wasting water where possible.</li>
+                      </ol>
                     </Accordion.Content>
                   </Accordion.Item>
 
                   <Accordion.Item className='AccordionItem' index={2}>
                     <Accordion.Header className='AccordionHeader'>
-                      <Accordion.Trigger className='AccordionTrigger'>Open 3</Accordion.Trigger>
+                      <Accordion.Trigger className='AccordionTrigger'>
+                        The Impact of Sustainable Living
+                      </Accordion.Trigger>
                     </Accordion.Header>
-                    <Accordion.Content className='AccordionContent AccordionContent-third'>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                      eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    <Accordion.Content>
+                      Embracing sustainable living has a broader impact than just preserving our natural resources. It
+                      can also contribute to our health and wellbeing, help us save money, and create stronger
+                      communities. When we make conscious choices about our consumption, we can help create a healthier,
+                      happier world for everyone. Join the sustainability movement today, and see the difference you can
+                      make!
                     </Accordion.Content>
                   </Accordion.Item>
                 </Accordion.Root>
