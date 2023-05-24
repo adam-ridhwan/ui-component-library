@@ -7,7 +7,7 @@ import React from 'react';
 interface AccordionContextData {
   activeIndexes: number[];
   setActiveIndexes: React.Dispatch<React.SetStateAction<number[]>>;
-  type: 'single' | 'multiple'; // Add a type property to the context
+  type: 'single' | 'multiple';
 }
 
 const AccordionContext = React.createContext<AccordionContextData | undefined>(undefined);
@@ -21,10 +21,6 @@ interface AccordionProps {
 
 const Accordion: React.FC<AccordionProps> = ({ children, defaultIndex = 0, type = 'single', className }) => {
   const [activeIndexes, setActiveIndexes] = React.useState<number[]>([defaultIndex]);
-
-  React.useEffect(() => {
-    console.log(activeIndexes);
-  }, [activeIndexes]);
 
   return (
     <AccordionContext.Provider value={{ activeIndexes, setActiveIndexes, type }}>
@@ -163,34 +159,49 @@ interface AccordionContentProps {
   className?: string;
 }
 
-const AccordionContent: React.FC<AccordionContentProps> = ({ children, isActive }) => {
-  const { activeIndexes, setActiveIndexes, type } = React.useContext(AccordionContext) as AccordionContextData;
+interface MinimalCSSStyleDeclaration {
+  transition?: string;
+}
 
-  const [contentHeight, setContentHeight] = React.useState<number | null>(null);
-  const [padding] = React.useState<number | null>(10);
-  const contentRef = React.useRef<HTMLDivElement>(null);
+const AccordionContent: React.FC<AccordionContentProps> = ({ children, isActive, className }) => {
+  const heightRef = React.useRef<number | undefined>(0);
+  const height = heightRef.current;
+  const ref = React.useRef<HTMLDivElement>(null);
+  const originalStylesRef = React.useRef<MinimalCSSStyleDeclaration | null>(null);
 
-  const getContentHeight = React.useCallback((): number => {
-    if (contentRef.current) return contentRef.current.scrollHeight + (padding || 0);
-    return 0;
-  }, [contentRef, padding]);
+  const isMountAnimationPreventedRef = React.useRef(isActive);
 
   React.useEffect(() => {
-    isActive ? setContentHeight(getContentHeight()) : setContentHeight(null);
-  }, [isActive, padding, children, getContentHeight]);
+    const rAF = requestAnimationFrame(() => (isMountAnimationPreventedRef.current = false));
+    return () => cancelAnimationFrame(rAF);
+  }, []);
 
-  const contentStyle: React.CSSProperties = {
-    height: isActive ? `${contentHeight}px` : '1px',
-    padding: isActive ? `0 0 ${padding}px 0` : '0',
-    fontSize: '14px',
-    fontWeight: 300,
-    overflow: 'hidden',
-    transition: 'height 300ms cubic-bezier(0.4, 0, 0.2, 1), padding 300ms cubic-bezier(0.4, 0, 0.2, 1)',
-    boxShadow: '0 1px 0 rgba(0, 0, 0, 0.1)',
+  React.useLayoutEffect(() => {
+    const node = ref.current;
+    if (node) {
+      originalStylesRef.current = originalStylesRef.current || {
+        transition: node.style.transition,
+      };
+
+      node.style.transition = '';
+
+      const rect = node.getBoundingClientRect();
+      heightRef.current = rect.height;
+      console.log(heightRef.current);
+
+      if (!isMountAnimationPreventedRef.current) {
+        node.style.transition = originalStylesRef.current?.transition || '';
+        console.log(originalStylesRef.current?.transition || '');
+      }
+    }
+  }, [isActive]);
+
+  const style: React.CSSProperties & { [key: string]: string } = {
+    [`--accordion-content-height` as any]: height ? `${height}px` : '0px',
   };
 
   return (
-    <div ref={contentRef} style={contentStyle}>
+    <div ref={ref} style={style} className={className} data-state={isActive ? 'open' : 'closed'}>
       {children}
     </div>
   );
