@@ -93,6 +93,7 @@ interface AccordionHeaderProps {
   toggleAccordionTab?: () => void;
   index?: number;
   className?: string;
+  isActive?: boolean;
 }
 
 const AccordionHeader: React.FC<AccordionHeaderProps> = ({ children, toggleAccordionTab, index, className }) => {
@@ -155,59 +156,46 @@ const AccordionTrigger: React.FC<AccordionTriggerProps> = ({ children, toggleAcc
 interface AccordionContentProps {
   children: React.ReactNode | null;
   toggleAccordionTab?: () => void;
-  isActive?: boolean;
+  index?: number;
   className?: string;
+  isActive?: boolean;
+  isOpen?: boolean;
+  setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-interface MinimalCSSStyleDeclaration {
-  transition?: string;
+export interface CustomCSSHeightVariable extends React.CSSProperties {
+  '--accordion-content-height': string;
 }
 
-const AccordionContent: React.FC<AccordionContentProps> = ({ children, isActive, className }) => {
-  const heightRef = React.useRef<number | undefined>(0);
-  const height = heightRef.current;
+const AccordionContent: React.FC<AccordionContentProps> = ({ children, className, isActive }) => {
+  const [isOpen, setIsOpen] = React.useState<boolean>(isActive ?? false);
   const ref = React.useRef<HTMLDivElement>(null);
-  const originalStylesRef = React.useRef<MinimalCSSStyleDeclaration | null>(null);
 
-  const isMountAnimationPreventedRef = React.useRef(isActive);
-
-  React.useEffect(() => {
-    const rAF = requestAnimationFrame(() => (isMountAnimationPreventedRef.current = false));
-    return () => cancelAnimationFrame(rAF);
-  }, []);
+  const heightRef = React.useRef<number | undefined>(undefined);
+  const height = heightRef.current;
 
   React.useLayoutEffect(() => {
     const node = ref.current;
+    console.log(height);
     if (node) {
-      originalStylesRef.current = originalStylesRef.current || {
-        transition: node.style.transition,
-      };
-
-      node.style.transition = '';
-
+      setIsOpen(true);
       const rect = node.getBoundingClientRect();
-      heightRef.current = rect.height;
-      console.log(heightRef.current);
-
-      if (!isMountAnimationPreventedRef.current) {
-        node.style.transition = originalStylesRef.current?.transition || '';
-        console.log(originalStylesRef.current?.transition || '');
-      }
+      const calculatedHeight = rect.height;
+      heightRef.current = calculatedHeight;
+      setIsOpen(isActive ?? false);
     }
-  }, [isActive]);
+  }, [isActive, isOpen]);
 
-  const style: React.CSSProperties & { [key: string]: string } = {
-    [`--accordion-content-height` as any]: height ? `${height}px` : '0px',
-  };
+  const styles = {
+    '--accordion-content-height': height ? `${height}px` : undefined,
+  } as CustomCSSHeightVariable;
 
   return (
-    <div ref={ref} style={style} className={className} data-state={isActive ? 'open' : 'closed'}>
+    <div ref={ref} style={styles} className={className} data-state={isOpen ? 'open' : 'closed'} hidden={!isActive}>
       {children}
     </div>
   );
 };
-
-//* ————————————————————————————————————————————————————————————————————————————————————————————————
 
 const Root = Accordion;
 const Item = AccordionItem;
