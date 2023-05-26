@@ -117,13 +117,8 @@ interface AccordionTriggerProps {
 const AccordionTrigger: React.FC<AccordionTriggerProps> = ({ children, toggleAccordionTab, index, className }) => {
   const { activeIndexes } = React.useContext(AccordionContext) as AccordionContextData;
 
-  const handleClick = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    toggleAccordionTab && toggleAccordionTab();
-  };
-
   return (
-    <button onClick={handleClick} className={className}>
+    <button onClick={toggleAccordionTab} className={className}>
       {children}
 
       <svg
@@ -168,31 +163,44 @@ export interface CustomCSSHeightVariable extends React.CSSProperties {
 }
 
 const AccordionContent: React.FC<AccordionContentProps> = ({ children, className, isActive }) => {
-  const [isOpen, setIsOpen] = React.useState<boolean>(isActive ?? false);
+  const [isOpen, setIsOpen] = React.useState<boolean>(true);
   const ref = React.useRef<HTMLDivElement>(null);
-
+  const dummyRef = React.useRef<HTMLDivElement>(null);
   const heightRef = React.useRef<number | undefined>(undefined);
+  const widthRef = React.useRef<number | undefined>(undefined);
   const height = heightRef.current;
+  const width = widthRef.current;
 
   React.useLayoutEffect(() => {
-    const node = ref.current;
-    console.log(height);
+    const node = dummyRef.current;
     if (node) {
-      setIsOpen(true);
       const rect = node.getBoundingClientRect();
-      const calculatedHeight = rect.height;
-      heightRef.current = calculatedHeight;
-      setIsOpen(isActive ?? false);
+      heightRef.current = rect.height;
+      widthRef.current = rect.width;
     }
-  }, [isActive, isOpen]);
+    setIsOpen(isActive ?? false);
+  }, [isActive]);
 
   const styles = {
     '--accordion-content-height': height ? `${height}px` : undefined,
+    '--accordion-content-width': width ? `${width}px` : undefined,
   } as CustomCSSHeightVariable;
 
   return (
     <div ref={ref} style={styles} className={className} data-state={isOpen ? 'open' : 'closed'} hidden={!isActive}>
       {children}
+      {/* Dummy div: This div is used to calculate the height of the content. It is hidden from the user. */}
+      <div
+        ref={dummyRef}
+        style={{
+          height: 'auto',
+          position: 'absolute',
+          pointerEvents: 'none',
+          visibility: 'hidden',
+        }}
+      >
+        {children}
+      </div>
     </div>
   );
 };
