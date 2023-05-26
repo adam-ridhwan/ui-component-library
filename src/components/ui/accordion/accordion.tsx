@@ -19,6 +19,8 @@ interface AccordionProps {
   className?: string;
 }
 
+type AccordionChild = React.ReactElement<AccordionHeaderProps | AccordionTriggerProps | AccordionContentProps>;
+
 const Accordion: React.FC<AccordionProps> = ({ children, defaultIndex = 0, type = 'single', className }) => {
   // Checking 'type' Prop
   if (type && !['single', 'multiple'].includes(type)) {
@@ -48,14 +50,6 @@ const Accordion: React.FC<AccordionProps> = ({ children, defaultIndex = 0, type 
 //* ────────────────────────────────────────────────────────────────────────────────────────────────
 //* AccordianItem
 //* ────────────────────────────────────────────────────────────────────────────────────────────────
-
-type AccordionChild = React.ReactElement<AccordionHeaderProps | AccordionTriggerProps | AccordionContentProps>;
-
-interface AccordionItemProps {
-  index: number;
-  children: AccordionChild | AccordionChild[];
-  className?: string;
-}
 
 interface AccordionItemProps extends AccordionProps {
   index: number;
@@ -109,14 +103,12 @@ interface AccordionHeaderChildProps {
 
 type AccordionHeaderChild = React.ReactElement<AccordionHeaderChildProps>;
 
-interface AccordionHeaderProps {
+interface AccordionHeaderProps extends AccordionProps {
   children: AccordionHeaderChild | AccordionHeaderChild[];
-  toggleAccordionTab?: () => void;
   index?: number;
-  className?: string;
+  toggleAccordionTab?: () => void;
   isActive?: boolean;
 }
-
 const AccordionHeader: React.FC<AccordionHeaderProps> = ({ children, toggleAccordionTab, index, className }) => {
   if (React.isValidElement<AccordionHeaderChildProps>(children)) {
     return React.cloneElement(children, { index, toggleAccordionTab });
