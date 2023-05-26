@@ -54,10 +54,12 @@ const AccordionDocs: FC<IAccordionProps> = () => {
                       <Accordion.Trigger className='AccordionTrigger'>Why Sustainable Living?</Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content className='AccordionContent'>
-                      1 Sustainable living isn't just a trend, it's a fundamental shift in how we interact with our
-                      environment. The choices we make every day, from the food we eat to the transportation we use, can
-                      have a major impact on our planet. By choosing a sustainable lifestyle, we can reduce our
-                      ecological footprint and help preserve the natural world for future generations.
+                      <div className='AccordionContentText'>
+                        Sustainable living isn't just a trend, it's a fundamental shift in how we interact with our
+                        environment. The choices we make every day, from the food we eat to the transportation we use,
+                        can have a major impact on our planet. By choosing a sustainable lifestyle, we can reduce our
+                        ecological footprint and help preserve the natural world for future generations.
+                      </div>
                     </Accordion.Content>
                   </Accordion.Item>
                   <Accordion.Item className='AccordionItem' index={1}>
@@ -67,10 +69,14 @@ const AccordionDocs: FC<IAccordionProps> = () => {
                       </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content className='AccordionContent'>
-                      2 Sustainable living isn't just a trend, it's a fundamental shift in how we interact with our
-                      environment. The choices we make every day, from the food we eat to the transportation we use, can
-                      have a major impact on our planet. By choosing a sustainable lifestyle, we can reduce our
-                      ecological footprint and help preserve the natural world for future generations.
+                      <div className='AccordionContentText'>
+                        Adopting a more sustainable lifestyle doesn't have to be complicated or inconvenient. Here are a
+                        few simple ways you can make a difference: Reduce, Reuse, Recycle: This age-old mantra still
+                        holds true. Consider buying less, reusing items, and recycling where possible. Choose Green
+                        Energy: Switch to renewable energy sources such as solar or wind power. Eat Local and Organic:
+                        Choose foods that are locally sourced and grown organically to reduce carbon emissions. Conserve
+                        Water: Use water-saving devices and avoid wasting water where possible.
+                      </div>
                     </Accordion.Content>
                   </Accordion.Item>
 
@@ -81,10 +87,13 @@ const AccordionDocs: FC<IAccordionProps> = () => {
                       </Accordion.Trigger>
                     </Accordion.Header>
                     <Accordion.Content className='AccordionContent'>
-                      3 Sustainable living isn't just a trend, it's a fundamental shift in how we interact with our
-                      environment. The choices we make every day, from the food we eat to the transportation we use, can
-                      have a major impact on our planet. By choosing a sustainable lifestyle, we can reduce our
-                      ecological footprint and help preserve the natural world for future generations.
+                      <div className='AccordionContentText'>
+                        Embracing sustainable living has a broader impact than just preserving our natural resources. It
+                        can also contribute to our health and wellbeing, help us save money, and create stronger
+                        communities. When we make conscious choices about our consumption, we can help create a
+                        healthier, happier world for everyone. Join the sustainability movement today, and see the
+                        difference you can make!
+                      </div>
                     </Accordion.Content>
                   </Accordion.Item>
                 </Accordion.Root>

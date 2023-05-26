@@ -20,6 +20,22 @@ interface AccordionProps {
 }
 
 const Accordion: React.FC<AccordionProps> = ({ children, defaultIndex = 0, type = 'single', className }) => {
+  // Checking 'type' Prop
+  if (type && !['single', 'multiple'].includes(type)) {
+    throw new Error('Invalid prop `type` supplied to `Accordion`. Expected one of `single | multiple`.');
+  }
+
+  if (type === 'multiple' && typeof defaultIndex === 'string') {
+    throw new Error(
+      'Invalid prop `type` supplied to `Accordion`. Expected `single` when `defaultValue` or `value` is type `string`.'
+    );
+  }
+
+  if (type === 'single' && Array.isArray(defaultIndex)) {
+    throw new Error(
+      'Invalid prop `type` supplied to `Accordion`. Expected `multiple` when `defaultValue` or `value` is type `string[]`.'
+    );
+  }
   const [activeIndexes, setActiveIndexes] = React.useState<number[]>([defaultIndex]);
 
   return (
@@ -39,6 +55,11 @@ interface AccordionItemProps {
   index: number;
   children: AccordionChild | AccordionChild[];
   className?: string;
+}
+
+interface AccordionItemProps extends AccordionProps {
+  index: number;
+  children: AccordionChild | AccordionChild[];
 }
 
 const AccordionItem: React.FC<AccordionItemProps> = ({ index, children, className }) => {
@@ -62,7 +83,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ index, children, classNam
   };
 
   return (
-    <div className={className}>
+    <div className={className} style={{ position: 'relative' }}>
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
           return React.cloneElement(child, {
@@ -150,48 +171,88 @@ const AccordionTrigger: React.FC<AccordionTriggerProps> = ({ children, toggleAcc
 
 interface AccordionContentProps {
   children: React.ReactNode | null;
-  toggleAccordionTab?: () => void;
-  index?: number;
   className?: string;
   isActive?: boolean;
-  isOpen?: boolean;
-  setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface CustomCSSHeightVariable extends React.CSSProperties {
   '--accordion-content-height': string;
+  '--accordion-content-width': string;
 }
 
 const AccordionContent: React.FC<AccordionContentProps> = ({ children, className, isActive }) => {
   const [isOpen, setIsOpen] = React.useState<boolean>(true);
-  const ref = React.useRef<HTMLDivElement>(null);
+  const contentRef = React.useRef<HTMLDivElement>(null);
   const dummyRef = React.useRef<HTMLDivElement>(null);
   const heightRef = React.useRef<number | undefined>(undefined);
   const widthRef = React.useRef<number | undefined>(undefined);
+
   const height = heightRef.current;
   const width = widthRef.current;
 
+  React.useEffect(() => {
+    const contentNode = contentRef.current;
+    const dummyNode = dummyRef.current;
+    let resizeTimeout: NodeJS.Timeout;
+
+    const handleResize = () => {
+      if (contentNode && dummyNode) {
+        if (!isActive) return;
+
+        contentNode.style.height = 'auto';
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          contentNode.style.height = '';
+          const rect = dummyNode.getBoundingClientRect();
+          heightRef.current = rect.height;
+          widthRef.current = rect.width;
+        }, 0);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isActive]);
+
   React.useLayoutEffect(() => {
-    const node = dummyRef.current;
-    if (node) {
-      const rect = node.getBoundingClientRect();
-      heightRef.current = rect.height;
-      widthRef.current = rect.width;
-    }
+    const dummyNode = dummyRef.current;
+    if (!dummyNode) return;
+    const rect = dummyNode.getBoundingClientRect();
+    heightRef.current = rect.height;
+    widthRef.current = rect.width;
+
     setIsOpen(isActive ?? false);
   }, [isActive]);
 
-  const styles = {
-    '--accordion-content-height': height ? `${height}px` : undefined,
-    '--accordion-content-width': width ? `${width}px` : undefined,
-  } as CustomCSSHeightVariable;
+  const styles = React.useMemo(() => {
+    return {
+      '--accordion-content-height': height ? `${height}px` : undefined,
+      '--accordion-content-width': width ? `${width}px` : undefined,
+    } as CustomCSSHeightVariable;
+  }, [height, width]);
 
   return (
-    <div ref={ref} style={styles} className={className} data-state={isOpen ? 'open' : 'closed'} hidden={!isActive}>
-      {children}
-      {/* Dummy div: This div is used to calculate the height of the content. It is hidden from the user. */}
+    <>
+      <div
+        ref={contentRef}
+        style={styles}
+        className={className}
+        data-state={isOpen ? 'open' : 'closed'}
+        hidden={!isActive}
+      >
+        {children}
+      </div>
+
+      {/*
+      //* ──────────────────────────────────────────────────────────────────────────────────────────
+      //* Dummy div
+      //* ──────────────────────────────────────────────────────────────────────────────────────────
+       * This div is used to calculate the height of the content. It is hidden from the user.
+       */}
       <div
         ref={dummyRef}
+        className={className}
         style={{
           height: 'auto',
           position: 'absolute',
@@ -201,7 +262,7 @@ const AccordionContent: React.FC<AccordionContentProps> = ({ children, className
       >
         {children}
       </div>
-    </div>
+    </>
   );
 };
 
