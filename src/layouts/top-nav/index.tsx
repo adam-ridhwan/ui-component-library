@@ -12,14 +12,8 @@ import styles from './styles.module.css';
 
 const TopNav = () => {
   const { toggleSidebar } = useSideBarContext();
-  const { toggleSearchBar, searchInputRef } = useSearchBarContext();
+  const { handleOpenSearchBar } = useSearchBarContext();
   const [deviceType] = useResolution();
-
-  const handleSearchBar = () => {
-    toggleSearchBar();
-    if (searchInputRef.current) searchInputRef.current.focus();
-    document.body.style.overflowY = 'hidden';
-  };
 
   const handleOpenSideBar = () => {
     toggleSidebar();
@@ -50,7 +44,7 @@ const TopNav = () => {
             )}
 
             <div className={styles.searchnav_container}>
-              <button onClick={handleSearchBar}>
+              <button onClick={handleOpenSearchBar}>
                 <div>
                   {[DeviceType.PHONE, DeviceType.TABLET].includes(deviceType) ? 'Search...' : 'Search documentation...'}
                 </div>

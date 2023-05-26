@@ -21,6 +21,7 @@ const SearchBar: FC = () => {
     initialSearchItemsState,
     isSearchBarToggled,
     toggleSearchBar,
+    handleOpenSearchBar,
     searchInputRef,
     setSearchInputValue,
     filterSections,
@@ -43,18 +44,18 @@ const SearchBar: FC = () => {
   const scrollableDivRef = useRef<HTMLDivElement | null>(null);
   const itemRefs = useRef<{ [key: string]: RefObject<HTMLAnchorElement> }>({});
 
-  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-  //                   Create refs for combined search items
-  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  //* ──────────────────────────────────────────────────────────────────────────────────────────────
+  //* Create refs for combined search items
+  //* ──────────────────────────────────────────────────────────────────────────────────────────────
   useEffect(() => {
     searchItemsState.combinedSearchItems.forEach((item) => {
       if (!itemRefs.current[item]) itemRefs.current[item] = createRef();
     });
   }, [searchItemsState.combinedSearchItems]);
 
-  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-  //                         Set initial search state
-  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  //* ──────────────────────────────────────────────────────────────────────────────────────────────
+  //* Set initial search state
+  //* ──────────────────────────────────────────────────────────────────────────────────────────────
   const handleSetInitialState = useCallback(() => {
     setSearchItemsState(initialSearchItemsState);
     setItemState({
@@ -71,9 +72,9 @@ const SearchBar: FC = () => {
     document.body.style.overflowY = 'auto';
   }, [toggleSearchBar, searchInputRef, handleSetInitialState]);
 
-  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-  //              Handle toggle search bar with keyboard shortcut
-  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  //* ──────────────────────────────────────────────────────────────────────────────────────────────
+  //* Handle toggle search bar with keyboard shortcut
+  //* ──────────────────────────────────────────────────────────────────────────────────────────────
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       const { combinedSearchItems } = searchItemsState;
@@ -86,7 +87,7 @@ const SearchBar: FC = () => {
       // Check if 'k' is pressed while 'Command' (on Mac) or 'Control' (on Windows) is held down
       if (event.key.toLowerCase() === 'k' && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
-        toggleSearchBar();
+        handleOpenSearchBar();
       }
 
       // Check if up or down arrow is pressed
@@ -198,9 +199,9 @@ const SearchBar: FC = () => {
     selectionState.lastSelectedItem,
   ]);
 
-  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-  //    Handle window resize and DISABLES transition when window is resized
-  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  //* ──────────────────────────────────────────────────────────────────────────────────────────────
+  //* Handle window resize and DISABLES transition when window is resized
+  //* ──────────────────────────────────────────────────────────────────────────────────────────────
   useEffect(() => {
     let resizeTimeout: ReturnType<typeof setTimeout>;
 
@@ -224,9 +225,9 @@ const SearchBar: FC = () => {
     };
   }, [isWindowResized, searchInputRef]);
 
-  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-  //                  Render a section of navigation buttons
-  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  //* ──────────────────────────────────────────────────────────────────────────────────────────────
+  //* Render a section of navigation buttons
+  //* ──────────────────────────────────────────────────────────────────────────────────────────────
   const renderSection = (title: string, items: string[], baseRoute: string, icon: ReactElement) => {
     if (items.length === 0) return null;
 
@@ -283,9 +284,9 @@ const SearchBar: FC = () => {
     );
   };
 
-  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-  //                        Handle search input change
-  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  //* ──────────────────────────────────────────────────────────────────────────────────────────────
+  //* Handle search input change
+  //* ──────────────────────────────────────────────────────────────────────────────────────────────
   const handleSearch = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     setSearchInputValue(value);
     setIsTyping(true);
@@ -311,11 +312,9 @@ const SearchBar: FC = () => {
     setItemState((prevState) => ({ ...prevState, lastSelectedItem: filteredCombinedSearchItems[0] }));
   };
 
-  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-  //
-  //               Handle mouse movement over the scrollable div
-  //
-  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  //* ──────────────────────────────────────────────────────────────────────────────────────────────
+  //* Handle mouse movement over the scrollable div
+  //* ──────────────────────────────────────────────────────────────────────────────────────────────
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       const scrollableDiv = scrollableDivRef.current;
@@ -335,9 +334,8 @@ const SearchBar: FC = () => {
     };
   }, [isSearchBarToggled, scrollableDivRef]);
 
-  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-  //                                   HTML
-  // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  //* ————————————————————————————————————————————————————————————————————————————————————————————————
+
   return (
     <>
       {/* Blurry overlay */}

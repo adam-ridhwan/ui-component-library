@@ -12,6 +12,7 @@ export interface SearchBarContextValue {
   initialSearchItemsState: SearchItemsState;
   isSearchBarToggled: boolean;
   toggleSearchBar: () => void;
+  handleOpenSearchBar: () => void;
   searchInputRef: RefObject<HTMLInputElement>;
   searchInputValue: string;
   setSearchInputValue: Dispatch<SetStateAction<string>>;
@@ -36,13 +37,19 @@ const initialSearchItemsState: SearchItemsState = {
 
 export const SearchBarProvider: FC<SearchBarProps> = ({ children }) => {
   const [isSearchBarToggled, setIsSearchBarToggled] = useState(false);
-  const searchInputRef = useRef(null);
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
   const [searchInputValue, setSearchInputValue] = useState('');
 
   const [searchItemsState, setSearchItemsState] = useState<SearchItemsState>(initialSearchItemsState);
 
   const toggleSearchBar = () => {
     setIsSearchBarToggled((isSearchBarToggled) => !isSearchBarToggled);
+  };
+
+  const handleOpenSearchBar = () => {
+    toggleSearchBar();
+    if (searchInputRef.current) searchInputRef.current.focus();
+    document.body.style.overflowY = 'hidden';
   };
 
   const filterSections = (items: string[]) => {
@@ -62,6 +69,7 @@ export const SearchBarProvider: FC<SearchBarProps> = ({ children }) => {
         initialSearchItemsState,
         isSearchBarToggled,
         toggleSearchBar,
+        handleOpenSearchBar,
         searchInputRef,
         searchInputValue,
         setSearchInputValue,
