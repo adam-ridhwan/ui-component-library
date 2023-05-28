@@ -73,7 +73,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ index, children, classNam
   };
 
   return (
-    <div className={className} style={{position: 'relative'}}>
+    <div className={className} style={{ position: 'relative' }}>
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
           return React.cloneElement(child, {
