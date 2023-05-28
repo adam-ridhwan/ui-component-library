@@ -48,7 +48,7 @@ const Accordion: React.FC<AccordionProps> = ({ children, defaultIndex = 0, type 
 };
 
 //* ────────────────────────────────────────────────────────────────────────────────────────────────
-//* AccordianItem
+//* AccordionItem
 //* ────────────────────────────────────────────────────────────────────────────────────────────────
 
 interface AccordionItemProps extends AccordionProps {
@@ -67,23 +67,19 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ index, children, classNam
       if (isActive) {
         return prevIndexes.filter((i) => i !== index);
       } else {
-        if (type === 'single') {
-          return [index];
-        } else {
-          return [...prevIndexes, index];
-        }
+        return type === 'single' ? [index] : [...prevIndexes, index];
       }
     });
   };
 
   return (
-    <div className={className} style={{ position: 'relative' }}>
+    <div className={className} style={{position: 'relative'}}>
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
           return React.cloneElement(child, {
             index,
             isActive,
-            toggleAccordionTab: toggleAccordionTab,
+            toggleAccordionTab,
           });
         }
         return child;
@@ -93,7 +89,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ index, children, classNam
 };
 
 //* ────────────────────────────────────────────────────────────────────────────────────────────────
-//* AccordianHeader
+//* AccordionHeader
 //* ────────────────────────────────────────────────────────────────────────────────────────────────
 
 interface AccordionHeaderChildProps {
@@ -158,7 +154,7 @@ const AccordionTrigger: React.FC<AccordionTriggerProps> = ({ children, toggleAcc
 };
 
 //* ────────────────────────────────────────────────────────────────────────────────────────────────
-//* AccordianContent
+//* AccordionContent
 //* ────────────────────────────────────────────────────────────────────────────────────────────────
 
 interface AccordionContentProps {
