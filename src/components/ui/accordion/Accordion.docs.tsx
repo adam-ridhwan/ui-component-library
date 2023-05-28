@@ -22,9 +22,7 @@ const AccordionDocs: FC<IAccordionProps> = () => {
   const isLargeDesktop = [DeviceType.LARGE_DESKTOP].includes(deviceType);
   const { selectedTab, switchTab } = useTab(Tab.PREVIEW);
 
-  const previewTabClassName = `${styles.tab} ${
-    selectedTab === Tab.PREVIEW ? styles.tab_active : styles.tab_not_active
-  }`;
+  const previewClassName = `${styles.tab} ${selectedTab === Tab.PREVIEW ? styles.tab_active : styles.tab_not_active}`;
   const codeTabClassName = `${styles.tab} ${selectedTab === Tab.CODE ? styles.tab_active : styles.tab_not_active}`;
 
   return (
@@ -37,7 +35,7 @@ const AccordionDocs: FC<IAccordionProps> = () => {
           <Divider />
 
           <div className={styles.tab}>
-            <button onClick={() => switchTab(Tab.PREVIEW)} className={previewTabClassName}>
+            <button onClick={() => switchTab(Tab.PREVIEW)} className={previewClassName}>
               Preview
             </button>
             <button onClick={() => switchTab(Tab.CODE)} className={codeTabClassName}>
@@ -48,13 +46,13 @@ const AccordionDocs: FC<IAccordionProps> = () => {
           <div className={styles.preview_container}>
             {selectedTab === Tab.PREVIEW && (
               <div className={styles.component_container}>
-                <Accordion.Root className='AccordionRoot' defaultIndex={-1} type='single'>
-                  <Accordion.Item className='AccordionItem' index={0}>
-                    <Accordion.Header className='AccordionHeader'>
-                      <Accordion.Trigger className='AccordionTrigger'>Why Sustainable Living?</Accordion.Trigger>
+                <Accordion.Root className="AccordionRoot" defaultIndex={0} type="multiple">
+                  <Accordion.Item className="AccordionItem" index={0}>
+                    <Accordion.Header className="AccordionHeader">
+                      <Accordion.Trigger className="AccordionTrigger">Why Sustainable Living?</Accordion.Trigger>
                     </Accordion.Header>
-                    <Accordion.Content className='AccordionContent'>
-                      <div className='AccordionContentText'>
+                    <Accordion.Content className="AccordionContent">
+                      <div className="AccordionContentText">
                         Sustainable living isn't just a trend, it's a fundamental shift in how we interact with our
                         environment. The choices we make every day, from the food we eat to the transportation we use,
                         can have a major impact on our planet. By choosing a sustainable lifestyle, we can reduce our
@@ -62,14 +60,14 @@ const AccordionDocs: FC<IAccordionProps> = () => {
                       </div>
                     </Accordion.Content>
                   </Accordion.Item>
-                  <Accordion.Item className='AccordionItem' index={1}>
-                    <Accordion.Header className='AccordionHeader'>
-                      <Accordion.Trigger className='AccordionTrigger'>
+                  <Accordion.Item className="AccordionItem" index={1}>
+                    <Accordion.Header className="AccordionHeader">
+                      <Accordion.Trigger className="AccordionTrigger">
                         Easy Ways to Adopt Sustainability
                       </Accordion.Trigger>
                     </Accordion.Header>
-                    <Accordion.Content className='AccordionContent'>
-                      <div className='AccordionContentText'>
+                    <Accordion.Content className="AccordionContent">
+                      <div className="AccordionContentText">
                         Adopting a more sustainable lifestyle doesn't have to be complicated or inconvenient. Here are a
                         few simple ways you can make a difference: Reduce, Reuse, Recycle: This age-old mantra still
                         holds true. Consider buying less, reusing items, and recycling where possible. Choose Green
@@ -80,14 +78,14 @@ const AccordionDocs: FC<IAccordionProps> = () => {
                     </Accordion.Content>
                   </Accordion.Item>
 
-                  <Accordion.Item className='AccordionItem' index={2}>
-                    <Accordion.Header className='AccordionHeader'>
-                      <Accordion.Trigger className='AccordionTrigger'>
+                  <Accordion.Item className="AccordionItem" index={2}>
+                    <Accordion.Header className="AccordionHeader">
+                      <Accordion.Trigger className="AccordionTrigger">
                         The Impact of Sustainable Living
                       </Accordion.Trigger>
                     </Accordion.Header>
-                    <Accordion.Content className='AccordionContent'>
-                      <div className='AccordionContentText'>
+                    <Accordion.Content className="AccordionContent">
+                      <div className="AccordionContentText">
                         Embracing sustainable living has a broader impact than just preserving our natural resources. It
                         can also contribute to our health and wellbeing, help us save money, and create stronger
                         communities. When we make conscious choices about our consumption, we can help create a
@@ -105,7 +103,7 @@ const AccordionDocs: FC<IAccordionProps> = () => {
 
           <Divider />
 
-          <div className='navigation_button-container'>
+          <div className="navigation_button-container">
             <NavigationLink
               path={`${COMPONENTS_ROUTES}/${Object.keys(COMPONENTS)[1]}`}
               section={Object.keys(COMPONENTS)[1]}

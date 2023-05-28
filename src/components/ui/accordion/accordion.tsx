@@ -1,8 +1,8 @@
 import React from 'react';
 
-//* ────────────────────────────────────────────────────────────────────────────────────────────────
+//* ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 //* Accordion
-//* ────────────────────────────────────────────────────────────────────────────────────────────────
+//* ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 interface AccordionContextData {
   activeIndexes: number[];
@@ -47,9 +47,9 @@ const Accordion: React.FC<AccordionProps> = ({ children, defaultIndex = 0, type 
   );
 };
 
-//* ────────────────────────────────────────────────────────────────────────────────────────────────
+//* ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 //* AccordionItem
-//* ────────────────────────────────────────────────────────────────────────────────────────────────
+//* ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 interface AccordionItemProps extends AccordionProps {
   index: number;
@@ -61,9 +61,11 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ index, children, classNam
 
   const isActive = activeIndexes.includes(index);
 
+  //* ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   const toggleAccordionTab = () => {
     setActiveIndexes((prevIndexes) => {
       const isActive = prevIndexes.includes(index);
+
       if (isActive) {
         return prevIndexes.filter((i) => i !== index);
       } else {
@@ -76,11 +78,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ index, children, classNam
     <div className={className} style={{ position: 'relative' }}>
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
-          return React.cloneElement(child, {
-            index,
-            isActive,
-            toggleAccordionTab,
-          });
+          return React.cloneElement(child, { index, isActive, toggleAccordionTab });
         }
         return child;
       })}
@@ -88,9 +86,9 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ index, children, classNam
   );
 };
 
-//* ────────────────────────────────────────────────────────────────────────────────────────────────
+//* ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 //* AccordionHeader
-//* ────────────────────────────────────────────────────────────────────────────────────────────────
+//* ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 interface AccordionHeaderChildProps {
   index: number;
@@ -105,6 +103,7 @@ interface AccordionHeaderProps extends AccordionProps {
   toggleAccordionTab?: () => void;
   isActive?: boolean;
 }
+
 const AccordionHeader: React.FC<AccordionHeaderProps> = ({ children, toggleAccordionTab, index, className }) => {
   if (React.isValidElement<AccordionHeaderChildProps>(children)) {
     return React.cloneElement(children, { index, toggleAccordionTab });
@@ -112,9 +111,9 @@ const AccordionHeader: React.FC<AccordionHeaderProps> = ({ children, toggleAccor
   return null;
 };
 
-//* ────────────────────────────────────────────────────────────────────────────────────────────────
+//* ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 //* AccordionTrigger
-//* ────────────────────────────────────────────────────────────────────────────────────────────────
+//* ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 interface AccordionTriggerProps {
   children: React.ReactNode;
@@ -131,15 +130,15 @@ const AccordionTrigger: React.FC<AccordionTriggerProps> = ({ children, toggleAcc
       {children}
 
       <svg
-        xmlns='http://www.w3.org/2000/svg'
-        width='24'
-        height='24'
-        viewBox='0 0 24 24'
-        fill='none'
-        stroke='currentColor'
-        strokeWidth='2'
-        strokeLinecap='round'
-        strokeLinejoin='round'
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
         style={{
           height: '1rem',
           width: '1rem',
@@ -147,15 +146,15 @@ const AccordionTrigger: React.FC<AccordionTriggerProps> = ({ children, toggleAcc
           transition: 'transform 0.3s ease-in-out',
         }}
       >
-        <polyline points='6 9 12 15 18 9'></polyline>
+        <polyline points="6 9 12 15 18 9"></polyline>
       </svg>
     </button>
   );
 };
 
-//* ────────────────────────────────────────────────────────────────────────────────────────────────
+//* ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 //* AccordionContent
-//* ────────────────────────────────────────────────────────────────────────────────────────────────
+//* ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 interface AccordionContentProps {
   children: React.ReactNode | null;
@@ -174,57 +173,66 @@ const AccordionContent: React.FC<AccordionContentProps> = ({ children, className
   const dummyRef = React.useRef<HTMLDivElement>(null);
   const heightRef = React.useRef<number | undefined>(undefined);
   const widthRef = React.useRef<number | undefined>(undefined);
+  const resizeTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
   const height = heightRef.current;
   const width = widthRef.current;
 
+  //* ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   React.useEffect(() => {
     const contentNode = contentRef.current;
     const dummyNode = dummyRef.current;
-    let resizeTimeout: NodeJS.Timeout;
+    let resizeTimeout = resizeTimeoutRef.current;
 
     const handleResize = () => {
-      if (contentNode && dummyNode) {
-        if (!isActive) return;
+      if (!(contentNode && dummyNode) || !isActive) return;
 
-        contentNode.style.height = 'auto';
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-          contentNode.style.height = '';
-          const rect = dummyNode.getBoundingClientRect();
-          heightRef.current = rect.height;
-          widthRef.current = rect.width;
-        }, 0);
-      }
+      contentNode.style.height = 'auto';
+
+      if (resizeTimeout) clearTimeout(resizeTimeout);
+
+      resizeTimeout = setTimeout(() => {
+        contentNode.style.height = '';
+        const { height, width } = dummyNode.getBoundingClientRect();
+        heightRef.current = height;
+        widthRef.current = width;
+      }, 0);
     };
+
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
+      if (resizeTimeout) clearTimeout(resizeTimeout);
     };
   }, [isActive]);
 
+  //* ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   React.useLayoutEffect(() => {
     const dummyNode = dummyRef.current;
+
     if (!dummyNode) return;
-    const rect = dummyNode.getBoundingClientRect();
-    heightRef.current = rect.height;
-    widthRef.current = rect.width;
+
+    const { height, width } = dummyNode.getBoundingClientRect();
+    heightRef.current = height;
+    widthRef.current = width;
 
     setIsOpen(isActive ?? false);
   }, [isActive]);
 
-  const styles = React.useMemo(() => {
+  //* ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  const style = React.useMemo(() => {
     return {
       '--accordion-content-height': height ? `${height}px` : undefined,
       '--accordion-content-width': width ? `${width}px` : undefined,
     } as CustomCSSHeightVariable;
   }, [height, width]);
 
+  //?
   return (
     <>
       <div
         ref={contentRef}
-        style={styles}
+        style={style}
         className={className}
         data-state={isOpen ? 'open' : 'closed'}
         hidden={!isActive}
