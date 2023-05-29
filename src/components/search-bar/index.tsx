@@ -44,18 +44,32 @@ const SearchBar: FC = () => {
   const scrollableDivRef = useRef<HTMLDivElement | null>(null);
   const itemRefs = useRef<{ [key: string]: RefObject<HTMLAnchorElement> }>({});
 
-  //* ──────────────────────────────────────────────────────────────────────────────────────────────
-  //* Create refs for combined search items
-  //* ──────────────────────────────────────────────────────────────────────────────────────────────
+  //* ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  /**
+   * Side effect that runs when `searchItemsState.combinedSearchItems` changes.
+   *
+   * This effect initializes references for each item in the `combinedSearchItems` array,
+   * if they don't already exist. This is useful for accessing the DOM elements corresponding
+   * to these items directly.
+   *
+   * `createRef()` is used to create the references. The result is an object
+   * with current property initialized to null. The current property is then
+   * populated with the corresponding DOM element when the component mounts.
+   */
   useEffect(() => {
     searchItemsState.combinedSearchItems.forEach((item) => {
       if (!itemRefs.current[item]) itemRefs.current[item] = createRef();
     });
   }, [searchItemsState.combinedSearchItems]);
 
-  //* ──────────────────────────────────────────────────────────────────────────────────────────────
-  //* Set initial search state
-  //* ──────────────────────────────────────────────────────────────────────────────────────────────
+  //* ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  /**
+   * Sets the state of search items and item state to their initial values.
+   *
+   * This function is resets state of component to its initial state.
+   * Used when user interactions or other events in application need to trigger a state reset.
+   * For example, closing the search bar, clicking outside the search bar, or navigating to a new page.
+   */
   const handleSetInitialState = useCallback(() => {
     setSearchItemsState(initialSearchItemsState);
     setItemState({
@@ -64,6 +78,17 @@ const SearchBar: FC = () => {
     });
   }, [setSearchItemsState, initialSearchItemsState]);
 
+  //* ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  /**
+   * Closes the search modal.
+   *
+   * This function is responsible for:
+   * - toggling the search bar
+   * - resetting the state to its initial state
+   * - clearing the search input
+   * - resetting the scroll position of a scrollable div
+   * - resetting the body's overflowY style to 'auto'
+   */
   const handleCloseModal = useCallback(() => {
     toggleSearchBar();
     handleSetInitialState();
@@ -72,9 +97,16 @@ const SearchBar: FC = () => {
     document.body.style.overflowY = 'auto';
   }, [toggleSearchBar, searchInputRef, handleSetInitialState]);
 
-  //* ──────────────────────────────────────────────────────────────────────────────────────────────
-  //* Handle toggle search bar with keyboard shortcut
-  //* ──────────────────────────────────────────────────────────────────────────────────────────────
+  //* ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  /**
+   * Listens to keyboard events globally and responds accordingly.
+   *
+   * Here's what it does based on the key pressed:
+   * - 'Escape': If the search bar is toggled on, it will close the modal.
+   * - 'K' (along with 'Command' or 'Control'): It prevents the default behaviour and opens the search bar.
+   * - 'ArrowUp'/'ArrowDown': It handles navigation to the previous/next item in the list.
+   * - 'Enter': It handles navigation to a particular route based on the last selected item..
+   */
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       const { combinedSearchItems } = searchItemsState;
@@ -146,7 +178,7 @@ const SearchBar: FC = () => {
           break;
       }
 
-      // Check if enter is pressed
+      // Check if 'Enter is pressed
       if (event.key === 'Enter' && isSearchBarToggled && selectionState.lastSelectedItem) {
         let path = `${DOC_ROUTE}`;
         let currentSection = selectionState.lastSelectedItem;
@@ -197,11 +229,20 @@ const SearchBar: FC = () => {
     toggleSearchBar,
     searchItemsState,
     selectionState.lastSelectedItem,
+    handleOpenSearchBar,
   ]);
 
-  //* ──────────────────────────────────────────────────────────────────────────────────────────────
-  //* Handle window resize and DISABLES transition when window is resized
-  //* ──────────────────────────────────────────────────────────────────────────────────────────────
+  //* ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  /**
+   * This `useEffect` hook is utilized to handle window resize events to disable animations.
+   *
+   * When a resize event occurs, a few actions are performed:
+   * - It checks if the window hasn't been previously resized.
+   * If not, it sets the `isWindowResized` state to true and removes content transitions.
+   *
+   * - Sets a new timeout that will be triggered after 250 milliseconds.
+   * Once this timeout expires, it sets `isWindowResized` back to false and re-enables content transitions.
+   */
   useEffect(() => {
     let resizeTimeout: ReturnType<typeof setTimeout>;
 
@@ -225,10 +266,30 @@ const SearchBar: FC = () => {
     };
   }, [isWindowResized, searchInputRef]);
 
-  //* ──────────────────────────────────────────────────────────────────────────────────────────────
-  //* Render a section of navigation buttons
-  //* ──────────────────────────────────────────────────────────────────────────────────────────────
-  const renderSection = (title: string, items: string[], baseRoute: string, icon: ReactElement) => {
+  //* ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  /**
+   * This function is used to render a section with multiple navigation items.
+   *
+   * @param {string} title - The title of the section.
+   * @param {string[]} items - An array of items to be displayed in the section.
+   * @param {string} baseRoute - The base route for the items.
+   * @param {ReactElement} icon - The icon to be displayed next to each item.
+   *
+   * If the items array is empty, it returns null.
+   * For each item, it determines its path and section for the button.
+   * Special cases are handled based on the combination of title and section.
+   * It returns a div containing the title and NavigationLinks for each item.
+   * Each NavigationLink has a mouse enter event that updates the item state.
+   * If the item is currently selected, its background color is set to '#f5f8fa'.
+   *
+   * @returns {ReactElement | null} - The rendered section or null.
+   */
+  const renderSection = (
+    title: string,
+    items: string[],
+    baseRoute: string,
+    icon: ReactElement
+  ): ReactElement | null => {
     if (items.length === 0) return null;
 
     return (
@@ -284,10 +345,22 @@ const SearchBar: FC = () => {
     );
   };
 
-  //* ──────────────────────────────────────────────────────────────────────────────────────────────
-  //* Handle search input change
-  //* ──────────────────────────────────────────────────────────────────────────────────────────────
-  const handleSearch = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
+  //* ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  /**
+   * This function is used to handle search inputs and update the state accordingly.
+   *
+   * @param {ChangeEvent<HTMLInputElement>} event - The change event from the search input.
+   *
+   * The input value is extracted from the event, which triggers a search.
+   * The state is updated to reflect that typing is in progress.
+   * If the input value is empty, it resets the state to its initial values.
+   * Then it filters the navigation menu items, documentation items, and components items based on the input value.
+   * A new combined search items list is created from these filtered items.
+   * Both the search items state and item state are updated with these new values.
+   *
+   * @returns {void}
+   */
+  const handleSearch = ({ target: { value } }: ChangeEvent<HTMLInputElement>): void => {
     setSearchInputValue(value);
     setIsTyping(true);
 
@@ -312,10 +385,24 @@ const SearchBar: FC = () => {
     setItemState((prevState) => ({ ...prevState, lastSelectedItem: filteredCombinedSearchItems[0] }));
   };
 
-  //* ──────────────────────────────────────────────────────────────────────────────────────────────
-  //* Handle mouse movement over the scrollable div
-  //* ──────────────────────────────────────────────────────────────────────────────────────────────
+  //* ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  /**
+   * This useEffect hook is responsible for handling mouse movement when the search bar is toggled.
+   *
+   * The hook adds an event listener to the window object, listening for 'mousemove' events.
+   * When a mouse move event is detected, it checks if the mouse is over the scrollable div.
+   * If so, it updates the state to indicate that typing is no longer happening, and sets the last selected item to be the last hovered item.
+   * The listener is cleaned up when the component is unmounted or when the dependencies of the hook change.
+   *
+   * @listens mousemove - Listens for mouse move events on the window object.
+   *
+   * @param {boolean} isSearchBarToggled - A state indicating whether the search bar is currently toggled.
+   * @param {MutableRefObject<HTMLDivElement | null>} scrollableDivRef - A React ref object pointing to the scrollable div.
+   *
+   */
   useEffect(() => {
+    if (!isSearchBarToggled) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       const scrollableDiv = scrollableDivRef.current;
 
@@ -342,7 +429,7 @@ const SearchBar: FC = () => {
       <div className={overlayStyle} onClick={handleCloseModal} />
 
       <div className={contentStyle}>
-        <label htmlFor='search' className={styles.visuallyHidden}>
+        <label htmlFor="search" className={styles.visuallyHidden}>
           Search
         </label>
 
@@ -353,11 +440,11 @@ const SearchBar: FC = () => {
 
           <input
             ref={searchInputRef}
-            id='search'
-            name='search'
-            type='text'
-            placeholder='Type a command or search...'
-            autoComplete='off'
+            id="search"
+            name="search"
+            type="text"
+            placeholder="Type a command or search..."
+            autoComplete="off"
             onChange={handleSearch}
           />
 

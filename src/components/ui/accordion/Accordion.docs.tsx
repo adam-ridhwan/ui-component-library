@@ -6,6 +6,7 @@ import useResolution, { DeviceType } from '@/hooks/useResolution';
 import { Tab, useTab } from '@/hooks/useTab';
 import Divider from '@/layouts/divider';
 import QuickNav from '@/layouts/quick-nav';
+import TabSelector from '@/layouts/tab-selector';
 import { COMPONENTS, COMPONENTS_ROUTES } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import { FC } from 'react';
@@ -22,9 +23,6 @@ const AccordionDocs: FC<AccordionProps> = () => {
   const isLargeDesktop = [DeviceType.LARGE_DESKTOP].includes(deviceType);
   const { selectedTab, switchTab } = useTab(Tab.PREVIEW);
 
-  const previewClassName = `${styles.tab} ${selectedTab === Tab.PREVIEW ? styles.tab_active : styles.tab_not_active}`;
-  const codeTabClassName = `${styles.tab} ${selectedTab === Tab.CODE ? styles.tab_active : styles.tab_not_active}`;
-
   return (
     <>
       <div className={styles.container}>
@@ -34,14 +32,7 @@ const AccordionDocs: FC<AccordionProps> = () => {
           <h3>A vertically stacked set of interactive headings that each reveal an associated section of content.</h3>
           <Divider />
 
-          <div className={styles.tab}>
-            <button onClick={() => switchTab(Tab.PREVIEW)} className={previewClassName}>
-              Preview
-            </button>
-            <button onClick={() => switchTab(Tab.CODE)} className={codeTabClassName}>
-              Code
-            </button>
-          </div>
+          <TabSelector {...{ selectedTab, switchTab }} />
 
           <div className={styles.preview_container}>
             {selectedTab === Tab.PREVIEW && (

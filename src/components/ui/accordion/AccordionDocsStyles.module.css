@@ -9,30 +9,6 @@
   width: 100%;
 }
 
-.tab {
-  border-bottom: 1px solid #dfe4ed;
-}
-
-.tab button {
-  font-size: 14px;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  outline: none;
-  background-color: white;
-  padding: 8px 16px 12px;
-  cursor: pointer;
-}
-
-.tab_active {
-  color: #0f172a;
-  border-bottom: 1px solid black;
-}
-.tab_not_active {
-  color: #64748b;
-  border-bottom: 1px solid transparent;
-}
-
 .preview_container {
   min-height: 350px;
   width: 100%;
