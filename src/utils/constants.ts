@@ -1,6 +1,6 @@
-import { AccordionDocs } from '@/components/ui/accordion/index';
+import { AccordionDocs } from '@/components/ui/accordion/Accordion.docs';
 import Alert from '@/components/ui/alert';
-import AlertDialog from '@/components/ui/alert-dialog';
+import AlertDialog from '@/components/ui/alert-dialog/alert-dialog';
 import AspectRatio from '@/components/ui/aspect-ratio';
 import Avatar from '@/components/ui/avatar';
 import Badge from '@/components/ui/badge';
@@ -37,10 +37,9 @@ import Textarea from '@/components/ui/textarea';
 import Toast from '@/components/ui/toast';
 import Toggle from '@/components/ui/toggle';
 import Tooltip from '@/components/ui/tooltip';
-import { FunctionComponent } from 'react';
 
 type ComponentMap = {
-  [key: string]: FunctionComponent;
+  [key: string]: React.FunctionComponent<any>;
 };
 
 export const NAVIGATION_MENU_ITEMS: string[] = ['documentation', 'components', 'examples'];
