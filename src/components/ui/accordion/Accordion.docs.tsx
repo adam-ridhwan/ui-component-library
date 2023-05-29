@@ -12,12 +12,12 @@ import { FC } from 'react';
 import styles from './AccordionDocsStyles.module.css';
 import './AccordionStyles.css';
 
-interface IAccordionProps {
+interface AccordionProps {
   title: string;
   content: string;
 }
 
-const AccordionDocs: FC<IAccordionProps> = () => {
+const AccordionDocs: FC<AccordionProps> = () => {
   const [deviceType] = useResolution();
   const isLargeDesktop = [DeviceType.LARGE_DESKTOP].includes(deviceType);
   const { selectedTab, switchTab } = useTab(Tab.PREVIEW);
@@ -95,9 +95,7 @@ const AccordionDocs: FC<IAccordionProps> = () => {
               section={Object.keys(COMPONENTS)[1]}
             >
               <span>{convertToTitleCase(Object.keys(COMPONENTS)[1])}</span>
-              <span>
-                <Chevronright />
-              </span>
+              <span><Chevronright /></span>
             </NavigationLink>
           </div>
         </div>

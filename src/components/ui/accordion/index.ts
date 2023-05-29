@@ -3,10 +3,10 @@ export {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  Content,
-  Item,
   //
   Root,
+  Content,
+  Item,
   Trigger,
-} from './Accordion';
+} from './Accordion.tsx'
 export { AccordionDocs } from './Accordion.docs';
