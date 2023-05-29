@@ -46,7 +46,7 @@ const AccordionDocs: FC<IAccordionProps> = () => {
           <div className={styles.preview_container}>
             {selectedTab === Tab.PREVIEW && (
               <div className={styles.component_container}>
-                <Accordion.Root className="AccordionRoot" defaultIndex={0} type="multiple">
+                <Accordion.Root className="AccordionRoot" defaultIndex={0} type="single">
                   <Accordion.Item className="AccordionItem" index={0}>
                     <Accordion.Header className="AccordionHeader">
                       <Accordion.Trigger className="AccordionTrigger">Why Sustainable Living?</Accordion.Trigger>

@@ -227,25 +227,12 @@ const AccordionContent: React.FC<AccordionContentProps> = ({ children, className
     } as CustomCSSHeightVariable;
   }, [height, width]);
 
-  //?
   return (
     <>
-      <div
-        ref={contentRef}
-        style={style}
-        className={className}
-        data-state={isOpen ? 'open' : 'closed'}
-        hidden={!isActive}
-      >
+      <div ref={contentRef} style={style} className={className} data-state={getState(isOpen)} hidden={!isActive}>
         {children}
       </div>
 
-      {/*
-      //* ──────────────────────────────────────────────────────────────────────────────────────────
-      //* Dummy div
-      //* ──────────────────────────────────────────────────────────────────────────────────────────
-       * This div is used to calculate the height of the content. It is hidden from the user.
-       */}
       <div
         ref={dummyRef}
         className={className}
@@ -261,6 +248,12 @@ const AccordionContent: React.FC<AccordionContentProps> = ({ children, className
     </>
   );
 };
+
+//* ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+function getState(open?: boolean) {
+  return open ? 'open' : 'closed';
+}
 
 const Root = Accordion;
 const Item = AccordionItem;
