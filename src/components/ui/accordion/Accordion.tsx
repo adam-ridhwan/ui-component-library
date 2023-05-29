@@ -61,7 +61,6 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ index, children, classNam
 
   const isActive = activeIndexes.includes(index);
 
-
   const toggleAccordionTab = () => {
     setActiveIndexes((prevIndexes) => {
       const isActive = prevIndexes.includes(index);
@@ -153,7 +152,6 @@ const AccordionContent: React.FC<AccordionContentProps> = ({ children, className
   const height = heightRef.current;
   const width = widthRef.current;
 
-
   React.useEffect(() => {
     const contentNode = contentRef.current;
     const dummyNode = dummyRef.current;
@@ -181,7 +179,6 @@ const AccordionContent: React.FC<AccordionContentProps> = ({ children, className
     };
   }, [isActive]);
 
-
   React.useLayoutEffect(() => {
     const dummyNode = dummyRef.current;
 
@@ -193,7 +190,6 @@ const AccordionContent: React.FC<AccordionContentProps> = ({ children, className
 
     setIsOpen(isActive ?? false);
   }, [isActive]);
-
 
   const style = React.useMemo(() => {
     return {
@@ -223,8 +219,6 @@ const AccordionContent: React.FC<AccordionContentProps> = ({ children, className
     </>
   );
 };
-
-
 
 function getState(open?: boolean) {
   return open ? 'open' : 'closed';

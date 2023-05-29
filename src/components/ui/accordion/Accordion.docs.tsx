@@ -1,4 +1,4 @@
-import Chevronright from '@/assets/svg/ChevronRightIcon';
+import ChevronRight from '@/assets/svg/ChevronRightIcon';
 import NavigationLink from '@/components/navigation-link';
 import Path from '@/components/path';
 import * as Accordion from '@/components/ui/accordion/index';
@@ -95,7 +95,9 @@ const AccordionDocs: FC<AccordionProps> = () => {
               section={Object.keys(COMPONENTS)[1]}
             >
               <span>{convertToTitleCase(Object.keys(COMPONENTS)[1])}</span>
-              <span><Chevronright /></span>
+              <span>
+                <ChevronRight />
+              </span>
             </NavigationLink>
           </div>
         </div>
@@ -104,8 +106,8 @@ const AccordionDocs: FC<AccordionProps> = () => {
           {isLargeDesktop && (
             <QuickNav>
               <>
-                {/* <span onClick={() => jumpToSection(faqRef)}>FAQ</span>
-                <span onClick={() => jumpToSection(creditsRef)}>Credits</span> */}
+                {/*<span onClick={() => jumpToSection(faqRef)}>FAQ</span>*/}
+                {/*<span onClick={() => jumpToSection(creditsRef)}>Credits</span>*/}
               </>
             </QuickNav>
           )}

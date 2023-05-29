@@ -44,7 +44,7 @@
 }
 
 .AccordionContent[data-state='closed'] {
-  height: 0px;
+  height: 0;
 }
 
 .AccordionContentText {
