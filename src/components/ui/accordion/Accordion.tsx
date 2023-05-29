@@ -61,6 +61,23 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ index, children, classNam
 
   const isActive = activeIndexes.includes(index);
 
+  /**
+   * Toggles the opened/closed state of an accordion tab.
+   *
+   * If the tab is already active (open),
+   * it's index will be removed from the active indexes,
+   * effectively closing the tab.
+   *
+   * If the tab is not active (closed),
+   * it's index will be added to the active indexes,
+   * effectively opening the tab.
+   *
+   * For an accordion where only a single tab can be open at a time (type 'single'),
+   * any previously active index will be discarded.
+   *
+   * For an accordion where multiple tabs can be open at a time (type 'multiple'),
+   * any previously active indexes will be preserved.
+   */
   const toggleAccordionTab = () => {
     setActiveIndexes((prevIndexes) => {
       const isActive = prevIndexes.includes(index);
@@ -152,6 +169,14 @@ const AccordionContent: React.FC<AccordionContentProps> = ({ children, className
   const height = heightRef.current;
   const width = widthRef.current;
 
+  /**
+   * Effect hook that manages responsive resizing for the accordion content.
+   *
+   * When the accordion content is active, this effect will automatically adjust the height
+   * of the content node to ensure correct rendering upon window resizing.
+   * It does this by temporarily setting the content height to 'auto', calculating the required
+   * height from a dummy node, and then resetting the height.
+   */
   React.useEffect(() => {
     const contentNode = contentRef.current;
     const dummyNode = dummyRef.current;
@@ -179,9 +204,17 @@ const AccordionContent: React.FC<AccordionContentProps> = ({ children, className
     };
   }, [isActive]);
 
+  /**
+   * Layout effect hook that updates the accordion's open state and stores the current height and width of the accordion.
+   *
+   * When the accordion is active, this effect retrieves the dimensions of a dummy node via getBoundingClientRect. These dimensions
+   * are then stored in refs for future use. The isOpen state of the accordion is also updated based on the active status.
+   *
+   * The hook executes this effect synchronously after all DOM mutations but before the browser has painted, thus ensuring that
+   * the height and width are accurately captured and the state is updated promptly.
+   */
   React.useLayoutEffect(() => {
     const dummyNode = dummyRef.current;
-
     if (!dummyNode) return;
 
     const { height, width } = dummyNode.getBoundingClientRect();
@@ -191,6 +224,11 @@ const AccordionContent: React.FC<AccordionContentProps> = ({ children, className
     setIsOpen(isActive ?? false);
   }, [isActive]);
 
+  /**
+   * Memoized CSS custom properties for accordion's content height and width.
+   *
+   * These variables are used to set the height and width of the accordion content in the CSS file.
+   */
   const style = React.useMemo(() => {
     return {
       '--accordion-content-height': height ? `${height}px` : undefined,
