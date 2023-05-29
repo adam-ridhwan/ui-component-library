@@ -19,7 +19,7 @@ interface AccordionProps {
   className?: string;
 }
 
-type AccordionChild = React.ReactElement<AccordionHeaderProps | AccordionTriggerProps | AccordionContentProps>;
+type AccordionChild = React.ReactElement<AccordionTriggerProps | AccordionContentProps>;
 
 const Accordion: React.FC<AccordionProps> = ({ children, defaultIndex = 0, type = 'single', className }) => {
   // Checking 'type' Prop
@@ -84,31 +84,6 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ index, children, classNam
       })}
     </div>
   );
-};
-
-//* ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-//* AccordionHeader
-//* ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-
-interface AccordionHeaderChildProps {
-  index: number;
-  toggleAccordionTab: () => void;
-}
-
-type AccordionHeaderChild = React.ReactElement<AccordionHeaderChildProps>;
-
-interface AccordionHeaderProps extends AccordionProps {
-  children: AccordionHeaderChild | AccordionHeaderChild[];
-  index?: number;
-  toggleAccordionTab?: () => void;
-  isActive?: boolean;
-}
-
-const AccordionHeader: React.FC<AccordionHeaderProps> = ({ children, toggleAccordionTab, index, className }) => {
-  if (React.isValidElement<AccordionHeaderChildProps>(children)) {
-    return React.cloneElement(children, { index, toggleAccordionTab });
-  }
-  return null;
 };
 
 //* ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -257,20 +232,17 @@ function getState(open?: boolean) {
 
 const Root = Accordion;
 const Item = AccordionItem;
-const Header = AccordionHeader;
 const Trigger = AccordionTrigger;
 const Content = AccordionContent;
 
 export {
   Accordion,
   AccordionItem,
-  AccordionHeader,
   AccordionTrigger,
   AccordionContent,
   //
   Root,
   Item,
-  Header,
   Trigger,
   Content,
 };

@@ -1,11 +1,9 @@
 export {
   Accordion,
   AccordionContent,
-  AccordionHeader,
   AccordionItem,
   AccordionTrigger,
   Content,
-  Header,
   Item,
   //
   Root,
