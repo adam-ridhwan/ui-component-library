@@ -1,5 +1,6 @@
 import ChevronRight from '@/assets/svg/ChevronRightIcon';
 import NavigationLink from '@/components/navigation-link';
+import PreviewContainer from '@/layouts/preview-container';
 import Path from '@/components/path';
 import * as Accordion from '@/components/ui/accordion/index';
 import useResolution, { DeviceType } from '@/hooks/useResolution';
@@ -13,12 +14,7 @@ import { FC } from 'react';
 import styles from './AccordionDocsStyles.module.css';
 import './AccordionStyles.css';
 
-interface AccordionProps {
-  title: string;
-  content: string;
-}
-
-const AccordionDocs: FC<AccordionProps> = () => {
+const AccordionDocs: FC = () => {
   const [deviceType] = useResolution();
   const isLargeDesktop = [DeviceType.LARGE_DESKTOP].includes(deviceType);
   const { selectedTab, switchTab } = useTab(Tab.PREVIEW);
@@ -34,7 +30,7 @@ const AccordionDocs: FC<AccordionProps> = () => {
 
           <TabSelector {...{ selectedTab, switchTab }} />
 
-          <div className={styles.preview_container}>
+          <PreviewContainer>
             {selectedTab === Tab.PREVIEW && (
               <div className={styles.component_container}>
                 <Accordion.Root className="AccordionRoot" defaultIndex={0} type="single">
@@ -76,7 +72,7 @@ const AccordionDocs: FC<AccordionProps> = () => {
             )}
 
             {selectedTab === Tab.CODE && <div>Code content here...</div>}
-          </div>
+          </PreviewContainer>
 
           <Divider />
 

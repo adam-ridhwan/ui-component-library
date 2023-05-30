@@ -16,7 +16,7 @@ const DesktopSideNavBar = () => {
             {DOCUMENTATION.map((section, index) => {
               if (section === 'introduction')
                 return (
-                  <NavigationLink key={index} path={`${DOC_ROUTE}`} section='docs'>
+                  <NavigationLink key={index} path={`${DOC_ROUTE}`} section="docs">
                     <span className={currentSection === 'docs' ? styles.active_section : ''}>
                       {convertToTitleCase(section)}
                     </span>
@@ -35,11 +35,11 @@ const DesktopSideNavBar = () => {
 
           <div className={styles.components_container}>
             <span>Components</span>
-            {Object.keys(COMPONENTS).map((componentString, index) => {
+            {COMPONENTS.map((component, index) => {
               return (
-                <NavigationLink key={index} path={`${COMPONENTS_ROUTES}/${componentString}`} section={componentString}>
-                  <span className={currentSection === componentString ? styles.active_section : ''}>
-                    {convertToTitleCase(componentString)}
+                <NavigationLink key={index} path={`${COMPONENTS_ROUTES}/${component}`} section={component}>
+                  <span className={currentSection === component ? styles.active_section : ''}>
+                    {convertToTitleCase(component)}
                   </span>
                 </NavigationLink>
               );

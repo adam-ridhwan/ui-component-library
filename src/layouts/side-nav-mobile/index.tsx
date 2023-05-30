@@ -1,4 +1,3 @@
-import CloseIcon from '@/assets/svg/CloseIcon';
 import NavigationLink from '@/components/navigation-link';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE } from '@/utils/constants';
@@ -39,7 +38,7 @@ const MobileSideNav: FC = () => {
             >
               Components
             </NavigationLink>
-            <NavigationLink path='/examples' section={''} closeModal={handleCloseModal}>
+            <NavigationLink path="/examples" section={''} closeModal={handleCloseModal}>
               Examples
             </NavigationLink>
           </div>
@@ -49,7 +48,7 @@ const MobileSideNav: FC = () => {
           </div>
           <div>
             <span className={styles.sidebar_title}>Components</span>
-            {Object.keys(COMPONENTS).map((component, index) => {
+            {COMPONENTS.map((component, index) => {
               return (
                 <NavigationLink
                   key={index}
