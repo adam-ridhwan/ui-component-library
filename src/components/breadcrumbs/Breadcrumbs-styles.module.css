@@ -1,0 +1,17 @@
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin-bottom: 1em;
+    font-size: 14px;
+}
+
+.breadcrumbs span:first-child {
+    font-weight: 400;
+    color: #64784b;
+}
+
+.breadcrumbs span:nth-child(2) {
+    display: flex;
+    align-items: center;
+}

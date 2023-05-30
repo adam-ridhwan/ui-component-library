@@ -1,5 +1,5 @@
 import { COMPONENTS, DOCUMENTATION, NAVIGATION_MENU_ITEMS } from '@/utils/constants';
-import { Dispatch, FC, ReactNode, RefObject, SetStateAction, createContext, useRef, useState } from 'react';
+import { createContext, Dispatch, FC, ReactNode, RefObject, SetStateAction, useRef, useState } from 'react';
 
 interface SearchItemsState {
   navMenuItems: string[];
@@ -31,8 +31,8 @@ interface SearchBarProps {
 const initialSearchItemsState: SearchItemsState = {
   navMenuItems: NAVIGATION_MENU_ITEMS,
   documentationItems: DOCUMENTATION,
-  componentsItems: Object.keys(COMPONENTS),
-  combinedSearchItems: [...NAVIGATION_MENU_ITEMS, ...DOCUMENTATION, ...Object.keys(COMPONENTS)],
+  componentsItems: COMPONENTS,
+  combinedSearchItems: [...NAVIGATION_MENU_ITEMS, ...DOCUMENTATION, ...COMPONENTS],
 };
 
 export const SearchBarProvider: FC<SearchBarProps> = ({ children }) => {

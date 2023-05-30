@@ -22,7 +22,6 @@ interface AccordionProps {
 type AccordionChild = React.ReactElement<AccordionTriggerProps | AccordionContentProps>;
 
 const Accordion: React.FC<AccordionProps> = ({ children, defaultIndex = 0, type = 'single', className }) => {
-  // Checking 'type' Prop
   if (type && !['single', 'multiple'].includes(type)) {
     throw new Error('Invalid prop `type` supplied to `Accordion`. Expected one of `single | multiple`.');
   }
@@ -205,13 +204,12 @@ const AccordionContent: React.FC<AccordionContentProps> = ({ children, className
   }, [isActive]);
 
   /**
-   * Layout effect hook that updates the accordion's open state and stores the current height and width of the accordion.
+   * Layout effect hook that updates the accordion's open state and stores the current height and width of the
+   * accordion.
    *
-   * When the accordion is active, this effect retrieves the dimensions of a dummy node via getBoundingClientRect. These dimensions
-   * are then stored in refs for future use. The isOpen state of the accordion is also updated based on the active status.
-   *
-   * The hook executes this effect synchronously after all DOM mutations but before the browser has painted, thus ensuring that
-   * the height and width are accurately captured and the state is updated promptly.
+   * When the accordion is active, this effect retrieves the dimensions of a dummy node via getBoundingClientRect.
+   * These dimensions are then stored in refs for future use.
+   * The isOpen state of the accordion is also updated based on the active status.
    */
   React.useLayoutEffect(() => {
     const dummyNode = dummyRef.current;
@@ -226,8 +224,6 @@ const AccordionContent: React.FC<AccordionContentProps> = ({ children, className
 
   /**
    * Memoized CSS custom properties for accordion's content height and width.
-   *
-   * These variables are used to set the height and width of the accordion content in the CSS file.
    */
   const style = React.useMemo(() => {
     return {

@@ -6,9 +6,9 @@ import PaperIcon from '@/assets/svg/PaperIcon';
 import NavigationLink from '@/components/navigation-link';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
-import { COMPONENTS, COMPONENTS_ROUTES, DOCUMENTATION, DOC_ROUTE, NAVIGATION_MENU_ITEMS } from '@/utils/constants';
+import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE, DOCUMENTATION, NAVIGATION_MENU_ITEMS } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
-import { ChangeEvent, FC, ReactElement, RefObject, createRef, useCallback, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, createRef, FC, ReactElement, RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './styles.module.css';
 
@@ -62,7 +62,8 @@ const SearchBar: FC = () => {
     });
   }, [searchItemsState.combinedSearchItems]);
 
-  //* ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  //*
+  // ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   /**
    * Sets the state of search items and item state to their initial values.
    *
@@ -103,7 +104,7 @@ const SearchBar: FC = () => {
    *
    * Here's what it does based on the key pressed:
    * - 'Escape': If the search bar is toggled on, it will close the modal.
-   * - 'K' (along with 'Command' or 'Control'): It prevents the default behaviour and opens the search bar.
+   * - 'K' (along with 'CommandDocs' or 'Control'): It prevents the default behaviour and opens the search bar.
    * - 'ArrowUp'/'ArrowDown': It handles navigation to the previous/next item in the list.
    * - 'Enter': It handles navigation to a particular route based on the last selected item..
    */
@@ -116,7 +117,7 @@ const SearchBar: FC = () => {
       // Check if 'Escape' is pressed while search bar is toggled
       if (event.key === 'Escape' && isSearchBarToggled) return handleCloseModal();
 
-      // Check if 'k' is pressed while 'Command' (on Mac) or 'Control' (on Windows) is held down
+      // Check if 'k' is pressed while 'CommandDocs' (on Mac) or 'Control' (on Windows) is held down
       if (event.key.toLowerCase() === 'k' && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
         handleOpenSearchBar();
@@ -237,10 +238,10 @@ const SearchBar: FC = () => {
    * This `useEffect` hook is utilized to handle window resize events to disable animations.
    *
    * When a resize event occurs, a few actions are performed:
-   * - It checks if the window hasn't been previously resized.
+   * It checks if the window hasn't been previously resized.
    * If not, it sets the `isWindowResized` state to true and removes content transitions.
    *
-   * - Sets a new timeout that will be triggered after 250 milliseconds.
+   * Sets a new timeout that will be triggered after 250 milliseconds.
    * Once this timeout expires, it sets `isWindowResized` back to false and re-enables content transitions.
    */
   useEffect(() => {
@@ -266,7 +267,7 @@ const SearchBar: FC = () => {
     };
   }, [isWindowResized, searchInputRef]);
 
-  //* ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  // ———————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   /**
    * This function is used to render a section with multiple navigation items.
    *
@@ -345,7 +346,7 @@ const SearchBar: FC = () => {
     );
   };
 
-  //* ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+  // ———————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   /**
    * This function is used to handle search inputs and update the state accordingly.
    *
@@ -366,7 +367,7 @@ const SearchBar: FC = () => {
 
     if (value === '') return handleSetInitialState();
 
-    const sections = [NAVIGATION_MENU_ITEMS, DOCUMENTATION, Object.keys(COMPONENTS)];
+    const sections = [NAVIGATION_MENU_ITEMS, DOCUMENTATION, COMPONENTS];
     const [filteredNavMenuItems, filteredDocumentationItems, filteredComponentsItems] = sections.map(filterSections);
 
     const filteredCombinedSearchItems = [
@@ -391,13 +392,14 @@ const SearchBar: FC = () => {
    *
    * The hook adds an event listener to the window object, listening for 'mousemove' events.
    * When a mouse move event is detected, it checks if the mouse is over the scrollable div.
-   * If so, it updates the state to indicate that typing is no longer happening, and sets the last selected item to be the last hovered item.
-   * The listener is cleaned up when the component is unmounted or when the dependencies of the hook change.
+   * If so, it updates the state to indicate that typing is no longer happening, and sets the last selected item to be
+   * the last hovered item.
    *
    * @listens mousemove - Listens for mouse move events on the window object.
    *
    * @param {boolean} isSearchBarToggled - A state indicating whether the search bar is currently toggled.
-   * @param {MutableRefObject<HTMLDivElement | null>} scrollableDivRef - A React ref object pointing to the scrollable div.
+   * @param {MutableRefObject<HTMLDivElement | null>} scrollableDivRef - A React ref object pointing to the scrollable
+   *   div.
    *
    */
   useEffect(() => {
