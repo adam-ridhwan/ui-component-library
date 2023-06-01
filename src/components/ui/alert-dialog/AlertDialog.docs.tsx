@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import SectionContainer from '@/components/containers/section-container/SectionContainer.tsx';
 import Breadcrumbs from '@/components/breadcrumbs/Breadcrumbs.tsx';
 import { convertToTitleCase } from '@/utils/convertToTitleCase.ts';
@@ -7,7 +6,7 @@ import Heading from '@/components/containers/typography/heading/Heading.tsx';
 import Subheading from '@/components/containers/typography/subheading/Subheading.tsx';
 import Divider from '@/layouts/divider';
 import TabSelector from '@/layouts/tab-selector';
-import ComponentContainer from '@/components/containers/preview-container/ComponentContainer.tsx';
+import ComponentContainer from '@/components/containers/component-container/ComponentContainer.tsx';
 import { Tab, useTab } from '@/hooks/useTab.ts';
 import PaginationContainer from '@/components/containers/pagination-container/PaginationContainer.tsx';
 import NavigationLink from '@/components/navigation-link';
@@ -74,12 +73,6 @@ const AlertDialogDocs = () => {
           </QuickNav>
         </QuickNavContainer>
       </ContentContainer>
-=======
-const AlertDialogDocs = () => {
-  return (
-    <>
-      <div>Alert dialog docs</div>
->>>>>>> origin/main
     </>
   );
 };

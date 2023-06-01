@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { Tab, useTab } from '@/hooks/useTab.ts';
 import ContentContainer from '@/components/containers/content-container/ContentContainer.tsx';
 import SectionContainer from '@/components/containers/section-container/SectionContainer.tsx';
@@ -9,7 +8,7 @@ import Heading from '@/components/containers/typography/heading/Heading.tsx';
 import Subheading from '@/components/containers/typography/subheading/Subheading.tsx';
 import Divider from '@/layouts/divider';
 import TabSelector from '@/layouts/tab-selector';
-import ComponentContainer from '@/components/containers/preview-container/ComponentContainer.tsx';
+import ComponentContainer from '@/components/containers/component-container/ComponentContainer.tsx';
 import PaginationContainer from '@/components/containers/pagination-container/PaginationContainer.tsx';
 import NavigationLink from '@/components/navigation-link';
 import ChevronRightIcon from '@/assets/svg/ChevronRightIcon.tsx';
@@ -69,12 +68,6 @@ const ButtonDocs = () => {
           </QuickNav>
         </QuickNavContainer>
       </ContentContainer>
-=======
-const ButtonDocs = () => {
-  return (
-    <>
-      <div>button docs</div>
->>>>>>> origin/main
     </>
   );
 };
