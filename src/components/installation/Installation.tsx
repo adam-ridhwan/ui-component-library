@@ -1,4 +1,4 @@
-import Path from '@/components/path';
+import Breadcrumbs from '@/components/breadcrumbs/Breadcrumbs.tsx';
 import Divider from '@/layouts/divider';
 import ContentContainer from '@/components/containers/content-container/ContentContainer.tsx';
 import SectionContainer from '@/components/containers/section-container/SectionContainer.tsx';
@@ -7,7 +7,7 @@ import PaginationContainer from '@/components/containers/pagination-container/Pa
 import NavigationLink from '@/components/navigation-link';
 import { DOC_ROUTE, DOCUMENTATION } from '@/utils/constants.ts';
 import { convertToTitleCase } from '@/utils/convertToTitleCase.ts';
-import Chevronright from '@/assets/svg/ChevronRightIcon.tsx';
+import ChevronRightIcon from '@/assets/svg/ChevronRightIcon.tsx';
 import QuickNavContainer from '@/components/containers/quick-nav-container/QuickNavContainer.tsx';
 import QuickNav from '@/layouts/quick-nav';
 
@@ -16,7 +16,7 @@ const Installation = () => {
     <>
       <ContentContainer>
         <SectionContainer>
-          <Path section={'Installation'} />
+          <Breadcrumbs section={'Installation'} />
           <h1>Installation</h1>
           <span>Reusable components built from scratch</span>
           <Divider />
@@ -118,7 +118,7 @@ const Installation = () => {
             <NavigationLink path={`${DOC_ROUTE}/${DOCUMENTATION[1]}`} section={DOCUMENTATION[1]}>
               <span>{convertToTitleCase(DOCUMENTATION[1])}</span>
               <span>
-                <Chevronright />
+                <ChevronRightIcon />
               </span>
             </NavigationLink>
           </PaginationContainer>

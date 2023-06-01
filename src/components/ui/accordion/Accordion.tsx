@@ -229,6 +229,8 @@ const AccordionContent: React.FC<AccordionContentProps> = ({ children, className
     return {
       '--accordion-content-height': height ? `${height}px` : undefined,
       '--accordion-content-width': width ? `${width}px` : undefined,
+      display: 'flex',
+      overflow: 'hidden',
     } as CustomCSSHeightVariable;
   }, [height, width]);
 
@@ -240,8 +242,9 @@ const AccordionContent: React.FC<AccordionContentProps> = ({ children, className
 
       <div
         ref={dummyRef}
-        className={className}
         style={{
+          display: 'flex',
+          overflow: 'hidden',
           height: 'auto',
           position: 'absolute',
           pointerEvents: 'none',

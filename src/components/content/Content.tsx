@@ -2,8 +2,8 @@ import { FC, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import useResolution, { DeviceType } from '@/hooks/useResolution';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
-import Installation from '@/components/installation';
-import Introduction from '@/components/introduction';
+import Installation from '@/components/installation/Installation.tsx';
+import Introduction from '@/components/introduction/Introduction.tsx';
 import Theming from '@/components/theming';
 import Typography from '@/components/typography';
 import DesktopSideNavBar from '@/layouts/side-nav-desktop';
@@ -47,7 +47,7 @@ import { ToggleDocs } from '@/components/ui/toggle';
 import { TooltipDocs } from '@/components/ui/tooltip';
 import { ToastDocs } from '@/components/ui/toast';
 
-import styles from './styles.module.css';
+import styles from './Content-styles.module.css';
 
 const Content: FC = () => {
   const { currentSection, setCurrentSection } = useSideBarContext();

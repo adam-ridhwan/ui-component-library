@@ -5,8 +5,8 @@ enum Tab {
   CODE = 'code',
 }
 
-const useTab = (initialTab: Tab) => {
-  const [selectedTab, setSelectedTab] = useState(initialTab);
+const useTab = () => {
+  const [selectedTab, setSelectedTab] = useState(Tab.PREVIEW);
 
   const switchTab = (tabName: Tab) => {
     setSelectedTab(tabName);

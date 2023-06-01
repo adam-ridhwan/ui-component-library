@@ -139,7 +139,7 @@ const SearchBar: FC = () => {
                   if (combinedSearchItems.indexOf(newItem) === 0) {
                     scrollableDivRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
                   } else {
-                    // Scroll up by the difference between the top of the item and the top of the container
+                    // Scroll up by the difference between the top of the item and the top of the containers
                     const scrollTop = scrollableDivRef.current?.scrollTop ?? 0;
                     const scrollAmount = scrollTop + rect.top - containerRect.top - 5;
                     scrollableDivRef.current?.scrollTo({ top: scrollAmount, behavior: 'smooth' });
@@ -164,7 +164,7 @@ const SearchBar: FC = () => {
                 // Check if the item is not in the view
                 if (rect && containerRect && rect.bottom > containerRect.bottom) {
                   const scrollTop = scrollableDivRef.current?.scrollTop ?? 0;
-                  // Scroll down by the difference between the bottom of the item and the bottom of the container
+                  // Scroll down by the difference between the bottom of the item and the bottom of the containers
                   const scrollAmount = scrollTop + rect.bottom - containerRect.bottom + 5;
                   scrollableDivRef.current?.scrollTo({ top: scrollAmount, behavior: 'smooth' });
                 }
@@ -277,7 +277,7 @@ const SearchBar: FC = () => {
    * @param {ReactElement} icon - The icon to be displayed next to each item.
    *
    * If the items array is empty, it returns null.
-   * For each item, it determines its path and section for the button.
+   * For each item, it determines its breadcrumbs and section for the button.
    * Special cases are handled based on the combination of title and section.
    * It returns a div containing the title and NavigationLinks for each item.
    * Each NavigationLink has a mouse enter event that updates the item state.

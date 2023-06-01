@@ -1,56 +1,23 @@
 * {
-  margin: 0;
-  padding: 0;
-  -webkit-font-smoothing: auto;
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box; /* Firefox, other Gecko */
-  box-sizing: border-box; /* Opera/IE 8+ */
-  font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    /*-webkit-font-smoothing: auto;*/
+    /*-webkit-box-sizing: border-box; !* Safari/Chrome, other WebKit *!*/
+    /*-moz-box-sizing: border-box; !* Firefox, other Gecko *!*/
+    box-sizing: border-box; /* Opera/IE 8+ */
+    font-family: 'Poppins', sans-serif;
 }
 
 :root {
-  --scrollBarWidth: 9px;
+    --scrollBarWidth: 9px;
 }
 
 body {
-  overflow-x: hidden;
+    overflow-x: hidden;
 }
 
 .app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.navigation_button-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 2em;
-}
-
-.navigation_button-container a {
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  color: #0f172a;
-  height: 36px;
-  border-radius: 6px;
-  background-color: white;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  padding-left: 12px;
-  padding-right: 10px;
-}
-
-.navigation_button-container a > span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.navigation_button-container a > span:last-child {
-  margin-left: 7px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }

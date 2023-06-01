@@ -1,11 +1,11 @@
-import { FC, ReactNode } from 'react';
+import { FC, ReactElement } from 'react';
 import styles from './styles.module.css';
 
-interface IQuickNavProps {
-  children: ReactNode;
+interface QuickNavProps {
+  children: ReactElement<HTMLSpanElement>[];
 }
 
-const QuickNav: FC<IQuickNavProps> = ({ children }) => {
+const QuickNav: FC<QuickNavProps> = ({ children }) => {
   return (
     <>
       <aside>

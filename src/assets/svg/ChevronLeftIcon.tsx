@@ -11,7 +11,11 @@ const ChevronLeftIcon = () => {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="mr-2 h-4 w-4"
+        style={{
+          height: '1rem',
+          width: '1rem',
+          opacity: '0.5',
+        }}
       >
         <polyline points="15 18 9 12 15 6"></polyline>
       </svg>

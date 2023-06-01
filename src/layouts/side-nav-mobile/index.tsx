@@ -20,7 +20,6 @@ const MobileSideNav: FC = () => {
 
   return (
     <>
-      {/* Blurry overlay */}
       <div className={overlayStyle} onClick={handleCloseModal} />
 
       <div className={contentStyle}>

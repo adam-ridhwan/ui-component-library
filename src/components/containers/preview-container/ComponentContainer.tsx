@@ -1,16 +1,16 @@
 import { FC, ReactNode } from 'react';
-import styles from './PreviewContainer-styles.module.css';
+import styles from './ComponentContainer-styles.module.css';
 
-interface PreviewContainerProps {
+interface ComponentContainerProps {
   children: ReactNode;
 }
 
-const PreviewContainer: FC<PreviewContainerProps> = ({ children }) => {
+const ComponentContainer: FC<ComponentContainerProps> = ({ children }) => {
   return (
     <>
-      <div className={styles.preview_container}>{children}</div>
+      <div className={styles.component_container}>{children}</div>
     </>
   );
 };
 
-export default PreviewContainer;
+export default ComponentContainer;

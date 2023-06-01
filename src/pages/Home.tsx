@@ -4,7 +4,7 @@ import LandingPage from '@/components/landing-page';
 import SearchBar from '@/components/search-bar';
 import Footer from '@/layouts/footer';
 import SideNavBar from '@/layouts/side-nav-mobile';
-import TopNavBar from '@/layouts/top-nav';
+import TopNavBar from '@/layouts/top-nav/TopNavBar.tsx';
 
 const Homepage = () => {
   const style: CSSProperties = {

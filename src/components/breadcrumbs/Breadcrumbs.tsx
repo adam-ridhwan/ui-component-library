@@ -1,6 +1,6 @@
 import ChevronRightIcon from '@/assets/svg/ChevronRightIcon';
 import { FC } from 'react';
-import styles from './styles.module.css';
+import styles from './Breadcrumbs-styles.module.css';
 
 interface BreadcrumbsProps {
   section: string;

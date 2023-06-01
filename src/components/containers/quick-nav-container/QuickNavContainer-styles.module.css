@@ -1,10 +1,11 @@
 
-.body_container {
-    margin-bottom: 2em;
+.quick_nav_container {
+    position: sticky;
+    top: 87px;
 }
 
-.body_container h2 {
-    padding-bottom: 0.25em;
-    margin-bottom: 0.5em;
-    border-bottom: 1px solid #dfe4ed;
+.quick_nav_container a {
+    text-decoration: none;
+    padding-bottom: 0.5em;
+    color: #64748b;
 }

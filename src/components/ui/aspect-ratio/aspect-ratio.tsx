@@ -1,8 +1,2 @@
-const AspectRatio = () => {
-  return (
-    <>
-      <div></div>
-    </>
-  );
-};
+const AspectRatio = () => {};
 export default AspectRatio;

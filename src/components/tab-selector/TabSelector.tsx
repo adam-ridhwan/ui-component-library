@@ -1,6 +1,6 @@
 import { Tab } from '@/hooks/useTab';
 import React from 'react';
-import styles from './styles.module.css';
+import styles from './TabSelector-styles.module.css';
 
 interface TabSelectorProps {
   selectedTab: Tab;

@@ -1,15 +1,13 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from '@/pages/Home';
 import Documentation from '@/pages/Documentation';
-import Introduction from '@/components/introduction';
-import Installation from '@/components/installation';
+import Introduction from '@/components/introduction/Introduction.tsx';
+import Installation from '@/components/installation/Installation.tsx';
 import Theming from '@/components/theming';
 import Typography from '@/components/typography';
 import { AccordionDocs } from '@/components/ui/accordion';
 import { AlertDocs } from '@/components/ui/alert';
 import { AlertDialogDocs } from '@/components/ui/alert-dialog';
-
-import './App.css';
 import { AspectRatioDocs } from '@/components/ui/aspect-ratio';
 import { AvatarDocs } from '@/components/ui/avatar';
 import { BadgeDocs } from '@/components/ui/badge';
@@ -45,6 +43,7 @@ import { TextareaDocs } from '@/components/ui/textarea';
 import { ToastDocs } from '@/components/ui/toast';
 import { ToggleDocs } from '@/components/ui/toggle';
 import { TooltipDocs } from '@/components/ui/tooltip';
+import './App.css';
 
 function App() {
   return (

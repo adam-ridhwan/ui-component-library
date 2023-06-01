@@ -1,12 +1,12 @@
-.preview_container {
+.component_container {
     min-height: 350px;
     width: 100%;
     border: 1px solid #dfe4ed;
     border-radius: 6px;
     margin-top: 2em;
     margin-bottom: 2em;
-    padding: 40px;
+    padding-top: 80px;
+    padding-bottom: 80px;
     display: flex;
     justify-content: center;
-    align-items: center;
 }

@@ -6,8 +6,8 @@ import NavigationLink from '@/components/navigation-link';
 import useResolution, { DeviceType } from '@/hooks/useResolution';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
-import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE } from '@/utils/constants';
-import styles from './styles.module.css';
+import { COMPONENTS } from '@/utils/constants';
+import styles from './TopNavBar-styles.module.css';
 
 const TopNav = () => {
   const { toggleSidebar } = useSideBarContext();
@@ -26,13 +26,13 @@ const TopNav = () => {
           <div className={styles.container}>
             {[DeviceType.DESKTOP, DeviceType.LARGE_DESKTOP].includes(deviceType) ? (
               <div className={styles.desktop_nav}>
-                <NavigationLink path={`${DOC_ROUTE}`} section="docs">
+                <NavigationLink path={`/docs`} section="docs">
                   Documentation
                 </NavigationLink>
-                <NavigationLink path={`${COMPONENTS_ROUTES}/accordion`} section={COMPONENTS[0]}>
+                <NavigationLink path={`/docs/components/accordion`} section={COMPONENTS[0]}>
                   Components
                 </NavigationLink>
-                <NavigationLink path={`${DOC_ROUTE}`} section="docs">
+                <NavigationLink path={`/docs`} section="docs">
                   Examples
                 </NavigationLink>
               </div>
@@ -42,7 +42,7 @@ const TopNav = () => {
               </button>
             )}
 
-            <div className={styles.searchnav_container}>
+            <div className={styles.search_nav_container}>
               <button onClick={handleOpenSearchBar}>
                 <div>
                   {[DeviceType.PHONE, DeviceType.TABLET].includes(deviceType) ? 'Search...' : 'Search documentation...'}
