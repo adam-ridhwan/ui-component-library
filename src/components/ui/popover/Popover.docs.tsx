@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Tab, useTab } from '@/hooks/useTab.ts';
 import { COMPONENTS } from '@/utils/constants.ts';
 import ContentContainer from '@/components/containers/content-container/ContentContainer.tsx';
@@ -69,6 +70,12 @@ const PopoverDocs = () => {
           </QuickNav>
         </QuickNavContainer>
       </ContentContainer>
+=======
+const PopoverDocs = () => {
+  return (
+    <>
+      <div>Popover docs</div>
+>>>>>>> origin/main
     </>
   );
 };

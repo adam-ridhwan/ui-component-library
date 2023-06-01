@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Tab, useTab } from '@/hooks/useTab.ts';
 import { COMPONENTS } from '@/utils/constants.ts';
 import ContentContainer from '@/components/containers/content-container/ContentContainer.tsx';
@@ -66,6 +67,12 @@ const TooltipDocs = () => {
           </QuickNav>
         </QuickNavContainer>
       </ContentContainer>
+=======
+const TooltipDocs = () => {
+  return (
+    <>
+      <div>Tooltip</div>
+>>>>>>> origin/main
     </>
   );
 };

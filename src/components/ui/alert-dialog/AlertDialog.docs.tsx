@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import SectionContainer from '@/components/containers/section-container/SectionContainer.tsx';
 import Breadcrumbs from '@/components/breadcrumbs/Breadcrumbs.tsx';
 import { convertToTitleCase } from '@/utils/convertToTitleCase.ts';
@@ -73,6 +74,12 @@ const AlertDialogDocs = () => {
           </QuickNav>
         </QuickNavContainer>
       </ContentContainer>
+=======
+const AlertDialogDocs = () => {
+  return (
+    <>
+      <div>Alert dialog docs</div>
+>>>>>>> origin/main
     </>
   );
 };

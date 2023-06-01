@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Tab, useTab } from '@/hooks/useTab.ts';
 import { COMPONENTS } from '@/utils/constants.ts';
 import ContentContainer from '@/components/containers/content-container/ContentContainer.tsx';
@@ -69,6 +70,12 @@ const HoverCardDocs = () => {
           </QuickNav>
         </QuickNavContainer>
       </ContentContainer>
+=======
+const HoverCardDocs = () => {
+  return (
+    <>
+      <div>Hover card</div>
+>>>>>>> origin/main
     </>
   );
 };

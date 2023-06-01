@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import ContentContainer from '@/components/containers/content-container/ContentContainer.tsx';
 import SectionContainer from '@/components/containers/section-container/SectionContainer.tsx';
 import Breadcrumbs from '@/components/breadcrumbs/Breadcrumbs.tsx';
@@ -69,6 +70,12 @@ const AlertDocs = () => {
           </QuickNav>
         </QuickNavContainer>
       </ContentContainer>
+=======
+const AlertDocs = () => {
+  return (
+    <>
+      <div>Alert docs</div>
+>>>>>>> origin/main
     </>
   );
 };

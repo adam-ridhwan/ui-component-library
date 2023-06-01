@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Tab, useTab } from '@/hooks/useTab.ts';
 import ContentContainer from '@/components/containers/content-container/ContentContainer.tsx';
 import SectionContainer from '@/components/containers/section-container/SectionContainer.tsx';
@@ -69,6 +70,12 @@ const ComboBoxDocs = () => {
           </QuickNav>
         </QuickNavContainer>
       </ContentContainer>
+=======
+const ComboBoxDocs = () => {
+  return (
+    <>
+      <div>ComboBox</div>
+>>>>>>> origin/main
     </>
   );
 };

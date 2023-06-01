@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Tab, useTab } from '@/hooks/useTab.ts';
 import ContentContainer from '@/components/containers/content-container/ContentContainer.tsx';
 import SectionContainer from '@/components/containers/section-container/SectionContainer.tsx';
@@ -71,6 +72,12 @@ const ContextMenuDocs = () => {
           </QuickNav>
         </QuickNavContainer>
       </ContentContainer>
+=======
+const ContextMenuDocs = () => {
+  return (
+    <>
+      <div>Context Menu docs</div>
+>>>>>>> origin/main
     </>
   );
 };

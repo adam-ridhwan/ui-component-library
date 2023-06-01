@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Tab, useTab } from '@/hooks/useTab.ts';
 import { COMPONENTS } from '@/utils/constants.ts';
 import ContentContainer from '@/components/containers/content-container/ContentContainer.tsx';
@@ -73,6 +74,12 @@ const TabsDocs = () => {
           </QuickNav>
         </QuickNavContainer>
       </ContentContainer>
+=======
+const TabsDocs = () => {
+  return (
+    <>
+      <div>tabs</div>
+>>>>>>> origin/main
     </>
   );
 };
