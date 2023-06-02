@@ -15,14 +15,12 @@ import { convertToTitleCase } from '@/utils/convertToTitleCase.ts';
 import ChevronRightIcon from '@/assets/svg/ChevronRightIcon.tsx';
 import QuickNavContainer from '@/components/containers/quick-nav-container/QuickNavContainer.tsx';
 import QuickNav from '@/layouts/quick-nav';
+import { getPaginationIndex } from '@/utils/getPaginationIndex.ts';
 
 const TableDocs = () => {
   const { selectedTab, switchTab } = useTab();
 
-  const COMPONENT = 'table';
-  const COMPONENT_INDEX = COMPONENTS.indexOf(COMPONENT);
-  const PREVIOUS_INDEX = COMPONENT_INDEX - 1;
-  const NEXT_INDEX = COMPONENT_INDEX + 1;
+  const [PREVIOUS_INDEX, NEXT_INDEX] = getPaginationIndex('table');
 
   return (
     <>

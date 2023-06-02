@@ -1,4 +1,4 @@
-import ChevronRight from '@/assets/svg/ChevronRightIcon';
+// import ChevronRight from '@/assets/svg/ChevronRightIcon';
 import NavigationLink from '@/components/navigation-link';
 import Breadcrumbs from '@/components/breadcrumbs/Breadcrumbs.tsx';
 import * as Accordion from '@/components/ui/accordion/index';
@@ -6,7 +6,7 @@ import { Tab, useTab } from '@/hooks/useTab';
 import Divider from '@/layouts/divider';
 import QuickNav from '@/layouts/quick-nav';
 import TabSelector from '@/layouts/tab-selector';
-import { COMPONENTS } from '@/utils/constants';
+import { COMPONENTS, DOCUMENTATION } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import { FC } from 'react';
 import { getPaginationIndex } from '@/utils/getPaginationIndex.ts';
@@ -20,13 +20,12 @@ import PaginationContainer from '@/components/containers/pagination-container/Pa
 import ChevronLeftIcon from '@/assets/svg/ChevronLeftIcon.tsx';
 import ChevronRightIcon from '@/assets/svg/ChevronRightIcon';
 
-import styles from './AccordionDocsStyles.module.css';
 import './AccordionStyles.css';
 
 const AccordionDocs: FC = () => {
   const { selectedTab, switchTab } = useTab();
 
-  const [PREVIOUS_INDEX, NEXT_INDEX] = getPaginationIndex('accordion');
+  const [, NEXT_INDEX] = getPaginationIndex('accordion');
 
   return (
     <>
@@ -43,8 +42,8 @@ const AccordionDocs: FC = () => {
 
           <ComponentContainer>
             {selectedTab === Tab.PREVIEW && (
-              <div className={styles.component_container}>
-                <Accordion.Root className="AccordionRoot" defaultIndex={0} type="single">
+              <>
+                <Accordion.Root className="AccordionRoot" defaultIndex={-1} type="single">
                   <Accordion.Item className="AccordionItem" index={0}>
                     <Accordion.Trigger className="AccordionTrigger">Why Sustainable Living?</Accordion.Trigger>
                     <Accordion.Content className="AccordionContent">
@@ -73,30 +72,27 @@ const AccordionDocs: FC = () => {
                     <Accordion.Content className="AccordionContent">
                       <div className="AccordionContentText">
                         Embracing sustainable living has a broader impact than just preserving our natural resources. It
-                        can also contribute to our health and wellbeing, help us save money, and create stronger
+                        can also contribute to our health and well-being, help us save money, and create stronger
                         communities.
                       </div>
                     </Accordion.Content>
                   </Accordion.Item>
                 </Accordion.Root>
-              </div>
+              </>
             )}
 
-            {selectedTab === Tab.CODE && <div>Code content here...</div>}
+            {selectedTab === Tab.CODE && <code>Code content here...</code>}
           </ComponentContainer>
 
           <Divider />
 
           <PaginationContainer>
-            {/*<NavigationLink*/}
-            {/*  path={`/docs/components/${COMPONENTS[PREVIOUS_INDEX]}`}*/}
-            {/*  section={COMPONENTS[PREVIOUS_INDEX]}*/}
-            {/*>*/}
-            {/*  <span>*/}
-            {/*    <ChevronLeftIcon />*/}
-            {/*  </span>*/}
-            {/*  <span>{convertToTitleCase(COMPONENTS[PREVIOUS_INDEX])}</span>*/}
-            {/*</NavigationLink>*/}
+            <NavigationLink path={`/docs/typography`} section={'typography'}>
+              <span>
+                <ChevronLeftIcon />
+              </span>
+              <span>{convertToTitleCase(DOCUMENTATION[DOCUMENTATION.length - 1])}</span>
+            </NavigationLink>
 
             <NavigationLink path={`/docs/components/${COMPONENTS[NEXT_INDEX]}`} section={COMPONENTS[NEXT_INDEX]}>
               <span>{convertToTitleCase(COMPONENTS[NEXT_INDEX])}</span>

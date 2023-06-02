@@ -14,14 +14,12 @@ import ChevronLeftIcon from '@/assets/svg/ChevronLeftIcon.tsx';
 import { convertToTitleCase } from '@/utils/convertToTitleCase.ts';
 import QuickNavContainer from '@/components/containers/quick-nav-container/QuickNavContainer.tsx';
 import QuickNav from '@/layouts/quick-nav';
+import { getPaginationIndex } from '@/utils/getPaginationIndex.ts';
 
 const TooltipDocs = () => {
   const { selectedTab, switchTab } = useTab();
 
-  const COMPONENT = 'tooltip';
-  const COMPONENT_INDEX = COMPONENTS.indexOf(COMPONENT);
-  const PREVIOUS_INDEX = COMPONENT_INDEX - 1;
-  const NEXT_INDEX = COMPONENT_INDEX + 1;
+  const [PREVIOUS_INDEX] = getPaginationIndex('tooltip');
 
   return (
     <>
