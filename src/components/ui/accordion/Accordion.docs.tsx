@@ -49,8 +49,7 @@ const AccordionDocs: FC = () => {
                     <Accordion.Content className="AccordionContent">
                       <div className="AccordionContentText">
                         Sustainable living isn't just a trend, it's a fundamental shift in how we interact with our
-                        environment. The choices we make every day, from the food we eat to the transportation we use,
-                        can have a major impact on our planet.
+                        environment.
                       </div>
                     </Accordion.Content>
                   </Accordion.Item>
