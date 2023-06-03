@@ -44,7 +44,7 @@ const AccordionDocs: FC = () => {
           <ComponentContainer>
             {selectedTab === Tab.PREVIEW && (
               <div className={styles.component_container}>
-                <Accordion.Root className="AccordionRoot" defaultIndex={0} type="single">
+                <Accordion.Root className="AccordionRoot" defaultIndex={-1} type="single">
                   <Accordion.Item className="AccordionItem" index={0}>
                     <Accordion.Trigger className="AccordionTrigger">Why Sustainable Living?</Accordion.Trigger>
                     <Accordion.Content className="AccordionContent">
