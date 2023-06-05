@@ -13,35 +13,50 @@ const DesktopSideNavBar = () => {
       <aside>
         <div className={styles.container}>
           <div className={styles.instructions_container}>
-            <span>Getting started</span>
+            <span className={styles.title}>Getting started</span>
             {DOCUMENTATION.map((section, index) => {
               if (section === 'introduction')
                 return (
-                  <NavigationLink key={index} path={`${DOC_ROUTE}`} section="docs">
-                    <span className={currentSection === 'docs' ? styles.active_section : ''}>
-                      {convertToTitleCase(section)}
-                    </span>
+                  <NavigationLink
+                    key={index}
+                    path={`${DOC_ROUTE}`}
+                    section="docs"
+                    className={`${
+                      currentSection === 'docs' ? styles.navigation_link_active : styles.navigation_link_not_active
+                    }`}
+                  >
+                    <span>{convertToTitleCase(section)}</span>
                   </NavigationLink>
                 );
 
               return (
-                <NavigationLink key={index} path={`${DOC_ROUTE}/${section}`} section={section}>
-                  <span className={currentSection === section ? styles.active_section : ''}>
-                    {convertToTitleCase(section)}
-                  </span>
+                <NavigationLink
+                  key={index}
+                  path={`${DOC_ROUTE}/${section}`}
+                  section={section}
+                  className={`${
+                    currentSection === section ? styles.navigation_link_active : styles.navigation_link_not_active
+                  }`}
+                >
+                  <span>{convertToTitleCase(section)}</span>
                 </NavigationLink>
               );
             })}
           </div>
 
           <div className={styles.components_container}>
-            <span>Components</span>
+            <span className={styles.title}>Components</span>
             {COMPONENTS.map((component, index) => {
               return (
-                <NavigationLink key={index} path={`${COMPONENTS_ROUTES}/${component}`} section={component}>
-                  <span className={currentSection === component ? styles.active_section : ''}>
-                    {convertToTitleCase(component)}
-                  </span>
+                <NavigationLink
+                  key={index}
+                  path={`${COMPONENTS_ROUTES}/${component}`}
+                  section={component}
+                  className={`${
+                    currentSection === component ? styles.navigation_link_active : styles.navigation_link_not_active
+                  }`}
+                >
+                  <span>{convertToTitleCase(component)}</span>
                 </NavigationLink>
               );
             })}

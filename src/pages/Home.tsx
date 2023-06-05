@@ -3,7 +3,7 @@ import { CSSProperties } from 'react';
 import LandingPage from '@/components/landing-page';
 import SearchBar from '@/components/search-bar';
 import Footer from '@/layouts/footer';
-import SideNavBar from '@/layouts/side-nav-mobile';
+import SideNavBar from '@/layouts/side-nav-mobile/SideNavMobile.tsx';
 import TopNavBar from '@/layouts/top-nav/TopNavBar.tsx';
 
 const Homepage = () => {

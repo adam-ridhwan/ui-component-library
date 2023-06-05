@@ -1,5 +1,5 @@
 import SearchBar from '@/components/search-bar';
-import SideNavBar from '@/layouts/side-nav-mobile';
+import SideNavBar from '@/layouts/side-nav-mobile/SideNavMobile.tsx';
 import TopNavBar from '@/layouts/top-nav/TopNavBar.tsx';
 import { CSSProperties } from 'react';
 

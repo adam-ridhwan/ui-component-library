@@ -1,43 +1,42 @@
 .wrapper {
-  display: flex;
-  justify-content: center;
-  background-color: white;
-  flex: 1;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    flex: 1;
 }
 
 .container {
-  position: relative;
-  display: flex;
-  padding: var(--desktop-horizontal-padding);
-  width: 100%;
-  max-width: var(--desktop-width);
+    position: relative;
+    display: flex;
+    /*padding: var(--desktop-horizontal-padding);*/
+    width: 100%;
+    max-width: var(--desktop-width);
 }
 
 .middle_container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-
-  padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 30px;
 }
 
 /* iPad (Portrait) */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-  .middle_container {
-    margin-left: 30px;
-  }
+    .middle_container {
+        margin-left: 30px;
+    }
 }
 
 /* iPad (Landscape) */
 @media screen and (min-width: 1024px) and (max-width: 1199px) {
-  .middle_container {
-    margin-left: 30px;
-  }
+    .middle_container {
+        margin-left: 30px;
+    }
 }
 
 /* Desktop */
 @media screen and (min-width: 1200px) {
-  .middle_container {
-    margin-left: 40px;
-  }
+    .middle_container {
+        margin-left: 40px;
+    }
 }

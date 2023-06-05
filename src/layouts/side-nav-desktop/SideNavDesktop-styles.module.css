@@ -7,8 +7,8 @@
     overflow-y: scroll;
     height: 100%;
     max-height: calc(100vh - 58px);
-    padding-top: 30px;
     border-right: 1px solid #dfe4ed;
+    padding: 30px 10px 100px;
 }
 
 .instructions_container {
@@ -23,41 +23,37 @@
     padding-bottom: 50px;
 }
 
-.instructions_container a,
-.components_container a {
-    height: 35px;
-    text-align: left;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    text-decoration: none;
-    color: 'inherit';
-}
 
-.instructions_container span,
-.components_container span {
+.title {
     height: 30px;
+    padding-right: 1rem;
+    padding-left: 1rem;
 }
 
-.instructions_container a:not(:first-child),
-.components_container a:not(:first-child) {
+
+.navigation_link_not_active,
+.navigation_link_active {
     font-size: 14px;
     color: #64748b;
     font-weight: 400;
     line-height: 1.8em;
+    height: 30px;
+    padding: 0 1rem;
+    margin-bottom: 2px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
 }
 
-
-.instructions_container a:not(:first-child):hover,
-.components_container a:not(:first-child):hover {
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-.active_section {
+.navigation_link_active {
     color: #0f172a;
     font-weight: 500;
-    outline: 2px solid blue;
+    background: lightgray;
+    border-radius: 15px;
+}
+
+.navigation_link_not_active:hover {
+    cursor: pointer;
+    background-color: whitesmoke;
+    border-radius: 15px;
 }

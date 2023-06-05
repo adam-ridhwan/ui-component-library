@@ -12,10 +12,11 @@ interface NavigationLinkProps {
   closeModal?: () => void;
   style?: object;
   onMouseEnter?: () => void;
+  className?: string;
 }
 
 const NavigationLink: FC<NavigationLinkProps> = forwardRef<HTMLAnchorElement, NavigationLinkProps>(
-  ({ path, sectionRef, section, children, closeModal, style, onMouseEnter }, ref) => {
+  ({ path, sectionRef, section, children, closeModal, style, onMouseEnter, className }, ref) => {
     const navigate = useNavigate();
     const location = useLocation();
     const { setCurrentSection } = useSideBarContext();
@@ -28,7 +29,7 @@ const NavigationLink: FC<NavigationLinkProps> = forwardRef<HTMLAnchorElement, Na
 
       // Determine whether the navigation should be performed
       const shouldNavigate =
-        location.pathname !== pathWithoutHash || // Different breadcrumbs
+        location.pathname !== pathWithoutHash || // Different path
         (!hash && location.hash) || // Navigating from hashed to non-hashed
         (hash && location.hash !== `#${hash}`); // Different hash
 
@@ -40,7 +41,14 @@ const NavigationLink: FC<NavigationLinkProps> = forwardRef<HTMLAnchorElement, Na
     };
 
     return (
-      <a ref={ref} href={path} onClick={handleNavigateToSection} onMouseEnter={onMouseEnter} style={style}>
+      <a
+        ref={ref}
+        href={path}
+        onClick={handleNavigateToSection}
+        onMouseEnter={onMouseEnter}
+        style={style}
+        className={className}
+      >
         {children}
       </a>
     );
