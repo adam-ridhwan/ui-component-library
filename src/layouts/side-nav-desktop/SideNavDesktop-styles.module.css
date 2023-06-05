@@ -1,0 +1,63 @@
+.container {
+    position: sticky;
+    top: 57px;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    overflow-y: scroll;
+    height: 100%;
+    max-height: calc(100vh - 58px);
+    padding-top: 30px;
+    border-right: 1px solid #dfe4ed;
+}
+
+.instructions_container {
+    display: flex;
+    flex-direction: column;
+}
+
+.components_container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    padding-bottom: 50px;
+}
+
+.instructions_container a,
+.components_container a {
+    height: 35px;
+    text-align: left;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    text-decoration: none;
+    color: 'inherit';
+}
+
+.instructions_container span,
+.components_container span {
+    height: 30px;
+}
+
+.instructions_container a:not(:first-child),
+.components_container a:not(:first-child) {
+    font-size: 14px;
+    color: #64748b;
+    font-weight: 400;
+    line-height: 1.8em;
+}
+
+
+.instructions_container a:not(:first-child):hover,
+.components_container a:not(:first-child):hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.active_section {
+    color: #0f172a;
+    font-weight: 500;
+    outline: 2px solid blue;
+}

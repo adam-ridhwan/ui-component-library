@@ -2,7 +2,8 @@ import NavigationLink from '@/components/navigation-link';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE, DOCUMENTATION } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
-import styles from './styles.module.css';
+
+import styles from './SideNavDesktop-styles.module.css';
 
 const DesktopSideNavBar = () => {
   const { currentSection } = useSideBarContext();

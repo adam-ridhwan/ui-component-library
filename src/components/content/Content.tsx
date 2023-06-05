@@ -6,7 +6,7 @@ import Installation from '@/components/installation/Installation.tsx';
 import Introduction from '@/components/introduction/Introduction.tsx';
 import Theming from '@/components/theming';
 import Typography from '@/components/typography';
-import DesktopSideNavBar from '@/layouts/side-nav-desktop';
+import DesktopSideNavBar from '@/layouts/side-nav-desktop/SideNavDesktop.tsx';
 import { AccordionDocs } from '@/components/ui/accordion';
 import { AlertDocs } from '@/components/ui/alert';
 import { AlertDialogDocs } from '@/components/ui/alert-dialog';
