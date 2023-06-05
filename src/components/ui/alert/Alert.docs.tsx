@@ -8,7 +8,7 @@ import TabSelector from '@/layouts/tab-selector';
 import ComponentContainer from '@/components/containers/component-container/ComponentContainer.tsx';
 import { Tab, useTab } from '@/hooks/useTab.ts';
 import PaginationContainer from '@/components/containers/pagination-container/PaginationContainer.tsx';
-import NavigationLink from '@/components/navigation-link';
+import NavigationLink from '@/components/navigation-link/NavigationLink.tsx';
 import ChevronRightIcon from '@/assets/svg/ChevronRightIcon.tsx';
 import ChevronLeftIcon from '@/assets/svg/ChevronLeftIcon.tsx';
 import QuickNavContainer from '@/components/containers/quick-nav-container/QuickNavContainer.tsx';

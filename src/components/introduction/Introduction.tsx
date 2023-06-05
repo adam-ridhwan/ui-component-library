@@ -5,7 +5,7 @@ import Breadcrumbs from '@/components/breadcrumbs/Breadcrumbs.tsx';
 import Divider from '@/layouts/divider';
 import QuickNav from '@/layouts/quick-nav';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
-import NavigationLink from '@/components/navigation-link';
+import NavigationLink from '@/components/navigation-link/NavigationLink.tsx';
 import ContentContainer from '@/components/containers/content-container/ContentContainer.tsx';
 import SectionContainer from '@/components/containers/section-container/SectionContainer.tsx';
 import BodyContainer from '@/components/containers/body-container/BodyContainer.tsx';

@@ -1,14 +1,14 @@
-import {FC} from 'react';
-import NavigationLink from '@/components/navigation-link';
+import { FC } from 'react';
+import NavigationLink from '@/components/navigation-link/NavigationLink.tsx';
 import Breadcrumbs from '@/components/breadcrumbs/Breadcrumbs.tsx';
 import * as Accordion from '@/components/ui/accordion/index';
-import {Tab, useTab} from '@/hooks/useTab';
+import { Tab, useTab } from '@/hooks/useTab';
 import Divider from '@/layouts/divider';
 import QuickNav from '@/layouts/quick-nav';
 import TabSelector from '@/layouts/tab-selector';
-import {COMPONENTS, DOCUMENTATION} from '@/utils/constants';
-import {convertToTitleCase} from '@/utils/convertToTitleCase';
-import {getPaginationIndex} from '@/utils/getPaginationIndex.ts';
+import { COMPONENTS, DOCUMENTATION } from '@/utils/constants';
+import { convertToTitleCase } from '@/utils/convertToTitleCase';
+import { getPaginationIndex } from '@/utils/getPaginationIndex.ts';
 import ContentContainer from '@/components/containers/content-container/ContentContainer.tsx';
 import SectionContainer from '@/components/containers/section-container/SectionContainer.tsx';
 import Heading from '@/components/containers/typography/heading/Heading.tsx';
@@ -22,7 +22,7 @@ import ChevronRightIcon from '@/assets/svg/ChevronRightIcon';
 import './AccordionStyles.css';
 
 const AccordionDocs: FC = () => {
-  const {selectedTab, switchTab} = useTab();
+  const { selectedTab, switchTab } = useTab();
 
   const [, NEXT_INDEX] = getPaginationIndex('accordion');
 
@@ -30,14 +30,14 @@ const AccordionDocs: FC = () => {
     <>
       <ContentContainer>
         <SectionContainer>
-          <Breadcrumbs section={'Accordion'}/>
+          <Breadcrumbs section={'Accordion'} />
           <Heading>Accordion</Heading>
           <Subheading>
             A vertically stacked set of interactive headings that each reveal an associated section of content.
           </Subheading>
-          <Divider/>
+          <Divider />
 
-          <TabSelector {...{selectedTab, switchTab}} />
+          <TabSelector {...{ selectedTab, switchTab }} />
 
           <ComponentContainer>
             {selectedTab === Tab.PREVIEW && (
@@ -83,7 +83,7 @@ const AccordionDocs: FC = () => {
             {selectedTab === Tab.CODE && <div>Code content here...</div>}
           </ComponentContainer>
 
-          <Divider/>
+          <Divider />
 
           <PaginationContainer>
             <NavigationLink
@@ -91,7 +91,7 @@ const AccordionDocs: FC = () => {
               section={DOCUMENTATION[DOCUMENTATION.length - 1]}
             >
               <span>
-                <ChevronLeftIcon/>
+                <ChevronLeftIcon />
               </span>
               <span>{convertToTitleCase(DOCUMENTATION[DOCUMENTATION.length - 1])}</span>
             </NavigationLink>
@@ -99,7 +99,7 @@ const AccordionDocs: FC = () => {
             <NavigationLink path={`/docs/components/${COMPONENTS[NEXT_INDEX]}`} section={COMPONENTS[NEXT_INDEX]}>
               <span>{convertToTitleCase(COMPONENTS[NEXT_INDEX])}</span>
               <span>
-                <ChevronRightIcon/>
+                <ChevronRightIcon />
               </span>
             </NavigationLink>
           </PaginationContainer>
@@ -116,4 +116,4 @@ const AccordionDocs: FC = () => {
   );
 };
 
-export {AccordionDocs};
+export { AccordionDocs };

@@ -4,7 +4,7 @@ import ContentContainer from '@/components/containers/content-container/ContentC
 import SectionContainer from '@/components/containers/section-container/SectionContainer.tsx';
 import BodyContainer from '@/components/containers/body-container/BodyContainer.tsx';
 import PaginationContainer from '@/components/containers/pagination-container/PaginationContainer.tsx';
-import NavigationLink from '@/components/navigation-link';
+import NavigationLink from '@/components/navigation-link/NavigationLink.tsx';
 import { DOC_ROUTE, DOCUMENTATION } from '@/utils/constants.ts';
 import { convertToTitleCase } from '@/utils/convertToTitleCase.ts';
 import ChevronRightIcon from '@/assets/svg/ChevronRightIcon.tsx';

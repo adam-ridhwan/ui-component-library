@@ -9,7 +9,7 @@ import Divider from '@/layouts/divider';
 import TabSelector from '@/layouts/tab-selector';
 import ComponentContainer from '@/components/containers/component-container/ComponentContainer.tsx';
 import PaginationContainer from '@/components/containers/pagination-container/PaginationContainer.tsx';
-import NavigationLink from '@/components/navigation-link';
+import NavigationLink from '@/components/navigation-link/NavigationLink.tsx';
 import ChevronLeftIcon from '@/assets/svg/ChevronLeftIcon.tsx';
 import { convertToTitleCase } from '@/utils/convertToTitleCase.ts';
 import QuickNavContainer from '@/components/containers/quick-nav-container/QuickNavContainer.tsx';
