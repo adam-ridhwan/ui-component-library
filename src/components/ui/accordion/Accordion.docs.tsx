@@ -48,8 +48,7 @@ const AccordionDocs: FC = () => {
                     <Accordion.Content className="AccordionContent">
                       <div className="AccordionContentText">
                         Sustainable living isn't just a trend, it's a fundamental shift in how we interact with our
-                        environment. The choices we make every day, from the food we eat to the transportation we use,
-                        can have a major impact on our planet.
+                        environment.
                       </div>
                     </Accordion.Content>
                   </Accordion.Item>
@@ -60,8 +59,7 @@ const AccordionDocs: FC = () => {
                     </Accordion.Trigger>
                     <Accordion.Content className="AccordionContent">
                       <div className="AccordionContentText">
-                        Adopting a more sustainable lifestyle doesn't have to be complicated or inconvenient. Here are a
-                        few simple ways you can make a difference: Reduce, Reuse, Recycle: This age-old mantra still
+                        Adopting a more sustainable lifestyle doesn't have to be complicated or inconvenient.
                       </div>
                     </Accordion.Content>
                   </Accordion.Item>
@@ -70,9 +68,7 @@ const AccordionDocs: FC = () => {
                     <Accordion.Trigger className="AccordionTrigger">The Impact of Sustainable Living</Accordion.Trigger>
                     <Accordion.Content className="AccordionContent">
                       <div className="AccordionContentText">
-                        Embracing sustainable living has a broader impact than just preserving our natural resources. It
-                        can also contribute to our health and well-being, help us save money, and create stronger
-                        communities.
+                        Embracing sustainable living has a broader impact than just preserving our natural resources.
                       </div>
                     </Accordion.Content>
                   </Accordion.Item>

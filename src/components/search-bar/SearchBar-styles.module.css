@@ -1,0 +1,223 @@
+.overlay {
+    position: fixed;
+    height: inherit;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.overlay_visible {
+    background-color: rgba(255, 255, 255, 0.5);
+    opacity: 1;
+    pointer-events: auto;
+    height: 100%;
+    z-index: 10;
+}
+
+.transition {
+    transition: transform 0.2s ease-in-out;
+}
+
+.content {
+    position: fixed;
+    max-height: 500px;
+    width: 100%;
+    opacity: 0;
+    background-color: white;
+    pointer-events: none;
+    box-shadow: 0 10px 220px rgba(0, 0, 0, 0.19), 0 10px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(20%);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.content_active {
+    transform: translateY(0%);
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 11;
+}
+
+.searchbar_container {
+    display: flex;
+    height: 50px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 12px;
+    gap: 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.searchbar_container div,
+.searchbar_container button {
+    height: 24px;
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+    background-color: white;
+}
+
+.searchbar_container input {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.searchbar_container input::placeholder {
+    color: rgb(148 163 184);
+}
+
+.visuallyHidden {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+}
+
+.section_wrapper {
+    /* outline: 2px solid blue; */
+    height: 300px;
+    overflow-y: auto;
+}
+
+.section_container {
+    padding: 4px 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.section_container a {
+    padding: 12px 8px;
+    background-color: white;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    color: #0f172a;
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.close_icon {
+    cursor: pointer;
+}
+
+.section {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.section span {
+    display: flex;
+    align-items: center;
+}
+
+.title {
+    padding: 6px 8px;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.shortcut_instructions {
+    height: 40px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.no_results {
+    padding: 12px 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: 14px;
+    color: #0f172a;
+    min-height: 100px;
+}
+
+
+/* iPad (Portrait) */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .content {
+        position: fixed;
+        top: 40%;
+        left: 50%;
+        width: 100%;
+        width: 500px;
+        opacity: 0;
+        background-color: white;
+        pointer-events: none;
+        box-shadow: 0 10px 220px rgba(0, 0, 0, 0.19), 0 10px 15px rgba(0, 0, 0, 0.1);
+        transform: translate(-50%, -50%) scale(0.9);
+        border: 1px solid lightgray;
+        border-radius: 8px;
+    }
+
+    .content_active {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+/* iPad (Landscape) */
+@media screen and (min-width: 1024px) and (max-width: 1199px) {
+    .content {
+        position: fixed;
+        top: 40%;
+        left: 50%;
+        width: 100%;
+        width: 500px;
+        opacity: 0;
+        background-color: white;
+        pointer-events: none;
+        box-shadow: 0 10px 220px rgba(0, 0, 0, 0.19), 0 10px 15px rgba(0, 0, 0, 0.1);
+        transform: translate(-50%, -50%) scale(0.9);
+        border: 1px solid lightgray;
+        border-radius: 8px;
+    }
+
+    .content_active {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+/* Desktop */
+@media screen and (min-width: 1200px) {
+    .content {
+        position: fixed;
+        top: 40%;
+        left: 50%;
+        width: 100%;
+        width: 500px;
+        opacity: 0;
+        background-color: white;
+        pointer-events: none;
+        box-shadow: 0 10px 220px rgba(0, 0, 0, 0.19), 0 10px 15px rgba(0, 0, 0, 0.1);
+        transform: translate(-50%, -50%) scale(0.9);
+        border: 1px solid lightgray;
+        border-radius: 8px;
+    }
+
+    .content_active {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+        pointer-events: auto;
+    }
+}

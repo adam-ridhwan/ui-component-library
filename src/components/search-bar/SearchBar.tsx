@@ -10,7 +10,8 @@ import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE, DOCUMENTATION, NAVIGATION_MEN
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import { ChangeEvent, createRef, FC, ReactElement, RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import styles from './styles.module.css';
+
+import styles from './SearchBar-styles.module.css';
 
 const SearchBar: FC = () => {
   const navigate = useNavigate();
@@ -44,7 +45,6 @@ const SearchBar: FC = () => {
   const scrollableDivRef = useRef<HTMLDivElement | null>(null);
   const itemRefs = useRef<{ [key: string]: RefObject<HTMLAnchorElement> }>({});
 
-  //* ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   /**
    * Side effect that runs when `searchItemsState.combinedSearchItems` changes.
    *
@@ -62,8 +62,6 @@ const SearchBar: FC = () => {
     });
   }, [searchItemsState.combinedSearchItems]);
 
-  //*
-  // ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   /**
    * Sets the state of search items and item state to their initial values.
    *
@@ -79,7 +77,6 @@ const SearchBar: FC = () => {
     });
   }, [setSearchItemsState, initialSearchItemsState]);
 
-  //* ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   /**
    * Closes the search modal.
    *
@@ -98,7 +95,6 @@ const SearchBar: FC = () => {
     document.body.style.overflowY = 'auto';
   }, [toggleSearchBar, searchInputRef, handleSetInitialState]);
 
-  //* ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   /**
    * Listens to keyboard events globally and responds accordingly.
    *
@@ -106,7 +102,7 @@ const SearchBar: FC = () => {
    * - 'Escape': If the search bar is toggled on, it will close the modal.
    * - 'K' (along with 'CommandDocs' or 'Control'): It prevents the default behaviour and opens the search bar.
    * - 'ArrowUp'/'ArrowDown': It handles navigation to the previous/next item in the list.
-   * - 'Enter': It handles navigation to a particular route based on the last selected item..
+   * - 'Enter': It handles navigation to a particular route based on the last selected item.
    */
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -181,7 +177,7 @@ const SearchBar: FC = () => {
 
       // Check if 'Enter is pressed
       if (event.key === 'Enter' && isSearchBarToggled && selectionState.lastSelectedItem) {
-        let path = `${DOC_ROUTE}`;
+        let path;
         let currentSection = selectionState.lastSelectedItem;
 
         switch (selectionState.lastSelectedItem) {
@@ -233,7 +229,6 @@ const SearchBar: FC = () => {
     handleOpenSearchBar,
   ]);
 
-  //* ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   /**
    * This `useEffect` hook is utilized to handle window resize events to disable animations.
    *
@@ -267,7 +262,6 @@ const SearchBar: FC = () => {
     };
   }, [isWindowResized, searchInputRef]);
 
-  // ———————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   /**
    * This function is used to render a section with multiple navigation items.
    *
@@ -346,7 +340,6 @@ const SearchBar: FC = () => {
     );
   };
 
-  // ———————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   /**
    * This function is used to handle search inputs and update the state accordingly.
    *
@@ -386,7 +379,6 @@ const SearchBar: FC = () => {
     setItemState((prevState) => ({ ...prevState, lastSelectedItem: filteredCombinedSearchItems[0] }));
   };
 
-  //* ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   /**
    * This useEffect hook is responsible for handling mouse movement when the search bar is toggled.
    *
@@ -411,10 +403,14 @@ const SearchBar: FC = () => {
       // Check if the mouse is over the scrollable div
       if (scrollableDiv && scrollableDiv.contains(e.target as Node)) {
         setIsTyping(false);
-        setItemState((prevState) => ({
-          ...prevState,
-          lastSelectedItem: prevState.lastHoveredItem,
-        }));
+        setItemState((prevState) => {
+          // Only update the state if lastSelectedItem is different from lastHoveredItem
+          if (prevState.lastSelectedItem !== prevState.lastHoveredItem) {
+            return { ...prevState, lastSelectedItem: prevState.lastHoveredItem };
+          }
+          // If they are the same, return the previous state to prevent unnecessary re-renders
+          return prevState;
+        });
       }
     };
     window.addEventListener('mousemove', handleMouseMove);
@@ -423,12 +419,13 @@ const SearchBar: FC = () => {
     };
   }, [isSearchBarToggled, scrollableDivRef]);
 
-  //* ————————————————————————————————————————————————————————————————————————————————————————————————
-
   return (
     <>
       {/* Blurry overlay */}
       <div className={overlayStyle} onClick={handleCloseModal} />
+      {/*<Overlay className={overlayStyle} handleCloseModal={handleCloseModal} />*/}
+
+      {/* Search bar */}
 
       <div className={contentStyle}>
         <label htmlFor="search" className={styles.visuallyHidden}>

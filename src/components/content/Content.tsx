@@ -8,20 +8,21 @@ import Theming from '@/components/theming';
 import Typography from '@/components/typography';
 import DesktopSideNavBar from '@/layouts/side-nav-desktop/SideNavDesktop.tsx';
 import { AccordionDocs } from '@/components/ui/accordion';
-import { AlertDocs } from '@/components/ui/alert';
 import { AlertDialogDocs } from '@/components/ui/alert-dialog';
+import { AlertDocs } from '@/components/ui/alert';
 import { AspectRatioDocs } from '@/components/ui/aspect-ratio';
 import { AvatarDocs } from '@/components/ui/avatar';
 import { BadgeDocs } from '@/components/ui/badge';
+import { BreadcrumbDocs } from '@/components/ui/breadcrumb';
 import { ButtonDocs } from '@/components/ui/button';
-import { CardDocs } from '@/components/ui/card';
 import { CalendarDocs } from '@/components/ui/calendar';
+import { CardDocs } from '@/components/ui/card';
 import { CheckboxDocs } from '@/components/ui/checkbox';
 import { CollapsibleDocs } from '@/components/ui/collapsible';
 import { ComboBoxDocs } from '@/components/ui/combo-box';
 import { CommandDocs } from '@/components/ui/command';
-import { DataTableDocs } from '@/components/ui/data-table';
 import { ContextMenuDocs } from '@/components/ui/context-menu';
+import { DataTableDocs } from '@/components/ui/data-table';
 import { DatePickerDocs } from '@/components/ui/date-picker';
 import { DialogDocs } from '@/components/ui/dialog';
 import { DropdownMenuDocs } from '@/components/ui/dropdown-menu';
@@ -43,9 +44,9 @@ import { SwitchDocs } from '@/components/ui/switch';
 import { TableDocs } from '@/components/ui/table';
 import { TabsDocs } from '@/components/ui/tabs';
 import { TextareaDocs } from '@/components/ui/textarea';
+import { ToastDocs } from '@/components/ui/toast';
 import { ToggleDocs } from '@/components/ui/toggle';
 import { TooltipDocs } from '@/components/ui/tooltip';
-import { ToastDocs } from '@/components/ui/toast';
 
 import styles from './Content-styles.module.css';
 
@@ -80,6 +81,7 @@ const Content: FC = () => {
             {currentSection === 'aspect-ratio' && <AspectRatioDocs />}
             {currentSection === 'avatar' && <AvatarDocs />}
             {currentSection === 'badge' && <BadgeDocs />}
+            {currentSection === 'breadcrumb' && <BreadcrumbDocs />}
             {currentSection === 'button' && <ButtonDocs />}
             {currentSection === 'calendar' && <CalendarDocs />}
             {currentSection === 'card' && <CardDocs />}

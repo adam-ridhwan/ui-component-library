@@ -12,6 +12,7 @@ import { AspectRatioDocs } from '@/components/ui/aspect-ratio';
 import { AvatarDocs } from '@/components/ui/avatar';
 import { BadgeDocs } from '@/components/ui/badge';
 import { ButtonDocs } from '@/components/ui/button';
+import { BreadcrumbDocs } from '@/components/ui/breadcrumb';
 import { CalendarDocs } from '@/components/ui/calendar';
 import { CardDocs } from '@/components/ui/card';
 import { CheckboxDocs } from '@/components/ui/checkbox';
@@ -60,6 +61,7 @@ function App() {
               <Route path="/docs/theming" element={<Theming />} />
               <Route path="/docs/typography" element={<Typography />} />
 
+              <Route path="/docs/components/breadcrumb" element={<BreadcrumbDocs />} />
               <Route path="/docs/components/accordion" element={<AccordionDocs />} />
               <Route path="/docs/components/alert" element={<AlertDocs />} />
               <Route path="/docs/components/alert-dialog" element={<AlertDialogDocs />} />
