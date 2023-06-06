@@ -6,7 +6,7 @@ import { convertToTitleCase } from '@/utils/convertToTitleCase.ts';
 import { COMPONENTS } from '@/utils/constants.ts';
 import Heading from '@/components/containers/typography/heading/Heading.tsx';
 import Subheading from '@/components/containers/typography/subheading/Subheading.tsx';
-import Divider from '@/layouts/divider';
+import Divider from '@/layouts/divider/Divider.tsx';
 import TabSelector from '@/layouts/tab-selector';
 import ComponentContainer from '@/components/containers/component-container/ComponentContainer.tsx';
 import PaginationContainer from '@/components/containers/pagination-container/PaginationContainer.tsx';

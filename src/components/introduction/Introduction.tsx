@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import ChevronRightIcon from '@/assets/svg/ChevronRightIcon';
 import { DOC_ROUTE, DOCUMENTATION } from '@/utils/constants';
 import Breadcrumbs from '@/components/breadcrumbs/Breadcrumbs.tsx';
-import Divider from '@/layouts/divider';
+import Divider from '@/layouts/divider/Divider.tsx';
 import QuickNav from '@/layouts/quick-nav';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import NavigationLink from '@/components/navigation-link/NavigationLink.tsx';
@@ -11,6 +11,8 @@ import SectionContainer from '@/components/containers/section-container/SectionC
 import BodyContainer from '@/components/containers/body-container/BodyContainer.tsx';
 import PaginationContainer from '@/components/containers/pagination-container/PaginationContainer.tsx';
 import QuickNavContainer from '@/components/containers/quick-nav-container/QuickNavContainer.tsx';
+import Heading from '@/components/containers/typography/heading/Heading.tsx';
+import Subheading from '@/components/containers/typography/subheading/Subheading.tsx';
 
 const Introduction = () => {
   const faqRef = useRef<HTMLDivElement>(null);
@@ -21,8 +23,9 @@ const Introduction = () => {
       <ContentContainer>
         <SectionContainer>
           <Breadcrumbs section={'Introduction'} />
-          <h1>Introduction</h1>
-          <span>Reusable components built from scratch</span>
+          <Heading>Introduction</Heading>
+          <Subheading>Reusable components built from scratch</Subheading>
+
           <Divider />
 
           <BodyContainer>

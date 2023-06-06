@@ -1,10 +1,11 @@
-import Installation from '@/components//installation/Installation.tsx';
-import Introduction from '@/components//introduction/Introduction.tsx';
-import Theming from '@/components//theming';
-import Typography from '@/components//typography';
-import Documentation from '@/pages/Documentation';
-import Home from '@/pages/Home';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from '@/pages/Home';
+import Documentation from '@/pages/Documentation';
+import Installation from '@/components/installation/Installation.tsx';
+import Introduction from '@/components/introduction/Introduction.tsx';
+import Theming from '@/components/theming';
+import Typography from '@/components/typography';
+
 import { AccordionDocs } from '@/components/ui/accordion';
 import { AlertDocs } from '@/components/ui/alert';
 import { AlertDialogDocs } from '@/components/ui/alert-dialog';

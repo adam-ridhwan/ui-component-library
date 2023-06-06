@@ -1,5 +1,5 @@
 import Breadcrumbs from '@/components/breadcrumbs/Breadcrumbs.tsx';
-import Divider from '@/layouts/divider';
+import Divider from '@/layouts/divider/Divider.tsx';
 import ContentContainer from '@/components/containers/content-container/ContentContainer.tsx';
 import SectionContainer from '@/components/containers/section-container/SectionContainer.tsx';
 import BodyContainer from '@/components/containers/body-container/BodyContainer.tsx';
@@ -10,6 +10,8 @@ import { convertToTitleCase } from '@/utils/convertToTitleCase.ts';
 import ChevronRightIcon from '@/assets/svg/ChevronRightIcon.tsx';
 import QuickNavContainer from '@/components/containers/quick-nav-container/QuickNavContainer.tsx';
 import QuickNav from '@/layouts/quick-nav';
+import Heading from '@/components/containers/typography/heading/Heading.tsx';
+import Subheading from '@/components/containers/typography/subheading/Subheading.tsx';
 
 const Installation = () => {
   return (
@@ -17,8 +19,9 @@ const Installation = () => {
       <ContentContainer>
         <SectionContainer>
           <Breadcrumbs section={'Installation'} />
-          <h1>Installation</h1>
-          <span>Reusable components built from scratch</span>
+          <Heading>Installation</Heading>
+          <Subheading>Reusable components built from scratch</Subheading>
+
           <Divider />
 
           <BodyContainer>

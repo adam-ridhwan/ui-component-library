@@ -23,17 +23,15 @@
     padding-bottom: 50px;
 }
 
-
 .title {
     height: 30px;
     padding-right: 1rem;
     padding-left: 1rem;
 }
 
-
 .navigation_link_not_active,
 .navigation_link_active {
-    font-size: 14px;
+    font-size: 12px;
     color: #64748b;
     font-weight: 400;
     line-height: 1.8em;
@@ -46,14 +44,19 @@
 }
 
 .navigation_link_active {
-    color: #0f172a;
-    font-weight: 500;
-    background: lightgray;
+    background-color: var(--colors-sky4);
     border-radius: 15px;
 }
 
+
 .navigation_link_not_active:hover {
     cursor: pointer;
-    background-color: whitesmoke;
+    background-color: var(--colors-sky3);
     border-radius: 15px;
+}
+
+
+.navigation_link_not_active:focus,
+.navigation_link_active:focus {
+    outline: 1px solid var(--colors-sky6);
 }

@@ -3,7 +3,7 @@ import NavigationLink from '@/components/navigation-link/NavigationLink.tsx';
 import Breadcrumbs from '@/components/breadcrumbs/Breadcrumbs.tsx';
 import * as Accordion from '@/components/ui/accordion/index';
 import { Tab, useTab } from '@/hooks/useTab';
-import Divider from '@/layouts/divider';
+import Divider from '@/layouts/divider/Divider.tsx';
 import QuickNav from '@/layouts/quick-nav';
 import TabSelector from '@/layouts/tab-selector';
 import { COMPONENTS, DOCUMENTATION } from '@/utils/constants';

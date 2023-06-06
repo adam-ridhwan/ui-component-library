@@ -1,4 +1,9 @@
 .component_container {
+    background: linear-gradient(to bottom right, var(--colors-tomato3), transparent 40%) no-repeat,
+    linear-gradient(to top left, var(--colors-sky3), transparent 40%) no-repeat;
+    background-size: 50% 75%;
+    background-position: top left, bottom right;
+
     min-height: 350px;
     width: 100%;
     border: 1px solid #dfe4ed;

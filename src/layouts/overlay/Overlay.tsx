@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-// import styles from './Overlay-styles.module.css';
+// import styles from './overlay-styles.module.css';
 
 interface OverlayProps {
   handleCloseModal: () => void;

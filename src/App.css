@@ -8,9 +8,6 @@
     font-family: 'Poppins', sans-serif;
 }
 
-:root {
-    --scrollBarWidth: 9px;
-}
 
 body {
     overflow-x: hidden;

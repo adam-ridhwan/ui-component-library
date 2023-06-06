@@ -423,7 +423,7 @@ const SearchBar: FC = () => {
     <>
       {/* Blurry overlay */}
       <div className={overlayStyle} onClick={handleCloseModal} />
-      {/*<Overlay className={overlayStyle} handleCloseModal={handleCloseModal} />*/}
+      {/*<overlay className={overlayStyle} handleCloseModal={handleCloseModal} />*/}
 
       {/* Search bar */}
 

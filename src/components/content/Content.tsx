@@ -1,12 +1,15 @@
 import { FC, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import useResolution, { DeviceType } from '@/hooks/useResolution';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
+import useResolution, { DeviceType } from '@/hooks/useResolution';
+
+import DesktopSideNavBar from '@/layouts/side-nav-desktop/SideNavDesktop.tsx';
+
 import Installation from '@/components/installation/Installation.tsx';
 import Introduction from '@/components/introduction/Introduction.tsx';
 import Theming from '@/components/theming';
 import Typography from '@/components/typography';
-import DesktopSideNavBar from '@/layouts/side-nav-desktop/SideNavDesktop.tsx';
+
 import { AccordionDocs } from '@/components/ui/accordion';
 import { AlertDialogDocs } from '@/components/ui/alert-dialog';
 import { AlertDocs } from '@/components/ui/alert';
