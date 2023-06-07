@@ -21,7 +21,6 @@ const TooltipDocs = () => {
   const COMPONENT = 'tooltip';
   const COMPONENT_INDEX = COMPONENTS.indexOf(COMPONENT);
   const PREVIOUS_INDEX = COMPONENT_INDEX - 1;
-  const NEXT_INDEX = COMPONENT_INDEX + 1;
 
   return (
     <>

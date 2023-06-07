@@ -20,7 +20,7 @@ import { getPaginationIndex } from '@/utils/getPaginationIndex.ts';
 const AvatarDocs = () => {
   const { selectedTab, switchTab } = useTab();
 
-  const [PREVIOUS_INDEX, NEXT_INDEX] = getPaginationIndex('alert-dialog');
+  const [PREVIOUS_INDEX, NEXT_INDEX] = getPaginationIndex('avatar');
 
   return (
     <>
