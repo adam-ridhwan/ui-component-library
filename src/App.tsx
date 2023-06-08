@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from '@/pages/Home';
-import Documentation from '@/pages/Documentation';
+import Home from '@/pages/HomePage.tsx';
+import DocumentationPage from '@/pages/DocumentationPage.tsx';
 import Installation from '@/components/installation/Installation.tsx';
 import Introduction from '@/components/introduction/Introduction.tsx';
 import Theming from '@/components/theming';
@@ -56,7 +56,7 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/docs" element={<Documentation />}>
+            <Route path="/docs" element={<DocumentationPage />}>
               <Route path="/docs" element={<Introduction />} />
               <Route path="/docs/installation" element={<Installation />} />
               <Route path="/docs/theming" element={<Theming />} />

@@ -3,18 +3,11 @@ import SearchBar from '@/components/search-bar/SearchBar.tsx';
 import Footer from '@/layouts/footer';
 import SideNavBar from '@/layouts/side-nav-mobile/SideNavMobile.tsx';
 import TopNavBar from '@/layouts/top-nav/TopNavBar.tsx';
-import { CSSProperties } from 'react';
 
-const Documentation = () => {
-  const style: CSSProperties = {
-    display: 'flex',
-    flexDirection: 'column',
-    position: 'relative',
-  };
-
+const DocumentationPage = () => {
   return (
     <>
-      <div style={style}>
+      <div className="pages_container">
         <TopNavBar />
         <Content />
         <SearchBar />
@@ -24,4 +17,4 @@ const Documentation = () => {
     </>
   );
 };
-export default Documentation;
+export default DocumentationPage;

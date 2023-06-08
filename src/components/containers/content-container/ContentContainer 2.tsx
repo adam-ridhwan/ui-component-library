@@ -1,5 +1,4 @@
 import { FC, ReactNode } from 'react';
-
 import styles from './ContentContainer-styles.module.css';
 
 interface ContentContainerProps {

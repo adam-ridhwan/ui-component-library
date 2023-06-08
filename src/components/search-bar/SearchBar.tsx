@@ -31,7 +31,7 @@ const SearchBar: FC = () => {
     setSearchItemsState,
   } = useSearchBarContext();
 
-  const [isWindowResized, setIsWindowResized] = useState<boolean>(false);
+  const [isWindowResized, setIsWindowResized] = useState<boolean>(true);
   const [contentTransition, setContentTransition] = useState<string>(styles.transition);
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const [selectionState, setItemState] = useState({
@@ -305,7 +305,7 @@ const SearchBar: FC = () => {
               path = `${COMPONENTS_ROUTES}/accordion`;
               sectionForButton = Object.keys(COMPONENTS)[0];
               break;
-            case 'Documentation-introduction':
+            case 'DocumentationPage-introduction':
               path = `${DOC_ROUTE}`;
               sectionForButton = 'docs';
               break;
