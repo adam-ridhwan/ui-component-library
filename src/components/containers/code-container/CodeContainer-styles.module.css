@@ -1,0 +1,42 @@
+.container {
+    position: relative;
+    background-color: var(--colors-sky2);
+    border-radius: 6px;
+    padding: 30px;
+    font-size: 14px;
+    margin: 1rem 0;
+}
+
+.copy_icon_container {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    cursor: pointer;
+    background-color: var(--colors-sky5);
+    border: 2px solid transparent;
+    border-radius: 6px;
+    height: 2rem;
+    width: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.copy_icon_container:hover {
+    background-color: var(--colors-sky6);
+}
+
+.copy_icon_container:focus {
+    border: 2px solid var(--colors-sky7);
+}
+
+.copy_icon_container:active {
+    background-color: var(--colors-sky7);
+}
+
+
+.copy_icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

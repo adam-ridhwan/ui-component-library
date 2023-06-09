@@ -1,4 +1,5 @@
 .horizontal_line {
-  border-top: 1px solid #dfe4ed;
-  margin: 20px 0;
+    border-top: 1px solid #dfe4ed;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }

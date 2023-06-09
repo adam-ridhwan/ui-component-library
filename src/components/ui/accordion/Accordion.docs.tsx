@@ -1,29 +1,27 @@
 import { FC } from 'react';
-import NavigationLink from '@/components/navigation-link/NavigationLink.tsx';
-import Breadcrumbs from '@/components/breadcrumbs/Breadcrumbs.tsx';
+import NavigationLink from '@/components/navigation-link/NavigationLink';
+import Breadcrumbs from '@/components/breadcrumbs/Breadcrumbs';
 import * as Accordion from '@/components/ui/accordion/index';
-import { Tab, useTab } from '@/hooks/useTab';
-import Divider from '@/layouts/divider/Divider.tsx';
+import Divider from '@/layouts/divider/Divider';
 import QuickNav from '@/layouts/quick-nav';
-import TabSelector from '@/layouts/tab-selector';
 import { COMPONENTS, DOCUMENTATION } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
-import { getPaginationIndex } from '@/utils/getPaginationIndex.ts';
-import ContentContainer from '@/components/containers/content-container/ContentContainer.tsx';
-import SectionContainer from '@/components/containers/section-container/SectionContainer.tsx';
-import Heading from '@/components/containers/typography/heading/Heading.tsx';
-import Subheading from '@/components/containers/typography/subheading/Subheading.tsx';
-import ComponentContainer from '@/components/containers/component-container/ComponentContainer.tsx';
-import QuickNavContainer from '@/components/containers/quick-nav-container/QuickNavContainer.tsx';
-import PaginationContainer from '@/components/containers/pagination-container/PaginationContainer.tsx';
-import ChevronLeftIcon from '@/assets/svg/ChevronLeftIcon.tsx';
+import { getPaginationIndex } from '@/utils/getPaginationIndex';
+import ContentContainer from '@/components/containers/content-container/ContentContainer';
+import SectionContainer from '@/components/containers/section-container/SectionContainer';
+import Heading from '@/components/containers/typography/heading/Heading';
+import Subheading from '@/components/containers/typography/subheading/Subheading';
+import ComponentContainer from '@/components/containers/component-container/ComponentContainer';
+import QuickNavContainer from '@/components/containers/quick-nav-container/QuickNavContainer';
+import PaginationContainer from '@/components/containers/pagination-container/PaginationContainer';
+import ChevronLeftIcon from '@/assets/svg/ChevronLeftIcon';
 import ChevronRightIcon from '@/assets/svg/ChevronRightIcon';
+import BodyContainer from '@/components/containers/body-container/BodyContainer';
 
 import './AccordionStyles.css';
+import CodeContainer from '@/components/containers/code-container/CodeContainer.tsx';
 
 const AccordionDocs: FC = () => {
-  const { selectedTab, switchTab } = useTab();
-
   const [, NEXT_INDEX] = getPaginationIndex('accordion');
 
   return (
@@ -37,47 +35,55 @@ const AccordionDocs: FC = () => {
           </Subheading>
           <Divider />
 
-          <TabSelector {...{ selectedTab, switchTab }} />
-
           <ComponentContainer>
-            {selectedTab === Tab.PREVIEW && (
-              <>
-                <Accordion.Root className="AccordionRoot" defaultIndex={-1} type="single">
-                  <Accordion.Item className="AccordionItem" index={0}>
-                    <Accordion.Trigger className="AccordionTrigger">Why Sustainable Living?</Accordion.Trigger>
-                    <Accordion.Content className="AccordionContent">
-                      <div className="AccordionContentText">
-                        Sustainable living isn't just a trend, it's a fundamental shift in how we interact with our
-                        environment.
-                      </div>
-                    </Accordion.Content>
-                  </Accordion.Item>
+            <>
+              <Accordion.Root className="AccordionRoot" defaultIndex={-1} type="single">
+                <Accordion.Item className="AccordionItem" index={0}>
+                  <Accordion.Trigger className="AccordionTrigger">Why Sustainable Living?</Accordion.Trigger>
+                  <Accordion.Content className="AccordionContent">
+                    <div className="AccordionContentText">
+                      Sustainable living isn't just a trend, it's a fundamental shift in how we interact with our
+                      environment.
+                    </div>
+                  </Accordion.Content>
+                </Accordion.Item>
 
-                  <Accordion.Item className="AccordionItem" index={1}>
-                    <Accordion.Trigger className="AccordionTrigger">
-                      Easy Ways to Adopt Sustainability
-                    </Accordion.Trigger>
-                    <Accordion.Content className="AccordionContent">
-                      <div className="AccordionContentText">
-                        Adopting a more sustainable lifestyle doesn't have to be complicated or inconvenient.
-                      </div>
-                    </Accordion.Content>
-                  </Accordion.Item>
+                <Accordion.Item className="AccordionItem" index={1}>
+                  <Accordion.Trigger className="AccordionTrigger">Easy Ways to Adopt Sustainability</Accordion.Trigger>
+                  <Accordion.Content className="AccordionContent">
+                    <div className="AccordionContentText">
+                      Adopting a more sustainable lifestyle doesn't have to be complicated or inconvenient.
+                    </div>
+                  </Accordion.Content>
+                </Accordion.Item>
 
-                  <Accordion.Item className="AccordionItem" index={2}>
-                    <Accordion.Trigger className="AccordionTrigger">The Impact of Sustainable Living</Accordion.Trigger>
-                    <Accordion.Content className="AccordionContent">
-                      <div className="AccordionContentText">
-                        Embracing sustainable living has a broader impact than just preserving our natural resources.
-                      </div>
-                    </Accordion.Content>
-                  </Accordion.Item>
-                </Accordion.Root>
-              </>
-            )}
-
-            {selectedTab === Tab.CODE && <div>Code content here...</div>}
+                <Accordion.Item className="AccordionItem" index={2}>
+                  <Accordion.Trigger className="AccordionTrigger">The Impact of Sustainable Living</Accordion.Trigger>
+                  <Accordion.Content className="AccordionContent">
+                    <div className="AccordionContentText">
+                      Embracing sustainable living has a broader impact than just preserving our natural resources.
+                    </div>
+                  </Accordion.Content>
+                </Accordion.Item>
+              </Accordion.Root>
+            </>
           </ComponentContainer>
+
+          <BodyContainer>
+            <h2>Usage</h2>
+            <span>When using an accordion, it's as simple as importing the necessary components.</span>
+          </BodyContainer>
+
+          <CodeContainer>
+            <pre>
+              <code>
+                <span className="syntax--main">
+                  import <span className="syntax--secondary">* as Accordion</span> from
+                  '@/components/ui/accordion/index';
+                </span>
+              </code>
+            </pre>
+          </CodeContainer>
 
           <Divider />
 

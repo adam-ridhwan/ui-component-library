@@ -24,3 +24,25 @@ body {
     flex-direction: column;
     position: relative;
 }
+
+pre, code * {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+
+:root {
+    ---background: var(--colors-violet2);
+    ---text: var(--colors-violet11);
+    ---syntax1: var(--colors-sky11);
+    ---syntax2: var(--colors-crimson10);
+    ---comment: var(--colors-mauve9);
+    ---fadedLines: var(--colors-mauveA8);
+}
+
+.syntax--main {
+    color: var(---syntax1)
+}
+
+.syntax--secondary {
+    color: var(---syntax2)
+}
