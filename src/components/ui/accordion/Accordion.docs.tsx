@@ -76,7 +76,6 @@ const AccordionDocs: FC = () => {
           <CodeContainer>
             <span className='syntax--main'>
               import <span className='syntax--secondary'>* as Accordion</span> from '@/components/ui/accordion/index';
-              import <span className='syntax--secondary'>* as Accordion</span> from '@/components/ui/accordion/index';
             </span>
           </CodeContainer>
 

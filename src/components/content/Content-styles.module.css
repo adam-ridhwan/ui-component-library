@@ -13,7 +13,6 @@
 }
 
 .middle_container {
-    outline: 2px solid hotpink;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -24,21 +23,21 @@
 /* iPad (Portrait) */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
     .middle_container {
-        margin: 0 20px;
+        margin: 0 50px 0 40px;
     }
 }
 
 /* iPad (Landscape) */
 @media screen and (min-width: 1024px) and (max-width: 1199px) {
     .middle_container {
-        margin: 0 30px;
+        margin: 0 60px 0 40px;
     }
 }
 
 /* Desktop */
 @media screen and (min-width: 1200px) {
     .middle_container {
-        margin: 0 40px;
+        margin: 0 80px 0 40px;
 
     }
 }
