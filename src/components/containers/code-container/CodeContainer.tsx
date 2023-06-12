@@ -10,14 +10,20 @@ interface CodeContainerProps {
 const CodeContainer: FC<CodeContainerProps> = ({ children }) => {
   return (
     <>
-      <div className={styles.container}>
-        <button className={styles.copy_icon_container}>
-          <div className={styles.copy_icon}>
-            <CopyIcon />
-          </div>
-        </button>
+      <div className={styles.wrapper}>
+        <div className={styles.container}>
+          <button className={styles.copy_icon_container}>
+            <div className={styles.copy_icon}>
+              <CopyIcon />
+            </div>
+          </button>
 
-        {children}
+          <pre className={styles.pre}>
+            <code>{children}</code>
+          </pre>
+
+          {/*{children}*/}
+        </div>
       </div>
     </>
   );

@@ -40,9 +40,10 @@ pre, code * {
 }
 
 .syntax--main {
-    color: var(---syntax1)
+    color: var(---syntax1);
+
 }
 
 .syntax--secondary {
-    color: var(---syntax2)
+    color: var(---syntax2);
 }

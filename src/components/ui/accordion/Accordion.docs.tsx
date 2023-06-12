@@ -17,9 +17,8 @@ import PaginationContainer from '@/components/containers/pagination-container/Pa
 import ChevronLeftIcon from '@/assets/svg/ChevronLeftIcon';
 import ChevronRightIcon from '@/assets/svg/ChevronRightIcon';
 import BodyContainer from '@/components/containers/body-container/BodyContainer';
-
-import './AccordionStyles.css';
 import CodeContainer from '@/components/containers/code-container/CodeContainer.tsx';
+import './AccordionStyles.css';
 
 const AccordionDocs: FC = () => {
   const [, NEXT_INDEX] = getPaginationIndex('accordion');
@@ -37,30 +36,30 @@ const AccordionDocs: FC = () => {
 
           <ComponentContainer>
             <>
-              <Accordion.Root className="AccordionRoot" defaultIndex={-1} type="single">
-                <Accordion.Item className="AccordionItem" index={0}>
-                  <Accordion.Trigger className="AccordionTrigger">Why Sustainable Living?</Accordion.Trigger>
-                  <Accordion.Content className="AccordionContent">
-                    <div className="AccordionContentText">
+              <Accordion.Root className='AccordionRoot' defaultIndex={-1} type='single'>
+                <Accordion.Item className='AccordionItem' index={0}>
+                  <Accordion.Trigger className='AccordionTrigger'>Why Sustainable Living?</Accordion.Trigger>
+                  <Accordion.Content className='AccordionContent'>
+                    <div className='AccordionContentText'>
                       Sustainable living isn't just a trend, it's a fundamental shift in how we interact with our
                       environment.
                     </div>
                   </Accordion.Content>
                 </Accordion.Item>
 
-                <Accordion.Item className="AccordionItem" index={1}>
-                  <Accordion.Trigger className="AccordionTrigger">Easy Ways to Adopt Sustainability</Accordion.Trigger>
-                  <Accordion.Content className="AccordionContent">
-                    <div className="AccordionContentText">
+                <Accordion.Item className='AccordionItem' index={1}>
+                  <Accordion.Trigger className='AccordionTrigger'>Easy Ways to Adopt Sustainability</Accordion.Trigger>
+                  <Accordion.Content className='AccordionContent'>
+                    <div className='AccordionContentText'>
                       Adopting a more sustainable lifestyle doesn't have to be complicated or inconvenient.
                     </div>
                   </Accordion.Content>
                 </Accordion.Item>
 
-                <Accordion.Item className="AccordionItem" index={2}>
-                  <Accordion.Trigger className="AccordionTrigger">The Impact of Sustainable Living</Accordion.Trigger>
-                  <Accordion.Content className="AccordionContent">
-                    <div className="AccordionContentText">
+                <Accordion.Item className='AccordionItem' index={2}>
+                  <Accordion.Trigger className='AccordionTrigger'>The Impact of Sustainable Living</Accordion.Trigger>
+                  <Accordion.Content className='AccordionContent'>
+                    <div className='AccordionContentText'>
                       Embracing sustainable living has a broader impact than just preserving our natural resources.
                     </div>
                   </Accordion.Content>
@@ -75,14 +74,10 @@ const AccordionDocs: FC = () => {
           </BodyContainer>
 
           <CodeContainer>
-            <pre>
-              <code>
-                <span className="syntax--main">
-                  import <span className="syntax--secondary">* as Accordion</span> from
-                  '@/components/ui/accordion/index';
-                </span>
-              </code>
-            </pre>
+            <span className='syntax--main'>
+              import <span className='syntax--secondary'>* as Accordion</span> from '@/components/ui/accordion/index';
+              import <span className='syntax--secondary'>* as Accordion</span> from '@/components/ui/accordion/index';
+            </span>
           </CodeContainer>
 
           <Divider />

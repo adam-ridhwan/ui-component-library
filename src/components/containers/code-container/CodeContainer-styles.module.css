@@ -1,10 +1,24 @@
+.wrapper {
+    box-sizing: border-box;
+    width: 100%;
+}
+
 .container {
     position: relative;
     background-color: var(--colors-sky2);
     border-radius: 6px;
-    padding: 30px;
     font-size: 14px;
     margin: 1rem 0;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.container > pre {
+    max-width: 100%;
+    outline: 2px solid green;
+    padding: 30px;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 .copy_icon_container {
@@ -12,7 +26,7 @@
     top: 0.75rem;
     right: 0.75rem;
     cursor: pointer;
-    background-color: var(--colors-sky5);
+    background-color: var(--colors-sky4);
     border: 2px solid transparent;
     border-radius: 6px;
     height: 2rem;
@@ -23,17 +37,16 @@
 }
 
 .copy_icon_container:hover {
-    background-color: var(--colors-sky6);
+    background-color: var(--colors-sky5);
 }
 
 .copy_icon_container:focus {
-    border: 2px solid var(--colors-sky7);
+    border: 2px solid var(--colors-sky6);
 }
 
 .copy_icon_container:active {
     background-color: var(--colors-sky7);
 }
-
 
 .copy_icon {
     display: flex;
