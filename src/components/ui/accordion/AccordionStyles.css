@@ -1,13 +1,13 @@
 .AccordionRoot {
     display: flex;
     flex-direction: column;
-    width: 350px
+    width: 350px;
 }
 
 .AccordionItem {
-    margin-bottom: 10px;
     border: 1px solid var(--colors-slate6);
     border-radius: 10px;
+    margin-bottom: 10px;
 }
 
 .AccordionTrigger {
@@ -23,6 +23,7 @@
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
+    color: var(--colors-slate12);
 }
 
 .AccordionTrigger:hover {
@@ -47,4 +48,6 @@
     padding-bottom: 10px;
     font-size: 12px;
     font-weight: 300;
+    color: var(--colors-slate11);
+
 }
