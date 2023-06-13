@@ -20,32 +20,26 @@ const CodeContainer: FC<CodeContainerProps> = ({ children, isExpandable }) => {
 
   const handleCopy = async () => {
     const node = codeRef.current;
-
     if (!node) return;
 
     const textToCopy = node.innerText;
-
     try {
       await navigator.clipboard.writeText(textToCopy);
       setIsCopied(true);
       if (copyTimeout !== undefined) window.clearTimeout(copyTimeout);
-
-      copyTimeout = window.setTimeout(() => {
-        setIsCopied(false);
-      }, 1000);
+      copyTimeout = window.setTimeout(() => setIsCopied(false), 1000);
     } catch (error) {
       console.error('Failed to copy text:', error);
     }
   };
 
-  const handleToggleContainerExpansion = () => {
-    setIsContainerCodeExpanded((isExpandable) => !isExpandable);
-  };
+  const handleToggleContainerExpansion = () => setIsContainerCodeExpanded((isExpandable) => !isExpandable);
 
   return (
     <>
-      <div className={styles.container} data-expanded={isExpandable ? isContainerCodeExpanded : ''}>
-        {[DeviceType.TABLET, DeviceType.DESKTOP, DeviceType.LARGE_DESKTOP].includes(deviceType) && (
+      {/* Region: Copy icon */}
+      <div className={styles.top_reference_line}>
+        {[DeviceType.TABLET_LANDSCAPE, DeviceType.DESKTOP, DeviceType.LARGE_DESKTOP].includes(deviceType) && (
           <button
             className={styles.copy_icon_container}
             onMouseEnter={() => setIsCopyButtonHovered(true)}
@@ -60,18 +54,24 @@ const CodeContainer: FC<CodeContainerProps> = ({ children, isExpandable }) => {
             </div>
           </button>
         )}
+      </div>
 
-        {isExpandable && (
-          <button className={styles.toggle_code_button} onClick={handleToggleContainerExpansion}>
-            Show code
-          </button>
-        )}
-
+      {/* Region: Code block */}
+      <div className={styles.container} data-expanded={isExpandable ? isContainerCodeExpanded : ''}>
         <pre className={styles.pre}>
           <code ref={codeRef}>{children}</code>
           {isExpandable && <br />}
         </pre>
       </div>
+
+      {/* Region: Toggle expand code block */}
+      {isExpandable && (
+        <div className={styles.bottom_reference_line}>
+          <button className={styles.toggle_code_button} onClick={handleToggleContainerExpansion}>
+            Show code
+          </button>
+        </div>
+      )}
     </>
   );
 };

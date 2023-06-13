@@ -5,7 +5,7 @@ import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import { FC, useRef } from 'react';
 import styles from './styles.module.css';
 
-const MobileSideNav: FC = () => {
+const SideNavMobile: FC = () => {
   const { isSidebarToggled, toggleSidebar } = useSideBarContext();
   const sideBarContentRef = useRef<HTMLDivElement | null>(null);
 
@@ -37,7 +37,7 @@ const MobileSideNav: FC = () => {
             >
               Components
             </NavigationLink>
-            <NavigationLink path="/examples" section={''} closeModal={handleCloseModal}>
+            <NavigationLink path='/examples' section={''} closeModal={handleCloseModal}>
               Examples
             </NavigationLink>
           </div>
@@ -66,4 +66,4 @@ const MobileSideNav: FC = () => {
   );
 };
 
-export default MobileSideNav;
+export default SideNavMobile;

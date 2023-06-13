@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 import useResolution, { DeviceType } from '@/hooks/useResolution';
 
-import DesktopSideNavBar from '@/layouts/side-nav-desktop/SideNavDesktop.tsx';
+import SideNavDesktop from '@/layouts/side-nav-desktop/SideNavDesktop.tsx';
 
 import Installation from '@/components/installation/Installation.tsx';
 import Introduction from '@/components/introduction/Introduction.tsx';
@@ -68,7 +68,7 @@ const Content: FC = () => {
     <>
       <div className={styles.wrapper}>
         <div className={styles.container}>
-          {[DeviceType.DESKTOP, DeviceType.LARGE_DESKTOP].includes(deviceType) && <DesktopSideNavBar />}
+          {[DeviceType.DESKTOP, DeviceType.LARGE_DESKTOP].includes(deviceType) && <SideNavDesktop />}
 
           <div className={styles.middle_container}>
             {/* Getting started section */}

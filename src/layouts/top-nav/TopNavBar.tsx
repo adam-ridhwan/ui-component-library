@@ -8,31 +8,42 @@ import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 import { COMPONENTS } from '@/utils/constants';
 import styles from './TopNavBar-styles.module.css';
+import { useEffect, useState } from 'react';
 
 const TopNav = () => {
   const { toggleSidebar } = useSideBarContext();
   const { handleOpenSearchBar } = useSearchBarContext();
   const [deviceType] = useResolution();
+  const [isPageScrolled, setIsPageScrolled] = useState<boolean>(false);
 
   const handleOpenSideBar = () => {
     toggleSidebar();
     document.body.style.overflowY = 'hidden';
   };
 
+  useEffect(() => {
+    const checkScroll = () => (window.scrollY > 20 ? setIsPageScrolled(true) : setIsPageScrolled(false));
+
+    window.addEventListener('scroll', checkScroll);
+    return () => {
+      window.removeEventListener('scroll', checkScroll);
+    };
+  }, []);
+
   return (
     <>
       <header>
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} data-scrolled={isPageScrolled}>
           <div className={styles.container}>
             {[DeviceType.DESKTOP, DeviceType.LARGE_DESKTOP].includes(deviceType) ? (
               <div className={styles.desktop_nav}>
-                <NavigationLink path={`/docs`} section="docs">
+                <NavigationLink path={`/docs`} section='docs'>
                   Documentation
                 </NavigationLink>
                 <NavigationLink path={`/docs/components/accordion`} section={COMPONENTS[0]}>
                   Components
                 </NavigationLink>
-                <NavigationLink path={`/docs`} section="docs">
+                <NavigationLink path={`/docs`} section='docs'>
                   Examples
                 </NavigationLink>
               </div>
@@ -47,12 +58,14 @@ const TopNav = () => {
                 <div>
                   {[DeviceType.PHONE, DeviceType.TABLET].includes(deviceType) ? 'Search...' : 'Search documentation...'}
                 </div>
-                <div className={styles.shortcut_container}>
-                  <span>
-                    <CommandMiniIcon />
-                  </span>
-                  <span>K</span>
-                </div>
+                {[DeviceType.DESKTOP, DeviceType.LARGE_DESKTOP].includes(deviceType) && (
+                  <div className={styles.shortcut_container}>
+                    <span>
+                      <CommandMiniIcon />
+                    </span>
+                    <span>K</span>
+                  </div>
+                )}
               </button>
 
               <button>

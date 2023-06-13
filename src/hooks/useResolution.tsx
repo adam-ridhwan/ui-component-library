@@ -7,7 +7,8 @@ export interface Resolution {
 
 export enum DeviceType {
   PHONE = 'Phone',
-  TABLET = 'Tablet',
+  TABLET_PORTRAIT = 'Tablet Portrait',
+  TABLET_LANDSCAPE = 'Tablet Landscape',
   DESKTOP = 'Desktop',
   LARGE_DESKTOP = 'Large Desktop',
 }
@@ -18,8 +19,10 @@ export const getDeviceType = (resolution: Resolution): DeviceType => {
   if (width <= 640) {
     return DeviceType.PHONE;
   } else if (width <= 767) {
-    return DeviceType.TABLET;
-  } else if (width <= 1400) {
+    return DeviceType.TABLET_PORTRAIT;
+  } else if (width <= 900) {
+    return DeviceType.TABLET_LANDSCAPE;
+  } else if (width <= 1440) {
     return DeviceType.DESKTOP;
   } else {
     return DeviceType.LARGE_DESKTOP;

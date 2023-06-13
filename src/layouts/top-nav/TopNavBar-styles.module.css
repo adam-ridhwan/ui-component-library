@@ -1,7 +1,10 @@
 header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 500;
 }
 
 header::before {
@@ -20,9 +23,35 @@ header::before {
     align-items: center;
     justify-content: center;
     height: var(--top-navigation-height);
-    box-shadow: inset 0 -1px 0 #dfe4ed;
-    background-color: white;
+    width: 100%;
+    max-width: var(--desktop-width);
+    margin: 0 10px;
+
+    transition: transform 200ms ease-in-out,
+    background 200ms ease-in-out,
+    border-radius 200ms ease-in-out,
+    box-shadow 200ms ease-in-out,
+    backdrop-filter 200ms ease-in-out;
 }
+
+.wrapper[data-scrolled= "true"] {
+    transform: translateY(10px);
+    background: rgba(255, 255, 255, 0.47);
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.wrapper[data-scrolled= "false"] {
+    transform: translateY(0px);
+    background: none;
+    border-radius: 0px;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
 
 .container {
     position: relative;
@@ -31,7 +60,6 @@ header::before {
     justify-content: center;
     gap: 1em;
     width: 100%;
-    max-width: var(--desktop-width);
     padding: var(--desktop-horizontal-padding);
 }
 
@@ -75,18 +103,24 @@ header::before {
     align-items: center;
     width: 100%;
     height: 36px;
-    border-radius: 6px;
-    background-color: white;
+    border-radius: 16px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     cursor: pointer;
     padding-left: 16px;
     padding-right: 6px;
     margin-right: 0.5rem;
     transition: background-color 0.1s ease-in-out;
+    background: rgba(255, 255, 255, 0.32);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .search_nav_container > button:first-child:hover {
-    background-color: #f1f5f9;
+    background: rgba(255, 255, 255, 0.58);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 /* search bar text */

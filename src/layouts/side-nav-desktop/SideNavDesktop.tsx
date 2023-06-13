@@ -6,8 +6,9 @@ import { convertToTitleCase } from '@/utils/convertToTitleCase';
 
 import styles from './SideNavDesktop-styles.module.css';
 
-const DesktopSideNavBar: FC = () => {
+const SideNavDesktop: FC = () => {
   const { currentSection } = useSideBarContext();
+
   const renderNavigationLinks = (items: string[], basePath: string, isDoc: boolean) => {
     return items.map((item, index) => {
       const path = isDoc && item === 'introduction' ? DOC_ROUTE : `${basePath}/${item}`;
@@ -45,4 +46,4 @@ const DesktopSideNavBar: FC = () => {
   );
 };
 
-export default DesktopSideNavBar;
+export default SideNavDesktop;

@@ -1,17 +1,20 @@
 /* @formatter:off */
 .container {
-    background:
-        linear-gradient(to bottom right, hsla(8, 100%, 96.6%, 50%), transparent 30%) no-repeat,
-        linear-gradient(to top left, hsla(193, 99.0%, 94.7%, 50%), transparent 30%) no-repeat,
-        var(--colors-sky8);
-    background-size:
-        50% 75%,
-        50% 75%,
-        auto;
-    background-position:
-        top left,
-        bottom right,
-        0 0;
+    background-image:
+        linear-gradient(to right top,
+            #d16ba5,
+            #c777b9,
+            #ba83ca,
+            #aa8fd8,
+            #9a9ae1,
+            #819fe2,
+            #68a3e0,
+            #51a6da,
+            #22a3ca,
+            #009fb6,
+            #00999e,
+            #059285
+        );
 
     position: relative;
     min-height: 350px;

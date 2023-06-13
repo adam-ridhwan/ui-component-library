@@ -1,9 +1,95 @@
+.top_reference_line {
+    margin: 1rem 0;
+    position: relative;
+}
+
+.copy_icon_container {
+    position: absolute;
+    z-index: 10;
+    top: 0.75rem;
+    right: 0.75rem;
+    cursor: pointer;
+    background-color: var(--colors-sky4);
+    border: 2px solid transparent;
+    border-radius: 6px;
+    height: 1.75rem;
+    width: 1.75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.copy_icon_container:hover {
+    background-color: var(--colors-sky5);
+}
+
+.copy_icon_container:focus {
+    border: 2px solid var(--colors-sky6);
+}
+
+.copy_icon_container:active {
+    background-color: var(--colors-sky7);
+}
+
+.copy_icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.copy_icon > svg {
+    height: 0.8rem;
+    width: 0.8rem;
+}
+
+.tooltip {
+    position: absolute;
+    z-index: 10;
+    top: calc(100% + 8px);
+    right: 50%;
+    background-color: var(--colors-sky12);
+    color: var(--colors-sky1);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    padding: 10px 15px;
+    font-size: 12px;
+    transition: opacity 300ms ease-in-out, transform 300ms cubic-bezier(0.44, -0.28, 0.29, 0.97);
+}
+
+.tooltip:before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent var(--colors-sky12) transparent;
+}
+
+.tooltip[data-hover="true"] {
+    opacity: 1;
+    transform: translate(50%, 0) scale(1);
+    transition-delay: 300ms;
+}
+
+.tooltip[data-hover="false"] {
+    opacity: 0;
+    transform: translate(50%, -10%) scale(0.9);
+    transition-delay: 0s;
+}
+
+
 .container {
     position: relative;
     background-color: var(--colors-sky2);
     border-radius: 6px;
     font-size: 14px;
-    margin: 1rem 0;
     min-width: 100%;
     width: 0 !important; /* needed for responsive layout*/
 }
@@ -58,84 +144,9 @@
     background-color: var(--colors-slate6);
 }
 
-.copy_icon_container {
-    position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
-    cursor: pointer;
-    background-color: var(--colors-sky4);
-    border: 2px solid transparent;
-    border-radius: 6px;
-    height: 1.75rem;
-    width: 1.75rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.copy_icon_container:hover {
-    background-color: var(--colors-sky5);
-}
-
-.copy_icon_container:focus {
-    border: 2px solid var(--colors-sky6);
-}
-
-.copy_icon_container:active {
-    background-color: var(--colors-sky7);
-}
-
-.copy_icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-}
-
-.copy_icon > svg {
-    height: 0.8rem;
-    width: 0.8rem;
-}
-
-.tooltip {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 50%;
-    background-color: var(--colors-sky12);
-    color: var(--colors-sky1);
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    white-space: nowrap;
-    padding: 10px 15px;
-    font-size: 12px;
-    transition: opacity 300ms ease-in-out, transform 300ms cubic-bezier(0.44, -0.28, 0.29, 0.97);
-}
-
-.tooltip:before {
-    content: "";
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent var(--colors-sky12) transparent;
-}
-
-
-.tooltip[data-hover="true"] {
-    opacity: 1;
-    transform: translate(50%, 0) scale(1);
-    transition-delay: 300ms;
-}
-
-.tooltip[data-hover="false"] {
-    opacity: 0;
-    transform: translate(50%, -10%) scale(0.9);
-    transition-delay: 0s;
+.bottom_reference_line {
+    position: relative;
 }
 
 .toggle_code_button {

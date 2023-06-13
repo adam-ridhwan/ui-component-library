@@ -13,7 +13,7 @@
     opacity: 1;
     pointer-events: auto;
     height: 100%;
-    z-index: 10;
+    z-index: 501;
 }
 
 .transition {
@@ -36,7 +36,7 @@
     transform: translateY(0%);
     opacity: 1;
     pointer-events: auto;
-    z-index: 11;
+    z-index: 1000;
 }
 
 .searchbar_container {
@@ -156,7 +156,7 @@
         position: fixed;
         top: 40%;
         left: 50%;
-        width: 100%;
+        /*width: 100%;*/
         width: 500px;
         opacity: 0;
         background-color: white;
@@ -180,7 +180,7 @@
         position: fixed;
         top: 40%;
         left: 50%;
-        width: 100%;
+        /*width: 100%;*/
         width: 500px;
         opacity: 0;
         background-color: white;
@@ -204,7 +204,7 @@
         position: fixed;
         top: 40%;
         left: 50%;
-        width: 100%;
+        /*width: 100%;*/
         width: 500px;
         opacity: 0;
         background-color: white;
