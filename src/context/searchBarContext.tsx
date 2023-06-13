@@ -42,9 +42,7 @@ export const SearchBarProvider: FC<SearchBarProps> = ({ children }) => {
 
   const [searchItemsState, setSearchItemsState] = useState<SearchItemsState>(initialSearchItemsState);
 
-  const toggleSearchBar = () => {
-    setIsSearchBarToggled((isSearchBarToggled) => !isSearchBarToggled);
-  };
+  const toggleSearchBar = () => setIsSearchBarToggled((isSearchBarToggled) => !isSearchBarToggled);
 
   const handleOpenSearchBar = () => {
     toggleSearchBar();

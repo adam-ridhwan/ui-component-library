@@ -426,9 +426,8 @@ const SearchBar: FC = () => {
       {/*<overlay className={overlayStyle} handleCloseModal={handleCloseModal} />*/}
 
       {/* Search bar */}
-
       <div className={contentStyle}>
-        <label htmlFor="search" className={styles.visuallyHidden}>
+        <label htmlFor='search' className={styles.visuallyHidden}>
           Search
         </label>
 
@@ -439,11 +438,11 @@ const SearchBar: FC = () => {
 
           <input
             ref={searchInputRef}
-            id="search"
-            name="search"
-            type="text"
-            placeholder="Type a command or search..."
-            autoComplete="off"
+            id='search'
+            name='search'
+            type='text'
+            placeholder='Type a command or search...'
+            autoComplete='off'
             onChange={handleSearch}
           />
 

@@ -1,12 +1,11 @@
 import { FC } from 'react';
+import { CLOSING_BRACE, COMPONENTS, DOCUMENTATION, GREATER_THAN, LESS_THAN, OPENING_BRACE } from '@/utils/constants';
+import { addTabs } from '@/utils/addTabs.ts';
+import ChevronLeftIcon from '@/assets/svg/ChevronLeftIcon';
+import ChevronRightIcon from '@/assets/svg/ChevronRightIcon';
 import NavigationLink from '@/components/navigation-link/NavigationLink';
 import Breadcrumbs from '@/components/breadcrumbs/Breadcrumbs';
 import * as Accordion from '@/components/ui/accordion/index';
-import Divider from '@/layouts/divider/Divider';
-import QuickNav from '@/layouts/quick-nav/QuickNav.tsx';
-import { CLOSING_BRACE, COMPONENTS, DOCUMENTATION, GREATER_THAN, LESS_THAN, OPENING_BRACE } from '@/utils/constants';
-import { convertToTitleCase } from '@/utils/convertToTitleCase';
-import { getPaginationIndex } from '@/utils/getPaginationIndex';
 import ContentContainer from '@/components/containers/content-container/ContentContainer';
 import SectionContainer from '@/components/containers/section-container/SectionContainer';
 import Heading from '@/components/containers/typography/heading/Heading';
@@ -14,11 +13,13 @@ import Subheading from '@/components/containers/typography/subheading/Subheading
 import ComponentContainer from '@/components/containers/component-container/ComponentContainer';
 import QuickNavContainer from '@/components/containers/quick-nav-container/QuickNavContainer';
 import PaginationContainer from '@/components/containers/pagination-container/PaginationContainer';
-import ChevronLeftIcon from '@/assets/svg/ChevronLeftIcon';
-import ChevronRightIcon from '@/assets/svg/ChevronRightIcon';
 import BodyContainer from '@/components/containers/body-container/BodyContainer';
 import CodeContainer from '@/components/containers/code-container/CodeContainer';
-import { addTabs } from '@/utils/addTabs.ts';
+import Divider from '@/layouts/divider/Divider';
+import QuickNav from '@/layouts/quick-nav/QuickNav.tsx';
+import { convertToTitleCase } from '@/utils/convertToTitleCase';
+import { getPaginationIndex } from '@/utils/getPaginationIndex';
+
 import './AccordionStyles.css';
 
 const AccordionDocs: FC = () => {
