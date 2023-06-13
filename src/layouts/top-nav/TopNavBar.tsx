@@ -6,7 +6,7 @@ import NavigationLink from '@/components/navigation-link/NavigationLink';
 import useResolution, { DeviceType } from '@/hooks/useResolution';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
-import { COMPONENTS } from '@/utils/constants';
+import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE } from '@/utils/constants';
 import styles from './TopNavBar-styles.module.css';
 import { useEffect, useState } from 'react';
 
@@ -34,16 +34,17 @@ const TopNav = () => {
     <>
       <header>
         <div className={styles.wrapper} data-scrolled={isPageScrolled}>
+          <div className={styles.shadow}></div>
           <div className={styles.container}>
             {[DeviceType.DESKTOP, DeviceType.LARGE_DESKTOP].includes(deviceType) ? (
               <div className={styles.desktop_nav}>
-                <NavigationLink path={`/docs`} section='docs'>
+                <NavigationLink path={DOC_ROUTE} section='docs'>
                   Documentation
                 </NavigationLink>
-                <NavigationLink path={`/docs/components/accordion`} section={COMPONENTS[0]}>
+                <NavigationLink path={`${COMPONENTS_ROUTES}/accordion`} section={COMPONENTS[0]}>
                   Components
                 </NavigationLink>
-                <NavigationLink path={`/docs`} section='docs'>
+                <NavigationLink path={DOC_ROUTE} section='docs'>
                   Examples
                 </NavigationLink>
               </div>
@@ -55,12 +56,9 @@ const TopNav = () => {
 
             <div className={styles.search_nav_container}>
               <button onClick={handleOpenSearchBar}>
-                <div>
-                  {[DeviceType.PHONE, DeviceType.TABLET_PORTRAIT].includes(deviceType)
-                    ? 'Search...'
-                    : 'Search documentation...'}
-                </div>
-                {[DeviceType.DESKTOP, DeviceType.LARGE_DESKTOP].includes(deviceType) && (
+                <div>{[DeviceType.PHONE].includes(deviceType) ? 'Search...' : 'Search documentation...'}</div>
+
+                {[DeviceType.TABLET_LANDSCAPE, DeviceType.DESKTOP, DeviceType.LARGE_DESKTOP].includes(deviceType) && (
                   <div className={styles.shortcut_container}>
                     <span>
                       <CommandMiniIcon />

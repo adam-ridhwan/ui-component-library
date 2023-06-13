@@ -17,7 +17,10 @@ header::before {
     z-index: -1;
 }
 
+
 .wrapper {
+    position: relative;
+    z-index: 100;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,6 +37,7 @@ header::before {
     backdrop-filter 200ms ease-in-out;
 }
 
+
 .wrapper[data-scrolled= "true"] {
     transform: translateY(10px);
     background: rgba(255, 255, 255, 0.47);
@@ -46,7 +50,6 @@ header::before {
 .wrapper[data-scrolled= "false"] {
     transform: translateY(0px);
     background: none;
-    border-radius: 0px;
     box-shadow: none;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -63,7 +66,7 @@ header::before {
     padding: var(--desktop-horizontal-padding);
 }
 
-/* LEFT SIDE ---- */
+/* Region: LEFT SIDE */
 .desktop_nav {
     display: flex;
     flex-direction: row;
@@ -86,7 +89,7 @@ header::before {
     color: #0f172acc;
 }
 
-/* RIGHT SIDE ---- */
+/* Region: RIGHT SIDE */
 .search_nav_container {
     width: 100%;
     display: flex;
@@ -169,23 +172,25 @@ ToggleThemeIcon
     max-width: 36px;
 }
 
-/* iPad (Portrait) */
-@media screen and (min-width: 768px) and (max-width: 1023px) {
+
+/* Styles for Small devices (tablets in portrait mode) */
+@media (min-width: 641px) and (max-width: 767px) {
+
+}
+
+/* Styles for Medium devices (tablets in landscape mode) */
+@media (min-width: 768px) and (max-width: 900px) {
+
+}
+
+/* Styles for Large devices (desktops) */
+@media (min-width: 901px) and (max-width: 1440px) {
     .search_nav_container > button:first-child {
         width: 256px;
     }
 }
 
-/* iPad (Landscape) */
-@media screen and (min-width: 1024px) and (max-width: 1199px) {
-    .search_nav_container > button:first-child {
-        width: 256px;
-    }
-}
+/* Styles for Extra large devices (large desktops) */
+@media (min-width: 1441px) {
 
-/* Desktop */
-@media screen and (min-width: 1200px) {
-    .search_nav_container > button:first-child {
-        width: 256px;
-    }
 }

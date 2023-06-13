@@ -17,7 +17,7 @@ import QuickNav from '@/layouts/quick-nav/QuickNav.tsx';
 import ContentContainer from '@/components/containers/content-container/ContentContainer.tsx';
 import { getPaginationIndex } from '@/utils/getPaginationIndex.ts';
 
-// import styles from './Breadcrumb-QuickNav-styles.module.css';
+// import styles from './Breadcrumb-QuickNav-SideNavMobile-styles.module.css';
 
 const BreadcrumbDocs = () => {
   const { selectedTab, switchTab } = useTab();

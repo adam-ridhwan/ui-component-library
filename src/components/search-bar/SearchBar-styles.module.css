@@ -150,56 +150,8 @@
 }
 
 
-/* iPad (Portrait) */
-@media screen and (min-width: 768px) and (max-width: 1023px) {
-    .content {
-        position: fixed;
-        top: 40%;
-        left: 50%;
-        /*width: 100%;*/
-        width: 500px;
-        opacity: 0;
-        background-color: white;
-        pointer-events: none;
-        box-shadow: 0 10px 220px rgba(0, 0, 0, 0.19), 0 10px 15px rgba(0, 0, 0, 0.1);
-        transform: translate(-50%, -50%) scale(0.9);
-        border: 1px solid lightgray;
-        border-radius: 8px;
-    }
-
-    .content_active {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 1;
-        pointer-events: auto;
-    }
-}
-
-/* iPad (Landscape) */
-@media screen and (min-width: 1024px) and (max-width: 1199px) {
-    .content {
-        position: fixed;
-        top: 40%;
-        left: 50%;
-        /*width: 100%;*/
-        width: 500px;
-        opacity: 0;
-        background-color: white;
-        pointer-events: none;
-        box-shadow: 0 10px 220px rgba(0, 0, 0, 0.19), 0 10px 15px rgba(0, 0, 0, 0.1);
-        transform: translate(-50%, -50%) scale(0.9);
-        border: 1px solid lightgray;
-        border-radius: 8px;
-    }
-
-    .content_active {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 1;
-        pointer-events: auto;
-    }
-}
-
-/* Desktop */
-@media screen and (min-width: 1200px) {
+/* Styles for Large devices (desktops) and Extra large devices (large desktops) */
+@media (min-width: 901px) {
     .content {
         position: fixed;
         top: 40%;

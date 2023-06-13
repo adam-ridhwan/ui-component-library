@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-// import styles from './overlay-QuickNav-styles.module.css';
+// import styles from './overlay-QuickNav-SideNavMobile-styles.module.css';
 
 interface OverlayProps {
   handleCloseModal: () => void;

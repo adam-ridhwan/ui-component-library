@@ -3,7 +3,7 @@ import { useSideBarContext } from '@/hooks/useSideBarContext';
 import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import { FC, useRef } from 'react';
-import styles from './styles.module.css';
+import styles from './SideNavMobile-styles.module.css';
 
 const SideNavMobile: FC = () => {
   const { isSidebarToggled, toggleSidebar } = useSideBarContext();
