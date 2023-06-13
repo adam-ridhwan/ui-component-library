@@ -40,7 +40,6 @@ const AccordionDocs: FC = () => {
             <Accordion.Root className='AccordionRoot' defaultIndex={-1} type='single'>
               <Accordion.Item className='AccordionItem' index={0}>
                 <Accordion.Trigger className='AccordionTrigger'>Artificial Intelligence</Accordion.Trigger>
-
                 <Accordion.Content className='AccordionContent'>
                   <div className='AccordionContentText'>AI enables machines to learn from experience.</div>
                 </Accordion.Content>
@@ -56,7 +55,6 @@ const AccordionDocs: FC = () => {
 
               <Accordion.Item className='AccordionItem' index={2}>
                 <Accordion.Trigger className='AccordionTrigger'>Blockchain Technology</Accordion.Trigger>
-
                 <Accordion.Content className='AccordionContent'>
                   <div className='AccordionContentText'>
                     Blockchain technology provides a secure way of recording transactions.

@@ -2,9 +2,13 @@
     display: flex;
     flex-direction: column;
     width: 350px;
+    height: 100%;
+    background-color: var(--colors-gray6);
+    border-radius: 4px;
 }
 
 .AccordionItem {
+    margin-top: 1px;
     background-color: var(--colors-gray1);
 }
 
@@ -16,6 +20,7 @@
 
 .AccordionItem:first-child,
 .AccordionItem:first-child > .AccordionTrigger {
+    margin-top: 0;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 }
@@ -41,7 +46,8 @@
     font-size: 15px;
     font-weight: 400;
     cursor: pointer;
-    /*border-bottom: 1px solid var(--colors-gray3);*/
+    box-shadow: 0 1px 0 var(--colors-gray6);
+
 }
 
 
@@ -50,8 +56,6 @@
 }
 
 .AccordionContent {
-    box-shadow: 0 -1px 0 var(--colors-gray3);
-
     transition: height 300ms cubic-bezier(0.87, 0, 0.13, 1);
 }
 
