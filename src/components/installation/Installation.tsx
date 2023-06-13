@@ -9,7 +9,7 @@ import { DOC_ROUTE, DOCUMENTATION } from '@/utils/constants.ts';
 import { convertToTitleCase } from '@/utils/convertToTitleCase.ts';
 import ChevronRightIcon from '@/assets/svg/ChevronRightIcon.tsx';
 import QuickNavContainer from '@/components/containers/quick-nav-container/QuickNavContainer.tsx';
-import QuickNav from '@/layouts/quick-nav';
+import QuickNav from '@/layouts/quick-nav/QuickNav.tsx';
 import Heading from '@/components/containers/typography/heading/Heading.tsx';
 import Subheading from '@/components/containers/typography/subheading/Subheading.tsx';
 

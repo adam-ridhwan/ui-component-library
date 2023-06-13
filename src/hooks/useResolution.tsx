@@ -19,7 +19,7 @@ export const getDeviceType = (resolution: Resolution): DeviceType => {
     return DeviceType.PHONE;
   } else if (width <= 767) {
     return DeviceType.TABLET;
-  } else if (width <= 1280) {
+  } else if (width <= 1400) {
     return DeviceType.DESKTOP;
   } else {
     return DeviceType.LARGE_DESKTOP;

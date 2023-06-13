@@ -14,7 +14,7 @@ import ChevronLeftIcon from '@/assets/svg/ChevronLeftIcon.tsx';
 import { convertToTitleCase } from '@/utils/convertToTitleCase.ts';
 import ChevronRightIcon from '@/assets/svg/ChevronRightIcon.tsx';
 import QuickNavContainer from '@/components/containers/quick-nav-container/QuickNavContainer.tsx';
-import QuickNav from '@/layouts/quick-nav';
+import QuickNav from '@/layouts/quick-nav/QuickNav.tsx';
 
 const SliderDocs = () => {
   const { selectedTab, switchTab } = useTab();

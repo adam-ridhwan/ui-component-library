@@ -1,5 +1,5 @@
 import { FC, ReactElement } from 'react';
-import styles from './styles.module.css';
+import styles from './QuickNav-styles.module.css';
 
 interface QuickNavProps {
   children: ReactElement<HTMLSpanElement>[];

@@ -14,7 +14,7 @@ import NavigationLink from '@/components/navigation-link/NavigationLink.tsx';
 import ChevronLeftIcon from '@/assets/svg/ChevronLeftIcon.tsx';
 import ChevronRightIcon from '@/assets/svg/ChevronRightIcon.tsx';
 import QuickNavContainer from '@/components/containers/quick-nav-container/QuickNavContainer.tsx';
-import QuickNav from '@/layouts/quick-nav';
+import QuickNav from '@/layouts/quick-nav/QuickNav.tsx';
 import { getPaginationIndex } from '@/utils/getPaginationIndex.ts';
 
 const CollapsibleDocs = () => {

@@ -3,7 +3,7 @@ import ChevronRightIcon from '@/assets/svg/ChevronRightIcon';
 import { DOC_ROUTE, DOCUMENTATION } from '@/utils/constants';
 import Breadcrumbs from '@/components/breadcrumbs/Breadcrumbs.tsx';
 import Divider from '@/layouts/divider/Divider.tsx';
-import QuickNav from '@/layouts/quick-nav';
+import QuickNav from '@/layouts/quick-nav/QuickNav.tsx';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import NavigationLink from '@/components/navigation-link/NavigationLink.tsx';
 import ContentContainer from '@/components/containers/content-container/ContentContainer.tsx';

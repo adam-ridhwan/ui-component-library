@@ -27,23 +27,33 @@ body {
 
 pre, code * {
     font-family: 'JetBrains Mono', monospace;
+    line-height: 25px;
+    font-size: 13px;
 }
 
 
 :root {
-    ---background: var(--colors-violet2);
-    ---text: var(--colors-violet11);
-    ---syntax1: var(--colors-sky11);
-    ---syntax2: var(--colors-crimson10);
-    ---comment: var(--colors-mauve9);
-    ---fadedLines: var(--colors-mauveA8);
+    --primary: var(--colors-sky11);
+    --secondary: var(--colors-teal11);
+    --tertiary: var(--colors-crimson10);
+    --text: var(--colors-indigo11);
+    --comment: var(--colors-mauve9);
+    --fadedLines: var(--colors-mauveA8);
 }
 
-.syntax--main {
-    color: var(---syntax1);
-
+.syntax--sky {
+    color: var(--primary);
+    white-space: pre;
 }
 
-.syntax--secondary {
-    color: var(---syntax2);
+.syntax--teal {
+    color: var(--secondary);
+}
+
+.syntax--crimson {
+    color: var(--tertiary);
+}
+
+.syntax--indigo {
+    color: var(--text)
 }

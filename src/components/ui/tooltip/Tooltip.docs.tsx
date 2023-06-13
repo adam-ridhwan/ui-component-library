@@ -13,7 +13,7 @@ import NavigationLink from '@/components/navigation-link/NavigationLink.tsx';
 import ChevronLeftIcon from '@/assets/svg/ChevronLeftIcon.tsx';
 import { convertToTitleCase } from '@/utils/convertToTitleCase.ts';
 import QuickNavContainer from '@/components/containers/quick-nav-container/QuickNavContainer.tsx';
-import QuickNav from '@/layouts/quick-nav';
+import QuickNav from '@/layouts/quick-nav/QuickNav.tsx';
 
 const TooltipDocs = () => {
   const { selectedTab, switchTab } = useTab();

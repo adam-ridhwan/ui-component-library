@@ -13,11 +13,11 @@ import ChevronLeftIcon from '@/assets/svg/ChevronLeftIcon.tsx';
 import { convertToTitleCase } from '@/utils/convertToTitleCase.ts';
 import ChevronRightIcon from '@/assets/svg/ChevronRightIcon.tsx';
 import QuickNavContainer from '@/components/containers/quick-nav-container/QuickNavContainer.tsx';
-import QuickNav from '@/layouts/quick-nav';
+import QuickNav from '@/layouts/quick-nav/QuickNav.tsx';
 import ContentContainer from '@/components/containers/content-container/ContentContainer.tsx';
 import { getPaginationIndex } from '@/utils/getPaginationIndex.ts';
 
-// import styles from './Breadcrumb-styles.module.css';
+// import styles from './Breadcrumb-QuickNav-styles.module.css';
 
 const BreadcrumbDocs = () => {
   const { selectedTab, switchTab } = useTab();

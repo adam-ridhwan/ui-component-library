@@ -12,7 +12,7 @@ import NavigationLink from '@/components/navigation-link/NavigationLink.tsx';
 import ChevronRightIcon from '@/assets/svg/ChevronRightIcon.tsx';
 import ChevronLeftIcon from '@/assets/svg/ChevronLeftIcon.tsx';
 import QuickNavContainer from '@/components/containers/quick-nav-container/QuickNavContainer.tsx';
-import QuickNav from '@/layouts/quick-nav';
+import QuickNav from '@/layouts/quick-nav/QuickNav.tsx';
 import { COMPONENTS } from '@/utils/constants.ts';
 import { convertToTitleCase } from '@/utils/convertToTitleCase.ts';
 import { getPaginationIndex } from '@/utils/getPaginationIndex.ts';

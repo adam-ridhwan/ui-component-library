@@ -50,3 +50,8 @@ export const EXAMPLES: string[] = ['Dashboard', 'Cards', 'Tasks', 'Playground', 
 
 export const DOC_ROUTE = '/docs';
 export const COMPONENTS_ROUTES = '/docs/components';
+
+export const LESS_THAN = '<';
+export const GREATER_THAN = '>';
+export const OPENING_BRACE = '{';
+export const CLOSING_BRACE = '}';
