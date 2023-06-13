@@ -1,29 +1,39 @@
-/* @formatter:off */
-.container {
-    background-image:
-        linear-gradient(to right top,
-            #d16ba5,
-            #c777b9,
-            #ba83ca,
-            #aa8fd8,
-            #9a9ae1,
-            #819fe2,
-            #68a3e0,
-            #51a6da,
-            #22a3ca,
-            #009fb6,
-            #00999e,
-            #059285
-        );
-
-    position: relative;
-    min-height: 350px;
+.wrapper {
+    margin-block: 2rem;
     width: 100%;
+    /*overflow: visible;*/
+}
+
+.container {
+    min-height: 350px;
     border-radius: 6px;
-    margin-top: 2em;
-    margin-bottom: 2em;
     padding-top: 80px;
     padding-bottom: 80px;
     display: flex;
     justify-content: center;
+
+    /* @formatter:off */
+    background-image:
+        linear-gradient(to right top,
+            hsl(326,53%,62%),
+            hsl(311,42%,62%),
+            hsl(286,40%,65%),
+            hsl(262,48%,70%),
+            hsl(240,54%,74%),
+            hsl(221,63%,70%),
+            hsl(211,66%,64%),
+            hsl(203,65%,59%),
+            hsl(194,71%,46%),
+            hsl(188,100%,36%),
+            hsl(182,100%,31%),
+            hsl(174,93%,30%)
+        );
+}
+
+@media (min-width: 900px) {
+    .container {
+        --container-padding: 5rem;
+        width: calc(100% + var(--container-padding));
+        margin: 0 0 0 calc(-0.5 * var(--container-padding));
+    }
 }

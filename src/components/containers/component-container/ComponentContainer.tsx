@@ -8,7 +8,9 @@ interface ComponentContainerProps {
 const ComponentContainer: FC<ComponentContainerProps> = ({ children }) => {
   return (
     <>
-      <div className={styles.container}>{children}</div>
+      <div className={styles.wrapper}>
+        <div className={styles.container}>{children}</div>
+      </div>
     </>
   );
 };

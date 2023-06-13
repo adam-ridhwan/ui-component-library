@@ -1,4 +1,6 @@
 .subheading {
+    max-inline-size: 50ch;
+    text-wrap: balance;
     font-weight: 300;
     font-size: 21px;
     color: #64748b;
