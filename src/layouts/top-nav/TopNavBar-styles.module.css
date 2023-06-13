@@ -7,6 +7,10 @@ header {
     z-index: 500;
 }
 
+header[data-scrolled= "false"] {
+    box-shadow: 0 0 0 1px var(--colors-mauve5);
+}
+
 header::before {
     content: '';
     position: absolute;
@@ -152,11 +156,7 @@ header::before {
     font-size: 10px;
 }
 
-/*
-ToggleSidebarIcon,
-GithubIcon,
-ToggleThemeIcon
-*/
+/* ToggleSidebarIcon, GithubIcon, ToggleThemeIcon */
 .toggle_side_bar_icon,
 .search_nav_container button:nth-child(2),
 .search_nav_container button:nth-child(3) {
@@ -173,24 +173,9 @@ ToggleThemeIcon
 }
 
 
-/* Styles for Small devices (tablets in portrait mode) */
-@media (min-width: 641px) and (max-width: 767px) {
-
-}
-
-/* Styles for Medium devices (tablets in landscape mode) */
-@media (min-width: 768px) and (max-width: 900px) {
-
-}
-
 /* Styles for Large devices (desktops) */
-@media (min-width: 901px) and (max-width: 1440px) {
+@media (min-width: 901px) {
     .search_nav_container > button:first-child {
         width: 256px;
     }
-}
-
-/* Styles for Extra large devices (large desktops) */
-@media (min-width: 1441px) {
-
 }

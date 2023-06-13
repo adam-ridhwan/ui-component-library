@@ -32,9 +32,10 @@ const TopNav = () => {
 
   return (
     <>
-      <header>
+      <header data-scrolled={isPageScrolled}>
         <div className={styles.wrapper} data-scrolled={isPageScrolled}>
           <div className={styles.shadow}></div>
+
           <div className={styles.container}>
             {[DeviceType.DESKTOP, DeviceType.LARGE_DESKTOP].includes(deviceType) ? (
               <div className={styles.desktop_nav}>
