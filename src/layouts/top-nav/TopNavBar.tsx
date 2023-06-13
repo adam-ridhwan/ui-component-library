@@ -2,7 +2,7 @@ import CommandMiniIcon from '@/assets/svg/CommandMiniIcon';
 import GithubIcon from '@/assets/svg/GithubIcon';
 import ToggleSidebarIcon from '@/assets/svg/ToggleSidebarIcon';
 import ToggleThemeIcon from '@/assets/svg/ToggleThemeIcon';
-import NavigationLink from '@/components/navigation-link/NavigationLink.tsx';
+import NavigationLink from '@/components/navigation-link/NavigationLink';
 import useResolution, { DeviceType } from '@/hooks/useResolution';
 import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
@@ -56,7 +56,9 @@ const TopNav = () => {
             <div className={styles.search_nav_container}>
               <button onClick={handleOpenSearchBar}>
                 <div>
-                  {[DeviceType.PHONE, DeviceType.TABLET].includes(deviceType) ? 'Search...' : 'Search documentation...'}
+                  {[DeviceType.PHONE, DeviceType.TABLET_PORTRAIT].includes(deviceType)
+                    ? 'Search...'
+                    : 'Search documentation...'}
                 </div>
                 {[DeviceType.DESKTOP, DeviceType.LARGE_DESKTOP].includes(deviceType) && (
                   <div className={styles.shortcut_container}>

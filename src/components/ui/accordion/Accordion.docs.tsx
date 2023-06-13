@@ -55,11 +55,9 @@ const AccordionDocs: FC = () => {
               </Accordion.Item>
 
               <Accordion.Item className='AccordionItem' index={2}>
-                <Accordion.Trigger className='AccordionTrigger'>Blockchain Technology</Accordion.Trigger>
+                <Accordion.Trigger className='AccordionTrigger'>Machine Learning</Accordion.Trigger>
                 <Accordion.Content className='AccordionContent'>
-                  <div className='AccordionContentText'>
-                    Blockchain technology provides a secure way of recording transactions.
-                  </div>
+                  <div className='AccordionContentText'>Machine learning is computers learning from data.</div>
                 </Accordion.Content>
               </Accordion.Item>
             </Accordion.Root>
@@ -68,6 +66,7 @@ const AccordionDocs: FC = () => {
           <CodeContainer isExpandable={true}>
             {/*prettier-ignore*/}
             <div>
+              {/* Region: First Item */}
               <span className='syntax--sky'>
                 <span className='syntax--teal'>{LESS_THAN}Accordion.Root</span> className=
                 <span className='syntax--crimson'>'AccordionRoot'</span> defaultIndex=
@@ -139,7 +138,7 @@ const AccordionDocs: FC = () => {
               </span>
 
 
-              {/** ----- */}
+              {/* Region: Second Item */}
               <br/>
 
               <span className='syntax--sky'>
@@ -204,7 +203,7 @@ const AccordionDocs: FC = () => {
                 <span className='syntax--teal'>{GREATER_THAN}</span>
               </span>
 
-              {/** ----- */}
+              {/* Region: Third Item */}
               <br/>
 
               <span className='syntax--sky'>
