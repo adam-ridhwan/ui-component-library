@@ -20,10 +20,6 @@
     border-radius: 5px;
 }
 
-.container::-webkit-scrollbar-thumb {
-    background-color: var(--colors-slate6);
-}
-
 
 .instructions_container {
     display: flex;
