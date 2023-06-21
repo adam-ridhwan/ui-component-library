@@ -223,7 +223,7 @@ const AccordionDocs: FC = () => {
 
               <span className='syntax--sky'>
                 {addTabs(3)}
-                <span className='syntax--indigo'>Blockchain Technology</span>
+                <span className='syntax--indigo'>Machine Learning</span>
               </span>
 
               <span className='syntax--sky'>
@@ -248,7 +248,7 @@ const AccordionDocs: FC = () => {
               <span className='syntax--sky'>
                 {addTabs(4)}
                 <span className='syntax--indigo'>
-                  Blockchain technology provides a secure way of recording transactions.{addTabs(2)}
+                  Machine learning is computers learning from data.{addTabs(2)}
                 </span>
               </span>
 

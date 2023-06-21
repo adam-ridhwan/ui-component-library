@@ -18,8 +18,6 @@ import { convertToTitleCase } from '@/utils/convertToTitleCase.ts';
 import { getPaginationIndex } from '@/utils/getPaginationIndex.ts';
 
 const AlertDocs = () => {
-  const { selectedTab, switchTab } = useTab();
-
   const [PREVIOUS_INDEX, NEXT_INDEX] = getPaginationIndex('alert');
 
   return (
@@ -32,13 +30,7 @@ const AlertDocs = () => {
 
           <Divider />
 
-          <TabSelector {...{ selectedTab, switchTab }} />
-
-          <ComponentContainer>
-            {selectedTab === Tab.PREVIEW && <></>}
-
-            {selectedTab === Tab.CODE && <>Code content here...</>}
-          </ComponentContainer>
+          <ComponentContainer></ComponentContainer>
 
           <Divider />
 

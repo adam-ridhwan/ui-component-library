@@ -45,48 +45,17 @@ const SearchBar: FC = () => {
   const scrollableDivRef = useRef<HTMLDivElement | null>(null);
   const itemRefs = useRef<{ [key: string]: RefObject<HTMLAnchorElement> }>({});
 
-  /**
-   * Side effect that runs when `searchItemsState.combinedSearchItems` changes.
-   *
-   * This effect initializes references for each item in the `combinedSearchItems` array,
-   * if they don't already exist. This is useful for accessing the DOM elements corresponding
-   * to these items directly.
-   *
-   * `createRef()` is used to create the references. The result is an object
-   * with current property initialized to null. The current property is then
-   * populated with the corresponding DOM element when the component mounts.
-   */
   useEffect(() => {
     searchItemsState.combinedSearchItems.forEach((item) => {
       if (!itemRefs.current[item]) itemRefs.current[item] = createRef();
     });
   }, [searchItemsState.combinedSearchItems]);
 
-  /**
-   * Sets the state of search items and item state to their initial values.
-   *
-   * This function is resets state of component to its initial state.
-   * Used when user interactions or other events in application need to trigger a state reset.
-   * For example, closing the search bar, clicking outside the search bar, or navigating to a new page.
-   */
   const handleSetInitialState = useCallback(() => {
     setSearchItemsState(initialSearchItemsState);
-    setItemState({
-      lastSelectedItem: NAVIGATION_MENU_ITEMS[0],
-      lastHoveredItem: NAVIGATION_MENU_ITEMS[0],
-    });
+    setItemState({ lastSelectedItem: NAVIGATION_MENU_ITEMS[0], lastHoveredItem: NAVIGATION_MENU_ITEMS[0] });
   }, [setSearchItemsState, initialSearchItemsState]);
 
-  /**
-   * Closes the search modal.
-   *
-   * This function is responsible for:
-   * - toggling the search bar
-   * - resetting the state to its initial state
-   * - clearing the search input
-   * - resetting the scroll position of a scrollable div
-   * - resetting the body's overflowY style to 'auto'
-   */
   const handleCloseModal = useCallback(() => {
     toggleSearchBar();
     handleSetInitialState();
@@ -229,16 +198,6 @@ const SearchBar: FC = () => {
     handleOpenSearchBar,
   ]);
 
-  /**
-   * This `useEffect` hook is utilized to handle window resize events to disable animations.
-   *
-   * When a resize event occurs, a few actions are performed:
-   * It checks if the window hasn't been previously resized.
-   * If not, it sets the `isWindowResized` state to true and removes content transitions.
-   *
-   * Sets a new timeout that will be triggered after 250 milliseconds.
-   * Once this timeout expires, it sets `isWindowResized` back to false and re-enables content transitions.
-   */
   useEffect(() => {
     let resizeTimeout: ReturnType<typeof setTimeout>;
 
@@ -262,23 +221,6 @@ const SearchBar: FC = () => {
     };
   }, [isWindowResized, searchInputRef]);
 
-  /**
-   * This function is used to render a section with multiple navigation items.
-   *
-   * @param {string} title - The title of the section.
-   * @param {string[]} items - An array of items to be displayed in the section.
-   * @param {string} baseRoute - The base route for the items.
-   * @param {ReactElement} icon - The icon to be displayed next to each item.
-   *
-   * If the items array is empty, it returns null.
-   * For each item, it determines its breadcrumbs and section for the button.
-   * Special cases are handled based on the combination of title and section.
-   * It returns a div containing the title and NavigationLinks for each item.
-   * Each NavigationLink has a mouse enter event that updates the item state.
-   * If the item is currently selected, its background color is set to '#f5f8fa'.
-   *
-   * @returns {ReactElement | null} - The rendered section or null.
-   */
   const renderSection = (
     title: string,
     items: string[],
@@ -305,7 +247,7 @@ const SearchBar: FC = () => {
               path = `${COMPONENTS_ROUTES}/accordion`;
               sectionForButton = Object.keys(COMPONENTS)[0];
               break;
-            case 'DocumentationPage-introduction':
+            case 'Documentation-introduction':
               path = `${DOC_ROUTE}`;
               sectionForButton = 'docs';
               break;
@@ -340,20 +282,6 @@ const SearchBar: FC = () => {
     );
   };
 
-  /**
-   * This function is used to handle search inputs and update the state accordingly.
-   *
-   * @param {ChangeEvent<HTMLInputElement>} event - The change event from the search input.
-   *
-   * The input value is extracted from the event, which triggers a search.
-   * The state is updated to reflect that typing is in progress.
-   * If the input value is empty, it resets the state to its initial values.
-   * Then it filters the navigation menu items, documentation items, and components items based on the input value.
-   * A new combined search items list is created from these filtered items.
-   * Both the search items state and item state are updated with these new values.
-   *
-   * @returns {void}
-   */
   const handleSearch = ({ target: { value } }: ChangeEvent<HTMLInputElement>): void => {
     setSearchInputValue(value);
     setIsTyping(true);
@@ -379,21 +307,6 @@ const SearchBar: FC = () => {
     setItemState((prevState) => ({ ...prevState, lastSelectedItem: filteredCombinedSearchItems[0] }));
   };
 
-  /**
-   * This useEffect hook is responsible for handling mouse movement when the search bar is toggled.
-   *
-   * The hook adds an event listener to the window object, listening for 'mousemove' events.
-   * When a mouse move event is detected, it checks if the mouse is over the scrollable div.
-   * If so, it updates the state to indicate that typing is no longer happening, and sets the last selected item to be
-   * the last hovered item.
-   *
-   * @listens mousemove - Listens for mouse move events on the window object.
-   *
-   * @param {boolean} isSearchBarToggled - A state indicating whether the search bar is currently toggled.
-   * @param {MutableRefObject<HTMLDivElement | null>} scrollableDivRef - A React ref object pointing to the scrollable
-   *   div.
-   *
-   */
   useEffect(() => {
     if (!isSearchBarToggled) return;
 

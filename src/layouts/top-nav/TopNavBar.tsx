@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import CommandMiniIcon from '@/assets/svg/CommandMiniIcon';
 import GithubIcon from '@/assets/svg/GithubIcon';
 import ToggleSidebarIcon from '@/assets/svg/ToggleSidebarIcon';
@@ -8,7 +9,6 @@ import { useSearchBarContext } from '@/hooks/useSearchBarContext';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE } from '@/utils/constants';
 import styles from './TopNavBar-styles.module.css';
-import { useEffect, useState } from 'react';
 
 const TopNav = () => {
   const { toggleSidebar } = useSideBarContext();
@@ -23,11 +23,8 @@ const TopNav = () => {
 
   useEffect(() => {
     const checkScroll = () => (window.scrollY > 20 ? setIsPageScrolled(true) : setIsPageScrolled(false));
-
     window.addEventListener('scroll', checkScroll);
-    return () => {
-      window.removeEventListener('scroll', checkScroll);
-    };
+    return () => window.removeEventListener('scroll', checkScroll);
   }, []);
 
   return (
