@@ -1,1 +1,1 @@
-export { ToggleDocs } from './Toggle.docs.tsx';
+export { ToggleDocs } from './Toggle.docs';

@@ -1,1 +1,1 @@
-export { SwitchDocs } from './Switch.docs.tsx';
+export { SwitchDocs } from './Switch.docs';

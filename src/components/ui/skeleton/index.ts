@@ -1,1 +1,1 @@
-export { SkeletonDocs } from './Skeleton.docs.tsx';
+export { SkeletonDocs } from './Skeleton.docs';

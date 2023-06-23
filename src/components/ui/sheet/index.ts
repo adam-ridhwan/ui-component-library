@@ -1,1 +1,1 @@
-export { SheetDocs } from './Sheet.docs.tsx';
+export { SheetDocs } from './Sheet.docs';

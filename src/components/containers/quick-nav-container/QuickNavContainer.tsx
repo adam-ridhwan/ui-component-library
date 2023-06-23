@@ -1,5 +1,5 @@
 import { FC, ReactElement } from 'react';
-import useResolution, { DeviceType } from '@/hooks/useResolution.tsx';
+import useResolution, { DeviceType } from '@/hooks/useResolution';
 import styles from './QuickNavContainer-styles.module.css';
 
 interface QuickNavContainerProps {

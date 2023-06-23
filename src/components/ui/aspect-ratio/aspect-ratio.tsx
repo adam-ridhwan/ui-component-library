@@ -1,4 +1,4 @@
-import { useSideBarContext } from '@/hooks/useSideBarContext.ts';
+import { useSideBarContext } from '@/hooks/useSideBarContext';
 
 const AspectRatio = () => {
   const { currentSection } = useSideBarContext();

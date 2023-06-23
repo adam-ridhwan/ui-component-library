@@ -1,1 +1,1 @@
-export { LabelDocs } from './Label.docs.tsx';
+export { LabelDocs } from './Label.docs';

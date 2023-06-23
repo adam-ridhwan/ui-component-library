@@ -1,1 +1,1 @@
-export { SliderDocs } from './Slider.docs.tsx';
+export { SliderDocs } from './Slider.docs';

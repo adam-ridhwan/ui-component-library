@@ -1,1 +1,1 @@
-export { BreadcrumbDocs } from './Breadcrumb.docs.tsx';
+export { BreadcrumbDocs } from './Breadcrumb.docs';

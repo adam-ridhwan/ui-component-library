@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from '@/pages/HomePage.tsx';
-import DocumentationPage from '@/pages/DocumentationPage.tsx';
-import Installation from '@/components/installation/Installation.tsx';
-import Introduction from '@/components/introduction/Introduction.tsx';
+import Home from '@/pages/HomePage';
+import DocumentationPage from '@/pages/DocumentationPage';
+import Installation from '@/components/installation/Installation';
+import Introduction from '@/components/introduction/Introduction';
 import Theming from '@/components/theming';
 import Typography from '@/components/typography';
 
@@ -52,56 +52,56 @@ import './App.css';
 function App() {
   return (
     <>
-      <div className="app">
+      <div className='app'>
         <Router>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/docs" element={<DocumentationPage />}>
-              <Route path="/docs" element={<Introduction />} />
-              <Route path="/docs/installation" element={<Installation />} />
-              <Route path="/docs/theming" element={<Theming />} />
-              <Route path="/docs/typography" element={<Typography />} />
+            <Route path='/' element={<Home />} />
+            <Route path='/docs' element={<DocumentationPage />}>
+              <Route path='/docs' element={<Introduction />} />
+              <Route path='/docs/installation' element={<Installation />} />
+              <Route path='/docs/theming' element={<Theming />} />
+              <Route path='/docs/typography' element={<Typography />} />
 
-              <Route path="/docs/components/breadcrumb" element={<BreadcrumbDocs />} />
-              <Route path="/docs/components/accordion" element={<AccordionDocs />} />
-              <Route path="/docs/components/alert" element={<AlertDocs />} />
-              <Route path="/docs/components/alert-dialog" element={<AlertDialogDocs />} />
-              <Route path="/docs/components/aspect-ratio" element={<AspectRatioDocs />} />
-              <Route path="/docs/components/avatar" element={<AvatarDocs />} />
-              <Route path="/docs/components/badge" element={<BadgeDocs />} />
-              <Route path="/docs/components/button" element={<ButtonDocs />} />
-              <Route path="/docs/components/calendar" element={<CalendarDocs />} />
-              <Route path="/docs/components/card" element={<CardDocs />} />
-              <Route path="/docs/components/checkbox" element={<CheckboxDocs />} />
-              <Route path="/docs/components/collapsible" element={<CollapsibleDocs />} />
-              <Route path="/docs/components/combo-box" element={<ComboBoxDocs />} />
-              <Route path="/docs/components/command" element={<CommandDocs />} />
-              <Route path="/docs/components/context-menu" element={<ContextMenuDocs />} />
-              <Route path="/docs/components/data-table" element={<DataTableDocs />} />
-              <Route path="/docs/components/date-picker" element={<DatePickerDocs />} />
-              <Route path="/docs/components/dialog" element={<DialogDocs />} />
-              <Route path="/docs/components/dropdown-menu" element={<DropdownMenuDocs />} />
-              <Route path="/docs/components/hover-card" element={<HoverCardDocs />} />
-              <Route path="/docs/components/input" element={<InputDocs />} />
-              <Route path="/docs/components/label" element={<LabelDocs />} />
-              <Route path="/docs/components/menu-bar" element={<MenuBarDocs />} />
-              <Route path="/docs/components/navigation-menu" element={<NavigationMenuDocs />} />
-              <Route path="/docs/components/popover" element={<PopoverDocs />} />
-              <Route path="/docs/components/progress" element={<ProgressDocs />} />
-              <Route path="/docs/components/radio-group" element={<RadioGroupDocs />} />
-              <Route path="/docs/components/scroll-area" element={<ScrollAreaDocs />} />
-              <Route path="/docs/components/select" element={<SelectDocs />} />
-              <Route path="/docs/components/separator" element={<SeparatorDocs />} />
-              <Route path="/docs/components/sheet" element={<SheetDocs />} />
-              <Route path="/docs/components/skeleton" element={<SkeletonDocs />} />
-              <Route path="/docs/components/slider" element={<SliderDocs />} />
-              <Route path="/docs/components/switch" element={<SwitchDocs />} />
-              <Route path="/docs/components/table" element={<TableDocs />} />
-              <Route path="/docs/components/tabs" element={<TabsDocs />} />
-              <Route path="/docs/components/textarea" element={<TextareaDocs />} />
-              <Route path="/docs/components/toast" element={<ToastDocs />} />
-              <Route path="/docs/components/toggle" element={<ToggleDocs />} />
-              <Route path="/docs/components/tooltip" element={<TooltipDocs />} />
+              <Route path='/docs/components/breadcrumb' element={<BreadcrumbDocs />} />
+              <Route path='/docs/components/accordion' element={<AccordionDocs />} />
+              <Route path='/docs/components/alert' element={<AlertDocs />} />
+              <Route path='/docs/components/alert-dialog' element={<AlertDialogDocs />} />
+              <Route path='/docs/components/aspect-ratio' element={<AspectRatioDocs />} />
+              <Route path='/docs/components/avatar' element={<AvatarDocs />} />
+              <Route path='/docs/components/badge' element={<BadgeDocs />} />
+              <Route path='/docs/components/button' element={<ButtonDocs />} />
+              <Route path='/docs/components/calendar' element={<CalendarDocs />} />
+              <Route path='/docs/components/card' element={<CardDocs />} />
+              <Route path='/docs/components/checkbox' element={<CheckboxDocs />} />
+              <Route path='/docs/components/collapsible' element={<CollapsibleDocs />} />
+              <Route path='/docs/components/combo-box' element={<ComboBoxDocs />} />
+              <Route path='/docs/components/command' element={<CommandDocs />} />
+              <Route path='/docs/components/context-menu' element={<ContextMenuDocs />} />
+              <Route path='/docs/components/data-table' element={<DataTableDocs />} />
+              <Route path='/docs/components/date-picker' element={<DatePickerDocs />} />
+              <Route path='/docs/components/dialog' element={<DialogDocs />} />
+              <Route path='/docs/components/dropdown-menu' element={<DropdownMenuDocs />} />
+              <Route path='/docs/components/hover-card' element={<HoverCardDocs />} />
+              <Route path='/docs/components/input' element={<InputDocs />} />
+              <Route path='/docs/components/label' element={<LabelDocs />} />
+              <Route path='/docs/components/menu-bar' element={<MenuBarDocs />} />
+              <Route path='/docs/components/navigation-menu' element={<NavigationMenuDocs />} />
+              <Route path='/docs/components/popover' element={<PopoverDocs />} />
+              <Route path='/docs/components/progress' element={<ProgressDocs />} />
+              <Route path='/docs/components/radio-group' element={<RadioGroupDocs />} />
+              <Route path='/docs/components/scroll-area' element={<ScrollAreaDocs />} />
+              <Route path='/docs/components/select' element={<SelectDocs />} />
+              <Route path='/docs/components/separator' element={<SeparatorDocs />} />
+              <Route path='/docs/components/sheet' element={<SheetDocs />} />
+              <Route path='/docs/components/skeleton' element={<SkeletonDocs />} />
+              <Route path='/docs/components/slider' element={<SliderDocs />} />
+              <Route path='/docs/components/switch' element={<SwitchDocs />} />
+              <Route path='/docs/components/table' element={<TableDocs />} />
+              <Route path='/docs/components/tabs' element={<TabsDocs />} />
+              <Route path='/docs/components/textarea' element={<TextareaDocs />} />
+              <Route path='/docs/components/toast' element={<ToastDocs />} />
+              <Route path='/docs/components/toggle' element={<ToggleDocs />} />
+              <Route path='/docs/components/tooltip' element={<TooltipDocs />} />
             </Route>
           </Routes>
         </Router>

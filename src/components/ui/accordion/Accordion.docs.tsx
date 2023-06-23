@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { CLOSING_BRACE, COMPONENTS, DOCUMENTATION, GREATER_THAN, LESS_THAN, OPENING_BRACE } from '@/utils/constants';
-import { addTabs } from '@/utils/addTabs.ts';
+import { addTabs } from '@/utils/addTabs';
 import ChevronLeftIcon from '@/assets/svg/ChevronLeftIcon';
 import ChevronRightIcon from '@/assets/svg/ChevronRightIcon';
 import NavigationLink from '@/components/navigation-link/NavigationLink';
@@ -16,7 +16,7 @@ import PaginationContainer from '@/components/containers/pagination-container/Pa
 import BodyContainer from '@/components/containers/body-container/BodyContainer';
 import CodeContainer from '@/components/containers/code-container/CodeContainer';
 import Divider from '@/layouts/divider/Divider';
-import QuickNav from '@/layouts/quick-nav/QuickNav.tsx';
+import QuickNav from '@/layouts/quick-nav/QuickNav';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
 import { getPaginationIndex } from '@/utils/getPaginationIndex';
 

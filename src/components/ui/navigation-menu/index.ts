@@ -1,1 +1,1 @@
-export { NavigationMenuDocs } from './NavigationMenu.docs.tsx';
+export { NavigationMenuDocs } from './NavigationMenu.docs';

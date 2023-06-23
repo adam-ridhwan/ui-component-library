@@ -1,20 +1,20 @@
-import { Tab, useTab } from '@/hooks/useTab.ts';
-import { COMPONENTS } from '@/utils/constants.ts';
-import ContentContainer from '@/components/containers/content-container/ContentContainer.tsx';
-import SectionContainer from '@/components/containers/section-container/SectionContainer.tsx';
-import Breadcrumbs from '@/components/breadcrumbs/Breadcrumbs.tsx';
-import Heading from '@/components/containers/typography/heading/Heading.tsx';
-import Subheading from '@/components/containers/typography/subheading/Subheading.tsx';
-import Divider from '@/layouts/divider/Divider.tsx';
+import { Tab, useTab } from '@/hooks/useTab';
+import { COMPONENTS } from '@/utils/constants';
+import ContentContainer from '@/components/containers/content-container/ContentContainer';
+import SectionContainer from '@/components/containers/section-container/SectionContainer';
+import Breadcrumbs from '@/components/breadcrumbs/Breadcrumbs';
+import Heading from '@/components/containers/typography/heading/Heading';
+import Subheading from '@/components/containers/typography/subheading/Subheading';
+import Divider from '@/layouts/divider/Divider';
 import TabSelector from '@/layouts/tab-selector';
-import ComponentContainer from '@/components/containers/component-container/ComponentContainer.tsx';
-import PaginationContainer from '@/components/containers/pagination-container/PaginationContainer.tsx';
-import NavigationLink from '@/components/navigation-link/NavigationLink.tsx';
-import ChevronLeftIcon from '@/assets/svg/ChevronLeftIcon.tsx';
-import { convertToTitleCase } from '@/utils/convertToTitleCase.ts';
-import ChevronRightIcon from '@/assets/svg/ChevronRightIcon.tsx';
-import QuickNavContainer from '@/components/containers/quick-nav-container/QuickNavContainer.tsx';
-import QuickNav from '@/layouts/quick-nav/QuickNav.tsx';
+import ComponentContainer from '@/components/containers/component-container/ComponentContainer';
+import PaginationContainer from '@/components/containers/pagination-container/PaginationContainer';
+import NavigationLink from '@/components/navigation-link/NavigationLink';
+import ChevronLeftIcon from '@/assets/svg/ChevronLeftIcon';
+import { convertToTitleCase } from '@/utils/convertToTitleCase';
+import ChevronRightIcon from '@/assets/svg/ChevronRightIcon';
+import QuickNavContainer from '@/components/containers/quick-nav-container/QuickNavContainer';
+import QuickNav from '@/layouts/quick-nav/QuickNav';
 
 const TextareaDocs = () => {
   const { selectedTab, switchTab } = useTab();

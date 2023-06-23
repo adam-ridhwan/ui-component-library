@@ -1,1 +1,1 @@
-export { DataTableDocs } from './DataTable.docs.tsx';
+export { DataTableDocs } from './DataTable.docs';

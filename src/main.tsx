@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
+import App from './App';
 
-import { SideBarProvider } from './context/sideBarContext.tsx';
+import { SideBarProvider } from './context/sideBarContext';
 
-import { SearchBarProvider } from './context/searchBarContext.tsx';
+import { SearchBarProvider } from './context/searchBarContext';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

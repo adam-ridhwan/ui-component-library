@@ -1,4 +1,4 @@
-import NavigationLink from '@/components/navigation-link/NavigationLink.tsx';
+import NavigationLink from '@/components/navigation-link/NavigationLink';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 import { COMPONENTS, COMPONENTS_ROUTES, DOC_ROUTE } from '@/utils/constants';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';

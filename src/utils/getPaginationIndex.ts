@@ -1,4 +1,4 @@
-import { COMPONENTS } from '@/utils/constants.ts';
+import { COMPONENTS } from '@/utils/constants';
 
 export const getPaginationIndex = (COMPONENT: string) => {
   const COMPONENT_INDEX = COMPONENTS.indexOf(COMPONENT);

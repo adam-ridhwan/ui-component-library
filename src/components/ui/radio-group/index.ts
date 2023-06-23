@@ -1,1 +1,1 @@
-export { RadioGroupDocs } from './RadioGroup.docs.tsx';
+export { RadioGroupDocs } from './RadioGroup.docs';

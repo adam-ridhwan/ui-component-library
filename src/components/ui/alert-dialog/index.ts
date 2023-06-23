@@ -1,1 +1,1 @@
-export { AlertDialogDocs } from './AlertDialog.docs.tsx';
+export { AlertDialogDocs } from './AlertDialog.docs';

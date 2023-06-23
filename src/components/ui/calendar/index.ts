@@ -1,1 +1,1 @@
-export { CalendarDocs } from './Calendar.docs.tsx';
+export { CalendarDocs } from './Calendar.docs';

@@ -1,1 +1,1 @@
-export { AlertDocs } from './Alert.docs.tsx';
+export { AlertDocs } from './Alert.docs';

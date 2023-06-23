@@ -1,1 +1,1 @@
-export { MenuBarDocs } from './MenuBar.docs.tsx';
+export { MenuBarDocs } from './MenuBar.docs';

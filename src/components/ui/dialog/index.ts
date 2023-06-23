@@ -1,1 +1,1 @@
-export { DialogDocs } from './Dialog.docs.tsx';
+export { DialogDocs } from './Dialog.docs';

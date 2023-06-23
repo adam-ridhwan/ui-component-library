@@ -1,1 +1,1 @@
-export { PopoverDocs } from './Popover.docs.tsx';
+export { PopoverDocs } from './Popover.docs';

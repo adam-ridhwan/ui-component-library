@@ -1,1 +1,1 @@
-export { CommandDocs } from './Command.docs.tsx';
+export { CommandDocs } from './Command.docs';

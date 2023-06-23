@@ -1,1 +1,1 @@
-export { ProgressDocs } from './Progress.docs.tsx';
+export { ProgressDocs } from './Progress.docs';

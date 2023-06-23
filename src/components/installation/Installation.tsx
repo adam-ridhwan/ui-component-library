@@ -1,17 +1,17 @@
-import Breadcrumbs from '@/components/breadcrumbs/Breadcrumbs.tsx';
-import Divider from '@/layouts/divider/Divider.tsx';
-import ContentContainer from '@/components/containers/content-container/ContentContainer.tsx';
-import SectionContainer from '@/components/containers/section-container/SectionContainer.tsx';
-import BodyContainer from '@/components/containers/body-container/BodyContainer.tsx';
-import PaginationContainer from '@/components/containers/pagination-container/PaginationContainer.tsx';
-import NavigationLink from '@/components/navigation-link/NavigationLink.tsx';
-import { DOC_ROUTE, DOCUMENTATION } from '@/utils/constants.ts';
-import { convertToTitleCase } from '@/utils/convertToTitleCase.ts';
-import ChevronRightIcon from '@/assets/svg/ChevronRightIcon.tsx';
-import QuickNavContainer from '@/components/containers/quick-nav-container/QuickNavContainer.tsx';
-import QuickNav from '@/layouts/quick-nav/QuickNav.tsx';
-import Heading from '@/components/containers/typography/heading/Heading.tsx';
-import Subheading from '@/components/containers/typography/subheading/Subheading.tsx';
+import Breadcrumbs from '@/components/breadcrumbs/Breadcrumbs';
+import Divider from '@/layouts/divider/Divider';
+import ContentContainer from '@/components/containers/content-container/ContentContainer';
+import SectionContainer from '@/components/containers/section-container/SectionContainer';
+import BodyContainer from '@/components/containers/body-container/BodyContainer';
+import PaginationContainer from '@/components/containers/pagination-container/PaginationContainer';
+import NavigationLink from '@/components/navigation-link/NavigationLink';
+import { DOC_ROUTE, DOCUMENTATION } from '@/utils/constants';
+import { convertToTitleCase } from '@/utils/convertToTitleCase';
+import ChevronRightIcon from '@/assets/svg/ChevronRightIcon';
+import QuickNavContainer from '@/components/containers/quick-nav-container/QuickNavContainer';
+import QuickNav from '@/layouts/quick-nav/QuickNav';
+import Heading from '@/components/containers/typography/heading/Heading';
+import Subheading from '@/components/containers/typography/subheading/Subheading';
 
 const Installation = () => {
   return (

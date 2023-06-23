@@ -1,1 +1,1 @@
-export { DatePickerDocs } from './DatePicker.docs.tsx';
+export { DatePickerDocs } from './DatePicker.docs';

@@ -3,10 +3,10 @@ import { useLocation } from 'react-router-dom';
 import { useSideBarContext } from '@/hooks/useSideBarContext';
 import useResolution, { DeviceType } from '@/hooks/useResolution';
 
-import SideNavDesktop from '@/layouts/side-nav-desktop/SideNavDesktop.tsx';
+import SideNavDesktop from '@/layouts/side-nav-desktop/SideNavDesktop';
 
-import Installation from '@/components/installation/Installation.tsx';
-import Introduction from '@/components/introduction/Introduction.tsx';
+import Installation from '@/components/installation/Installation';
+import Introduction from '@/components/introduction/Introduction';
 import Theming from '@/components/theming';
 import Typography from '@/components/typography';
 

@@ -1,18 +1,18 @@
 import { useRef } from 'react';
 import ChevronRightIcon from '@/assets/svg/ChevronRightIcon';
 import { DOC_ROUTE, DOCUMENTATION } from '@/utils/constants';
-import Breadcrumbs from '@/components/breadcrumbs/Breadcrumbs.tsx';
-import Divider from '@/layouts/divider/Divider.tsx';
-import QuickNav from '@/layouts/quick-nav/QuickNav.tsx';
+import Breadcrumbs from '@/components/breadcrumbs/Breadcrumbs';
+import Divider from '@/layouts/divider/Divider';
+import QuickNav from '@/layouts/quick-nav/QuickNav';
 import { convertToTitleCase } from '@/utils/convertToTitleCase';
-import NavigationLink from '@/components/navigation-link/NavigationLink.tsx';
-import ContentContainer from '@/components/containers/content-container/ContentContainer.tsx';
-import SectionContainer from '@/components/containers/section-container/SectionContainer.tsx';
-import BodyContainer from '@/components/containers/body-container/BodyContainer.tsx';
-import PaginationContainer from '@/components/containers/pagination-container/PaginationContainer.tsx';
-import QuickNavContainer from '@/components/containers/quick-nav-container/QuickNavContainer.tsx';
-import Heading from '@/components/containers/typography/heading/Heading.tsx';
-import Subheading from '@/components/containers/typography/subheading/Subheading.tsx';
+import NavigationLink from '@/components/navigation-link/NavigationLink';
+import ContentContainer from '@/components/containers/content-container/ContentContainer';
+import SectionContainer from '@/components/containers/section-container/SectionContainer';
+import BodyContainer from '@/components/containers/body-container/BodyContainer';
+import PaginationContainer from '@/components/containers/pagination-container/PaginationContainer';
+import QuickNavContainer from '@/components/containers/quick-nav-container/QuickNavContainer';
+import Heading from '@/components/containers/typography/heading/Heading';
+import Subheading from '@/components/containers/typography/subheading/Subheading';
 
 const Introduction = () => {
   const faqRef = useRef<HTMLDivElement>(null);

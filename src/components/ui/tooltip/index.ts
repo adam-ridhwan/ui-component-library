@@ -1,1 +1,1 @@
-export { TooltipDocs } from './Tooltip.docs.tsx';
+export { TooltipDocs } from './Tooltip.docs';

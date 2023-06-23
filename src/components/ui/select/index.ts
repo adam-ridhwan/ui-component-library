@@ -1,1 +1,1 @@
-export { SelectDocs } from './Select.docs.tsx';
+export { SelectDocs } from './Select.docs';

@@ -1,1 +1,1 @@
-export { AvatarDocs } from './Avatar.docs.tsx';
+export { AvatarDocs } from './Avatar.docs';

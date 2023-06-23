@@ -1,1 +1,1 @@
-export { AspectRatioDocs } from './AspectRatio.docs.tsx';
+export { AspectRatioDocs } from './AspectRatio.docs';

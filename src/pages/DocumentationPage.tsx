@@ -1,7 +1,7 @@
-import Content from '@/components/content/Content.tsx';
-import SearchBar from '@/components/search-bar/SearchBar.tsx';
-import SideNavBar from '@/layouts/side-nav-mobile/SideNavMobile.tsx';
-import TopNavBar from '@/layouts/top-nav/TopNavBar.tsx';
+import Content from '@/components/content/Content';
+import SearchBar from '@/components/search-bar/SearchBar';
+import SideNavBar from '@/layouts/side-nav-mobile/SideNavMobile';
+import TopNavBar from '@/layouts/top-nav/TopNavBar';
 
 const DocumentationPage = () => {
   return (

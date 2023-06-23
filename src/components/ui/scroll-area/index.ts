@@ -1,1 +1,1 @@
-export { ScrollAreaDocs } from './ScrollArea.docs.tsx';
+export { ScrollAreaDocs } from './ScrollArea.docs';

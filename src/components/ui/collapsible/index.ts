@@ -1,1 +1,1 @@
-export { CollapsibleDocs } from './Collapsible.docs.tsx';
+export { CollapsibleDocs } from './Collapsible.docs';

@@ -1,1 +1,1 @@
-export { DropdownMenuDocs } from './DropdownMenu.docs.tsx';
+export { DropdownMenuDocs } from './DropdownMenu.docs';

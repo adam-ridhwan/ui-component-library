@@ -8,5 +8,5 @@ export {
   Content,
   Item,
   Trigger,
-} from './Accordion.tsx';
-export { AccordionDocs } from './Accordion.docs.tsx';
+} from './Accordion';
+export { AccordionDocs } from './Accordion.docs';
