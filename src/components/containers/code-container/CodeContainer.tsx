@@ -37,7 +37,6 @@ const CodeContainer: FC<CodeContainerProps> = ({ children, isExpandable }) => {
 
   return (
     <>
-      {/* Region: Copy icon */}
       <div className={styles.top_reference_line}>
         {[DeviceType.TABLET_LANDSCAPE, DeviceType.DESKTOP, DeviceType.LARGE_DESKTOP].includes(deviceType) && (
           <button
@@ -56,7 +55,6 @@ const CodeContainer: FC<CodeContainerProps> = ({ children, isExpandable }) => {
         )}
       </div>
 
-      {/* Region: Code block */}
       <div className={styles.container} data-expanded={isExpandable ? isContainerCodeExpanded : ''}>
         <pre className={styles.pre}>
           <code ref={codeRef}>{children}</code>
@@ -64,7 +62,6 @@ const CodeContainer: FC<CodeContainerProps> = ({ children, isExpandable }) => {
         </pre>
       </div>
 
-      {/* Region: Toggle expand code block */}
       {isExpandable && (
         <div className={styles.bottom_reference_line}>
           <button className={styles.toggle_code_button} onClick={handleToggleContainerExpansion}>

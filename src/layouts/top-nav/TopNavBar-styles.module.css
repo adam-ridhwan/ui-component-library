@@ -5,6 +5,7 @@ header {
     position: sticky;
     top: 0;
     z-index: 500;
+    background-color: var(--matching-pallette-blue1);
 }
 
 header[data-scrolled= "false"] {
@@ -83,14 +84,14 @@ header::before {
     background: none;
     cursor: pointer;
     outline: none;
-    color: #0f172a99;
+    color: var(--matching-pallette-blue3);
     font-weight: 500;
     font-size: 14px;
     text-decoration: none;
 }
 
 .desktop_nav a:hover {
-    color: #0f172acc;
+    color: var(--matching-pallette-blue2);
 }
 
 /* Region: RIGHT SIDE */
@@ -116,11 +117,11 @@ header::before {
     padding-left: 16px;
     padding-right: 6px;
     margin-right: 0.5rem;
-    transition: background-color 0.1s ease-in-out;
-    background: rgba(255, 255, 255, 0.32);
+    background: var(--matching-pallette-blue2);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    transition: background-color 0.1s ease-in-out;
 }
 
 .search_nav_container > button:first-child:hover {
@@ -134,7 +135,7 @@ header::before {
 .search_nav_container > button:first-child > div {
     font-size: 14px;
     text-align: left;
-    color: #64748b;
+    color: var(--matching-pallette-blue3);
 }
 
 .shortcut_container {
