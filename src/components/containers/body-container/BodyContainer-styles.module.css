@@ -1,4 +1,6 @@
 .body_container {
+    color: var(--colors-slate12);
+
 }
 
 .body_container h2 {
@@ -6,4 +8,5 @@
     padding-bottom: 0.25em;
     margin-bottom: 0.5em;
     border-bottom: 1px solid #dfe4ed;
+    color: var(--colors-slate12);
 }

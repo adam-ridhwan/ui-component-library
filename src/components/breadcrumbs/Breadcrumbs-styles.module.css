@@ -6,12 +6,45 @@
     font-size: 14px;
 }
 
-.breadcrumbs span:first-child {
+.breadcrumbs span {
     font-weight: 400;
-    color: #64784b;
+    color: var(--colors-mauve11)
 }
 
-.breadcrumbs span:nth-child(2) {
+.home_icon {
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background: none;
+    height: 1.3rem;
+    width: 1.3rem;
+    opacity: 0.5;
+    color: var(--colors-slate12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.home_icon > a {
+    text-decoration: none;
+}
+
+.home_icon > a > svg {
+    text-decoration: none;
+    height: 1.2rem;
+    width: 1.2rem;
+    fill: var(--colors-slate12);
+}
+
+.chevron_right_icon {
+    outline: none;
+    border: none;
+    background: none;
+    height: 1.3rem;
+    width: 1.3rem;
+    opacity: 0.5;
+    color: var(--colors-slate12);
     display: flex;
     align-items: center;
 }

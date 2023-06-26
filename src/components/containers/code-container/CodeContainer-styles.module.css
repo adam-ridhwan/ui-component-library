@@ -28,7 +28,7 @@
 }
 
 .copy_icon_container:active {
-    background-color: var(--colors-sky9);
+    background-color: var(--colors-blue8);
 }
 
 .copy_icon {
@@ -40,14 +40,15 @@
 }
 
 .copy_icon > svg {
-    height: 0.8rem;
-    width: 0.8rem;
+    color: var(--colors-sky12);
+    height: 0.9rem;
+    width: 0.9rem;
 }
 
 .tooltip {
     position: absolute;
     z-index: 10;
-    top: calc(100% + 8px);
+    top: calc(100% + 20px);
     right: 50%;
     background-color: var(--colors-sky12);
     color: var(--colors-sky1);
@@ -111,7 +112,7 @@
     left: 0;
     right: 0;
     top: 50%;
-    background: linear-gradient(to top right, hsla(0, 0%, 100%, 0.75), hsla(0, 0%, 100%, 0));
+    background: linear-gradient(to top, var(--matching-pallette-blue2), hsla(0, 0%, 100%, 0));
     pointer-events: none;
     z-index: 5;
 }

@@ -3,5 +3,5 @@
     text-wrap: balance;
     font-weight: 300;
     font-size: 21px;
-    color: #64748b;
+    color: var(--colors-sky10)
 }

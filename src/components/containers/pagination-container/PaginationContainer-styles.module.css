@@ -2,23 +2,22 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    gap: 20px;
     margin-top: 2em;
+
 }
 
 .pagination_container a {
     font-size: 14px;
     display: flex;
     align-items: center;
-    justify-content: center;
     text-decoration: none;
     color: #0f172a;
-    height: 36px;
+    padding: 24px 20px;
     border-radius: 6px;
-    background-color: white;
+    background-color: var(--matching-pallette-blue3);
     border: 1px solid rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    padding-left: 12px;
-    padding-right: 12px;
     gap: 7px;
 }
 
@@ -26,4 +25,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.pagination_container svg {
+    height: 1.7rem;
+    width: 1.7rem;
+    opacity: 0.5;
+}
+
+.pagination_container a:first-child {
+    width: 100%;
+}
+
+.pagination_container a:last-child {
+    width: 100%;
+    justify-content: end;
 }
